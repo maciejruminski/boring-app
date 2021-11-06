@@ -7,9 +7,8 @@ import ActionsController from "../controllers/ActionsController";
 // Reducers.
 import reducer from "../reducers/reducer";
 
-const initialState = {
-  isLoggedIn: false,
-};
+// States.
+import initialState from "../states/initialState";
 
 export default function useBoringApp() {
   const [state, dispatch] = useReducer(reducer, initialState);
