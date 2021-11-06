@@ -1,7 +1,8 @@
+// Controllers.
+import LocalStorageController from "./LocalStorageController";
+
 export default class Controller {
   static checkIfLoggedIn() {
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-
-    return isLoggedIn ? true : false;
+    return LocalStorageController.getIsLoggedIn() ? true : false;
   }
 }
