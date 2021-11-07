@@ -4,7 +4,10 @@ interface IState {
 
 interface IActions {
   checkIfLoggedIn: () => boolean;
-  verifyOneTimePassword: () => void;
+  verifyOneTimePassword: (
+    e: React.FormEvent<HTMLFormElement>,
+    oneTimePassword: string | null
+  ) => void;
 }
 
 type ActionTypes = "checkIfLoggedIn" | "verifyOneTimePassword";

@@ -12,10 +12,15 @@ export default class ActionsController {
     });
   };
 
-  verifyOneTimePassword = () => {
+  verifyOneTimePassword = (
+    evt: React.FormEvent<HTMLFormElement>,
+    oneTimePassword: string | null
+  ) => {
+    evt.preventDefault();
+
     this._dis({
       type: "verifyOneTimePassword",
-      payload: this._dis,
+      payload: oneTimePassword,
     });
   };
 
