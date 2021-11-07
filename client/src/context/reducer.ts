@@ -1,5 +1,5 @@
 // Handlers.
-import StateManipulateHandler from "../handlers/StateManipulateHandler";
+import StateManipulateHandler from "./StateManipulateHandler";
 
 const reducer: ReducerType = (state, action) => {
   const { type, payload } = action;
