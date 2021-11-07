@@ -5,4 +5,8 @@ export default class Controller {
   static checkIfLoggedIn() {
     return LocalStorageController.getIsLoggedIn() ? true : false;
   }
+
+  static verifyOneTimePassword() {
+    return null;
+  }
 }
