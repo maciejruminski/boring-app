@@ -1,28 +1,21 @@
 // Functions.
-import { createContext, useEffect } from "react";
+import { useEffect } from "react";
 
 // Components.
 import Dashboard from "./components/Dashboard";
 import SignUp from "./components/SignUp";
 
 // Hooks.
-import useBoringApp from "./hooks/useBoringApp";
-
-// Context.
-export const AppContext = createContext({});
+import { useGlobalContext } from "./context";
 
 function App() {
-  const { state, actions } = useBoringApp();
+  const { state, actions } = useGlobalContext();
 
   useEffect(() => {
-    console.log(state);
-  });
+    actions.checkIfLoggedIn();
+  }, []);
 
-  return (
-    <AppContext.Provider value={{ state, actions }}>
-      {state.isLoggedIn ? <Dashboard /> : <SignUp />}
-    </AppContext.Provider>
-  );
+  return <>{state.isLoggedIn ? <Dashboard /> : <SignUp />}</>;
 }
 
 export default App;
