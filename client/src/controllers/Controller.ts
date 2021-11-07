@@ -12,9 +12,7 @@ export default class Controller {
     return LocalStorageController.getUserAuthentication() ? true : false;
   }
 
-  static async verifyOneTimePassword(
-    oneTimePassword: string
-  ): Promise<boolean> {
+  static async verifyOneTimePassword(oneTimePassword: string): Promise<void> {
     const response = await ApiController.verifyOneTimePassword(oneTimePassword);
     const statusIsNotOk = response.status !== 200;
 
@@ -23,7 +21,5 @@ export default class Controller {
     }
 
     this.setUser(response.uuid);
-
-    return true;
   }
 }
