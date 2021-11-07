@@ -20,3 +20,8 @@ type ContextHook = () => {
   state: IState;
   actions: Actions;
 };
+
+interface IStateHandler {
+  state: IState;
+  payload?: any;
+}
