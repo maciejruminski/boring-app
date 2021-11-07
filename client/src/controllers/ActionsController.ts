@@ -1,3 +1,6 @@
+// Controllers.
+import Controller from "./Controller";
+
 export default class ActionsController {
   _dis: any;
 
@@ -6,22 +9,22 @@ export default class ActionsController {
   }
 
   checkIfLoggedIn = (): boolean => {
+    const isLoggedIn = Controller.checkIfLoggedIn();
+
     return this._dis({
       type: "checkIfLoggedIn",
-      payload: this._dis,
+      payload: isLoggedIn,
     });
   };
 
   verifyOneTimePassword = (
     evt: React.FormEvent<HTMLFormElement>,
-    oneTimePassword: string | null
+    oneTimePassword: string
   ) => {
     evt.preventDefault();
+    Controller.verifyOneTimePassword(oneTimePassword, this.checkIfLoggedIn);
 
-    this._dis({
-      type: "verifyOneTimePassword",
-      payload: oneTimePassword,
-    });
+    // this._dis({ type: "verifyOneTimePassword" });
   };
 
   getAllActions = (): IActions => {
