@@ -1,10 +1,10 @@
 // Handlers.
-import StateManipulateHandler from "./StateManipulateHandler";
+import StateHandler from "./StateHandler";
 
 const reducer: ReducerType = (state, action) => {
   const { type, payload } = action;
 
-  const handler = StateManipulateHandler.handlers[type];
+  const handler = StateHandler.handlers[type];
 
   if (!handler) {
     throw new Error(`There is no action like ${type}`);

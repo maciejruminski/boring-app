@@ -2,35 +2,55 @@
 import Controller from "./Controller";
 
 export default class ActionsController {
-  _dis: any;
+  _dispatch: any;
 
   constructor(dispatch: any) {
-    this._dis = dispatch;
+    this._dispatch = dispatch;
   }
 
-  checkIfLoggedIn = (): boolean => {
-    const isLoggedIn = Controller.checkIfLoggedIn();
+  setUserAuthenticationOn = (): void => {
+    this._dispatch({ type: "setUserAuthenticationOn" });
+  };
 
-    return this._dis({
-      type: "checkIfLoggedIn",
-      payload: isLoggedIn,
-    });
+  setUserAuthenticationOff = (): void => {
+    this._dispatch({ type: "setUserAuthenticationOff" });
+  };
+
+  setUserAuthenticationFromLocalStorage = (): void => {
+    this._dispatch({ type: "setUserAuthenticationFromLocalStorage" });
+  };
+
+  setBusyOn = (): void => {
+    this._dispatch({ type: "setBusyOn" });
+  };
+
+  setBusyOff = (): void => {
+    this._dispatch({ type: "setBusyOn" });
   };
 
   verifyOneTimePassword = (
     evt: React.FormEvent<HTMLFormElement>,
     oneTimePassword: string
-  ) => {
+  ): void => {
     evt.preventDefault();
-    Controller.verifyOneTimePassword(oneTimePassword, this.checkIfLoggedIn);
 
-    // this._dis({ type: "verifyOneTimePassword" });
+    this.setBusyOn();
+
+    Controller.verifyOneTimePassword(oneTimePassword).then(() => {
+      this.setUserAuthenticationOn();
+      this.setBusyOff();
+    });
   };
 
   getAllActions = (): IActions => {
     return {
-      checkIfLoggedIn: this.checkIfLoggedIn,
+      setUserAuthenticationOn: this.setUserAuthenticationOn,
+      setUserAuthenticationOff: this.setUserAuthenticationOff,
+      setUserAuthenticationFromLocalStorage:
+        this.setUserAuthenticationFromLocalStorage,
       verifyOneTimePassword: this.verifyOneTimePassword,
+      setBusyOn: this.setBusyOn,
+      setBusyOff: this.setBusyOff,
     };
   };
 }

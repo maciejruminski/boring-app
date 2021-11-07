@@ -1,16 +1,26 @@
 interface IState {
   isLoggedIn: boolean;
+  isBusy: boolean;
 }
 
 interface IActions {
-  checkIfLoggedIn: () => boolean;
+  setUserAuthenticationOn: () => void;
+  setUserAuthenticationOff: () => void;
+  setUserAuthenticationFromLocalStorage: () => void;
   verifyOneTimePassword: (
     e: React.FormEvent<HTMLFormElement>,
-    oneTimePassword: string | null
+    oneTimePassword: string
   ) => void;
+  setBusyOn: () => void;
+  setBusyOff: () => void;
 }
 
-type ActionTypes = "checkIfLoggedIn" | "verifyOneTimePassword";
+type ActionTypes =
+  | "setUserAuthenticationOn"
+  | "setUserAuthenticationOff"
+  | "setUserAuthenticationFromLocalStorage"
+  | "setBusyOn"
+  | "setBusyOff";
 
 interface IAction {
   type: ActionTypes;
