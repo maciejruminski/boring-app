@@ -1,7 +1,6 @@
+// Libraries.
 import express from "express";
-import path from "path";
 import dotenv from "dotenv";
-import { fileURLToPath } from "url";
 
 // Routes.
 import oneTimePasswordRouter from "./routes/one-time-password.js";
@@ -9,16 +8,14 @@ import googleSheetsRouter from "./routes/google-sheets.js";
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 const app = express();
 
 // Middlewares.
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//static folder
-app.use("/public", express.static(path.join(__dirname, "public")));
+// Public folder.
+app.use(express.static("public"));
 
 // Routes.
 app.use(oneTimePasswordRouter);
