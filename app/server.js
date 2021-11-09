@@ -1,5 +1,4 @@
 import app from "./app.js";
-
-const port = process.env.PORT || 5000;
+import port from "./config.js";
 
 app.listen(port, () => `App is live at ${port}`);
