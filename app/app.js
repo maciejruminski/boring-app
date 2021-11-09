@@ -6,9 +6,10 @@ import dotenv from "dotenv";
 import oneTimePasswordRouter from "./routes/one-time-password.js";
 import googleSheetsRouter from "./routes/google-sheets.js";
 
-dotenv.config();
-
 const app = express();
+
+// Environment variables.
+dotenv.config();
 
 // Middlewares.
 app.use(express.urlencoded({ extended: true }));
