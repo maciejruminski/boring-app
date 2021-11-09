@@ -1,5 +1,4 @@
 import express from "express";
-import bodyparser from "body-parser";
 import path from "path";
 import dotenv from "dotenv";
 import { fileURLToPath } from "url";
@@ -14,9 +13,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
 
-// body parser middleware
-app.use(bodyparser.urlencoded({ extended: false }));
-app.use(bodyparser.json());
+// Middlewares.
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 //static folder
 app.use("/public", express.static(path.join(__dirname, "public")));
