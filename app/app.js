@@ -5,11 +5,13 @@ import dotenv from "dotenv";
 // Routes.
 import oneTimePasswordRouter from "./routes/one-time-password.js";
 import googleSheetsRouter from "./routes/google-sheets.js";
-
-const app = express();
+import googlePlacesRouter from "./routes/google-places.js";
 
 // Environment variables.
 dotenv.config();
+
+// Creates an Express application.
+const app = express();
 
 // Middlewares.
 app.use(express.urlencoded({ extended: true }));
@@ -21,5 +23,6 @@ app.use(express.static("public"));
 // Routes.
 app.use(oneTimePasswordRouter);
 app.use(googleSheetsRouter);
+app.use(googlePlacesRouter);
 
 export default app;
