@@ -1,6 +1,22 @@
+type TypesOfFilters = {
+  distance: number;
+  keyword: string;
+  type: string;
+  minPrice: number;
+  maxPrice: number;
+  openNow: boolean;
+};
+
+type Filters = {
+  isModalOpen: boolean;
+  types: TypesOfFilters;
+};
+
 interface IState {
   isLoggedIn: boolean;
   isBusy: boolean;
+  filters: Filters;
+  places: [];
 }
 
 interface IActions {
@@ -13,6 +29,9 @@ interface IActions {
   ) => void;
   setBusyOn: () => void;
   setBusyOff: () => void;
+  filter: (filters: TypesOfFilters) => void;
+  setFiltersModalOn: () => void;
+  setFiltersModalOff: () => void;
 }
 
 type ActionTypes =
@@ -20,7 +39,8 @@ type ActionTypes =
   | "setUserAuthenticationOff"
   | "setUserAuthenticationFromLocalStorage"
   | "setBusyOn"
-  | "setBusyOff";
+  | "setBusyOff"
+  | "setFilters";
 
 interface IAction {
   type: ActionTypes;
