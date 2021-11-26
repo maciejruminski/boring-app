@@ -117,7 +117,7 @@ export default forwardRef<HTMLSelectElement>(({}, ref) => {
         id="type"
         name="type"
         placeholder="type"
-        defaultValue={state.filters.type}
+        defaultValue={state.filters.types.type}
       >
         {types.map((type) => {
           return <option value={type}>{type} </option>;

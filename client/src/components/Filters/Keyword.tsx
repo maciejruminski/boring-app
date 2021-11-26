@@ -17,7 +17,7 @@ export default forwardRef<HTMLInputElement>(({}, ref) => {
         id="keyword"
         name="keyword"
         placeholder="keyword"
-        defaultValue={state.filters.keyword}
+        defaultValue={state.filters.types.keyword}
       />
     </div>
   );

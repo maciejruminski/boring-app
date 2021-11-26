@@ -17,7 +17,7 @@ export default forwardRef<HTMLInputElement>(({}, ref) => {
         id="opennow"
         name="opennow"
         placeholder="opennow"
-        defaultValue={state.filters.openNow ? "true" : "false"}
+        defaultValue={state.filters.types.openNow ? "true" : "false"}
       />
     </div>
   );

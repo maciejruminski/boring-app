@@ -16,7 +16,7 @@ export default forwardRef<HTMLSelectElement>(({}, ref) => {
         id="minprice"
         name="minprice"
         placeholder="minprice"
-        defaultValue={state.filters.minPrice}
+        defaultValue={state.filters.types.minPrice}
       >
         <option value="">--Please choose a price</option>
         <option value="0">0</option>

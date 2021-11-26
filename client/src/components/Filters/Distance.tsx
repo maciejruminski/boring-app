@@ -4,9 +4,9 @@ import { forwardRef } from "react";
 // Context.
 import { useGlobalContext } from "../../context";
 
-export default forwardRef<HTMLInputElement>(({}, ref) => {
+const Distance = ({}, ref: any) => {
   const { state } = useGlobalContext();
-
+  
   return (
     <div className="form-group">
       <label htmlFor="formGroupExampleInput">Distance</label>
@@ -18,8 +18,10 @@ export default forwardRef<HTMLInputElement>(({}, ref) => {
         id="distance"
         name="distance"
         placeholder="distance"
-        defaultValue={state.filters.distance}
+        defaultValue={state.filters.types.distance}
       />
     </div>
   );
-});
+};
+
+export default forwardRef<HTMLInputElement>(Distance);
