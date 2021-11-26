@@ -22,4 +22,16 @@ export default class LocalStorageController {
   static getUserUUID() {
     return localStorage.getItem("userUUID");
   }
+
+  static setPlaces(places: string) {
+    return localStorage.setItem("places", places);
+  }
+
+  static removePlaces() {
+    return localStorage.removeItem("places");
+  }
+
+  static getPlaces() {
+    return localStorage.getItem("places");
+  }
 }

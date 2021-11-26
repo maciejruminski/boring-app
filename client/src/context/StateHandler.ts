@@ -22,6 +22,22 @@ export default class StateHandler {
     return { ...state, isBusy: false };
   }
 
+  static setFilters({ state, payload: filterTypes }: IStateHandler) {
+    return { ...state, filters: { ...state.filters, types: filterTypes } };
+  }
+
+  static setPlaces({ state, payload: places }: IStateHandler) {
+    return { ...state, places };
+  }
+
+  static setFiltersModalOn({ state }: IStateHandler) {
+    return { ...state, filters: { ...state.filters, isModalOpen: true } };
+  }
+
+  static setFiltersModalOff({ state }: IStateHandler) {
+    return { ...state, filters: { ...state.filters, isModalOpen: false } };
+  }
+
   static handlers = {
     setUserAuthenticationOn: StateHandler.setUserAuthenticationOn,
     setUserAuthenticationOff: StateHandler.setUserAuthenticationOff,
@@ -29,5 +45,9 @@ export default class StateHandler {
       StateHandler.setUserAuthenticationFromLocalStorage,
     setBusyOn: StateHandler.setBusyOn,
     setBusyOff: StateHandler.setBusyOff,
+    setFilters: StateHandler.setFilters,
+    setPlaces: StateHandler.setPlaces,
+    setFiltersModalOn: StateHandler.setFiltersModalOn,
+    setFiltersModalOff: StateHandler.setFiltersModalOff,
   };
 }

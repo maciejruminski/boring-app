@@ -18,4 +18,21 @@ export default class ApiController {
 
     return await response.json();
   }
+
+  static async getPlaces(filters: {
+    distance: number;
+    keyword: string;
+    type: string;
+    minPrice: number;
+    maxPrice: number;
+    openNow: boolean;
+  }) {
+    const response = await fetch("/get-places", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ filters }),
+    });
+
+    return await response.json();
+  }
 }
