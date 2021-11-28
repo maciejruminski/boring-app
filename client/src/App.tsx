@@ -9,13 +9,14 @@ import SignUp from "./components/SignUp";
 import { useGlobalContext } from "./context";
 
 function App() {
-  const { state, actions } = useGlobalContext();
+  const {
+    state: { isLoggedIn },
+    actions: { setUserAuthenticationFromLocalStorage },
+  } = useGlobalContext();
 
-  useEffect(() => {
-    actions.checkIfLoggedIn();
-  }, []);
+  useEffect(() => setUserAuthenticationFromLocalStorage(), []);
 
-  return <>{state.isLoggedIn ? <Dashboard /> : <SignUp />}</>;
+  return <>{isLoggedIn ? <Dashboard /> : <SignUp />}</>;
 }
 
 export default App;
