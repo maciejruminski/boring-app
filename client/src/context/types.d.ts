@@ -17,6 +17,14 @@ interface IState {
   isBusy: boolean;
   filters: Filters;
   places: [];
+  currentPlace: {
+    isModalOpen: boolean;
+    details: {
+      name?: string;
+      rating?: number;
+      website?: string;
+    };
+  };
 }
 
 interface IActions {
@@ -32,6 +40,9 @@ interface IActions {
   filter: (filters: TypesOfFilters) => void;
   setFiltersModalOn: () => void;
   setFiltersModalOff: () => void;
+  setPlaceModalOn: () => void;
+  setPlaceModalOff: () => void;
+  getPlace: (placeId: string) => void;
 }
 
 type ActionTypes =

@@ -29,13 +29,25 @@ export default class StateHandler {
   static setPlaces({ state, payload: places }: IStateHandler) {
     return { ...state, places };
   }
-
+  
   static setFiltersModalOn({ state }: IStateHandler) {
     return { ...state, filters: { ...state.filters, isModalOpen: true } };
   }
-
+  
   static setFiltersModalOff({ state }: IStateHandler) {
     return { ...state, filters: { ...state.filters, isModalOpen: false } };
+  }
+  
+  static setPlaceModalOn({ state }: IStateHandler) {
+    return { ...state, currentPlace: { ...state.currentPlace, isModalOpen: true } };
+  }
+  
+  static setPlaceModalOff({ state }: IStateHandler) {
+    return { ...state, currentPlace: { ...state.currentPlace, isModalOpen: false } };
+  }
+  
+  static setCurrentPlaceDetails({ state, payload: details }: IStateHandler) {
+    return { ...state, currentPlace: { ...state.currentPlace, details } };
   }
 
   static handlers = {
@@ -49,5 +61,8 @@ export default class StateHandler {
     setPlaces: StateHandler.setPlaces,
     setFiltersModalOn: StateHandler.setFiltersModalOn,
     setFiltersModalOff: StateHandler.setFiltersModalOff,
+    setPlaceModalOn: StateHandler.setPlaceModalOn,
+    setPlaceModalOff: StateHandler.setPlaceModalOff,
+    setCurrentPlaceDetails: StateHandler.setCurrentPlaceDetails,
   };
 }

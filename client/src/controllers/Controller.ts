@@ -41,7 +41,7 @@ export default class Controller {
   }) {
     const response = await ApiController.getPlaces(filters);
     const statusIsNotOk = response.status !== 200;
-    console.log({response});
+    console.log({ response });
     if (statusIsNotOk) {
       return false;
       // throw Error(response.errorMessage);
@@ -49,5 +49,25 @@ export default class Controller {
 
     this.setPlaces(response.places);
     return response.places;
+  }
+
+  static async getPlaceDetails(placeId: string) {
+    const response = await ApiController.getPlaceDetails(placeId);
+    const statusIsNotOk = response.status !== 200;
+
+    if (statusIsNotOk) {
+      return false;
+      // throw Error(response.errorMessage);
+    }
+
+    const {
+      name,
+      rating,
+      website,
+      reviews,
+      geometry: { location },
+    } = response.placeDetails.result;
+
+    return { name, rating, website, reviews, location };
   }
 }

@@ -13,6 +13,10 @@ const initialState: IState = {
     },
   },
   places: [],
+  currentPlace: {
+    isModalOpen: false,
+    details: {}
+  }
 };
 
 export default initialState;

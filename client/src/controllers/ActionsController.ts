@@ -64,6 +64,26 @@ export default class ActionsController {
     this._dispatch({ type: "setFilters", payload: filterTypes });
   };
 
+  setPlaceModalOn = (): void => {
+    this._dispatch({ type: "setPlaceModalOn" });
+  };
+
+  setPlaceModalOff = (): void => {
+    this._dispatch({ type: "setPlaceModalOff" });
+  };
+
+  getPlace = (placeId: string): void => {
+    this.setBusyOn();
+
+    // Controller.getPlaceDetails(placeId).then((details) => {
+    //   console.log("place details", details);
+    //   // this.setBusyOff();
+    //   this._dispatch({ type: "setCurrentPlaceDetails", payload: details });
+    // });
+
+    this._dispatch({ type: "setPlaceModalOn" });
+  };
+
   getAllActions = (): IActions => {
     return {
       setUserAuthenticationOn: this.setUserAuthenticationOn,
@@ -76,6 +96,9 @@ export default class ActionsController {
       filter: this.filter,
       setFiltersModalOn: this.setFiltersModalOn,
       setFiltersModalOff: this.setFiltersModalOff,
+      setPlaceModalOn: this.setPlaceModalOn,
+      setPlaceModalOff: this.setPlaceModalOff,
+      getPlace: this.getPlace,
     };
   };
 }

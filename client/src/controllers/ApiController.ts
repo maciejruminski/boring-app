@@ -35,4 +35,14 @@ export default class ApiController {
 
     return await response.json();
   }
+
+  static async getPlaceDetails(placeId: string) {
+    const response = await fetch("/get-place-details", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ placeId }),
+    });
+
+    return await response.json();
+  }
 }
