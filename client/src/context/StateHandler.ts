@@ -22,7 +22,7 @@ export default class StateHandler {
     return { ...state, isBusy: false };
   }
 
-  static setFilters({ state, payload: filterTypes }: IStateHandler) {
+  static setFilterTypes({ state, payload: filterTypes }: IStateHandler) {
     return { ...state, filters: { ...state.filters, types: filterTypes } };
   }
 
@@ -50,6 +50,14 @@ export default class StateHandler {
     return { ...state, currentPlace: { ...state.currentPlace, details } };
   }
 
+  static setPlacesFromLocalStorage({ state, payload: places }: IStateHandler) {
+    return { ...state, places };
+  }
+
+  static setFilterTypesFromLocalStorage({ state, payload: filterTypes }: IStateHandler) {
+    return { ...state, filters: { ...state.filters, types: filterTypes } };
+  }
+
   static handlers = {
     setUserAuthenticationOn: StateHandler.setUserAuthenticationOn,
     setUserAuthenticationOff: StateHandler.setUserAuthenticationOff,
@@ -57,12 +65,14 @@ export default class StateHandler {
       StateHandler.setUserAuthenticationFromLocalStorage,
     setBusyOn: StateHandler.setBusyOn,
     setBusyOff: StateHandler.setBusyOff,
-    setFilters: StateHandler.setFilters,
+    setFilterTypes: StateHandler.setFilterTypes,
     setPlaces: StateHandler.setPlaces,
     setFiltersModalOn: StateHandler.setFiltersModalOn,
     setFiltersModalOff: StateHandler.setFiltersModalOff,
     setPlaceModalOn: StateHandler.setPlaceModalOn,
     setPlaceModalOff: StateHandler.setPlaceModalOff,
     setCurrentPlaceDetails: StateHandler.setCurrentPlaceDetails,
+    setPlacesFromLocalStorage: StateHandler.setPlacesFromLocalStorage,
+    setFilterTypesFromLocalStorage: StateHandler.setFilterTypesFromLocalStorage,
   };
 }

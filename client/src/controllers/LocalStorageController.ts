@@ -34,4 +34,17 @@ export default class LocalStorageController {
   static getPlaces() {
     return localStorage.getItem("places");
   }
+
+  static setFilterTypes(filterTypes: string) {
+    console.log('setfilterTypes')
+    return localStorage.setItem("filterTypes", filterTypes);
+  }
+
+  static removeFilterTypes() {
+    return localStorage.removeItem("filterTypes");
+  }
+
+  static getFilterTypes() {
+    return localStorage.getItem("filterTypes");
+  }
 }

@@ -11,10 +11,18 @@ import { useGlobalContext } from "./context";
 function App() {
   const {
     state: { isLoggedIn },
-    actions: { setUserAuthenticationFromLocalStorage },
+    actions: {
+      setUserAuthenticationFromLocalStorage,
+      setPlacesFromLocalStorage,
+      setFilterTypesFromLocalStorage,
+    },
   } = useGlobalContext();
 
-  useEffect(() => setUserAuthenticationFromLocalStorage(), []);
+  useEffect(() => {
+    setUserAuthenticationFromLocalStorage();
+    setPlacesFromLocalStorage();
+    setFilterTypesFromLocalStorage();
+  }, []);
 
   return <>{isLoggedIn ? <Dashboard /> : <SignUp />}</>;
 }

@@ -15,7 +15,9 @@ const initialState: IState = {
   places: [],
   currentPlace: {
     isModalOpen: false,
-    details: {}
+    details: {
+      id: ''
+    }
   }
 };
 

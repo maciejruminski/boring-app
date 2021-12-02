@@ -20,6 +20,7 @@ interface IState {
   currentPlace: {
     isModalOpen: boolean;
     details: {
+      id: string;
       name?: string;
       rating?: number;
       website?: string;
@@ -43,6 +44,9 @@ interface IActions {
   setPlaceModalOn: () => void;
   setPlaceModalOff: () => void;
   getPlace: (placeId: string) => void;
+  getRandomPlace: (places: [], currentPlaceId: string) => void;
+  setPlacesFromLocalStorage: () => void;
+  setFilterTypesFromLocalStorage: () => void;
 }
 
 type ActionTypes =
@@ -51,7 +55,7 @@ type ActionTypes =
   | "setUserAuthenticationFromLocalStorage"
   | "setBusyOn"
   | "setBusyOff"
-  | "setFilters";
+  | "setFilterTypes";
 
 interface IAction {
   type: ActionTypes;

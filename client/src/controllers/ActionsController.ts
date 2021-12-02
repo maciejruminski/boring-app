@@ -55,13 +55,12 @@ export default class ActionsController {
     this.setBusyOn();
 
     Controller.findPlaces(filterTypes).then((places: []) => {
-      console.log("places", places);
       // this.setUserAuthenticationOn();
       // this.setBusyOff();
       this._dispatch({ type: "setPlaces", payload: places });
     });
 
-    this._dispatch({ type: "setFilters", payload: filterTypes });
+    this._dispatch({ type: "setFilterTypes", payload: filterTypes });
   };
 
   setPlaceModalOn = (): void => {
@@ -75,13 +74,33 @@ export default class ActionsController {
   getPlace = (placeId: string): void => {
     this.setBusyOn();
 
-    // Controller.getPlaceDetails(placeId).then((details) => {
-    //   console.log("place details", details);
-    //   // this.setBusyOff();
-    //   this._dispatch({ type: "setCurrentPlaceDetails", payload: details });
-    // });
+    Controller.getPlaceDetails(placeId).then((details) => {
+      // console.log("place details", details);
+      // this.setBusyOff();
+      this._dispatch({ type: "setCurrentPlaceDetails", payload: details });
+    });
 
     this._dispatch({ type: "setPlaceModalOn" });
+  };
+
+  getRandomPlace = (places: [], currentPlaceId: string): void => {
+    this.setBusyOn();
+
+    const newPlaceId = Controller.getRandomPlace(places, currentPlaceId);
+
+    this.getPlace(newPlaceId);
+  };
+
+  setPlacesFromLocalStorage = (): void => {
+    const places = Controller.getPlacesFromLocalStorage();
+
+    this._dispatch({ type: "setPlacesFromLocalStorage", payload: places });
+  };
+
+  setFilterTypesFromLocalStorage = (): void => {
+    const filters = Controller.getFilterTypesFromLocalStorage();
+
+    this._dispatch({ type: "setFilterTypesFromLocalStorage", payload: filters });
   };
 
   getAllActions = (): IActions => {
@@ -99,6 +118,9 @@ export default class ActionsController {
       setPlaceModalOn: this.setPlaceModalOn,
       setPlaceModalOff: this.setPlaceModalOff,
       getPlace: this.getPlace,
+      getRandomPlace: this.getRandomPlace,
+      setPlacesFromLocalStorage: this.setPlacesFromLocalStorage,
+      setFilterTypesFromLocalStorage: this.setFilterTypesFromLocalStorage,
     };
   };
 }
