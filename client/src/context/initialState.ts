@@ -1,6 +1,12 @@
 const initialState: IState = {
   isLoggedIn: false,
   isBusy: false,
+  signUp: {
+    email: '',
+    password: '',
+    error: '',
+    isSent: false
+  },
   filters: {
     isModalOpen: false,
     types: {

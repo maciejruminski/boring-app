@@ -7,7 +7,7 @@ export default function Places() {
   return (
     <>
       <Heading />
-      {/* <List /> */}
+      <List />
       <Details />
     </>
   );

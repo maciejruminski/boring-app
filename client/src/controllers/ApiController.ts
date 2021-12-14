@@ -45,4 +45,14 @@ export default class ApiController {
 
     return await response.json();
   }
+
+  static async sendPassword(email: string) {
+    const response = await fetch("/send-password", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+
+    return await response.json();
+  }
 }

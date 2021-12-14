@@ -22,7 +22,6 @@ export default class Controller {
     maxPrice: number;
     openNow: boolean;
   }) {
-    console.log('wdwqdwq');
     LocalStorageController.setFilterTypes(JSON.stringify(filterTypes));
   }
 
@@ -53,9 +52,11 @@ export default class Controller {
   }) {
     const placesFromLocalStorage = this.getPlacesFromLocalStorage();
     const filterTypesFromLocalStorage = this.getFilterTypesFromLocalStorage();
-    const areFilterTypesEqual = JSON.stringify(filterTypes) === JSON.stringify(filterTypesFromLocalStorage);
+    const areFilterTypesEqual =
+      JSON.stringify(filterTypes) ===
+      JSON.stringify(filterTypesFromLocalStorage);
 
-    if(areFilterTypesEqual) {
+    if (areFilterTypesEqual) {
       return placesFromLocalStorage;
     }
 
@@ -132,5 +133,35 @@ export default class Controller {
     }
 
     return filters;
+  }
+
+  static async sendPassword(email: string) {
+    const response = await ApiController.sendPassword(email);
+    const statusIsNotOk = response.status !== 200;
+    console.log(response);
+    if (statusIsNotOk) {
+      return false;
+      // throw Error(response.errorMessage);
+    }
+
+    // this.setUser(response.uuid);
+    return true;
+  }
+
+  static validateInput(input: HTMLInputElement): boolean {
+    const {
+      id,
+      validity: { tooLong, tooShort },
+    } = input;
+
+    if (id === "signUpPassword") {
+      input.setCustomValidity(
+        tooShort || tooLong
+          ? "A one time password must contain exactly 6 digits."
+          : ""
+      );
+    }
+
+    return input.checkValidity() ? true : false;
   }
 }

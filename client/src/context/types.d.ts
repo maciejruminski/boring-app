@@ -15,6 +15,12 @@ type Filters = {
 interface IState {
   isLoggedIn: boolean;
   isBusy: boolean;
+  signUp: {
+    email: string;
+    password: string;
+    error: string;
+    isSent: boolean;
+  };
   filters: Filters;
   places: [];
   currentPlace: {
@@ -47,6 +53,12 @@ interface IActions {
   getRandomPlace: (places: [], currentPlaceId: string) => void;
   setPlacesFromLocalStorage: () => void;
   setFilterTypesFromLocalStorage: () => void;
+  validateInput: (input: HTMLInputElement) => boolean;
+  setSignUpEmail: (input: HTMLInputElement) => void;
+  setSignUpEmailAsSent: () => void;
+  inputOnChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
+  sendPassword: (email: string) => void;
+  setOneTimePassword: (input: HTMLInputElement) => void;
 }
 
 type ActionTypes =
@@ -55,7 +67,8 @@ type ActionTypes =
   | "setUserAuthenticationFromLocalStorage"
   | "setBusyOn"
   | "setBusyOff"
-  | "setFilterTypes";
+  | "setFilterTypes"
+  | "setSignUpEmailAsSent";
 
 interface IAction {
   type: ActionTypes;

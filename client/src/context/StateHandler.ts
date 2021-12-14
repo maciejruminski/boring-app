@@ -58,6 +58,22 @@ export default class StateHandler {
     return { ...state, filters: { ...state.filters, types: filterTypes } };
   }
 
+  static setSignUpError({ state, payload: error }: IStateHandler) {
+    return { ...state, signUp: { ...state.signUp, error } };
+  }
+
+  static setSignUpEmail({ state, payload: email }: IStateHandler) {
+    return { ...state, signUp: { ...state.signUp, email } };
+  }
+
+  static setOneTimePassword({ state, payload: password }: IStateHandler) {
+    return { ...state, signUp: { ...state.signUp, password } };
+  }
+
+  static setSignUpEmailAsSent({ state }: IStateHandler) {
+    return { ...state, signUp: { ...state.signUp, isSent: true } };
+  }
+
   static handlers = {
     setUserAuthenticationOn: StateHandler.setUserAuthenticationOn,
     setUserAuthenticationOff: StateHandler.setUserAuthenticationOff,
@@ -74,5 +90,9 @@ export default class StateHandler {
     setCurrentPlaceDetails: StateHandler.setCurrentPlaceDetails,
     setPlacesFromLocalStorage: StateHandler.setPlacesFromLocalStorage,
     setFilterTypesFromLocalStorage: StateHandler.setFilterTypesFromLocalStorage,
+    setSignUpError: StateHandler.setSignUpError,
+    setSignUpEmail: StateHandler.setSignUpEmail,
+    setSignUpEmailAsSent: StateHandler.setSignUpEmailAsSent,
+    setOneTimePassword: StateHandler.setOneTimePassword,
   };
 }

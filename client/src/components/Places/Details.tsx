@@ -8,6 +8,7 @@ import { useGlobalContext } from "../../context";
 
 // Components.
 import Map from './Map';
+import ActionsController from "../../controllers/ActionsController";
 
 const SDetails = styled.div<{ isModalOpen: boolean }>`
   position: fixed;
@@ -15,9 +16,9 @@ const SDetails = styled.div<{ isModalOpen: boolean }>`
   left: 0;
   width: 100%;
   height: 100%;
-  /* opacity: ${({ isModalOpen }) => (isModalOpen ? "1" : "0")}; */
-  /* transform: ${({ isModalOpen }) =>
-    isModalOpen ? "translateY(0)" : "translateY(-100%)"}; */
+  opacity: ${({ isModalOpen }) => (isModalOpen ? "1" : "0")};
+  transform: ${({ isModalOpen }) =>
+    isModalOpen ? "translateY(0)" : "translateY(-100%)"};
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
   background-color: black;
   color: white;
@@ -26,14 +27,14 @@ const SDetails = styled.div<{ isModalOpen: boolean }>`
 export default () => {
   const {
     state: {
+      places,
       currentPlace: {
         isModalOpen,
-        details: { name, rating, website },
+        details: { id, name, rating, website },
       },
     },
-    actions: { setPlaceModalOff },
+    actions: { setPlaceModalOff, getRandomPlace },
   } = useGlobalContext();
-
 
   return (
     <SDetails isModalOpen={isModalOpen}>
@@ -43,13 +44,13 @@ export default () => {
 
       <button onClick={() => setPlaceModalOff()}>X</button>
 
-      <Map />
+      {/* <Map /> */}
 
       <a href="https://www.google.com/maps/dir/53.4614609,18.7250887,17/53.4614609,18.7272774/data=!3m1!4b1!4m2!4m1!3e2">
       odpal trase na google map
       </a>
 
-      <button onClick={() => console.log("losuj inne miejsce")}>
+      <button onClick={() => getRandomPlace(places, id)}>
         losuj inne miejsce
       </button>
     </SDetails>

@@ -1,4 +1,5 @@
 // Controllers.
+import { TargetElement } from "@testing-library/user-event";
 import Controller from "./Controller";
 
 export default class ActionsController {
@@ -25,7 +26,7 @@ export default class ActionsController {
   };
 
   setBusyOff = (): void => {
-    this._dispatch({ type: "setBusyOn" });
+    this._dispatch({ type: "setBusyOff" });
   };
 
   setFiltersModalOn = (): void => {
@@ -46,7 +47,7 @@ export default class ActionsController {
 
     Controller.verifyOneTimePassword(oneTimePassword).then((test) => {
       console.log("verified!", test);
-      this.setUserAuthenticationOn();
+      // this.setUserAuthenticationOn();
       // this.setBusyOff();
     });
   };
@@ -100,7 +101,77 @@ export default class ActionsController {
   setFilterTypesFromLocalStorage = (): void => {
     const filters = Controller.getFilterTypesFromLocalStorage();
 
-    this._dispatch({ type: "setFilterTypesFromLocalStorage", payload: filters });
+    this._dispatch({
+      type: "setFilterTypesFromLocalStorage",
+      payload: filters,
+    });
+  };
+
+  setSignUpError = (error: string): void => {
+    this._dispatch({ type: "setSignUpError", payload: error });
+  };
+
+  setSignUpEmail = (emailInput: HTMLInputElement): void => {
+    const emailIsNotValid: boolean = !this.validateInput(emailInput);
+
+    if (emailIsNotValid) {
+      return;
+    }
+
+    this._dispatch({ type: "setSignUpEmail", payload: emailInput.value });
+  };
+
+  setOneTimePassword = (passwordInput: HTMLInputElement): void => {
+    const passwordIsNotValid: boolean = !this.validateInput(passwordInput);
+
+    if (passwordIsNotValid) {
+      return;
+    }
+
+    this._dispatch({
+      type: "setOneTimePassword",
+      payload: passwordInput.value,
+    });
+  };
+
+  setSignUpEmailAsSent = (): void => {
+    this._dispatch({ type: "setSignUpEmailAsSent" });
+  };
+
+  validateInput = (input: HTMLInputElement): boolean => {
+    const inputIsNotValid = !Controller.validateInput(input);
+
+    if (inputIsNotValid) {
+      this.setSignUpError(input.validationMessage);
+      return false;
+    }
+
+    this.setSignUpError("");
+    return true;
+  };
+
+  inputOnChange = (evt: React.ChangeEvent<HTMLInputElement>): void => {
+    const input = evt.target;
+
+    switch (input.id) {
+      case "email":
+        this.setSignUpEmail(input);
+        break;
+      case "signUpPassword":
+        this.setOneTimePassword(input);
+        break;
+      default:
+        console.log("test...");
+    }
+  };
+
+  sendPassword = (email: string): void => {
+    this.setBusyOn();
+
+    Controller.sendPassword(email).then(() => {
+      this.setBusyOff();
+      this.setSignUpEmailAsSent();
+    });
   };
 
   getAllActions = (): IActions => {
@@ -121,6 +192,12 @@ export default class ActionsController {
       getRandomPlace: this.getRandomPlace,
       setPlacesFromLocalStorage: this.setPlacesFromLocalStorage,
       setFilterTypesFromLocalStorage: this.setFilterTypesFromLocalStorage,
+      validateInput: this.validateInput,
+      setSignUpEmail: this.setSignUpEmail,
+      setSignUpEmailAsSent: this.setSignUpEmailAsSent,
+      inputOnChange: this.inputOnChange,
+      sendPassword: this.sendPassword,
+      setOneTimePassword: this.setOneTimePassword,
     };
   };
 }
