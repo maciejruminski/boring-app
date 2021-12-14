@@ -54,10 +54,6 @@ export default class StateHandler {
     return { ...state, places };
   }
 
-  static setFilterTypesFromLocalStorage({ state, payload: filterTypes }: IStateHandler) {
-    return { ...state, filters: { ...state.filters, types: filterTypes } };
-  }
-
   static setSignUpError({ state, payload: error }: IStateHandler) {
     return { ...state, signUp: { ...state.signUp, error } };
   }
@@ -89,7 +85,6 @@ export default class StateHandler {
     setPlaceModalOff: StateHandler.setPlaceModalOff,
     setCurrentPlaceDetails: StateHandler.setCurrentPlaceDetails,
     setPlacesFromLocalStorage: StateHandler.setPlacesFromLocalStorage,
-    setFilterTypesFromLocalStorage: StateHandler.setFilterTypesFromLocalStorage,
     setSignUpError: StateHandler.setSignUpError,
     setSignUpEmail: StateHandler.setSignUpEmail,
     setSignUpEmailAsSent: StateHandler.setSignUpEmailAsSent,

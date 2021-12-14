@@ -99,12 +99,11 @@ export default class ActionsController {
   };
 
   setFilterTypesFromLocalStorage = (): void => {
-    const filters = Controller.getFilterTypesFromLocalStorage();
+    const filterTypes = Controller.getFilterTypesFromLocalStorage();
 
-    this._dispatch({
-      type: "setFilterTypesFromLocalStorage",
-      payload: filters,
-    });
+    if (filterTypes) {
+      this._dispatch({ type: "setFilterTypes", payload: filterTypes });
+    }
   };
 
   setSignUpError = (error: string): void => {
