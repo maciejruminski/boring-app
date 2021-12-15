@@ -20,12 +20,14 @@ const SForm = styled.form<{ isModalOpen: boolean }>`
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: ${({ isModalOpen }) => (isModalOpen ? "1" : "0")};
-  transform: ${({ isModalOpen }) =>
-    isModalOpen ? "translateY(0)" : "translateY(-100%)"};
+  /* opacity: ${({ isModalOpen }) => (isModalOpen ? "1" : "0")}; */
+  /* transform: ${({ isModalOpen }) =>
+    isModalOpen ? "translateY(0)" : "translateY(-100%)"}; */
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
   background-color: black;
   color: white;
+  padding: 60px 40px;
+  box-sizing: border-box;
 `;
 
 export default () => {
