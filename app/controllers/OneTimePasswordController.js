@@ -2,27 +2,29 @@ import nodemailer from "nodemailer";
 import { v4 as uuidv4 } from "uuid";
 
 // var generatedOneTimePassword = Math.random();
-var generatedOneTimePassword = "1"; // https://www.npmjs.com/package/generate-password
+var generatedOneTimePassword = "111111"; // https://www.npmjs.com/package/generate-password
 // generatedOneTimePassword = generatedOneTimePassword * 1000000;
 // generatedOneTimePassword = parseInt(generatedOneTimePassword);
 
 var email;
 
-let transporter = nodemailer.createTransport({
-  host: process.env.NODEMAILER_HOST,
-  port: process.env.NODEMAILER_PORT,
-  secure: true,
-  service: process.env.NODEMAILER_SERVICE,
-  from: process.env.NODEMAILER_AUTH_USER,
-  auth: {
-    user: process.env.NODEMAILER_AUTH_USER,
-    pass: process.env.NODEMAILER_AUTH_PASS,
-  },
-});
 
 class OneTimePasswordController {
   send(req, res) {
     email = req.body.email;
+
+    let transporter = nodemailer.createTransport({
+      host: process.env.NODEMAILER_HOST,
+      port: process.env.NODEMAILER_PORT,
+      secure: true,
+      service: process.env.NODEMAILER_SERVICE,
+      from: process.env.NODEMAILER_AUTH_USER,
+      auth: {
+        user: process.env.NODEMAILER_AUTH_USER,
+        pass: process.env.NODEMAILER_AUTH_PASS,
+      },
+    });
+
 
     // send mail with defined transport object
     var mailOptions = {
@@ -36,6 +38,7 @@ class OneTimePasswordController {
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
+
       if (error) {
         return console.log(error);
       }
