@@ -8,8 +8,9 @@ const SMap = styled.div`
 
 export default function Map(): JSX.Element {
   let map: google.maps.Map;
+  console.log(process.env.REACT_APP_GOOGLE_API_KEY);
   const loader = new Loader({
-    apiKey: "AIzaSyCixmDfK8z2O0674_cXwl_IlqY17UAnGT4",
+    apiKey: `${process.env.REACT_APP_GOOGLE_API_KEY}`,
     // version: "weekly",
   });
 

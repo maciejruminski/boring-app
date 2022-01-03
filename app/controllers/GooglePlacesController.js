@@ -1,7 +1,5 @@
 import fetch from "node-fetch";
 
-const key = "AIzaSyCixmDfK8z2O0674_cXwl_IlqY17UAnGT4";
-
 class GooglePlacesController {
   async getPlaces(req, res, next) {
     const { distance, keyword, type, maxprice, minprice, opennow } =
@@ -14,7 +12,7 @@ class GooglePlacesController {
         distance ? distance : 5000
       }&keyword=${keyword}${
         opennow ? "&opennow" : ""
-      }&type=${type}&maxprice=${maxprice}&minprice=${minprice}&key=AIzaSyCixmDfK8z2O0674_cXwl_IlqY17UAnGT4`;
+      }&type=${type}&maxprice=${maxprice}&minprice=${minprice}&key=${process.env.GOOGLE_API_KEY}`;
       console.log(url);
       await fetch(url, {
         method: "GET",
@@ -43,10 +41,9 @@ class GooglePlacesController {
   async getPlaceDetails(req, res, next) {
     const { placeId } = req.body;
 
+    
     try {
-      const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=AIzaSyCixmDfK8z2O0674_cXwl_IlqY17UAnGT4`;
-
-      console.log(url);
+      const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${process.env.GOOGLE_API_KEY}`;
 
       await fetch(url, {
         method: "GET",
