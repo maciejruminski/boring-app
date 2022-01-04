@@ -7,25 +7,24 @@ import { useGlobalContext } from "../../../context";
 // Components.
 import Select from "../../Common/Form/Select";
 
-// Array with types.
-import types from "./filterTypes";
-
 export default forwardRef<HTMLSelectElement>(
   ({}, ref: React.ForwardedRef<HTMLSelectElement>) => {
     const {
       state: {
         filters: {
-          types: { type },
+          types: { distance },
         },
       },
     } = useGlobalContext();
 
+    const distances = [100, 300, 500];
+
     return (
       <Select
-        label="Type"
-        options={types}
-        defaultOption={type}
-        id="types"
+        label="Distance"
+        options={distances}
+        defaultOption={distance}
+        id="distance"
         ref={ref}
       />
     );

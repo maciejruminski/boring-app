@@ -32,7 +32,7 @@ const SForm = styled.form<{ isModalOpen: boolean }>`
 
 export default () => {
   const { state, actions } = useGlobalContext();
-  const distanceRef = useRef<HTMLInputElement>(null);
+  const distanceRef = useRef<HTMLSelectElement>(null);
   const keywordRef = useRef<HTMLInputElement>(null);
   const typeRef = useRef<HTMLSelectElement>(null);
   const minPriceRef = useRef<HTMLSelectElement>(null);

@@ -7,25 +7,24 @@ import { useGlobalContext } from "../../../context";
 // Components.
 import Select from "../../Common/Form/Select";
 
-// Array with types.
-import types from "./filterTypes";
-
 export default forwardRef<HTMLSelectElement>(
   ({}, ref: React.ForwardedRef<HTMLSelectElement>) => {
     const {
       state: {
         filters: {
-          types: { type },
+          types: { maxPrice },
         },
       },
     } = useGlobalContext();
 
+    const prices = [0, 1, 2, 3];
+
     return (
       <Select
-        label="Type"
-        options={types}
-        defaultOption={type}
-        id="types"
+        label="Max price"
+        options={prices}
+        defaultOption={maxPrice}
+        id="maxPrice"
         ref={ref}
       />
     );

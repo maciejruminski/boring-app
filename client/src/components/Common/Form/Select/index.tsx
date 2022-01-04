@@ -15,10 +15,10 @@ import {
 
 export default forwardRef<
   HTMLSelectElement,
-  { label: string; defaultOption: string; options: any }
+  { label: string; defaultOption: string | number; options: any, id: string }
 >(
   (
-    { label, defaultOption, options },
+    { label, defaultOption, options, id },
     ref: React.ForwardedRef<HTMLSelectElement>
   ) => {
     const [activeOption, setActiveOption] = useState(defaultOption);
@@ -45,10 +45,10 @@ export default forwardRef<
     return (
       <SContainer>
         {/* <Label text="Type" /> */}
-        <SLabel htmlFor="test">{label}</SLabel>
+        <SLabel htmlFor={id}>{label}</SLabel>
         <SSelect
-          id="test"
-          name="test"
+          id={id}
+          name={id}
           ref={ref}
           onMouseDown={showOptionsHandler}
           value={activeOption}
