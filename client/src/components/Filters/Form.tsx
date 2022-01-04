@@ -39,6 +39,9 @@ export default () => {
   const maxPriceRef = useRef<HTMLSelectElement>(null);
   const openNowRef = useRef<HTMLInputElement>(null);
 
+console.log('checked', openNowRef?.current?.checked);
+console.log('value', openNowRef?.current?.value);
+  
   return (
     <>
       <button onClick={() => actions.setFiltersModalOn()}>Pokaż filtry</button>
