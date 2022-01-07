@@ -13,6 +13,7 @@ import Distance from "./Distance";
 import MinPrice from "./MinPrice";
 import MaxPrice from "./MaxPrice";
 import OpenNow from "./OpenNow";
+import Submits from "../Common/Form/Submits";
 
 const SForm = styled.form<{ isModalOpen: boolean }>`
   position: fixed;
@@ -39,9 +40,9 @@ export default () => {
   const maxPriceRef = useRef<HTMLSelectElement>(null);
   const openNowRef = useRef<HTMLInputElement>(null);
 
-console.log('checked', openNowRef?.current?.checked);
-console.log('value', openNowRef?.current?.value);
-  
+  console.log("checked", openNowRef?.current?.checked);
+  console.log("value", openNowRef?.current?.value);
+
   return (
     <>
       <button onClick={() => actions.setFiltersModalOn()}>Pokaż filtry</button>
@@ -68,13 +69,7 @@ console.log('value', openNowRef?.current?.value);
         <MaxPrice ref={maxPriceRef} />
         <OpenNow ref={openNowRef} />
 
-        <button
-          type="submit"
-          className="btn btn-primary btn-sm"
-          onClick={() => actions.setFiltersModalOff()}
-        >
-          Submit
-        </button>
+        <Submits onClickHandler={actions.setFiltersModalOff} text="Submit" />
       </SForm>
     </>
   );
