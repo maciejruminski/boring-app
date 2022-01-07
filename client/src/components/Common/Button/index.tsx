@@ -1,16 +1,18 @@
 // Styles.
 import { SSubmit } from "./styles";
 
-export default function Submits({
+export default ({
   onClickHandler,
   text,
+  type = "button",
 }: {
   onClickHandler: React.MouseEventHandler<HTMLButtonElement>;
   text: string;
-}) {
+  type?: "button" | "submit" | "reset";
+}) => {
   return (
-    <SSubmit type="submit" onClick={onClickHandler}>
+    <SSubmit type={type} onClick={onClickHandler}>
       {text}
     </SSubmit>
   );
-}
+};

@@ -1,17 +1,16 @@
 import styled from "styled-components";
 
+import { Font } from "../../../Mixins";
+
 const SSubmit = styled.button`
+  ${Font({ weight: 600, size: 16 })};
   appearance: none;
-  background-color: #1a7bcf;
   border: none;
+  background-color: var(--theme);
   padding: 16px 28px;
-  font-size: 16px;
   letter-spacing: 0.5px;
-  border-radius: 5px;
-  font-weight: 600;
-  color: white;
-  margin-top: 30px;
-  font-family: inherit;
+  border-radius: var(--borderRadius);
+  color: #ffffff;
   cursor: pointer;
 `;
 

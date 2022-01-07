@@ -13,7 +13,7 @@ import Distance from "./Distance";
 import MinPrice from "./MinPrice";
 import MaxPrice from "./MaxPrice";
 import OpenNow from "./OpenNow";
-import Submits from "../Common/Form/Submits";
+import Button from "../Common/Button";
 
 const SForm = styled.form<{ isModalOpen: boolean }>`
   position: fixed;
@@ -29,6 +29,8 @@ const SForm = styled.form<{ isModalOpen: boolean }>`
   color: white;
   padding: 60px 40px;
   box-sizing: border-box;
+  background-color: #0c1025;
+  background: linear-gradient(135deg, #0c143d, #090b14);
 `;
 
 export default () => {
@@ -45,7 +47,7 @@ export default () => {
 
   return (
     <>
-      <button onClick={() => actions.setFiltersModalOn()}>Pokaż filtry</button>
+      <Button onClickHandler={actions.setFiltersModalOn} text="Pokaż filtry" />
 
       <SForm
         isModalOpen={state.filters.isModalOpen}
@@ -69,7 +71,11 @@ export default () => {
         <MaxPrice ref={maxPriceRef} />
         <OpenNow ref={openNowRef} />
 
-        <Submits onClickHandler={actions.setFiltersModalOff} text="Submit" />
+        <Button
+          type="submit"
+          onClickHandler={actions.setFiltersModalOff}
+          text="Submit"
+        />
       </SForm>
     </>
   );
