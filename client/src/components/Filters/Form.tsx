@@ -1,5 +1,3 @@
-import styled from "styled-components";
-
 // Functions.
 import { useRef } from "react";
 
@@ -15,26 +13,17 @@ import MaxPrice from "./MaxPrice";
 import OpenNow from "./OpenNow";
 import Button from "../Common/Button";
 
-const SForm = styled.form<{ isModalOpen: boolean }>`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* opacity: ${({ isModalOpen }) => (isModalOpen ? "1" : "0")};
-  transform: ${({ isModalOpen }) =>
-    isModalOpen ? "translateY(0)" : "translateY(-100%)"}; */
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-  background-color: black;
-  color: white;
-  padding: 60px 40px;
-  box-sizing: border-box;
-  background-color: #0c1025;
-  background: linear-gradient(135deg, #0c143d, #090b14);
-`;
+// Styles.
+import { SForm } from "./styles";
 
 export default () => {
-  const { state, actions } = useGlobalContext();
+  const {
+    state: {
+      filters: { isModalOpen },
+    },
+    actions: { filter, setFiltersModalOn, setFiltersModalOff },
+  } = useGlobalContext();
+
   const distanceRef = useRef<HTMLSelectElement>(null);
   const keywordRef = useRef<HTMLInputElement>(null);
   const typeRef = useRef<HTMLSelectElement>(null);
@@ -42,28 +31,23 @@ export default () => {
   const maxPriceRef = useRef<HTMLSelectElement>(null);
   const openNowRef = useRef<HTMLInputElement>(null);
 
-  console.log("checked", openNowRef?.current?.checked);
-  console.log("value", openNowRef?.current?.value);
+  const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    filter({
+      distance: distanceRef?.current?.value,
+      keyword: keywordRef?.current?.value,
+      type: typeRef?.current?.value,
+      minPrice: minPriceRef?.current?.value,
+      maxPrice: maxPriceRef?.current?.value,
+      openNow: openNowRef?.current?.checked,
+    });
+  };
 
   return (
     <>
-      <Button onClickHandler={actions.setFiltersModalOn} text="Pokaż filtry" />
+      <Button onClickHandler={setFiltersModalOn} text="Pokaż filtry" />
 
-      <SForm
-        isModalOpen={state.filters.isModalOpen}
-        method="POST"
-        onSubmit={(evt: React.FormEvent<HTMLFormElement>) => {
-          evt.preventDefault();
-          actions.filter({
-            distance: distanceRef?.current?.value,
-            keyword: keywordRef?.current?.value,
-            type: typeRef?.current?.value,
-            minPrice: minPriceRef?.current?.value,
-            maxPrice: maxPriceRef?.current?.value,
-            openNow: openNowRef?.current?.checked,
-          });
-        }}
-      >
+      <SForm method="POST" isModalOpen={isModalOpen} onSubmit={onSubmitHandler}>
         <Distance ref={distanceRef} />
         <Keyword ref={keywordRef} />
         <Types ref={typeRef} />
@@ -73,7 +57,7 @@ export default () => {
 
         <Button
           type="submit"
-          onClickHandler={actions.setFiltersModalOff}
+          onClickHandler={setFiltersModalOff}
           text="Submit"
         />
       </SForm>
