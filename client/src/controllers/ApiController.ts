@@ -9,18 +9,21 @@ export default class ApiController {
     return await response.json();
   }
 
-  static async addFilterTypesToDatabase(filterTypes: {
-    distance: number;
-    keyword: string;
-    type: string;
-    minPrice: number;
-    maxPrice: number;
-    openNow: boolean;
-  }) {
+  static async addFilterTypesToDatabase(
+    filterTypes: {
+      distance: number;
+      keyword: string;
+      type: string;
+      minPrice: number;
+      maxPrice: number;
+      openNow: boolean;
+    },
+    userUUID: string
+  ) {
     const response = await fetch("/add-filter-types", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ filterTypes }),
+      body: JSON.stringify({ filterTypes, userUUID }),
     });
 
     return await response.json();

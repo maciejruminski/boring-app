@@ -10,6 +10,10 @@ export default class Controller {
     const response = await ApiController.addUserToDatabase(userUUID);
   }
 
+  private static getUserUUID() {
+    return LocalStorageController.getUserUUID();
+  }
+
   private static setPlaces(places: []) {
     LocalStorageController.setPlaces(JSON.stringify(places));
   }
@@ -33,7 +37,14 @@ export default class Controller {
     maxPrice: number;
     openNow: boolean;
   }) {
-    const response = await ApiController.addFilterTypesToDatabase(filterTypes);
+    const userUUID = this.getUserUUID();
+console.log({userUUID});
+    if (userUUID) {
+      const response = await ApiController.addFilterTypesToDatabase(
+        filterTypes,
+        userUUID
+      );
+    }
   }
 
   static checkIfLoggedIn(): boolean {
