@@ -14,7 +14,7 @@ export default class Controller {
     LocalStorageController.setPlaces(JSON.stringify(places));
   }
 
-  private static setFilterTypes(filterTypes: {
+  private static setFilterTypesToLocalStorage(filterTypes: {
     distance: number;
     keyword: string;
     type: string;
@@ -23,6 +23,17 @@ export default class Controller {
     openNow: boolean;
   }) {
     LocalStorageController.setFilterTypes(JSON.stringify(filterTypes));
+  }
+
+  static async setFilterTypesToDatabase(filterTypes: {
+    distance: number;
+    keyword: string;
+    type: string;
+    minPrice: number;
+    maxPrice: number;
+    openNow: boolean;
+  }) {
+    const response = await ApiController.addFilterTypesToDatabase(filterTypes);
   }
 
   static checkIfLoggedIn(): boolean {
@@ -69,7 +80,8 @@ export default class Controller {
     }
 
     this.setPlaces(response.places);
-    this.setFilterTypes(filterTypes);
+    this.setFilterTypesToLocalStorage(filterTypes);
+    this.setFilterTypesToDatabase(filterTypes);
 
     return response.places;
   }

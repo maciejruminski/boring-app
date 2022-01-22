@@ -1,8 +1,6 @@
 import styled, { css } from "styled-components";
 
 const SEmail = styled.div<{ isError: string }>`
-  background-color: #0c1025;
-  background: linear-gradient(135deg, #0c143d, #090b14);
   color: white;
   overflow: hidden;
 

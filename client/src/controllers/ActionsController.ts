@@ -61,6 +61,9 @@ export default class ActionsController {
       this._dispatch({ type: "setPlaces", payload: places });
     });
 
+    Controller.setFilterTypesToDatabase(filterTypes).then(() => {
+      console.log("filtry dodane do bazy danych!");
+    });
     this._dispatch({ type: "setFilterTypes", payload: filterTypes });
   };
 
