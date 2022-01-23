@@ -1,7 +1,7 @@
-import { Router } from "express";
-import GoogleSheetsController from "../controllers/GoogleSheetsController.js";
+import * as express from "express";
+import GoogleSheetsController from "../controllers/GoogleSheetsController";
 
-const router = new Router();
+const router = express.Router();
 
 router.post("/add-user", GoogleSheetsController.addUser);
 router.post(

@@ -1,11 +1,11 @@
 // Libraries.
-import express from "express";
+import express from 'express';
 import dotenv from "dotenv";
 
 // Routes.
-import oneTimePasswordRouter from "./routes/one-time-password.js";
-import googleSheetsRouter from "./routes/google-sheets.js";
-import googlePlacesRouter from "./routes/google-places.js";
+import oneTimePasswordRouter from "./routes/one-time-password";
+import googleSheetsRouter from "./routes/google-sheets";
+import googlePlacesRouter from "./routes/google-places";
 
 // Environment variables.
 dotenv.config();

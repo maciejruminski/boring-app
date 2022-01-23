@@ -12,14 +12,16 @@ class GooglePlacesController {
         distance ? distance : 5000
       }&keyword=${keyword}${
         opennow ? "&opennow" : ""
-      }&type=${type}&maxprice=${maxprice}&minprice=${minprice}&key=${process.env.GOOGLE_API_KEY}`;
-      console.log(url);
+      }&type=${type}&maxprice=${maxprice}&minprice=${minprice}&key=${
+        process.env.GOOGLE_API_KEY
+      }`;
+
       await fetch(url, {
         method: "GET",
       })
         .then((response) => response.json())
-        .then((data) => {
-          const places = data.results.map((data) => {
+        .then((data: any) => {
+          const places = data?.results.map((data) => {
             return {
               id: data.place_id,
               name: data.name,
@@ -41,17 +43,16 @@ class GooglePlacesController {
   async getPlaceDetails(req, res, next) {
     const { placeId } = req.body;
 
-    
     try {
       const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${process.env.GOOGLE_API_KEY}`;
 
-      await fetch(url, {
-        method: "GET",
-      })
-        .then((response) => response.json())
-        .then((placeDetails) => {
-          res.status(200).json({ status: 200, placeDetails });
-        });
+      // await fetch(url, {
+      //   method: "GET",
+      // })
+      //   .then((response) => response.json())
+      //   .then((placeDetails) => {
+      //     res.status(200).json({ status: 200, placeDetails });
+      //   });
     } catch (err) {
       next(err);
     }

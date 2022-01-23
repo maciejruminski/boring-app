@@ -1,7 +1,7 @@
-import { Router } from "express";
-import OneTimePasswordController from "../controllers/OneTimePasswordController.js";
+import * as express from "express";
+import OneTimePasswordController from "../controllers/OneTimePasswordController";
 
-const router = new Router();
+const router = express.Router();
 
 router.post("/send-password", OneTimePasswordController.send);
 router.post("/resend-password", OneTimePasswordController.resend);
