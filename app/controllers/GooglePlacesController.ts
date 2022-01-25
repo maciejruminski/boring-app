@@ -46,13 +46,13 @@ class GooglePlacesController {
     try {
       const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${process.env.GOOGLE_API_KEY}`;
 
-      // await fetch(url, {
-      //   method: "GET",
-      // })
-      //   .then((response) => response.json())
-      //   .then((placeDetails) => {
-      //     res.status(200).json({ status: 200, placeDetails });
-      //   });
+      await fetch(url, {
+        method: "GET",
+      })
+        .then((response) => response.json())
+        .then((placeDetails) => {
+          res.status(200).json({ status: 200, placeDetails });
+        });
     } catch (err) {
       next(err);
     }

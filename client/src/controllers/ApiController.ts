@@ -29,6 +29,19 @@ export default class ApiController {
     return await response.json();
   }
 
+  static async addHistoricPlacesToDatabase(
+    places: Place[],
+    userUUID: string
+  ) {
+    const response = await fetch("/add-historic-place", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ places, userUUID }),
+    });
+
+    return await response.json();
+  }
+
   static async verifyOneTimePassword(oneTimePassword: string) {
     const response = await fetch("/verify-password", {
       method: "POST",

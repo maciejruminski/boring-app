@@ -8,5 +8,9 @@ router.post(
   "/add-filter-types",
   GoogleSheetsController.addFilterTypes.bind(GoogleSheetsController)
 );
+router.post(
+  "/add-historic-place",
+  GoogleSheetsController.addHistoricPlace.bind(GoogleSheetsController)
+);
 
 export default router;

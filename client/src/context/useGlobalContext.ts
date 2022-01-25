@@ -10,7 +10,7 @@ import ActionsController from "../controllers/ActionsController";
 const useGlobalContext: ContextHook = () => {
   const { state, dispatch } = useContext(globalContext);
 
-  const actions: IActions = new ActionsController(dispatch).getAllActions();
+  const actions: IActions = new ActionsController(state, dispatch).getAllActions();
 
   return { state, actions };
 };

@@ -3,10 +3,16 @@ import { TargetElement } from "@testing-library/user-event";
 import Controller from "./Controller";
 
 export default class ActionsController {
+  _state: any;
   _dispatch: any;
+  private places: [];
+  private historicPlaces: [];
 
-  constructor(dispatch: any) {
+  constructor(state: any, dispatch: any) {
     this._dispatch = dispatch;
+    this._state = state;
+    this.places = state.places;
+    this.historicPlaces = state.historicPlaces.places;
   }
 
   setUserAuthenticationOn = (): void => {
@@ -37,6 +43,14 @@ export default class ActionsController {
     this._dispatch({ type: "setFiltersModalOff" });
   };
 
+  setSavingModalOn = (): void => {
+    this._dispatch({ type: "setSavingModalOn" });
+  };
+
+  setSavingModalOff = (): void => {
+    this._dispatch({ type: "setSavingModalOff" });
+  };
+
   verifyOneTimePassword = (
     evt: React.FormEvent<HTMLFormElement>,
     oneTimePassword: string
@@ -65,6 +79,29 @@ export default class ActionsController {
       console.log("filtry dodane do bazy danych!");
     });
     this._dispatch({ type: "setFilterTypes", payload: filterTypes });
+  };
+
+  setHistoricPlaces = (id: string): void => {
+    this.setBusyOn();
+
+    const historicPlaceAlreadyExists =
+      Controller.checkIfHistoricPlaceAlreadyExists(id);
+
+    if (historicPlaceAlreadyExists) {
+      this.setBusyOff();
+      return;
+    }
+
+    const newHistoricPlace = Controller.getPlaceById(this.places, id);
+    const historicPlaces = [...this.historicPlaces, newHistoricPlace];
+
+    Controller.setHistoricPlaces(historicPlaces).then((xx: any) => {
+      // console.log("Historyczne miejsce dodane do bazy danych!");
+      console.log("HISTORIC PLACES ", this.historicPlaces);
+      console.log({ xx });
+      this._dispatch({ type: "setHistoricPlaces", payload: historicPlaces });
+      this.setBusyOff();
+    });
   };
 
   setPlaceModalOn = (): void => {
@@ -188,6 +225,8 @@ export default class ActionsController {
       filter: this.filter,
       setFiltersModalOn: this.setFiltersModalOn,
       setFiltersModalOff: this.setFiltersModalOff,
+      setSavingModalOn: this.setSavingModalOn,
+      setSavingModalOff: this.setSavingModalOff,
       setPlaceModalOn: this.setPlaceModalOn,
       setPlaceModalOff: this.setPlaceModalOff,
       getPlace: this.getPlace,
@@ -200,6 +239,7 @@ export default class ActionsController {
       inputOnChange: this.inputOnChange,
       sendPassword: this.sendPassword,
       setOneTimePassword: this.setOneTimePassword,
+      setHistoricPlaces: this.setHistoricPlaces,
     };
   };
 }

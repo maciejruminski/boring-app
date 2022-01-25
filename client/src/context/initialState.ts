@@ -2,10 +2,10 @@ const initialState: IState = {
   isLoggedIn: false,
   isBusy: false,
   signUp: {
-    email: '',
-    password: '',
-    error: '',
-    isSent: false
+    email: "",
+    password: "",
+    error: "",
+    isSent: false,
   },
   filters: {
     isModalOpen: false,
@@ -21,10 +21,15 @@ const initialState: IState = {
   places: [],
   currentPlace: {
     isModalOpen: false,
+    isSavingModalOpen: false,
     details: {
-      id: ''
-    }
-  }
+      id: "",
+    },
+  },
+  historicPlaces: {
+    places: [],
+    isModalOpen: false,
+  },
 };
 
 export default initialState;

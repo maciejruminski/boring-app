@@ -36,7 +36,6 @@ export default class LocalStorageController {
   }
 
   static setFilterTypes(filterTypes: string) {
-    console.log('setfilterTypes')
     return localStorage.setItem("filterTypes", filterTypes);
   }
 
@@ -46,5 +45,17 @@ export default class LocalStorageController {
 
   static getFilterTypes() {
     return localStorage.getItem("filterTypes");
+  }
+
+  static setHistoricPlaces(places: Place[]) {
+    return localStorage.setItem("historicPlaces", JSON.stringify(places));
+  }
+
+  static removeHistoricPlaces() {
+    return localStorage.removeItem("historicPlaces");
+  }
+
+  static getHistoricPlaces() {
+    return localStorage.getItem("historicPlaces");
   }
 }

@@ -22,15 +22,20 @@ interface IState {
     isSent: boolean;
   };
   filters: Filters;
-  places: [];
+  places: Place[];
   currentPlace: {
     isModalOpen: boolean;
+    isSavingModalOpen: boolean;
     details: {
       id: string;
       name?: string;
       rating?: number;
       website?: string;
     };
+  };
+  historicPlaces: {
+    places: Place[];
+    isModalOpen: boolean;
   };
 }
 
@@ -47,6 +52,8 @@ interface IActions {
   filter: (filters: TypesOfFilters) => void;
   setFiltersModalOn: () => void;
   setFiltersModalOff: () => void;
+  setSavingModalOn: () => void;
+  setSavingModalOff: () => void;
   setPlaceModalOn: () => void;
   setPlaceModalOff: () => void;
   getPlace: (placeId: string) => void;
@@ -59,6 +66,7 @@ interface IActions {
   inputOnChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
   sendPassword: (email: string) => void;
   setOneTimePassword: (input: HTMLInputElement) => void;
+  setHistoricPlaces: (id: string) => void;
 }
 
 type ActionTypes =
@@ -85,4 +93,18 @@ type ContextHook = () => {
 interface IStateHandler {
   state: IState;
   payload?: any;
+}
+
+interface Place {
+  id: string;
+  name: string;
+  rating: number;
+  geometry: {
+    location: { lat: number; lng: number };
+    viewport: {
+      northeast: { lat: number; lng: number };
+      southwest: { lat: number; lng: number };
+    };
+  };
+  openNow: boolean;
 }

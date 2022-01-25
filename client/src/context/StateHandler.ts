@@ -37,6 +37,14 @@ export default class StateHandler {
   static setFiltersModalOff({ state }: IStateHandler) {
     return { ...state, filters: { ...state.filters, isModalOpen: false } };
   }
+
+  static setSavingModalOn({ state }: IStateHandler) {
+    return { ...state, currentPlace: { ...state.currentPlace, isSavingModalOpen: true } };
+  }
+  
+  static setSavingModalOff({ state }: IStateHandler) {
+    return { ...state, currentPlace: { ...state.currentPlace, isSavingModalOpen: false } };
+  }
   
   static setPlaceModalOn({ state }: IStateHandler) {
     return { ...state, currentPlace: { ...state.currentPlace, isModalOpen: true } };
@@ -70,6 +78,10 @@ export default class StateHandler {
     return { ...state, signUp: { ...state.signUp, isSent: true } };
   }
 
+  static setHistoricPlaces({ state, payload: places }: IStateHandler) {
+    return { ...state, historicPlaces: { ...state.historicPlaces, places } };
+  }
+
   static handlers = {
     setUserAuthenticationOn: StateHandler.setUserAuthenticationOn,
     setUserAuthenticationOff: StateHandler.setUserAuthenticationOff,
@@ -81,6 +93,8 @@ export default class StateHandler {
     setPlaces: StateHandler.setPlaces,
     setFiltersModalOn: StateHandler.setFiltersModalOn,
     setFiltersModalOff: StateHandler.setFiltersModalOff,
+    setSavingModalOn: StateHandler.setSavingModalOn,
+    setSavingModalOff: StateHandler.setSavingModalOff,
     setPlaceModalOn: StateHandler.setPlaceModalOn,
     setPlaceModalOff: StateHandler.setPlaceModalOff,
     setCurrentPlaceDetails: StateHandler.setCurrentPlaceDetails,
@@ -89,5 +103,6 @@ export default class StateHandler {
     setSignUpEmail: StateHandler.setSignUpEmail,
     setSignUpEmailAsSent: StateHandler.setSignUpEmailAsSent,
     setOneTimePassword: StateHandler.setOneTimePassword,
+    setHistoricPlaces: StateHandler.setHistoricPlaces,
   };
 }

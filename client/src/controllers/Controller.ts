@@ -38,7 +38,7 @@ export default class Controller {
     openNow: boolean;
   }) {
     const userUUID = this.getUserUUID();
-console.log({userUUID});
+    console.log({ userUUID });
     if (userUUID) {
       const response = await ApiController.addFilterTypesToDatabase(
         filterTypes,
@@ -136,6 +136,33 @@ console.log({userUUID});
     // } = response.placeDetails.result;
 
     // return { id, name, rating, website, reviews, location };
+  }
+
+  static checkIfHistoricPlaceAlreadyExists(placeId: string): boolean {
+    return false;
+  }
+
+  static async setHistoricPlaces(historicPlaces: Place[]): Promise<any> {
+    const userUUID = this.getUserUUID();
+    if (userUUID) {
+      LocalStorageController.setHistoricPlaces(historicPlaces);
+      const response = await ApiController.addHistoricPlacesToDatabase(
+        historicPlaces,
+        userUUID
+      );
+
+      const statusIsNotOk = response.status !== 200;
+
+      if (statusIsNotOk) {
+        return false;
+      }
+
+      return true;
+    }
+  }
+
+  static getPlaceById(palces: [], placeID: string): any {
+    return palces.find((place: { id: string }) => place.id === placeID);
   }
 
   static getPlacesFromLocalStorage() {

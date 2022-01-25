@@ -70,6 +70,26 @@ class GoogleSheetsController {
       message: "Typy filtrów zostały dodane do bazy danych",
     });
   }
+
+  async addHistoricPlace(req: Request, res: Response) {
+    const { places, userUUID }: { places: any; userUUID: string } = req.body;
+    const row = await this.getUserRowById(userUUID);
+    const clientData = {
+      spreadsheetId: process.env.SPREADSHEETS_ID,
+      range: "Sheet1!C" + row,
+      valueInputOption: "RAW",
+      resource: {
+        values: [[JSON.stringify(places)]],
+      },
+    };
+
+    await this.getClientValues().update(clientData);
+
+    res.status(200).json({
+      status: 200,
+      message: "Historyczne miejsce dodane do bazy danych",
+    });
+  }
 }
 
 export default new GoogleSheetsController();
