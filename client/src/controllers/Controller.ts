@@ -138,7 +138,23 @@ export default class Controller {
     // return { id, name, rating, website, reviews, location };
   }
 
-  static checkIfHistoricPlaceAlreadyExists(placeId: string): boolean {
+  static async checkIfHistoricPlaceSaved(placeID: string): Promise<boolean> {
+    let historicPlaces: Place[] = LocalStorageController.getHistoricPlaces();
+    let isHistoricPlaceSaved = historicPlaces.find(
+      (place) => place.id === placeID
+    );
+
+    if (isHistoricPlaceSaved) {
+      return true;
+    }
+
+    // const userUUID = this.getUserUUID();
+
+    // if (userUUID) {
+    // const response = await ApiController.getHistoricPlaces(userUUID);
+    // console.log({ test });
+    // }
+
     return false;
   }
 
@@ -173,6 +189,25 @@ export default class Controller {
     }
 
     return places;
+  }
+
+  static getHistoricPlacesFromLocalStorage() {
+    return LocalStorageController.getHistoricPlaces();
+  }
+
+  static async getHistoricPlacesFromDatabase() {
+    const userUUID = this.getUserUUID();
+
+    if (userUUID) {
+      const response = await ApiController.getHistoricPlaces(userUUID);
+      const statusIsNotOk = response.status !== 200;
+
+      if (statusIsNotOk) {
+        return false;
+      }
+
+      return response.historicPlaces;
+    }
   }
 
   static getFilterTypesFromLocalStorage() {

@@ -66,7 +66,9 @@ interface IActions {
   inputOnChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
   sendPassword: (email: string) => void;
   setOneTimePassword: (input: HTMLInputElement) => void;
-  setHistoricPlaces: (id: string) => void;
+  addHistoricPlace: (id: string) => void;
+  setHistoricPlaces: () => void;
+  setHistoricPlacesFromLocalStorage: () => void;
 }
 
 type ActionTypes =

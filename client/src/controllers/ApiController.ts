@@ -29,14 +29,21 @@ export default class ApiController {
     return await response.json();
   }
 
-  static async addHistoricPlacesToDatabase(
-    places: Place[],
-    userUUID: string
-  ) {
+  static async addHistoricPlacesToDatabase(places: Place[], userUUID: string) {
     const response = await fetch("/add-historic-place", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ places, userUUID }),
+    });
+
+    return await response.json();
+  }
+
+  static async getHistoricPlaces(userUUID: string) {
+    const response = await fetch("/get-historic-places", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userUUID }),
     });
 
     return await response.json();

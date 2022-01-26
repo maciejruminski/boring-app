@@ -1,6 +1,7 @@
 // Controllers.
 import { TargetElement } from "@testing-library/user-event";
 import Controller from "./Controller";
+import LocalStorageController from "./LocalStorageController";
 
 export default class ActionsController {
   _state: any;
@@ -81,26 +82,54 @@ export default class ActionsController {
     this._dispatch({ type: "setFilterTypes", payload: filterTypes });
   };
 
-  setHistoricPlaces = (id: string): void => {
-    this.setBusyOn();
+  setHistoricPlaces = (): void => {
+    const historicPlaces = Controller.getHistoricPlacesFromLocalStorage();
 
-    const historicPlaceAlreadyExists =
-      Controller.checkIfHistoricPlaceAlreadyExists(id);
-
-    if (historicPlaceAlreadyExists) {
+    if (historicPlaces.length) {
+      this._dispatch({ type: "setHistoricPlaces", payload: historicPlaces });
       this.setBusyOff();
+
       return;
     }
 
-    const newHistoricPlace = Controller.getPlaceById(this.places, id);
-    const historicPlaces = [...this.historicPlaces, newHistoricPlace];
+    Controller.getHistoricPlacesFromDatabase().then((historicPlaces) => {
+      if (historicPlaces) {
+        LocalStorageController.setHistoricPlaces(historicPlaces);
+        this._dispatch({
+          type: "setHistoricPlaces",
+          payload: historicPlaces,
+        });
+        this.setBusyOff();
+      }
+    });
+  };
 
-    Controller.setHistoricPlaces(historicPlaces).then((xx: any) => {
-      // console.log("Historyczne miejsce dodane do bazy danych!");
-      console.log("HISTORIC PLACES ", this.historicPlaces);
-      console.log({ xx });
-      this._dispatch({ type: "setHistoricPlaces", payload: historicPlaces });
-      this.setBusyOff();
+  setHistoricPlacesFromLocalStorage = (): void => {
+    const historicPlaces = Controller.getHistoricPlacesFromLocalStorage();
+
+    this._dispatch({ type: "setHistoricPlaces", payload: historicPlaces });
+  };
+
+  addHistoricPlace = (id: string): void => {
+    this.setBusyOn();
+
+    const isHistoricPlaceSaved = Controller.checkIfHistoricPlaceSaved(id);
+
+    isHistoricPlaceSaved.then((isSaved) => {
+      if (isSaved) {
+        this.setBusyOff();
+        console.log("Historyczne miejsce już istnieje!");
+        return;
+      }
+
+      const newHistoricPlace = Controller.getPlaceById(this.places, id);
+      const historicPlaces = [...this.historicPlaces, newHistoricPlace];
+
+      Controller.setHistoricPlaces(historicPlaces).then(() => {
+        console.log("Historyczne miejsce dodane do bazy danych!");
+        this._dispatch({ type: "setHistoricPlaces", payload: historicPlaces });
+        this.setBusyOff();
+      });
     });
   };
 
@@ -239,7 +268,9 @@ export default class ActionsController {
       inputOnChange: this.inputOnChange,
       sendPassword: this.sendPassword,
       setOneTimePassword: this.setOneTimePassword,
+      addHistoricPlace: this.addHistoricPlace,
       setHistoricPlaces: this.setHistoricPlaces,
+      setHistoricPlacesFromLocalStorage: this.setHistoricPlacesFromLocalStorage,
     };
   };
 }

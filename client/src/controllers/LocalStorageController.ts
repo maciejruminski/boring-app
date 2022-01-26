@@ -56,6 +56,8 @@ export default class LocalStorageController {
   }
 
   static getHistoricPlaces() {
-    return localStorage.getItem("historicPlaces");
+    const historicPlaces = localStorage.getItem("historicPlaces");
+
+    return historicPlaces ? JSON.parse(historicPlaces) : [];
   }
 }

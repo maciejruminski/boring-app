@@ -90,6 +90,23 @@ class GoogleSheetsController {
       message: "Historyczne miejsce dodane do bazy danych",
     });
   }
+
+  async getHistoricPlaces(req: Request, res: Response) {
+    const { userUUID }: { userUUID: string } = req.body;
+    const row = await this.getUserRowById(userUUID);
+    const clientData = {
+      spreadsheetId: process.env.SPREADSHEETS_ID,
+      majorDimension: "ROWS",
+      range: "Sheet1!C" + row,
+    };
+
+    const historicPlaces = await this.getClientValues().get(clientData);
+
+    res.status(200).json({
+      status: 200,
+      historicPlaces: historicPlaces.data.values[0],
+    });
+  }
 }
 
 export default new GoogleSheetsController();

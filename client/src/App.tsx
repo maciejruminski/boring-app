@@ -15,6 +15,7 @@ function App() {
       setUserAuthenticationFromLocalStorage,
       setPlacesFromLocalStorage,
       setFilterTypesFromLocalStorage,
+      setHistoricPlaces
     },
   } = useGlobalContext();
 
@@ -22,6 +23,7 @@ function App() {
     setUserAuthenticationFromLocalStorage();
     setPlacesFromLocalStorage();
     setFilterTypesFromLocalStorage();
+    setHistoricPlaces();
   }, []);
 
   return <>{isLoggedIn ? <Dashboard /> : <SignUp />}</>;

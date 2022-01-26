@@ -54,7 +54,7 @@ export default () => {
       getRandomPlace,
       setSavingModalOn,
       setSavingModalOff,
-      setHistoricPlaces,
+      addHistoricPlace,
     },
   } = useGlobalContext();
   console.log(historicPlaces.places);
@@ -71,7 +71,7 @@ export default () => {
       <STest isSavingModalOpen={isSavingModalOpen}>
         <button onClick={setSavingModalOff}>X</button>
         <p>Czy zapisać lokację w historii?</p>
-        <button onClick={() => setHistoricPlaces(id)}>Tak</button>
+        <button onClick={() => addHistoricPlace(id)}>Tak</button>
       </STest>
 
       <button
