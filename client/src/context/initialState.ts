@@ -24,9 +24,7 @@ const initialState: IState = {
       isSavedAsHistoric: false,
     },
   },
-  historicPlaces: {
-    places: [],
-  },
+  historicPlaces: [],
   modals: {
     isFiltersModalOpen: false,
     isCurrentPlaceModalOpen: false,

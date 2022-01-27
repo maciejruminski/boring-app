@@ -10,7 +10,7 @@ import { SModal, SList, SListContainer } from "./styles";
 export default function HistoricPlaces(): JSX.Element {
   const {
     state: {
-      historicPlaces: { places },
+      historicPlaces,
       modals: { isHistoricPlacesModalOpen },
     },
     actions: {
@@ -19,12 +19,12 @@ export default function HistoricPlaces(): JSX.Element {
     },
   } = useGlobalContext();
 
-  if (places.length) {
+  if (historicPlaces.length) {
     return (
       <SModal isModalOpen={isHistoricPlacesModalOpen}>
         <SListContainer>
           <SList>
-            {places.map((place: any) => (
+            {historicPlaces.map((place: any) => (
               <Place
                 place={place}
                 getPlaceDetails={getPlaceDetails}

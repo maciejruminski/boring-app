@@ -31,9 +31,7 @@ interface IState {
       isSavedAsHistoric: boolean;
     };
   };
-  historicPlaces: {
-    places: Place[];
-  };
+  historicPlaces: Place[];
   modals: {
     isFiltersModalOpen: boolean;
     isCurrentPlaceModalOpen: boolean;

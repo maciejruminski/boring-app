@@ -12,7 +12,7 @@ export default class ActionsController {
     this._dispatch = dispatch;
     this._state = state;
     this.places = state.places;
-    this.historicPlaces = state.historicPlaces.places;
+    this.historicPlaces = state.historicPlaces;
   }
 
   setUserAuthenticationOn = (): void => {

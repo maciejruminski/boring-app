@@ -86,8 +86,8 @@ export default class StateHandler {
     return { ...state, signUp: { ...state.signUp, isSent: true } };
   }
 
-  static setHistoricPlaces({ state, payload: places }: IStateHandler) {
-    return { ...state, historicPlaces: { ...state.historicPlaces, places } };
+  static setHistoricPlaces({ state, payload: historicPlaces }: IStateHandler) {
+    return { ...state, historicPlaces };
   }
 
   static handlers = {
