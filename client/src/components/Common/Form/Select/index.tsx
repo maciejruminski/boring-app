@@ -15,7 +15,7 @@ import {
 
 export default forwardRef<
   HTMLSelectElement,
-  { label: string; defaultOption: string | number; options: any, id: string }
+  { label: string; defaultOption: string | number; options: any; id: string }
 >(
   (
     { label, defaultOption, options, id },
@@ -24,18 +24,25 @@ export default forwardRef<
     const [activeOption, setActiveOption] = useState(defaultOption);
     const [optionsVisibility, setOptionsVisibility] = useState(false);
 
-    const showOptionsHandler = (
+    const showOptionsOnMouseDownHandler = (
       e: React.MouseEvent<HTMLSelectElement, MouseEvent>
     ) => {
       e.preventDefault();
       setOptionsVisibility(true);
     };
 
+    const showOptionsOnChangeHandler = (
+      e: React.ChangeEvent<HTMLSelectElement>
+    ) => {
+      e.preventDefault();
+      setActiveOption(e.target.value);
+    };
+
     const setOptionHandler = (
       e: React.MouseEvent<HTMLDivElement, MouseEvent>
     ) => {
       const type = (e.target as HTMLDivElement).dataset.type;
-
+      console.log(type);
       if (type) {
         setOptionsVisibility(false);
         setActiveOption(type);
@@ -50,21 +57,27 @@ export default forwardRef<
           id={id}
           name={id}
           ref={ref}
-          onMouseDown={showOptionsHandler}
+          onMouseDown={showOptionsOnMouseDownHandler}
           value={activeOption}
+          onChange={showOptionsOnChangeHandler}
         >
-          {options.map((option: any) => {
-            return <option value={option}>{option}</option>;
+          {options.map((option: string, key: number) => {
+            return (
+              <option value={option} key={key}>
+                {option}
+              </option>
+            );
           })}
         </SSelect>
 
         <SCustomSelect areOptionsVisible={optionsVisibility}>
-          {options.map((option: any) => {
+          {options.map((option: string, key: number) => {
             return (
               <SCustomOption
                 data-type={option}
                 className={`option ${option === activeOption && "active"}`}
                 onClick={setOptionHandler}
+                key={key}
               >
                 {option}
               </SCustomOption>

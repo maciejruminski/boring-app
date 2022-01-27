@@ -16,13 +16,17 @@ export default function HistoricPlaces(): JSX.Element {
   } = useGlobalContext();
 
   if (places.length) {
-    console.log('HISTORIC PLACES', places);
+    console.log("HISTORIC PLACES", places);
     return (
       <SModal isModalOpen={isModalOpen}>
         <SListContainer>
           <SList>
             {places.map((place: any) => (
-              <Place place={place} getPlaceDetails={getPlaceDetails} />
+              <Place
+                place={place}
+                getPlaceDetails={getPlaceDetails}
+                key={place.id}
+              />
             ))}
           </SList>
 

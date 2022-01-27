@@ -26,7 +26,11 @@ export default function List(): JSX.Element {
       <SListContainer>
         <SList>
           {places.map((place: any) => (
-            <Place place={place} getPlaceDetails={getPlaceDetails} />
+            <Place
+              place={place}
+              getPlaceDetails={getPlaceDetails}
+              key={place.id}
+            />
           ))}
         </SList>
       </SListContainer>
