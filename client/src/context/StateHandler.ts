@@ -54,6 +54,14 @@ export default class StateHandler {
     return { ...state, currentPlace: { ...state.currentPlace, isModalOpen: false } };
   }
   
+  static setHistoricPlacesModalOn({ state }: IStateHandler) {
+    return { ...state, historicPlaces: { ...state.historicPlaces, isModalOpen: true } };
+  }
+
+  static setHistoricPlacesModalOff({ state }: IStateHandler) {
+    return { ...state, historicPlaces: { ...state.historicPlaces, isModalOpen: false } };
+  }
+
   static setCurrentPlaceDetails({ state, payload: details }: IStateHandler) {
     return { ...state, currentPlace: { ...state.currentPlace, details } };
   }
@@ -104,5 +112,7 @@ export default class StateHandler {
     setSignUpEmailAsSent: StateHandler.setSignUpEmailAsSent,
     setOneTimePassword: StateHandler.setOneTimePassword,
     setHistoricPlaces: StateHandler.setHistoricPlaces,
+    setHistoricPlacesModalOn: StateHandler.setHistoricPlacesModalOn,
+    setHistoricPlacesModalOff: StateHandler.setHistoricPlacesModalOff,
   };
 }

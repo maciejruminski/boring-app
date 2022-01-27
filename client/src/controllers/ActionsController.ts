@@ -70,9 +70,12 @@ export default class ActionsController {
   filter = (filterTypes: TypesOfFilters): void => {
     this.setBusyOn();
 
+    console.log("FILTERRRR");
+
     Controller.findPlaces(filterTypes).then((places: []) => {
       // this.setUserAuthenticationOn();
       // this.setBusyOff();
+      console.log("PLACES", places);
       this._dispatch({ type: "setPlaces", payload: places });
     });
 
@@ -92,16 +95,19 @@ export default class ActionsController {
       return;
     }
 
-    Controller.getHistoricPlacesFromDatabase().then((historicPlaces) => {
-      if (historicPlaces) {
-        LocalStorageController.setHistoricPlaces(historicPlaces);
-        this._dispatch({
-          type: "setHistoricPlaces",
-          payload: historicPlaces,
-        });
-        this.setBusyOff();
+    Controller.getHistoricPlacesFromDatabase().then(
+      (historicPlaces: string) => {
+        if (historicPlaces) {
+          const parsedHistoricPlaces: Place[] = JSON.parse(historicPlaces);
+          LocalStorageController.setHistoricPlaces(parsedHistoricPlaces);
+          this._dispatch({
+            type: "setHistoricPlaces",
+            payload: parsedHistoricPlaces,
+          });
+          this.setBusyOff();
+        }
       }
-    });
+    );
   };
 
   setHistoricPlacesFromLocalStorage = (): void => {
@@ -123,13 +129,57 @@ export default class ActionsController {
       }
 
       const newHistoricPlace = Controller.getPlaceById(this.places, id);
+
+      newHistoricPlace.isSavedAsHistoric = true;
+
       const historicPlaces = [...this.historicPlaces, newHistoricPlace];
 
       Controller.setHistoricPlaces(historicPlaces).then(() => {
         console.log("Historyczne miejsce dodane do bazy danych!");
         this._dispatch({ type: "setHistoricPlaces", payload: historicPlaces });
+        console.log("CURRENT STATE", this._state.historicPlaces);
         this.setBusyOff();
       });
+    });
+  };
+
+  removeHistoricPlace = (id: string): void => {
+    this.setBusyOn();
+
+    const isHistoricPlaceSaved = Controller.checkIfHistoricPlaceSaved(id);
+
+    
+
+    isHistoricPlaceSaved.then((isSaved) => {
+      if (isSaved) {
+        const historicPlaceToRemove = Controller.getPlaceById(this.historicPlaces, id);
+
+        const newPlaceDetails = this._state.currentPlace.details;
+
+        newPlaceDetails.isSavedAsHistoric = false;
+
+        // historicPlaceToRemove.isSavedAsHistoric = false;
+
+
+
+        this._dispatch({ type: "setCurrentPlaceDetails", payload: newPlaceDetails });
+
+        const historicPlaces: Place[] = [...this.historicPlaces].filter(
+          (place: Place) => place.id !== historicPlaceToRemove.id
+        );
+
+        
+        Controller.setHistoricPlaces(historicPlaces).then(() => {
+          console.log("Historyczne miejsce usunięte z bazy danych!");
+          this._dispatch({
+            type: "setHistoricPlaces",
+            payload: historicPlaces,
+          });
+
+          
+          this.setBusyOff();
+        });
+      }
     });
   };
 
@@ -141,13 +191,34 @@ export default class ActionsController {
     this._dispatch({ type: "setPlaceModalOff" });
   };
 
-  getPlace = (placeId: string): void => {
+  setHistoricPlacesModalOn = (): void => {
+    this._dispatch({ type: "setHistoricPlacesModalOn" });
+  };
+
+  setHistoricPlacesModalOff = (): void => {
+    this._dispatch({ type: "setHistoricPlacesModalOff" });
+  };
+
+  getPlaceDetails = (placeId: string): void => {
     this.setBusyOn();
 
-    Controller.getPlaceDetails(placeId).then((details) => {
-      // console.log("place details", details);
-      // this.setBusyOff();
-      this._dispatch({ type: "setCurrentPlaceDetails", payload: details });
+
+   
+
+    Controller.getPlaceDetails(placeId).then((placeWithDetails) => {
+      const historicPlace = Controller.getPlaceById(
+        this.historicPlaces,
+        placeId
+      );
+
+      console.log('GET PLACE DETAILS', placeWithDetails)
+
+      if (placeWithDetails) {
+        placeWithDetails.isSavedAsHistoric = historicPlace && true;
+
+        // this.setBusyOff();
+        this._dispatch({ type: "setCurrentPlaceDetails", payload: placeWithDetails });
+      }
     });
 
     this._dispatch({ type: "setPlaceModalOn" });
@@ -158,7 +229,7 @@ export default class ActionsController {
 
     const newPlaceId = Controller.getRandomPlace(places, currentPlaceId);
 
-    this.getPlace(newPlaceId);
+    this.getPlaceDetails(newPlaceId);
   };
 
   setPlacesFromLocalStorage = (): void => {
@@ -258,7 +329,7 @@ export default class ActionsController {
       setSavingModalOff: this.setSavingModalOff,
       setPlaceModalOn: this.setPlaceModalOn,
       setPlaceModalOff: this.setPlaceModalOff,
-      getPlace: this.getPlace,
+      getPlaceDetails: this.getPlaceDetails,
       getRandomPlace: this.getRandomPlace,
       setPlacesFromLocalStorage: this.setPlacesFromLocalStorage,
       setFilterTypesFromLocalStorage: this.setFilterTypesFromLocalStorage,
@@ -269,8 +340,11 @@ export default class ActionsController {
       sendPassword: this.sendPassword,
       setOneTimePassword: this.setOneTimePassword,
       addHistoricPlace: this.addHistoricPlace,
+      removeHistoricPlace: this.removeHistoricPlace,
       setHistoricPlaces: this.setHistoricPlaces,
       setHistoricPlacesFromLocalStorage: this.setHistoricPlacesFromLocalStorage,
+      setHistoricPlacesModalOn: this.setHistoricPlacesModalOn,
+      setHistoricPlacesModalOff: this.setHistoricPlacesModalOff,
     };
   };
 }

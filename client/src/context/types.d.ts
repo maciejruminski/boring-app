@@ -31,6 +31,7 @@ interface IState {
       name?: string;
       rating?: number;
       website?: string;
+      isSavedAsHistoric: boolean;
     };
   };
   historicPlaces: {
@@ -56,7 +57,7 @@ interface IActions {
   setSavingModalOff: () => void;
   setPlaceModalOn: () => void;
   setPlaceModalOff: () => void;
-  getPlace: (placeId: string) => void;
+  getPlaceDetails: (placeId: string) => void;
   getRandomPlace: (places: [], currentPlaceId: string) => void;
   setPlacesFromLocalStorage: () => void;
   setFilterTypesFromLocalStorage: () => void;
@@ -67,8 +68,11 @@ interface IActions {
   sendPassword: (email: string) => void;
   setOneTimePassword: (input: HTMLInputElement) => void;
   addHistoricPlace: (id: string) => void;
+  removeHistoricPlace: (id: string) => void;
   setHistoricPlaces: () => void;
   setHistoricPlacesFromLocalStorage: () => void;
+  setHistoricPlacesModalOn: () => void;
+  setHistoricPlacesModalOff: () => void;
 }
 
 type ActionTypes =
@@ -109,4 +113,5 @@ interface Place {
     };
   };
   openNow: boolean;
+  isSavedAsHistoric: boolean;
 }

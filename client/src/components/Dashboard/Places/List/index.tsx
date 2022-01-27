@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useGlobalContext } from "../../../../context";
 
 // Components.
-import Place from "./Place";
+import Place from "../Place";
 
 // Styles.
 import { SList, SListContainer } from "./styles";
@@ -16,7 +16,7 @@ export default function List(): JSX.Element {
       places,
       filters: { types },
     },
-    actions: { filter, getPlace },
+    actions: { filter, getPlaceDetails },
   } = useGlobalContext();
 
   useEffect(() => filter(types), []);
@@ -26,7 +26,7 @@ export default function List(): JSX.Element {
       <SListContainer>
         <SList>
           {places.map((place: any) => (
-            <Place place={place} getPlace={getPlace} />
+            <Place place={place} getPlaceDetails={getPlaceDetails} />
           ))}
         </SList>
       </SListContainer>

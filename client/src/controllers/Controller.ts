@@ -84,11 +84,13 @@ export default class Controller {
 
     const response = await ApiController.getPlaces(filterTypes);
     const statusIsNotOk = response.status !== 200;
-    console.log({ response });
-    if (statusIsNotOk) {
-      return false;
-      // throw Error(response.errorMessage);
-    }
+    // console.log({ response });
+    // if (statusIsNotOk) {
+    //   return false;
+    //   // throw Error(response.errorMessage);
+    // }
+
+    console.log("@@@@@@@", { response });
 
     this.setPlaces(response.places);
     this.setFilterTypesToLocalStorage(filterTypes);
@@ -112,9 +114,17 @@ export default class Controller {
       website,
       reviews,
       geometry: { location },
+      isSavedAsHistoric,
+    }: {
+      name: string;
+      rating: number;
+      website: string;
+      reviews: [];
+      geometry: { location: any };
+      isSavedAsHistoric: boolean;
     } = response.placeDetails.result;
 
-    return { id, name, rating, website, reviews, location };
+    return { id, name, rating, website, reviews, location, isSavedAsHistoric };
   }
 
   static getRandomPlace(places: [], currentPlaceId: string) {
@@ -182,13 +192,7 @@ export default class Controller {
   }
 
   static getPlacesFromLocalStorage() {
-    let places = LocalStorageController.getPlaces();
-
-    if (places) {
-      places = JSON.parse(places);
-    }
-
-    return places;
+    return LocalStorageController.getPlaces();
   }
 
   static getHistoricPlacesFromLocalStorage() {

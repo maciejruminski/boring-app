@@ -22,6 +22,7 @@ const SDetails = styled.div<{ isModalOpen: boolean }>`
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
   background-color: black;
   color: white;
+  z-index: 3;
 `;
 
 const STest = styled.div<{ isSavingModalOpen: boolean }>`
@@ -36,6 +37,7 @@ const STest = styled.div<{ isSavingModalOpen: boolean }>`
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
   background-color: black;
   color: white;
+  z-index: 4;
 `;
 
 export default () => {
@@ -45,7 +47,7 @@ export default () => {
       currentPlace: {
         isModalOpen,
         isSavingModalOpen,
-        details: { id, name, rating, website },
+        details: { id, name, rating, website, isSavedAsHistoric },
       },
       historicPlaces,
     },
@@ -55,9 +57,13 @@ export default () => {
       setSavingModalOn,
       setSavingModalOff,
       addHistoricPlace,
+      removeHistoricPlace,
     },
   } = useGlobalContext();
-  console.log(historicPlaces.places);
+
+  console.log({ isSavedAsHistoric });
+  console.log({ isSavedAsHistoric });
+
   return (
     <SDetails isModalOpen={isModalOpen}>
       <p>{name}</p>
@@ -76,16 +82,26 @@ export default () => {
 
       <button
         onClick={() => {
-          setSavingModalOn();
+          if (!isSavedAsHistoric) {
+            setSavingModalOn();
+          }
           // window.open('https://www.google.com/maps/dir/53.4614609,18.7250887,17/53.4614609,18.7272774/data=!3m1!4b1!4m2!4m1!3e2', '_blank');
         }}
       >
         odpal trase na google map
       </button>
 
+      {isSavedAsHistoric && (
+        <button onClick={() => removeHistoricPlace(id)}>
+          Usuń lokację z historii
+        </button>
+      )}
+
+      {/* {!isSavedAsHistoric && ( */}
       <button onClick={() => getRandomPlace(places, id)}>
         losuj inne miejsce
       </button>
+      {/* )} */}
     </SDetails>
   );
 };

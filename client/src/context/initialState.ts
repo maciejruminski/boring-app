@@ -24,6 +24,7 @@ const initialState: IState = {
     isSavingModalOpen: false,
     details: {
       id: "",
+      isSavedAsHistoric: false
     },
   },
   historicPlaces: {

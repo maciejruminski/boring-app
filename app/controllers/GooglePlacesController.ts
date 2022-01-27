@@ -28,6 +28,7 @@ class GooglePlacesController {
               rating: data.rating,
               geometry: data.geometry,
               openNow: data?.opening_hours?.open_now,
+              isSavedAsHistoric: false
             };
           });
 

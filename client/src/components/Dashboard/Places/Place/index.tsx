@@ -9,15 +9,15 @@ import {
 } from "./styles";
 
 // Icons.
-import StarIconPath from "../../../../../images/star.svg";
+import StarIconPath from "../../../../images/star.svg";
 
 export default function Place({
   place: { id, name, rating },
-  getPlace,
+  getPlaceDetails,
 }: any): JSX.Element {
   return (
     <SPlace>
-      <SButton onClick={() => getPlace(id)}>
+      <SButton onClick={() => getPlaceDetails(id)}>
         <SName>{name}</SName>
         <SStars>
           <SStarsContainer ratingWidth={rating * 20}>

@@ -12,7 +12,7 @@ export default function Buttons(): JSX.Element {
         details: { id },
       },
     },
-    actions: { getRandomPlace, getHistoricPlaces },
+    actions: { getRandomPlace, setHistoricPlacesModalOn },
   } = useGlobalContext();
 
   return (
@@ -22,7 +22,7 @@ export default function Buttons(): JSX.Element {
         text="Wybierz losowe miejsce"
       />
       <SButton
-        onClickHandler={getHistoricPlaces}
+        onClickHandler={setHistoricPlacesModalOn}
         text="Pokaż miejsca, w których już byłem"
       />
     </>

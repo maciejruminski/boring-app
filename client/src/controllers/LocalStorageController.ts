@@ -32,7 +32,9 @@ export default class LocalStorageController {
   }
 
   static getPlaces() {
-    return localStorage.getItem("places");
+    const places = localStorage.getItem("places");
+
+    return places ? JSON.parse(places) : [];
   }
 
   static setFilterTypes(filterTypes: string) {
