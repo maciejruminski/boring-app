@@ -2,7 +2,7 @@
 import Buttons from "./Buttons";
 import Heading from "./Heading";
 import List from "./List";
-import Details from "./Details";
+import CurrentPlace from "./CurrentPlace";
 import HistoricPlaces from "./HistoricPlaces";
 
 export default function Places() {
@@ -10,7 +10,7 @@ export default function Places() {
     <>
       <Heading />
       <List />
-      <Details />
+      <CurrentPlace />
       <Buttons />
       <HistoricPlaces />
     </>

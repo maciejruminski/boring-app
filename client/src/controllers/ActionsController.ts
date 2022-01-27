@@ -157,7 +157,7 @@ export default class ActionsController {
 
 
 
-        this._dispatch({ type: "setCurrentPlaceDetails", payload: newPlaceDetails });
+        this._dispatch({ type: "setCurrentPlace", payload: newPlaceDetails });
 
         const historicPlaces: Place[] = [...this.historicPlaces].filter(
           (place: Place) => place.id !== historicPlaceToRemove.id
@@ -194,13 +194,13 @@ export default class ActionsController {
     this._dispatch({ type: "setHistoricPlacesModalOff" });
   };
 
-  getPlaceDetails = (placeId: string): void => {
+  getCurrentPlaceDetails = (placeId: string): void => {
     this.setBusyOn();
 
 
    
 
-    Controller.getPlaceDetails(placeId).then((placeWithDetails) => {
+    Controller.getCurrentPlaceDetails(placeId).then((placeWithDetails) => {
       const historicPlace = Controller.getPlaceById(
         this.historicPlaces,
         placeId
@@ -212,7 +212,7 @@ export default class ActionsController {
         placeWithDetails.isSavedAsHistoric = historicPlace && true;
 
         // this.setBusyOff();
-        this._dispatch({ type: "setCurrentPlaceDetails", payload: placeWithDetails });
+        this._dispatch({ type: "setCurrentPlace", payload: placeWithDetails });
       }
     });
 
@@ -224,7 +224,7 @@ export default class ActionsController {
 
     const newPlaceId = Controller.getRandomPlace(places, currentPlaceId);
 
-    this.getPlaceDetails(newPlaceId);
+    this.getCurrentPlaceDetails(newPlaceId);
   };
 
   setPlacesFromLocalStorage = (): void => {
@@ -324,7 +324,7 @@ export default class ActionsController {
       setSavingHistoricPlaceModalOff: this.setSavingHistoricPlaceModalOff,
       setCurrentPlaceModalOn: this.setCurrentPlaceModalOn,
       setCurrentPlaceModalOff: this.setCurrentPlaceModalOff,
-      getPlaceDetails: this.getPlaceDetails,
+      getCurrentPlaceDetails: this.getCurrentPlaceDetails,
       getRandomPlace: this.getRandomPlace,
       setPlacesFromLocalStorage: this.setPlacesFromLocalStorage,
       setFilterTypesFromLocalStorage: this.setFilterTypesFromLocalStorage,

@@ -15,7 +15,7 @@ export default function HistoricPlaces(): JSX.Element {
     },
     actions: {
       // setHistoricPlacesModalOff,
-      getPlaceDetails,
+      getCurrentPlaceDetails,
     },
   } = useGlobalContext();
 
@@ -27,7 +27,7 @@ export default function HistoricPlaces(): JSX.Element {
             {historicPlaces.map((place: any) => (
               <Place
                 place={place}
-                getPlaceDetails={getPlaceDetails}
+                getCurrentPlaceDetails={getCurrentPlaceDetails}
                 key={place.id}
               />
             ))}

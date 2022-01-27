@@ -8,9 +8,7 @@ export default function Buttons(): JSX.Element {
   const {
     state: {
       places,
-      currentPlace: {
-        details: { id },
-      },
+      currentPlace: { id },
     },
     actions: { getRandomPlace, setHistoricPlacesModalOn },
   } = useGlobalContext();

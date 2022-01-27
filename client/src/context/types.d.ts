@@ -23,13 +23,11 @@ interface IState {
   filters: Filters;
   places: Place[];
   currentPlace: {
-    details: {
-      id: string;
-      name?: string;
-      rating?: number;
-      website?: string;
-      isSavedAsHistoric: boolean;
-    };
+    id: string;
+    name?: string;
+    rating?: number;
+    website?: string;
+    isSavedAsHistoric: boolean;
   };
   historicPlaces: Place[];
   modals: {
@@ -37,7 +35,7 @@ interface IState {
     isCurrentPlaceModalOpen: boolean;
     isSavingHistoricPlaceModalOpen: boolean;
     isHistoricPlacesModalOpen: boolean;
-  }
+  };
 }
 
 interface IActions {
@@ -57,7 +55,7 @@ interface IActions {
   setSavingHistoricPlaceModalOff: () => void;
   setCurrentPlaceModalOn: () => void;
   setCurrentPlaceModalOff: () => void;
-  getPlaceDetails: (placeId: string) => void;
+  getCurrentPlaceDetails: (placeId: string) => void;
   getRandomPlace: (places: [], currentPlaceId: string) => void;
   setPlacesFromLocalStorage: () => void;
   setFilterTypesFromLocalStorage: () => void;

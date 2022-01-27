@@ -19,10 +19,8 @@ const initialState: IState = {
   },
   places: [],
   currentPlace: {
-    details: {
-      id: "",
-      isSavedAsHistoric: false,
-    },
+    id: "",
+    isSavedAsHistoric: false,
   },
   historicPlaces: [],
   modals: {

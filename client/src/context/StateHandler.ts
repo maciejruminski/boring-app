@@ -62,8 +62,8 @@ export default class StateHandler {
     return { ...state, modals: { ...state.modals, isHistoricPlacesModalOpen: false } };
   }
 
-  static setCurrentPlaceDetails({ state, payload: details }: IStateHandler) {
-    return { ...state, currentPlace: { ...state.currentPlace, details } };
+  static setCurrentPlace({ state, payload: currentPlace }: IStateHandler) {
+    return { ...state, currentPlace };
   }
 
   static setPlacesFromLocalStorage({ state, payload: places }: IStateHandler) {
@@ -105,7 +105,7 @@ export default class StateHandler {
     setSavingHistoricPlaceModalOff: StateHandler.setSavingHistoricPlaceModalOff,
     setCurrentPlaceModalOn: StateHandler.setCurrentPlaceModalOn,
     setCurrentPlaceModalOff: StateHandler.setCurrentPlaceModalOff,
-    setCurrentPlaceDetails: StateHandler.setCurrentPlaceDetails,
+    setCurrentPlace: StateHandler.setCurrentPlace,
     setPlacesFromLocalStorage: StateHandler.setPlacesFromLocalStorage,
     setSignUpError: StateHandler.setSignUpError,
     setSignUpEmail: StateHandler.setSignUpEmail,

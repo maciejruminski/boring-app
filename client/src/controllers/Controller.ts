@@ -103,8 +103,8 @@ export default class Controller {
     return response.places;
   }
 
-  static async getPlaceDetails(id: string) {
-    const response = await ApiController.getPlaceDetails(id);
+  static async getCurrentPlaceDetails(id: string) {
+    const response = await ApiController.getCurrentPlaceDetails(id);
     const statusIsNotOk = response.status !== 200;
 
     if (statusIsNotOk) {

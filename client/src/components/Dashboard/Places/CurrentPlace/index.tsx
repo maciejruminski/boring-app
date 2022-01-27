@@ -44,9 +44,7 @@ export default function Details() {
   const {
     state: {
       places,
-      currentPlace: {
-        details: { id, name, rating, website, isSavedAsHistoric },
-      },
+      currentPlace: { id, name, rating, website, isSavedAsHistoric },
       modals: { isCurrentPlaceModalOpen, isSavingHistoricPlaceModalOpen },
       // historicPlaces,
     },
