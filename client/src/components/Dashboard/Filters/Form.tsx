@@ -19,7 +19,7 @@ import { SForm } from "./styles";
 export default function Form() {
   const {
     state: {
-      filters: { isModalOpen },
+      modals: { isFiltersModalOpen },
     },
     actions: { filter, setFiltersModalOff },
   } = useGlobalContext();
@@ -45,7 +45,11 @@ export default function Form() {
 
   return (
     <>
-      <SForm method="POST" isModalOpen={isModalOpen} onSubmit={onSubmitHandler}>
+      <SForm
+        method="POST"
+        isModalOpen={isFiltersModalOpen}
+        onSubmit={onSubmitHandler}
+      >
         <Distance ref={distanceRef} />
         <Keyword ref={keywordRef} />
         <Types ref={typeRef} />

@@ -31,35 +31,35 @@ export default class StateHandler {
   }
   
   static setFiltersModalOn({ state }: IStateHandler) {
-    return { ...state, filters: { ...state.filters, isModalOpen: true } };
+    return { ...state, modals: { ...state.modals, isFiltersModalOpen: true } };
   }
   
   static setFiltersModalOff({ state }: IStateHandler) {
-    return { ...state, filters: { ...state.filters, isModalOpen: false } };
+    return { ...state, modals: { ...state.modals, isFiltersModalOpen: false } };
   }
 
-  static setSavingModalOn({ state }: IStateHandler) {
-    return { ...state, currentPlace: { ...state.currentPlace, isSavingModalOpen: true } };
+  static setSavingHistoricPlaceModalOn({ state }: IStateHandler) {
+    return { ...state, modals: { ...state.modals, isSavingHistoricPlaceModalOpen: true } };
   }
   
-  static setSavingModalOff({ state }: IStateHandler) {
-    return { ...state, currentPlace: { ...state.currentPlace, isSavingModalOpen: false } };
+  static setSavingHistoricPlaceModalOff({ state }: IStateHandler) {
+    return { ...state, modals: { ...state.modals, isSavingHistoricPlaceModalOpen: false } };
   }
   
-  static setPlaceModalOn({ state }: IStateHandler) {
-    return { ...state, currentPlace: { ...state.currentPlace, isModalOpen: true } };
+  static setCurrentPlaceModalOn({ state }: IStateHandler) {
+    return { ...state, modals: { ...state.modals, isCurrentPlaceModalOpen: true } };
   }
   
-  static setPlaceModalOff({ state }: IStateHandler) {
-    return { ...state, currentPlace: { ...state.currentPlace, isModalOpen: false } };
+  static setCurrentPlaceModalOff({ state }: IStateHandler) {
+    return { ...state, modals: { ...state.modals, isCurrentPlaceModalOpen: false } };
   }
   
   static setHistoricPlacesModalOn({ state }: IStateHandler) {
-    return { ...state, historicPlaces: { ...state.historicPlaces, isModalOpen: true } };
+    return { ...state, modals: { ...state.modals, isHistoricPlacesModalOpen: true } };
   }
 
   static setHistoricPlacesModalOff({ state }: IStateHandler) {
-    return { ...state, historicPlaces: { ...state.historicPlaces, isModalOpen: false } };
+    return { ...state, modals: { ...state.modals, isHistoricPlacesModalOpen: false } };
   }
 
   static setCurrentPlaceDetails({ state, payload: details }: IStateHandler) {
@@ -101,10 +101,10 @@ export default class StateHandler {
     setPlaces: StateHandler.setPlaces,
     setFiltersModalOn: StateHandler.setFiltersModalOn,
     setFiltersModalOff: StateHandler.setFiltersModalOff,
-    setSavingModalOn: StateHandler.setSavingModalOn,
-    setSavingModalOff: StateHandler.setSavingModalOff,
-    setPlaceModalOn: StateHandler.setPlaceModalOn,
-    setPlaceModalOff: StateHandler.setPlaceModalOff,
+    setSavingHistoricPlaceModalOn: StateHandler.setSavingHistoricPlaceModalOn,
+    setSavingHistoricPlaceModalOff: StateHandler.setSavingHistoricPlaceModalOff,
+    setCurrentPlaceModalOn: StateHandler.setCurrentPlaceModalOn,
+    setCurrentPlaceModalOff: StateHandler.setCurrentPlaceModalOff,
     setCurrentPlaceDetails: StateHandler.setCurrentPlaceDetails,
     setPlacesFromLocalStorage: StateHandler.setPlacesFromLocalStorage,
     setSignUpError: StateHandler.setSignUpError,

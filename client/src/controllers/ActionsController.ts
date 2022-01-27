@@ -43,12 +43,12 @@ export default class ActionsController {
     this._dispatch({ type: "setFiltersModalOff" });
   };
 
-  setSavingModalOn = (): void => {
-    this._dispatch({ type: "setSavingModalOn" });
+  setSavingHistoricPlaceModalOn = (): void => {
+    this._dispatch({ type: "setSavingHistoricPlaceModalOn" });
   };
 
-  setSavingModalOff = (): void => {
-    this._dispatch({ type: "setSavingModalOff" });
+  setSavingHistoricPlaceModalOff = (): void => {
+    this._dispatch({ type: "setSavingHistoricPlaceModalOff" });
   };
 
   verifyOneTimePassword = (
@@ -178,12 +178,12 @@ export default class ActionsController {
     });
   };
 
-  setPlaceModalOn = (): void => {
-    this._dispatch({ type: "setPlaceModalOn" });
+  setCurrentPlaceModalOn = (): void => {
+    this._dispatch({ type: "setCurrentPlaceModalOn" });
   };
 
-  setPlaceModalOff = (): void => {
-    this._dispatch({ type: "setPlaceModalOff" });
+  setCurrentPlaceModalOff = (): void => {
+    this._dispatch({ type: "setCurrentPlaceModalOff" });
   };
 
   setHistoricPlacesModalOn = (): void => {
@@ -216,7 +216,7 @@ export default class ActionsController {
       }
     });
 
-    this._dispatch({ type: "setPlaceModalOn" });
+    this.setCurrentPlaceModalOn();
   };
 
   getRandomPlace = (places: [], currentPlaceId: string): void => {
@@ -320,10 +320,10 @@ export default class ActionsController {
       filter: this.filter,
       setFiltersModalOn: this.setFiltersModalOn,
       setFiltersModalOff: this.setFiltersModalOff,
-      setSavingModalOn: this.setSavingModalOn,
-      setSavingModalOff: this.setSavingModalOff,
-      setPlaceModalOn: this.setPlaceModalOn,
-      setPlaceModalOff: this.setPlaceModalOff,
+      setSavingHistoricPlaceModalOn: this.setSavingHistoricPlaceModalOn,
+      setSavingHistoricPlaceModalOff: this.setSavingHistoricPlaceModalOff,
+      setCurrentPlaceModalOn: this.setCurrentPlaceModalOn,
+      setCurrentPlaceModalOff: this.setCurrentPlaceModalOff,
       getPlaceDetails: this.getPlaceDetails,
       getRandomPlace: this.getRandomPlace,
       setPlacesFromLocalStorage: this.setPlacesFromLocalStorage,

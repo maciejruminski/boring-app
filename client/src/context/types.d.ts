@@ -8,7 +8,6 @@ type TypesOfFilters = {
 };
 
 type Filters = {
-  isModalOpen: boolean;
   types: TypesOfFilters;
 };
 
@@ -24,8 +23,6 @@ interface IState {
   filters: Filters;
   places: Place[];
   currentPlace: {
-    isModalOpen: boolean;
-    isSavingModalOpen: boolean;
     details: {
       id: string;
       name?: string;
@@ -36,8 +33,13 @@ interface IState {
   };
   historicPlaces: {
     places: Place[];
-    isModalOpen: boolean;
   };
+  modals: {
+    isFiltersModalOpen: boolean;
+    isCurrentPlaceModalOpen: boolean;
+    isSavingHistoricPlaceModalOpen: boolean;
+    isHistoricPlacesModalOpen: boolean;
+  }
 }
 
 interface IActions {
@@ -53,10 +55,10 @@ interface IActions {
   filter: (filters: TypesOfFilters) => void;
   setFiltersModalOn: () => void;
   setFiltersModalOff: () => void;
-  setSavingModalOn: () => void;
-  setSavingModalOff: () => void;
-  setPlaceModalOn: () => void;
-  setPlaceModalOff: () => void;
+  setSavingHistoricPlaceModalOn: () => void;
+  setSavingHistoricPlaceModalOff: () => void;
+  setCurrentPlaceModalOn: () => void;
+  setCurrentPlaceModalOff: () => void;
   getPlaceDetails: (placeId: string) => void;
   getRandomPlace: (places: [], currentPlaceId: string) => void;
   setPlacesFromLocalStorage: () => void;

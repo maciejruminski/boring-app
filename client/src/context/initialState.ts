@@ -8,7 +8,6 @@ const initialState: IState = {
     isSent: false,
   },
   filters: {
-    isModalOpen: false,
     types: {
       distance: 1000,
       keyword: "",
@@ -20,16 +19,19 @@ const initialState: IState = {
   },
   places: [],
   currentPlace: {
-    isModalOpen: false,
-    isSavingModalOpen: false,
     details: {
       id: "",
-      isSavedAsHistoric: false
+      isSavedAsHistoric: false,
     },
   },
   historicPlaces: {
     places: [],
-    isModalOpen: false,
+  },
+  modals: {
+    isFiltersModalOpen: false,
+    isCurrentPlaceModalOpen: false,
+    isSavingHistoricPlaceModalOpen: false,
+    isHistoricPlacesModalOpen: false,
   },
 };
 

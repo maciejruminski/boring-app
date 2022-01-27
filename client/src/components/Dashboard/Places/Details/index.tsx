@@ -25,15 +25,15 @@ const SDetails = styled.div<{ isModalOpen: boolean }>`
   z-index: 3;
 `;
 
-const STest = styled.div<{ isSavingModalOpen: boolean }>`
+const STest = styled.div<{ isModalOpen: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: ${({ isSavingModalOpen }) => (isSavingModalOpen ? "1" : "0")};
-  transform: ${({ isSavingModalOpen }) =>
-    isSavingModalOpen ? "translateY(0)" : "translateY(-100%)"};
+  opacity: ${({ isModalOpen }) => (isModalOpen ? "1" : "0")};
+  transform: ${({ isModalOpen }) =>
+    isModalOpen ? "translateY(0)" : "translateY(-100%)"};
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
   background-color: black;
   color: white;
@@ -45,34 +45,33 @@ export default function Details() {
     state: {
       places,
       currentPlace: {
-        isModalOpen,
-        isSavingModalOpen,
         details: { id, name, rating, website, isSavedAsHistoric },
       },
+      modals: { isCurrentPlaceModalOpen, isSavingHistoricPlaceModalOpen },
       // historicPlaces,
     },
     actions: {
-      setPlaceModalOff,
+      setCurrentPlaceModalOff,
       getRandomPlace,
-      setSavingModalOn,
-      setSavingModalOff,
+      setSavingHistoricPlaceModalOn,
+      setSavingHistoricPlaceModalOff,
       addHistoricPlace,
       removeHistoricPlace,
     },
   } = useGlobalContext();
 
   return (
-    <SDetails isModalOpen={isModalOpen}>
+    <SDetails isModalOpen={isCurrentPlaceModalOpen}>
       <p>{name}</p>
       <p>{rating}</p>
       <p>{website}</p>
 
-      <button onClick={setPlaceModalOff}>X</button>
+      <button onClick={setCurrentPlaceModalOff}>X</button>
 
       {/* <Map /> */}
 
-      <STest isSavingModalOpen={isSavingModalOpen}>
-        <button onClick={setSavingModalOff}>X</button>
+      <STest isModalOpen={isSavingHistoricPlaceModalOpen}>
+        <button onClick={setSavingHistoricPlaceModalOff}>X</button>
         <p>Czy zapisać lokację w historii?</p>
         <button onClick={() => addHistoricPlace(id)}>Tak</button>
       </STest>
@@ -80,7 +79,7 @@ export default function Details() {
       <button
         onClick={() => {
           if (!isSavedAsHistoric) {
-            setSavingModalOn();
+            setSavingHistoricPlaceModalOn();
           }
           // window.open('https://www.google.com/maps/dir/53.4614609,18.7250887,17/53.4614609,18.7272774/data=!3m1!4b1!4m2!4m1!3e2', '_blank');
         }}
