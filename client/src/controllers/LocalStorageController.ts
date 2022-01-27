@@ -37,16 +37,16 @@ export default class LocalStorageController {
     return places ? JSON.parse(places) : [];
   }
 
-  static setFilterTypes(filterTypes: string) {
-    return localStorage.setItem("filterTypes", filterTypes);
+  static setFilters(filters: string) {
+    return localStorage.setItem("filters", filters);
   }
 
-  static removeFilterTypes() {
-    return localStorage.removeItem("filterTypes");
+  static removeFilters() {
+    return localStorage.removeItem("filters");
   }
 
-  static getFilterTypes() {
-    return localStorage.getItem("filterTypes");
+  static getFilters() {
+    return localStorage.getItem("filters");
   }
 
   static setHistoricPlaces(places: Place[]) {

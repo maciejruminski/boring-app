@@ -14,7 +14,7 @@ function App() {
     actions: {
       setUserAuthenticationFromLocalStorage,
       setPlacesFromLocalStorage,
-      setFilterTypesFromLocalStorage,
+      setFiltersFromLocalStorage,
       setHistoricPlaces
     },
   } = useGlobalContext();
@@ -22,7 +22,7 @@ function App() {
   useEffect(() => {
     setUserAuthenticationFromLocalStorage();
     setPlacesFromLocalStorage();
-    setFilterTypesFromLocalStorage();
+    setFiltersFromLocalStorage();
     setHistoricPlaces();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

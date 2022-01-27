@@ -65,19 +65,19 @@ export default class ActionsController {
     });
   };
 
-  filter = (filterTypes: TypesOfFilters): void => {
+  filter = (filters: Filters): void => {
     this.setBusyOn();
 
-    Controller.findPlaces(filterTypes).then((places: []) => {
+    Controller.findPlaces(filters).then((places: []) => {
       // this.setUserAuthenticationOn();
       // this.setBusyOff();
       this._dispatch({ type: "setPlaces", payload: places });
     });
 
-    Controller.setFilterTypesToDatabase(filterTypes).then(() => {
+    Controller.setFiltersToDatabase(filters).then(() => {
       console.log("filtry dodane do bazy danych!");
     });
-    this._dispatch({ type: "setFilterTypes", payload: filterTypes });
+    this._dispatch({ type: "setFilters", payload: filters });
   };
 
   setHistoricPlaces = (): void => {
@@ -143,11 +143,12 @@ export default class ActionsController {
 
     const isHistoricPlaceSaved = Controller.checkIfHistoricPlaceSaved(id);
 
-    
-
     isHistoricPlaceSaved.then((isSaved) => {
       if (isSaved) {
-        const historicPlaceToRemove = Controller.getPlaceById(this.historicPlaces, id);
+        const historicPlaceToRemove = Controller.getPlaceById(
+          this.historicPlaces,
+          id
+        );
 
         const newPlaceDetails = this._state.currentPlace.details;
 
@@ -155,15 +156,12 @@ export default class ActionsController {
 
         // historicPlaceToRemove.isSavedAsHistoric = false;
 
-
-
         this._dispatch({ type: "setCurrentPlace", payload: newPlaceDetails });
 
         const historicPlaces: Place[] = [...this.historicPlaces].filter(
           (place: Place) => place.id !== historicPlaceToRemove.id
         );
 
-        
         Controller.setHistoricPlaces(historicPlaces).then(() => {
           console.log("Historyczne miejsce usunięte z bazy danych!");
           this._dispatch({
@@ -171,7 +169,6 @@ export default class ActionsController {
             payload: historicPlaces,
           });
 
-          
           this.setBusyOff();
         });
       }
@@ -196,9 +193,6 @@ export default class ActionsController {
 
   getCurrentPlaceDetails = (placeId: string): void => {
     this.setBusyOn();
-
-
-   
 
     Controller.getCurrentPlaceDetails(placeId).then((placeWithDetails) => {
       const historicPlace = Controller.getPlaceById(
@@ -233,11 +227,11 @@ export default class ActionsController {
     this._dispatch({ type: "setPlacesFromLocalStorage", payload: places });
   };
 
-  setFilterTypesFromLocalStorage = (): void => {
-    const filterTypes = Controller.getFilterTypesFromLocalStorage();
+  setFiltersFromLocalStorage = (): void => {
+    const filters = Controller.getFiltersFromLocalStorage();
 
-    if (filterTypes) {
-      this._dispatch({ type: "setFilterTypes", payload: filterTypes });
+    if (filters) {
+      this._dispatch({ type: "setFilters", payload: filters });
     }
   };
 
@@ -327,7 +321,7 @@ export default class ActionsController {
       getCurrentPlaceDetails: this.getCurrentPlaceDetails,
       getRandomPlace: this.getRandomPlace,
       setPlacesFromLocalStorage: this.setPlacesFromLocalStorage,
-      setFilterTypesFromLocalStorage: this.setFilterTypesFromLocalStorage,
+      setFiltersFromLocalStorage: this.setFiltersFromLocalStorage,
       validateInput: this.validateInput,
       setSignUpEmail: this.setSignUpEmail,
       setSignUpEmailAsSent: this.setSignUpEmailAsSent,

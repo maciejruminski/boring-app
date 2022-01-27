@@ -9,21 +9,11 @@ export default class ApiController {
     return await response.json();
   }
 
-  static async addFilterTypesToDatabase(
-    filterTypes: {
-      distance: number;
-      keyword: string;
-      type: string;
-      minPrice: number;
-      maxPrice: number;
-      openNow: boolean;
-    },
-    userUUID: string
-  ) {
+  static async addFiltersToDatabase(filters: Filters, userUUID: string) {
     const response = await fetch("/add-filter-types", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ filterTypes, userUUID }),
+      body: JSON.stringify({ filters, userUUID }),
     });
 
     return await response.json();
@@ -59,14 +49,7 @@ export default class ApiController {
     return await response.json();
   }
 
-  static async getPlaces(filters: {
-    distance: number;
-    keyword: string;
-    type: string;
-    minPrice: number;
-    maxPrice: number;
-    openNow: boolean;
-  }) {
+  static async getPlaces(filters: Filters) {
     const response = await fetch("/get-places", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

@@ -8,14 +8,12 @@ const initialState: IState = {
     isSent: false,
   },
   filters: {
-    types: {
-      distance: 1000,
-      keyword: "",
-      type: "accounting",
-      minPrice: 0,
-      maxPrice: 4,
-      openNow: false,
-    },
+    distance: 1000,
+    keyword: "",
+    type: "accounting",
+    minPrice: 0,
+    maxPrice: 4,
+    openNow: false,
   },
   places: [],
   currentPlace: {

@@ -1,14 +1,10 @@
-type TypesOfFilters = {
+type Filters = {
   distance: number;
   keyword: string;
   type: string;
   minPrice: number;
   maxPrice: number;
   openNow: boolean;
-};
-
-type Filters = {
-  types: TypesOfFilters;
 };
 
 interface IState {
@@ -48,7 +44,7 @@ interface IActions {
   ) => void;
   setBusyOn: () => void;
   setBusyOff: () => void;
-  filter: (filters: TypesOfFilters) => void;
+  filter: (filters: Filters) => void;
   setFiltersModalOn: () => void;
   setFiltersModalOff: () => void;
   setSavingHistoricPlaceModalOn: () => void;
@@ -58,7 +54,7 @@ interface IActions {
   getCurrentPlaceDetails: (placeId: string) => void;
   getRandomPlace: (places: [], currentPlaceId: string) => void;
   setPlacesFromLocalStorage: () => void;
-  setFilterTypesFromLocalStorage: () => void;
+  setFiltersFromLocalStorage: () => void;
   validateInput: (input: HTMLInputElement) => boolean;
   setSignUpEmail: (input: HTMLInputElement) => void;
   setSignUpEmailAsSent: () => void;
@@ -79,7 +75,7 @@ type ActionTypes =
   | "setUserAuthenticationFromLocalStorage"
   | "setBusyOn"
   | "setBusyOff"
-  | "setFilterTypes"
+  | "setFilters"
   | "setSignUpEmailAsSent";
 
 interface IAction {

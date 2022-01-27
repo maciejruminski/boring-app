@@ -9,12 +9,16 @@ import Checkbox from "../../../Common/Form/Checkbox";
 
 // eslint-disable-next-line no-empty-pattern
 export default forwardRef<HTMLInputElement>(({}, ref) => {
-  const { state } = useGlobalContext();
+  const {
+    state: {
+      filters: { openNow },
+    },
+  } = useGlobalContext();
 
   return (
     <Checkbox
       label="Show only open now items"
-      defaultValue={state.filters.types.openNow ? true : false}
+      defaultValue={openNow ? true : false}
       id="openNow"
       ref={ref}
     />

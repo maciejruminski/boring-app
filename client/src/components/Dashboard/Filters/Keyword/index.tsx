@@ -11,9 +11,7 @@ import Input from "../../../Common/Form/Input";
 export default forwardRef<HTMLInputElement>(({}, ref) => {
   const {
     state: {
-      filters: {
-        types: { keyword },
-      },
+      filters: { keyword },
     },
   } = useGlobalContext();
 

@@ -19,9 +19,7 @@ import filterIconPath from "../../../../images/filter.svg";
 export default function Preview() {
   const {
     state: {
-      filters: {
-        types: { distance, keyword, type, minPrice, maxPrice, openNow },
-      },
+      filters: { distance, keyword, type, minPrice, maxPrice, openNow },
     },
     actions: { setFiltersModalOn },
   } = useGlobalContext();

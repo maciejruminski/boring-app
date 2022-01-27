@@ -12,15 +12,12 @@ import { SList, SListContainer } from "./styles";
 
 export default function List(): JSX.Element {
   const {
-    state: {
-      places,
-      filters: { types },
-    },
+    state: { places, filters },
     actions: { filter, getPlaceDetails },
   } = useGlobalContext();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => filter(types), []);
+  useEffect(() => filter(filters), []);
 
   if (places.length) {
     return (

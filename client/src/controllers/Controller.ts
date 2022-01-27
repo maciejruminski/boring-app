@@ -9,7 +9,6 @@ export default class Controller {
 
     // const response = await ApiController.addUserToDatabase(userUUID);
     await ApiController.addUserToDatabase(userUUID);
-
   }
 
   private static getUserUUID() {
@@ -20,7 +19,7 @@ export default class Controller {
     LocalStorageController.setPlaces(JSON.stringify(places));
   }
 
-  private static setFilterTypesToLocalStorage(filterTypes: {
+  private static setFiltersToLocalStorage(filters: {
     distance: number;
     keyword: string;
     type: string;
@@ -28,10 +27,10 @@ export default class Controller {
     maxPrice: number;
     openNow: boolean;
   }) {
-    LocalStorageController.setFilterTypes(JSON.stringify(filterTypes));
+    LocalStorageController.setFilters(JSON.stringify(filters));
   }
 
-  static async setFilterTypesToDatabase(filterTypes: {
+  static async setFiltersToDatabase(filters: {
     distance: number;
     keyword: string;
     type: string;
@@ -42,14 +41,11 @@ export default class Controller {
     const userUUID = this.getUserUUID();
 
     if (userUUID) {
-      // const response = await ApiController.addFilterTypesToDatabase(
-      //   filterTypes,
+      // const response = await ApiController.addFiltersToDatabase(
+      //   filters,
       //   userUUID
       // );
-      await ApiController.addFilterTypesToDatabase(
-        filterTypes,
-        userUUID
-      );
+      await ApiController.addFiltersToDatabase(filters, userUUID);
     }
   }
 
@@ -70,7 +66,7 @@ export default class Controller {
     return true;
   }
 
-  static async findPlaces(filterTypes: {
+  static async findPlaces(filters: {
     distance: number;
     keyword: string;
     type: string;
@@ -79,16 +75,15 @@ export default class Controller {
     openNow: boolean;
   }) {
     const placesFromLocalStorage = this.getPlacesFromLocalStorage();
-    const filterTypesFromLocalStorage = this.getFilterTypesFromLocalStorage();
-    const areFilterTypesEqual =
-      JSON.stringify(filterTypes) ===
-      JSON.stringify(filterTypesFromLocalStorage);
+    const filtersFromLocalStorage = this.getFiltersFromLocalStorage();
+    const areFiltersEqual =
+      JSON.stringify(filters) === JSON.stringify(filtersFromLocalStorage);
 
-    if (areFilterTypesEqual) {
+    if (areFiltersEqual) {
       return placesFromLocalStorage;
     }
 
-    const response = await ApiController.getPlaces(filterTypes);
+    const response = await ApiController.getPlaces(filters);
     // const statusIsNotOk = response.status !== 200;
     // console.log({ response });
     // if (statusIsNotOk) {
@@ -97,8 +92,8 @@ export default class Controller {
     // }
 
     this.setPlaces(response.places);
-    this.setFilterTypesToLocalStorage(filterTypes);
-    this.setFilterTypesToDatabase(filterTypes);
+    this.setFiltersToLocalStorage(filters);
+    this.setFiltersToDatabase(filters);
 
     return response.places;
   }
@@ -218,8 +213,8 @@ export default class Controller {
     }
   }
 
-  static getFilterTypesFromLocalStorage() {
-    let filters = LocalStorageController.getFilterTypes();
+  static getFiltersFromLocalStorage() {
+    let filters = LocalStorageController.getFilters();
 
     if (filters) {
       filters = JSON.parse(filters);

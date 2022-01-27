@@ -12,9 +12,7 @@ export default forwardRef<HTMLSelectElement>(
   ({}, ref: React.ForwardedRef<HTMLSelectElement>) => {
     const {
       state: {
-        filters: {
-          types: { distance },
-        },
+        filters: { distance },
       },
     } = useGlobalContext();
 

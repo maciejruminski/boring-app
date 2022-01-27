@@ -15,9 +15,7 @@ export default forwardRef<HTMLSelectElement>(
   ({}, ref: React.ForwardedRef<HTMLSelectElement>) => {
     const {
       state: {
-        filters: {
-          types: { type },
-        },
+        filters: { type },
       },
     } = useGlobalContext();
 
