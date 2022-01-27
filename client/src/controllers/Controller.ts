@@ -7,7 +7,9 @@ export default class Controller {
     LocalStorageController.setUserUUID(userUUID);
     LocalStorageController.setUserAuthentication();
 
-    const response = await ApiController.addUserToDatabase(userUUID);
+    // const response = await ApiController.addUserToDatabase(userUUID);
+    await ApiController.addUserToDatabase(userUUID);
+
   }
 
   private static getUserUUID() {
@@ -38,9 +40,13 @@ export default class Controller {
     openNow: boolean;
   }) {
     const userUUID = this.getUserUUID();
-    console.log({ userUUID });
+
     if (userUUID) {
-      const response = await ApiController.addFilterTypesToDatabase(
+      // const response = await ApiController.addFilterTypesToDatabase(
+      //   filterTypes,
+      //   userUUID
+      // );
+      await ApiController.addFilterTypesToDatabase(
         filterTypes,
         userUUID
       );
@@ -54,7 +60,7 @@ export default class Controller {
   static async verifyOneTimePassword(oneTimePassword: string) {
     const response = await ApiController.verifyOneTimePassword(oneTimePassword);
     const statusIsNotOk = response.status !== 200;
-    console.log(response);
+
     if (statusIsNotOk) {
       return false;
       // throw Error(response.errorMessage);
@@ -83,14 +89,12 @@ export default class Controller {
     }
 
     const response = await ApiController.getPlaces(filterTypes);
-    const statusIsNotOk = response.status !== 200;
+    // const statusIsNotOk = response.status !== 200;
     // console.log({ response });
     // if (statusIsNotOk) {
     //   return false;
     //   // throw Error(response.errorMessage);
     // }
-
-    console.log("@@@@@@@", { response });
 
     this.setPlaces(response.places);
     this.setFilterTypesToLocalStorage(filterTypes);
@@ -227,7 +231,7 @@ export default class Controller {
   static async sendPassword(email: string) {
     const response = await ApiController.sendPassword(email);
     const statusIsNotOk = response.status !== 200;
-    console.log(response);
+
     if (statusIsNotOk) {
       return false;
       // throw Error(response.errorMessage);

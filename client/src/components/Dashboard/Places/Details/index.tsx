@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 // Functions.
-import { useRef } from "react";
+// import { useRef } from "react";
 
 // Context.
 import { useGlobalContext } from "../../../../context";
 
 // Components.
-import Map from "./Map";
-import ActionsController from "../../../../controllers/ActionsController";
+// import Map from "./Map";
+// import ActionsController from "../../../../controllers/ActionsController";
 
 const SDetails = styled.div<{ isModalOpen: boolean }>`
   position: fixed;
@@ -40,7 +40,7 @@ const STest = styled.div<{ isSavingModalOpen: boolean }>`
   z-index: 4;
 `;
 
-export default () => {
+export default function Details() {
   const {
     state: {
       places,
@@ -49,7 +49,7 @@ export default () => {
         isSavingModalOpen,
         details: { id, name, rating, website, isSavedAsHistoric },
       },
-      historicPlaces,
+      // historicPlaces,
     },
     actions: {
       setPlaceModalOff,
@@ -60,9 +60,6 @@ export default () => {
       removeHistoricPlace,
     },
   } = useGlobalContext();
-
-  console.log({ isSavedAsHistoric });
-  console.log({ isSavedAsHistoric });
 
   return (
     <SDetails isModalOpen={isModalOpen}>
@@ -104,4 +101,4 @@ export default () => {
       {/* )} */}
     </SDetails>
   );
-};
+}

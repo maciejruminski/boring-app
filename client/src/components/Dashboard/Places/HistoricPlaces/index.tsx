@@ -12,11 +12,12 @@ export default function HistoricPlaces(): JSX.Element {
     state: {
       historicPlaces: { places, isModalOpen },
     },
-    actions: { setHistoricPlacesModalOff, getPlaceDetails },
+    actions: { 
+      // setHistoricPlacesModalOff, 
+      getPlaceDetails },
   } = useGlobalContext();
 
   if (places.length) {
-    console.log("HISTORIC PLACES", places);
     return (
       <SModal isModalOpen={isModalOpen}>
         <SListContainer>

@@ -24,6 +24,8 @@ function App() {
     setPlacesFromLocalStorage();
     setFilterTypesFromLocalStorage();
     setHistoricPlaces();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <>{isLoggedIn ? <Dashboard /> : <SignUp />}</>;

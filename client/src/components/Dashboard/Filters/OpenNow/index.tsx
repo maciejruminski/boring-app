@@ -1,5 +1,5 @@
 // Functions.
-import { forwardRef, useState } from "react";
+import { forwardRef } from "react";
 
 // Context.
 import { useGlobalContext } from "../../../../context";
@@ -7,6 +7,7 @@ import { useGlobalContext } from "../../../../context";
 // Components.
 import Checkbox from "../../../Common/Form/Checkbox";
 
+// eslint-disable-next-line no-empty-pattern
 export default forwardRef<HTMLInputElement>(({}, ref) => {
   const { state } = useGlobalContext();
 

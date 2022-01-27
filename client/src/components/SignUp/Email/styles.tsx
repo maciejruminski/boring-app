@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const SEmail = styled.div<{ isError: string }>`
   color: white;

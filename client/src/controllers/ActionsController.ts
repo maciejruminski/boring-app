@@ -1,5 +1,4 @@
 // Controllers.
-import { TargetElement } from "@testing-library/user-event";
 import Controller from "./Controller";
 import LocalStorageController from "./LocalStorageController";
 
@@ -61,7 +60,6 @@ export default class ActionsController {
     this.setBusyOn();
 
     Controller.verifyOneTimePassword(oneTimePassword).then((test) => {
-      console.log("verified!", test);
       // this.setUserAuthenticationOn();
       // this.setBusyOff();
     });
@@ -70,12 +68,9 @@ export default class ActionsController {
   filter = (filterTypes: TypesOfFilters): void => {
     this.setBusyOn();
 
-    console.log("FILTERRRR");
-
     Controller.findPlaces(filterTypes).then((places: []) => {
       // this.setUserAuthenticationOn();
       // this.setBusyOff();
-      console.log("PLACES", places);
       this._dispatch({ type: "setPlaces", payload: places });
     });
 
@@ -137,7 +132,7 @@ export default class ActionsController {
       Controller.setHistoricPlaces(historicPlaces).then(() => {
         console.log("Historyczne miejsce dodane do bazy danych!");
         this._dispatch({ type: "setHistoricPlaces", payload: historicPlaces });
-        console.log("CURRENT STATE", this._state.historicPlaces);
+        // console.log("CURRENT STATE", this._state.historicPlaces);
         this.setBusyOff();
       });
     });
@@ -211,7 +206,7 @@ export default class ActionsController {
         placeId
       );
 
-      console.log('GET PLACE DETAILS', placeWithDetails)
+      // console.log('GET PLACE DETAILS', placeWithDetails)
 
       if (placeWithDetails) {
         placeWithDetails.isSavedAsHistoric = historicPlace && true;

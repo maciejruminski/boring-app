@@ -32,8 +32,6 @@ class GooglePlacesController {
             };
           });
 
-          // console.log(data.results);
-
           res.status(200).json({ status: 200, places });
         });
     } catch (err) {

@@ -8,7 +8,7 @@ const SMap = styled.div`
 
 export default function Map(): JSX.Element {
   let map: google.maps.Map;
-  console.log(process.env.REACT_APP_GOOGLE_API_KEY);
+  // console.log(process.env.REACT_APP_GOOGLE_API_KEY);
   const loader = new Loader({
     apiKey: `${process.env.REACT_APP_GOOGLE_API_KEY}`,
     // version: "weekly",
@@ -22,7 +22,7 @@ export default function Map(): JSX.Element {
     travelMode: any,
     marker: any
   ) {
-    console.log("route!!");
+    // console.log("route!!");
 
     let travelModeTest = "DRIVING";
 
@@ -38,7 +38,7 @@ export default function Map(): JSX.Element {
       },
       function (response: any, status: any) {
         if (status == google.maps.DirectionsStatus.OK) {
-          console.log(google.maps.TravelMode);
+          // console.log(google.maps.TravelMode);
 
           // response.request.travelMode= 'WALKING';
 
@@ -70,7 +70,7 @@ export default function Map(): JSX.Element {
           //     map: map
           // });
 
-          console.log(response);
+          // console.log(response);
 
           directionsDisplay.setDirections(response);
         } else {
@@ -112,7 +112,7 @@ export default function Map(): JSX.Element {
   const currentPosition = navigator.geolocation.getCurrentPosition(
     (success) =>
       loader.load().then(() => {
-        console.log("Map initialized!");
+        // console.log("Map initialized!");
         // map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
         //   center: { lat: 53.461460907469835, lng: 18.727277425618237 },
         //   zoom: 17,

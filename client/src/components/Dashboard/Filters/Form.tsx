@@ -16,12 +16,12 @@ import Button from "../../Common/Button";
 // Styles.
 import { SForm } from "./styles";
 
-export default () => {
+export default function Form() {
   const {
     state: {
       filters: { isModalOpen },
     },
-    actions: { filter, setFiltersModalOn, setFiltersModalOff },
+    actions: { filter, setFiltersModalOff },
   } = useGlobalContext();
 
   const distanceRef = useRef<HTMLSelectElement>(null);
@@ -61,4 +61,4 @@ export default () => {
       </SForm>
     </>
   );
-};
+}

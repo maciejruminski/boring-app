@@ -7,6 +7,7 @@ import { useGlobalContext } from "../../../../context";
 // Components.
 import Input from "../../../Common/Form/Input";
 
+// eslint-disable-next-line no-empty-pattern
 export default forwardRef<HTMLInputElement>(({}, ref) => {
   const {
     state: {

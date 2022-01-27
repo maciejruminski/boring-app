@@ -16,7 +16,7 @@ import {
 // Icons.
 import filterIconPath from "../../../../images/filter.svg";
 
-export default () => {
+export default function Preview() {
   const {
     state: {
       filters: {
@@ -49,4 +49,4 @@ export default () => {
       </SFiltersContainer>
     </SContainer>
   );
-};
+}

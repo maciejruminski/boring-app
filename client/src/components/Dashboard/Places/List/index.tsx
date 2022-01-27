@@ -19,6 +19,7 @@ export default function List(): JSX.Element {
     actions: { filter, getPlaceDetails },
   } = useGlobalContext();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => filter(types), []);
 
   if (places.length) {

@@ -1,7 +1,7 @@
 // Styles.
 import { SSubmit } from "./styles";
 
-export default ({
+export default function Button({
   onClickHandler,
   text,
   type = "button",
@@ -13,11 +13,11 @@ export default ({
   type?: "button" | "submit" | "reset";
   icon?: string;
   className?: string;
-}) => {
+}): JSX.Element {
   return (
     <SSubmit type={type} onClick={onClickHandler} className={className}>
       <span className="text">{text}</span>
-      {icon && <img className="icon" src={icon} aria-hidden="true" />}
+      {icon && <img className="icon" src={icon} aria-hidden="true" alt='' />}
     </SSubmit>
   );
-};
+}

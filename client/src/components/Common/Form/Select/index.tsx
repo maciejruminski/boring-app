@@ -42,7 +42,7 @@ export default forwardRef<
       e: React.MouseEvent<HTMLDivElement, MouseEvent>
     ) => {
       const type = (e.target as HTMLDivElement).dataset.type;
-      console.log(type);
+
       if (type) {
         setOptionsVisibility(false);
         setActiveOption(type);

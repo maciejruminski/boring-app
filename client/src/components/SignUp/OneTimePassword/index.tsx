@@ -7,7 +7,9 @@ import { useRef, useEffect } from "react";
 import { useGlobalContext } from "../../../context";
 
 // Components.
-import { Key, Lock } from "../../Common/Icons";
+import { Key, 
+  // Lock
+ } from "../../Common/Icons";
 
 import {
   SForm,
@@ -122,8 +124,6 @@ export default function OneTimePassword() {
     }
   }, [error, password]);
 
-  console.log({password});
-
   return (
     <SOneTimePassword isModalOpen={true}>
       <h3 className="register-heading">You are almost there!</h3>
@@ -134,7 +134,7 @@ export default function OneTimePassword() {
       <p>
         Please check your email (and the spam folder if necessary), enter the{" "}
         <b>OTP</b> and click on login button. If you haven't received your
-        email, <a href="#">click here to resend</a>.
+        email, <a href="#hashToChange">click here to resend</a>.
       </p>
 
       <p className="alert">

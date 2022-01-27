@@ -8,6 +8,7 @@ import { useGlobalContext } from "../../../../context";
 import Select from "../../../Common/Form/Select";
 
 export default forwardRef<HTMLSelectElement>(
+  // eslint-disable-next-line no-empty-pattern
   ({}, ref: React.ForwardedRef<HTMLSelectElement>) => {
     const {
       state: {

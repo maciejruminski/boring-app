@@ -11,6 +11,7 @@ import Select from "../../../Common/Form/Select";
 import types from "./filterTypes";
 
 export default forwardRef<HTMLSelectElement>(
+  // eslint-disable-next-line no-empty-pattern
   ({}, ref: React.ForwardedRef<HTMLSelectElement>) => {
     const {
       state: {
