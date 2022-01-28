@@ -11,7 +11,8 @@ const SSpinner = styled.div<{ isBusy: boolean }>`
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 3;
+  transition-duration: 0.3s;
+  z-index: ${({ isBusy }) => (isBusy ? "3" : "-1")};
   opacity: ${({ isBusy }) => (isBusy ? "0.75" : "0")};
 `;
 
