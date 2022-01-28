@@ -4,6 +4,7 @@ import { useEffect } from "react";
 // Components.
 import Dashboard from "./components/Dashboard";
 import SignUp from "./components/SignUp";
+import Spinner from "./components/Spinner";
 
 // Hooks.
 import { useGlobalContext } from "./context";
@@ -15,7 +16,7 @@ function App() {
       setUserAuthenticationFromLocalStorage,
       setPlacesFromLocalStorage,
       setFiltersFromLocalStorage,
-      setHistoricPlaces
+      setHistoricPlaces,
     },
   } = useGlobalContext();
 
@@ -28,7 +29,12 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <>{isLoggedIn ? <Dashboard /> : <SignUp />}</>;
+  return (
+    <>
+      {isLoggedIn ? <Dashboard /> : <SignUp />}
+      <Spinner />
+    </>
+  );
 }
 
 export default App;
