@@ -5,12 +5,12 @@ import { useContext } from "react";
 import globalContext from "./globalContext";
 
 // Controllers.
-import ActionsController from "../controllers/ActionsController";
+import Actions from "../controllers/Actions";
 
 const useGlobalContext: ContextHook = () => {
   const { state, dispatch } = useContext(globalContext);
 
-  const actions: IActions = new ActionsController(state, dispatch).getAllActions();
+  const actions: IActions = new Actions(state, dispatch).getAllActions();
 
   return { state, actions };
 };

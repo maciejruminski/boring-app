@@ -11,13 +11,12 @@ import {
 // Icons.
 import StarIconPath from "../../../../images/star.svg";
 
-export default function Place({
-  place: { id, name, rating },
-  getPlaceDetails,
-}: any): JSX.Element {
+export default function Place({ place, getCurrentPlaceDetails }: any): JSX.Element {
+  const { name, rating } = place;
+
   return (
     <SPlace>
-      <SButton onClick={() => getPlaceDetails(id)}>
+      <SButton onClick={() => getCurrentPlaceDetails(place)}>
         <SName>{name}</SName>
         <SStars>
           <SStarsContainer ratingWidth={rating * 20}>

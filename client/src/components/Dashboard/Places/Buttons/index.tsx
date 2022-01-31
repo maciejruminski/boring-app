@@ -10,13 +10,13 @@ export default function Buttons(): JSX.Element {
       places,
       currentPlace: { id },
     },
-    actions: { getRandomPlace, setHistoricPlacesModalOn },
+    actions: { getRandomPlaceDetails, setHistoricPlacesModalOn },
   } = useGlobalContext();
 
   return (
     <>
       <SButton
-        onClickHandler={() => getRandomPlace(places, id)}
+        onClickHandler={() => getRandomPlaceDetails(id)}
         text="Wybierz losowe miejsce"
       />
       <SButton

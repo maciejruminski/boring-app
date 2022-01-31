@@ -11,9 +11,9 @@ import { useGlobalContext } from "./context";
 
 function App() {
   const {
-    state: { isLoggedIn },
+    state: { isLoggedIn, historicPlaces },
     actions: {
-      setUserAuthenticationFromLocalStorage,
+      setUserAuthenticationByLocalStorage,
       setPlacesFromLocalStorage,
       setFiltersFromLocalStorage,
       setHistoricPlaces,
@@ -21,7 +21,7 @@ function App() {
   } = useGlobalContext();
 
   useEffect(() => {
-    setUserAuthenticationFromLocalStorage();
+    setUserAuthenticationByLocalStorage();
     setPlacesFromLocalStorage();
     setFiltersFromLocalStorage();
     setHistoricPlaces();

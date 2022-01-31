@@ -18,13 +18,22 @@ const initialState: IState = {
   places: [],
   currentPlace: {
     id: "",
+    name: "",
+    rating: 0,
+    geometry: {
+      location: { lat: 0, lng: 0 },
+      viewport: {
+        northeast: { lat: 0, lng: 0 },
+        southwest: { lat: 0, lng: 0 },
+      },
+    },
+    openNow: false,
     isSavedAsHistoric: false,
   },
   historicPlaces: [],
   modals: {
     isFiltersModalOpen: false,
     isCurrentPlaceModalOpen: false,
-    isSavingHistoricPlaceModalOpen: false,
     isHistoricPlacesModalOpen: false,
   },
 };

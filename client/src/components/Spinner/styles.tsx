@@ -11,7 +11,8 @@ const SSpinner = styled.div<{ isBusy: boolean }>`
   left: 0;
   width: 100%;
   height: 100%;
-  transition-duration: 0.3s;
+  transition-duration: 0.2s;
+  transition-delay: 0.2s;
   z-index: ${({ isBusy }) => (isBusy ? "3" : "-1")};
   opacity: ${({ isBusy }) => (isBusy ? "0.75" : "0")};
 `;
@@ -22,14 +23,14 @@ const SSpinnerIcon = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   color: var(--theme);
-  font-size: 20px;
+  font-size: 6px;
   margin: 0;
   width: 1em;
   height: 1em;
   border-radius: 50%;
   text-indent: -9999em;
-  -webkit-animation: load4 1.3s infinite linear;
-  animation: load4 1.3s infinite linear;
+  -webkit-animation: load4 1s infinite linear;
+  animation: load4 1s infinite linear;
   /* -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0); */

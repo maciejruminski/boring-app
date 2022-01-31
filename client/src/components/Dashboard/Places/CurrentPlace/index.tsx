@@ -8,7 +8,7 @@ import { useGlobalContext } from "../../../../context";
 
 // Components.
 // import Map from "./Map";
-// import ActionsController from "../../../../controllers/ActionsController";
+// import Actions from "../../../../controllers/Actions";
 
 const SDetails = styled.div<{ isModalOpen: boolean }>`
   position: fixed;
@@ -17,9 +17,10 @@ const SDetails = styled.div<{ isModalOpen: boolean }>`
   width: 100%;
   height: 100%;
   opacity: ${({ isModalOpen }) => (isModalOpen ? "1" : "0")};
-  transform: ${({ isModalOpen }) =>
-    isModalOpen ? "translateY(0)" : "translateY(-100%)"};
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  visibility: ${({ isModalOpen }) => (isModalOpen ? "visible" : "hidden")};
+  transform: ${({ isModalOpen }) => (isModalOpen ? "scale(1)" : "scale(1.02)")};
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in;
   background-color: black;
   color: white;
   z-index: 3;
@@ -32,9 +33,10 @@ const STest = styled.div<{ isModalOpen: boolean }>`
   width: 100%;
   height: 100%;
   opacity: ${({ isModalOpen }) => (isModalOpen ? "1" : "0")};
-  transform: ${({ isModalOpen }) =>
-    isModalOpen ? "translateY(0)" : "translateY(-100%)"};
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  visibility: ${({ isModalOpen }) => (isModalOpen ? "visible" : "hidden")};
+  /* transform: ${({ isModalOpen }) =>
+    isModalOpen ? "translateY(0)" : "translateY(-90%)"}; */
+  transition-duration: 0.5s;
   background-color: black;
   color: white;
   z-index: 4;
@@ -44,19 +46,18 @@ export default function Details() {
   const {
     state: {
       places,
-      currentPlace: { id, name, rating, website, isSavedAsHistoric },
-      modals: { isCurrentPlaceModalOpen, isSavingHistoricPlaceModalOpen },
-      // historicPlaces,
+      currentPlace,
+      modals: { isCurrentPlaceModalOpen },
     },
     actions: {
       setCurrentPlaceModalOff,
-      getRandomPlace,
-      setSavingHistoricPlaceModalOn,
-      setSavingHistoricPlaceModalOff,
+      getRandomPlaceDetails,
       addHistoricPlace,
       removeHistoricPlace,
     },
   } = useGlobalContext();
+
+  const { id, name, rating, website, isSavedAsHistoric } = currentPlace;
 
   return (
     <SDetails isModalOpen={isCurrentPlaceModalOpen}>
@@ -68,17 +69,11 @@ export default function Details() {
 
       {/* <Map /> */}
 
-      <STest isModalOpen={isSavingHistoricPlaceModalOpen}>
-        <button onClick={setSavingHistoricPlaceModalOff}>X</button>
-        <p>Czy zapisać lokację w historii?</p>
-        <button onClick={() => addHistoricPlace(id)}>Tak</button>
-      </STest>
+      <p>Czy zapisać lokację w historii?</p>
+      <button onClick={() => addHistoricPlace(currentPlace)}>Tak</button>
 
       <button
         onClick={() => {
-          if (!isSavedAsHistoric) {
-            setSavingHistoricPlaceModalOn();
-          }
           // window.open('https://www.google.com/maps/dir/53.4614609,18.7250887,17/53.4614609,18.7272774/data=!3m1!4b1!4m2!4m1!3e2', '_blank');
         }}
       >
@@ -92,7 +87,7 @@ export default function Details() {
       )}
 
       {/* {!isSavedAsHistoric && ( */}
-      <button onClick={() => getRandomPlace(places, id)}>
+      <button onClick={() => getRandomPlaceDetails(places, id)}>
         losuj inne miejsce
       </button>
       {/* )} */}

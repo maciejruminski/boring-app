@@ -1,3 +1,78 @@
+interface APIPlaceDetails {
+  address_components: {}[];
+  adr_address: string;
+  business_status: string;
+  formatted_address: string;
+  formatted_phone_number: string;
+  geometry: {
+    location: {
+      lat: number;
+      lng: number;
+    };
+    viewport: {
+      northeast: {
+        lat: number;
+        lng: number;
+      };
+      southwest: {
+        lat: number;
+        lng: number;
+      };
+    };
+  };
+  icon: string;
+  icon_background_color: string;
+  icon_mask_base_uri: string;
+  international_phone_number: string;
+  name: string;
+  opening_hours: {
+    open_now: boolean;
+    periods: {}[];
+    weekday_text: string[];
+  };
+  photos: {}[];
+  place_id: string;
+  plus_code: {
+    compound_code: string;
+    global_code: string;
+  };
+  rating: number;
+  reference: string;
+  reviews: {}[];
+  types: string[];
+  url: string;
+  user_ratings_total: number;
+  utc_offset: number;
+  vicinity: string;
+  website: string;
+}
+
+interface Place {
+  id: string;
+  name: string;
+  rating: number;
+  geometry: {
+    location: { lat: number; lng: number };
+    viewport: {
+      northeast: { lat: number; lng: number };
+      southwest: { lat: number; lng: number };
+    };
+  };
+  openNow: boolean;
+  isSavedAsHistoric: boolean;
+}
+
+interface PlaceDetails {
+  website?: string;
+  reviews?: {}[];
+  vicinity?: string;
+  phone?: string;
+}
+
+interface PlaceWithDetails extends Place, PlaceDetails {}
+
+type Places = Place[];
+
 type Filters = {
   distance: number;
   keyword: string;
@@ -17,19 +92,12 @@ interface IState {
     isSent: boolean;
   };
   filters: Filters;
-  places: Place[];
-  currentPlace: {
-    id: string;
-    name?: string;
-    rating?: number;
-    website?: string;
-    isSavedAsHistoric: boolean;
-  };
-  historicPlaces: Place[];
+  places: Places;
+  currentPlace: PlaceWithDetails;
+  historicPlaces: Places;
   modals: {
     isFiltersModalOpen: boolean;
     isCurrentPlaceModalOpen: boolean;
-    isSavingHistoricPlaceModalOpen: boolean;
     isHistoricPlacesModalOpen: boolean;
   };
 }
@@ -37,22 +105,21 @@ interface IState {
 interface IActions {
   setUserAuthenticationOn: () => void;
   setUserAuthenticationOff: () => void;
-  setUserAuthenticationFromLocalStorage: () => void;
+  setUserAuthenticationByLocalStorage: () => void;
   verifyOneTimePassword: (
     e: React.FormEvent<HTMLFormElement>,
     oneTimePassword: string
   ) => void;
   setBusyOn: () => void;
   setBusyOff: () => void;
-  filter: (filters: Filters) => void;
+  setNewPlacesByFilters: (filters: Filters) => void;
   setFiltersModalOn: () => void;
   setFiltersModalOff: () => void;
-  setSavingHistoricPlaceModalOn: () => void;
-  setSavingHistoricPlaceModalOff: () => void;
   setCurrentPlaceModalOn: () => void;
   setCurrentPlaceModalOff: () => void;
-  getCurrentPlaceDetails: (placeId: string) => void;
-  getRandomPlace: (places: [], currentPlaceId: string) => void;
+  setCurrentPlace: (placeWithDetails: PlaceWithDetails) => void;
+  getCurrentPlaceDetails: (place: Place) => Promise<void>;
+  getRandomPlaceDetails: (currentPlaceID: string) => void;
   setPlacesFromLocalStorage: () => void;
   setFiltersFromLocalStorage: () => void;
   validateInput: (input: HTMLInputElement) => boolean;
@@ -61,7 +128,7 @@ interface IActions {
   inputOnChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
   sendPassword: (email: string) => void;
   setOneTimePassword: (input: HTMLInputElement) => void;
-  addHistoricPlace: (id: string) => void;
+  addHistoricPlace: (place: Place) => void;
   removeHistoricPlace: (id: string) => void;
   setHistoricPlaces: () => void;
   setHistoricPlacesFromLocalStorage: () => void;
@@ -72,10 +139,22 @@ interface IActions {
 type ActionTypes =
   | "setUserAuthenticationOn"
   | "setUserAuthenticationOff"
-  | "setUserAuthenticationFromLocalStorage"
   | "setBusyOn"
   | "setBusyOff"
+  | "setFiltersModalOn"
+  | "setFiltersModalOff"
   | "setFilters"
+  | "setPlaces"
+  | "setHistoricPlaces"
+  | "setCurrentPlace"
+  | "setCurrentPlaceModalOn"
+  | "setCurrentPlaceModalOff"
+  | "setHistoricPlacesModalOn"
+  | "setHistoricPlacesModalOff"
+  | "setPlacesFromLocalStorage"
+  | "setOneTimePassword"
+  | "setSignUpError"
+  | "setSignUpEmail"
   | "setSignUpEmailAsSent";
 
 interface IAction {
@@ -93,19 +172,4 @@ type ContextHook = () => {
 interface IStateHandler {
   state: IState;
   payload?: any;
-}
-
-interface Place {
-  id: string;
-  name: string;
-  rating: number;
-  geometry: {
-    location: { lat: number; lng: number };
-    viewport: {
-      northeast: { lat: number; lng: number };
-      southwest: { lat: number; lng: number };
-    };
-  };
-  openNow: boolean;
-  isSavedAsHistoric: boolean;
 }

@@ -28,7 +28,7 @@ class GooglePlacesController {
               rating: data.rating,
               geometry: data.geometry,
               openNow: data?.opening_hours?.open_now,
-              isSavedAsHistoric: false
+              isSavedAsHistoric: false,
             };
           });
 
@@ -49,8 +49,8 @@ class GooglePlacesController {
         method: "GET",
       })
         .then((response) => response.json())
-        .then((placeDetails) => {
-          res.status(200).json({ status: 200, placeDetails });
+        .then((response) => {
+          res.status(200).json({ status: 200, placeDetails: response.result });
         });
     } catch (err) {
       next(err);

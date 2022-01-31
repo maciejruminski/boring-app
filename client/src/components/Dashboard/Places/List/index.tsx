@@ -13,11 +13,11 @@ import { SList, SListContainer } from "./styles";
 export default function List(): JSX.Element {
   const {
     state: { places, filters },
-    actions: { filter, getPlaceDetails },
+    actions: { setNewPlacesByFilters, getCurrentPlaceDetails },
   } = useGlobalContext();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => filter(filters), []);
+  useEffect(() => setNewPlacesByFilters(filters), []);
 
   if (places.length) {
     return (
@@ -26,7 +26,7 @@ export default function List(): JSX.Element {
           {places.map((place: any) => (
             <Place
               place={place}
-              getPlaceDetails={getPlaceDetails}
+              getCurrentPlaceDetails={getCurrentPlaceDetails}
               key={place.id}
             />
           ))}

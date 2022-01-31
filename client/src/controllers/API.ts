@@ -1,4 +1,4 @@
-export default class ApiController {
+export default class API {
   static async addUserToDatabase(userUUID: string) {
     const response = await fetch("/add-user", {
       method: "POST",

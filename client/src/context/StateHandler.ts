@@ -1,6 +1,3 @@
-// Controllers.
-import Controller from "../controllers/Controller";
-
 export default class StateHandler {
   static setUserAuthenticationOn({ state }: IStateHandler) {
     return { ...state, isLoggedIn: true };
@@ -8,10 +5,6 @@ export default class StateHandler {
 
   static setUserAuthenticationOff({ state }: IStateHandler) {
     return { ...state, isLoggedIn: false };
-  }
-
-  static setUserAuthenticationFromLocalStorage({ state }: IStateHandler) {
-    return { ...state, isLoggedIn: Controller.checkIfLoggedIn() };
   }
 
   static setBusyOn({ state }: IStateHandler) {
@@ -36,20 +29,6 @@ export default class StateHandler {
 
   static setFiltersModalOff({ state }: IStateHandler) {
     return { ...state, modals: { ...state.modals, isFiltersModalOpen: false } };
-  }
-
-  static setSavingHistoricPlaceModalOn({ state }: IStateHandler) {
-    return {
-      ...state,
-      modals: { ...state.modals, isSavingHistoricPlaceModalOpen: true },
-    };
-  }
-
-  static setSavingHistoricPlaceModalOff({ state }: IStateHandler) {
-    return {
-      ...state,
-      modals: { ...state.modals, isSavingHistoricPlaceModalOpen: false },
-    };
   }
 
   static setCurrentPlaceModalOn({ state }: IStateHandler) {
@@ -111,16 +90,12 @@ export default class StateHandler {
   static handlers = {
     setUserAuthenticationOn: StateHandler.setUserAuthenticationOn,
     setUserAuthenticationOff: StateHandler.setUserAuthenticationOff,
-    setUserAuthenticationFromLocalStorage:
-      StateHandler.setUserAuthenticationFromLocalStorage,
     setBusyOn: StateHandler.setBusyOn,
     setBusyOff: StateHandler.setBusyOff,
     setFilters: StateHandler.setFilters,
     setPlaces: StateHandler.setPlaces,
     setFiltersModalOn: StateHandler.setFiltersModalOn,
     setFiltersModalOff: StateHandler.setFiltersModalOff,
-    setSavingHistoricPlaceModalOn: StateHandler.setSavingHistoricPlaceModalOn,
-    setSavingHistoricPlaceModalOff: StateHandler.setSavingHistoricPlaceModalOff,
     setCurrentPlaceModalOn: StateHandler.setCurrentPlaceModalOn,
     setCurrentPlaceModalOff: StateHandler.setCurrentPlaceModalOff,
     setCurrentPlace: StateHandler.setCurrentPlace,
