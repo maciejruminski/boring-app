@@ -74,25 +74,23 @@ export default class Actions {
 
     const userUUID = LocalStorage.getUserUUID();
 
-    if (userUUID) {
+    if (userUUID && !filtersAreEqual) {
       await API.addFiltersToDatabase(filters, userUUID).then(() =>
         console.log("Filtry zostały dodane do bazy danych!")
       );
-    }
 
-    if (!filtersAreEqual) {
+      LocalStorage.setFilters(filters);
       this.dispatch({ type: "setFilters", payload: filters });
     }
 
     const response = await API.getPlaces(filters);
-    const statusIsNotOk = response.status !== 200;
 
-    if (statusIsNotOk) {
+    if (Helper.statusIsNotOk(response.status)) {
       return;
     }
 
     LocalStorage.setPlaces(response.places);
-    LocalStorage.setFilters(filters);
+    this.dispatch({ type: "setPlaces", payload: response.places });
 
     this.setBusyOff();
   };
