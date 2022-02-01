@@ -26,3 +26,20 @@ export const BodyBackground = () => css`
   background-color: #0c1025;
   background: linear-gradient(135deg, #0c143d, #090b14);
 `;
+
+export const Modal = () => css<{ isModalOpen: boolean }>`
+  ${BodyBackground()};
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  z-index: 1;
+  overflow: scroll;
+  opacity: ${({ isModalOpen }) => (isModalOpen ? "1" : "0")};
+  visibility: ${({ isModalOpen }) => (isModalOpen ? "visible" : "hidden")};
+  transform: ${({ isModalOpen }) => (isModalOpen ? "scale(1)" : "scale(1.02)")};
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in;
+`;

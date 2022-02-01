@@ -2,7 +2,7 @@
 import styled from "styled-components";
 
 // Mixins.
-import { BodyBackground } from "../../../../Mixins";
+import { BodyBackground } from "../../../../../Mixins";
 
 // Styles.
 const SModal = styled.div<{ isModalOpen: boolean }>`
@@ -24,7 +24,7 @@ const SModal = styled.div<{ isModalOpen: boolean }>`
 `;
 
 const SListContainer = styled.div`
-  position: relative;
+  /* position: relative;
 
   &:before {
     content: "";
@@ -36,17 +36,13 @@ const SListContainer = styled.div`
     border: 1px solid var(--text);
     border-radius: var(--borderRadius);
     opacity: 0.15;
-  }
+  } */
 `;
 
 const SList = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
-  overflow-y: scroll;
-  height: 300px;
-  position: relative;
-  z-index: 1;
 `;
 
 export { SModal, SListContainer, SList };

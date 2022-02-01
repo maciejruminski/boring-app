@@ -10,7 +10,7 @@ import Place from "../Place";
 // Styles.
 import { SList, SListContainer, SButton } from "./styles";
 
-export default function PlacesList(): JSX.Element {
+export default function List(): JSX.Element {
   const {
     state: {
       places,
@@ -34,12 +34,9 @@ export default function PlacesList(): JSX.Element {
     () => setNumberOfPlacesButtonVisibility(),
     [numberOfPlacesToShowAtOnce, maximumNumberOfPlaces]
   );
-  useEffect(() => {
-    resetNumberOfPlacesToShowAtOnce();
-    console.log(places.length);
-  }, [places]);
+  useEffect(() => resetNumberOfPlacesToShowAtOnce(), [places]);
 
-  if (maximumNumberOfPlaces) {
+  if (places.length) {
     return (
       <SListContainer>
         <SList>

@@ -94,8 +94,8 @@ const SStar = styled.img`
 const SArrowContainer = styled.div`
   position: relative;
   padding: 6px;
-  width: 16px;
-  height: 16px;
+  width: 26px;
+  height: 26px;
   display: flex;
   justify-content: center;
   align-items: center;
