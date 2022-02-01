@@ -1,18 +1,18 @@
 // Components.
-import Buttons from "./Buttons";
 import Heading from "./Heading";
-import List from "./List";
+import PlacesList from "./PlacesList";
+import Buttons from "./Buttons";
 import CurrentPlace from "./CurrentPlace";
-import HistoricPlaces from "./HistoricPlaces";
+import HistoricPlacesList from "./HistoricPlacesList";
 
 export default function Places() {
   return (
     <>
       <Heading />
-      <List />
-      <CurrentPlace />
+      <PlacesList />
       <Buttons />
-      <HistoricPlaces />
+      <CurrentPlace />
+      <HistoricPlacesList />
     </>
   );
 }

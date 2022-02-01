@@ -22,6 +22,7 @@ const SFiltersHeader = styled.div`
 const SButton = styled(Button)`
   background-color: transparent;
   padding: 5px 0 5px 5px;
+  width: auto;
 
   .text {
     ${ScreenReaderText()};

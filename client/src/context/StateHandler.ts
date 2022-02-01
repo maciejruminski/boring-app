@@ -87,6 +87,27 @@ export default class StateHandler {
     return { ...state, historicPlaces };
   }
 
+  static setNumberOfPlacesToShowAtOnce({
+    state,
+    payload: numberOfPlacesToShowAtOnce,
+  }: IStateHandler) {
+    return { ...state, numberOfPlacesToShowAtOnce };
+  }
+
+  static setNumberOfPlacesButtonVisibility({
+    state,
+    payload: isShowMorePlacesButtonVisible,
+  }: IStateHandler) {
+    return { ...state, isShowMorePlacesButtonVisible };
+  }
+
+  static setMaximumNumberOfPlaces({
+    state,
+    payload: maximumNumberOfPlaces,
+  }: IStateHandler) {
+    return { ...state, maximumNumberOfPlaces };
+  }
+
   static handlers = {
     setUserAuthenticationOn: StateHandler.setUserAuthenticationOn,
     setUserAuthenticationOff: StateHandler.setUserAuthenticationOff,
@@ -107,5 +128,9 @@ export default class StateHandler {
     setHistoricPlaces: StateHandler.setHistoricPlaces,
     setHistoricPlacesModalOn: StateHandler.setHistoricPlacesModalOn,
     setHistoricPlacesModalOff: StateHandler.setHistoricPlacesModalOff,
+    setNumberOfPlacesToShowAtOnce: StateHandler.setNumberOfPlacesToShowAtOnce,
+    setNumberOfPlacesButtonVisibility:
+      StateHandler.setNumberOfPlacesButtonVisibility,
+    setMaximumNumberOfPlaces: StateHandler.setMaximumNumberOfPlaces,
   };
 }

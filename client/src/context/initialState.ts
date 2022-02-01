@@ -16,6 +16,10 @@ const initialState: IState = {
     openNow: false,
   },
   places: [],
+  historicPlaces: [],
+  maximumNumberOfPlaces: 0,
+  numberOfPlacesToShowAtOnce: 5,
+  isShowMorePlacesButtonVisible: false,
   currentPlace: {
     id: "",
     name: "",
@@ -30,7 +34,6 @@ const initialState: IState = {
     openNow: false,
     isSavedAsHistoric: false,
   },
-  historicPlaces: [],
   modals: {
     isFiltersModalOpen: false,
     isCurrentPlaceModalOpen: false,

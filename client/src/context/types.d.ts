@@ -93,8 +93,11 @@ interface IState {
   };
   filters: Filters;
   places: Places;
-  currentPlace: PlaceWithDetails;
   historicPlaces: Places;
+  maximumNumberOfPlaces: number;
+  numberOfPlacesToShowAtOnce: number;
+  isShowMorePlacesButtonVisible: boolean;
+  currentPlace: PlaceWithDetails;
   modals: {
     isFiltersModalOpen: boolean;
     isCurrentPlaceModalOpen: boolean;
@@ -134,6 +137,10 @@ interface IActions {
   setHistoricPlacesFromLocalStorage: () => void;
   setHistoricPlacesModalOn: () => void;
   setHistoricPlacesModalOff: () => void;
+  setNumberOfPlacesToShowAtOnce: () => void;
+  resetNumberOfPlacesToShowAtOnce: () => void;
+  setNumberOfPlacesButtonVisibility: () => void;
+  setMaximumNumberOfPlaces: (number: number) => void;
 }
 
 type ActionTypes =
@@ -155,7 +162,10 @@ type ActionTypes =
   | "setOneTimePassword"
   | "setSignUpError"
   | "setSignUpEmail"
-  | "setSignUpEmailAsSent";
+  | "setSignUpEmailAsSent"
+  | "setNumberOfPlacesToShowAtOnce"
+  | "setNumberOfPlacesButtonVisibility"
+  | "setMaximumNumberOfPlaces";
 
 interface IAction {
   type: ActionTypes;

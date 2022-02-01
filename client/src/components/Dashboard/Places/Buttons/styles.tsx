@@ -4,10 +4,17 @@ import styled from "styled-components";
 // Components.
 import Button from "../../../Common/Button";
 
-const SButton = styled(Button)`
-  margin-bottom: 20px;
-  width: 100%;
-  max-width: 300px;
+const SNote = styled.p`
+  color: var(--text);
+  margin: 0 0 17px;
 `;
 
-export { SButton };
+const SButton = styled(Button)`
+  margin-bottom: 20px;
+`;
+
+const SSecondButton = styled(SButton)`
+  background-color: var(--secondary);
+`;
+
+export { SNote, SButton, SSecondButton };

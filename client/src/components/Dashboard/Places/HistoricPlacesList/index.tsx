@@ -7,7 +7,7 @@ import Place from "../Place";
 // Styles.
 import { SModal, SList, SListContainer } from "./styles";
 
-export default function HistoricPlaces(): JSX.Element {
+export default function HistoricPlacesList(): JSX.Element {
   const {
     state: {
       historicPlaces,

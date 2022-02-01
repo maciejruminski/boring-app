@@ -1,10 +1,10 @@
 // Styles.
 import { SHeading, SNote } from "./styles";
 
-export default function Heading(): JSX.Element {
+export default function Heading() {
   return (
     <>
-      <SHeading>Miejsca</SHeading>
+      <SHeading>Lokalizacje</SHeading>
       <SNote>Kliknij w wybrane miejsce aby uzyskać szczegóły.</SNote>
     </>
   );

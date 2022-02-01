@@ -68,6 +68,7 @@ export default class Actions {
 
     if (filtersAreEqual && placesFromLocalStorage.length) {
       this.dispatch({ type: "setPlaces", payload: placesFromLocalStorage });
+      this.setMaximumNumberOfPlaces(placesFromLocalStorage.length);
       this.setBusyOff();
       return;
     }
@@ -89,9 +90,12 @@ export default class Actions {
       return;
     }
 
-    LocalStorage.setPlaces(response.places);
-    this.dispatch({ type: "setPlaces", payload: response.places });
+    const places = response.places;
 
+    LocalStorage.setPlaces(places);
+    this.dispatch({ type: "setPlaces", payload: places });
+    this.setMaximumNumberOfPlaces(places.length);
+    this.setNumberOfPlacesButtonVisibility();
     this.setBusyOff();
   };
 
@@ -321,6 +325,36 @@ export default class Actions {
     });
   };
 
+  resetNumberOfPlacesToShowAtOnce = (): void => {
+    this.dispatch({ type: "setNumberOfPlacesToShowAtOnce", payload: 5 });
+  };
+
+  setNumberOfPlacesToShowAtOnce = (): void => {
+    const numberOfPlacesToShowAtOnceIncreaser = 5;
+    const numberOfPlacesToShowAtOnce =
+      this.state.numberOfPlacesToShowAtOnce +
+      numberOfPlacesToShowAtOnceIncreaser;
+
+    this.dispatch({
+      type: "setNumberOfPlacesToShowAtOnce",
+      payload: numberOfPlacesToShowAtOnce,
+    });
+  };
+
+  setNumberOfPlacesButtonVisibility = (): void => {
+    const isShowMorePlacesButtonVisible =
+      this.state.places.length > this.state.numberOfPlacesToShowAtOnce;
+
+    this.dispatch({
+      type: "setNumberOfPlacesButtonVisibility",
+      payload: isShowMorePlacesButtonVisible,
+    });
+  };
+
+  setMaximumNumberOfPlaces = (number: number): void => {
+    this.dispatch({ type: "setMaximumNumberOfPlaces", payload: number });
+  };
+
   getAllActions = (): IActions => {
     return {
       setUserAuthenticationOn: this.setUserAuthenticationOn,
@@ -352,6 +386,10 @@ export default class Actions {
       setHistoricPlacesFromLocalStorage: this.setHistoricPlacesFromLocalStorage,
       setHistoricPlacesModalOn: this.setHistoricPlacesModalOn,
       setHistoricPlacesModalOff: this.setHistoricPlacesModalOff,
+      setNumberOfPlacesToShowAtOnce: this.setNumberOfPlacesToShowAtOnce,
+      setMaximumNumberOfPlaces: this.setMaximumNumberOfPlaces,
+      resetNumberOfPlacesToShowAtOnce: this.resetNumberOfPlacesToShowAtOnce,
+      setNumberOfPlacesButtonVisibility: this.setNumberOfPlacesButtonVisibility,
     };
   };
 }
