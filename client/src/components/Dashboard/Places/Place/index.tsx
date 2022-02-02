@@ -18,7 +18,7 @@ import ArrowIconPath from "../../../../images/right-arrow.svg";
 export default function Place({
   place,
   getCurrentPlaceDetails,
-  isVisible
+  isVisible,
 }: any): JSX.Element {
   const { name, rating } = place;
   const numberOfStars = [...new Array(5)];
@@ -29,6 +29,16 @@ export default function Place({
         <SName>{name}</SName>
         <SBottom>
           <SStars>
+            <SStarsContainer ratingWidth={rating * 20}>
+              {numberOfStars.map((el, key) => (
+                <SStar
+                  src={StarIconPath}
+                  aria-hidden="true"
+                  alt="Ikona gwiazdki"
+                  key={key}
+                />
+              ))}
+            </SStarsContainer>
             <SStarsContainer ratingWidth={rating * 20}>
               {numberOfStars.map((el, key) => (
                 <SStar

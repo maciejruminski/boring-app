@@ -2,7 +2,7 @@
 import { useGlobalContext } from "../../../../context";
 
 // Styles.
-import { SHeading, SNote } from "./styles";
+import { SHeading, SSmallNote, SNote } from "./styles";
 
 export default function Heading() {
   const {
@@ -13,7 +13,10 @@ export default function Heading() {
     <>
       <SHeading>Lokalizacje</SHeading>
       {Boolean(maximumNumberOfPlaces) && (
-        <SNote>Kliknij w wybrane miejsce aby uzyskać szczegóły.</SNote>
+        <>
+          <SSmallNote>{maximumNumberOfPlaces} wyników wyszukiwania.</SSmallNote>
+          <SNote>Kliknij w wybrane miejsce aby uzyskać szczegóły.</SNote>
+        </>
       )}
     </>
   );

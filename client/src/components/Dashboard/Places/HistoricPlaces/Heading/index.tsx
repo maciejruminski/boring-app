@@ -2,18 +2,21 @@
 import { useGlobalContext } from "../../../../../context";
 
 // Styles.
-import { SHeading, SNote } from "./styles";
+import { SHeading, SNote, SSmallNote } from "./styles";
 
 export default function Heading() {
   const {
-    state: { maximumNumberOfPlaces },
+    state: { historicPlaces },
   } = useGlobalContext();
 
   return (
     <>
-      <SHeading>Zapisane lokalizacje</SHeading>
-      {Boolean(maximumNumberOfPlaces) && (
-        <SNote>Kliknij w wybrane miejsce aby uzyskać szczegóły.</SNote>
+      <SHeading>Historia</SHeading>
+      {Boolean(historicPlaces.length) && (
+        <>
+          <SSmallNote>{historicPlaces.length} zapisanych miejsc.</SSmallNote>
+          <SNote>Kliknij w wybrane miejsce aby uzyskać szczegóły.</SNote>
+        </>
       )}
     </>
   );

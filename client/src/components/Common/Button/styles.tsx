@@ -7,7 +7,7 @@ const SSubmit = styled.button`
   appearance: none;
   border: none;
   background-color: var(--primary);
-  padding: 14px 22px;
+  padding: 16px 22px;
   letter-spacing: 0.2px;
   border-radius: var(--borderRadius);
   color: #ffffff;
