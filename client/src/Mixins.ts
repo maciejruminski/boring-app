@@ -47,3 +47,106 @@ export const Modal = () => css<{ isModalOpen: boolean }>`
   transition-duration: 0.3s;
   transition-timing-function: ease-in;
 `;
+
+export const InputContainer = () => css<{
+  isError: boolean;
+  isSuccess: boolean;
+  checkValidity: boolean;
+  pseudoElementWidth: number;
+}>`
+  position: relative;
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 53px;
+    border-radius: 5px 0 0 5px;
+    bottom: 3px;
+    transition-duration: 0.3s;
+    border: 2px solid #abc2d4;
+    border-bottom: none;
+    border-color: ${({ isError, isSuccess, checkValidity }) =>
+      !checkValidity
+        ? "#abc2d4"
+        : isError
+        ? "#ff8282"
+        : isSuccess
+        ? "#98e792"
+        : "#abc2d4"};
+  }
+
+  &:before {
+    left: 0;
+    border-right: none;
+    border-radius: 5px 0 0 5px;
+  }
+
+  &:after {
+    right: 0;
+    border-left: none;
+    border-radius: 0 5px 5px 0;
+    width: ${({ isError, isSuccess, pseudoElementWidth }) =>
+      isError || isSuccess
+        ? `calc(100% - ${pseudoElementWidth + 40}px)`
+        : "calc(100% - 10px)"};
+  }
+`;
+
+export const Label = () => css<{ isActive: boolean }>`
+  display: block;
+  text-transform: uppercase;
+  font-size: 14px;
+  position: absolute;
+  top: 19px;
+  left: 23px;
+  font-weight: 500;
+  color: #abc2d4;
+  letter-spacing: 0.5px;
+  transition-duration: 0.3s;
+  transform-origin: left;
+  transform: ${({ isActive }) =>
+    isActive ? "translateY(-27px) translateX(1px) scale(0.85)" : ""};
+`;
+
+export const Input = () => css<{
+  isError: boolean;
+  isSuccess: boolean;
+  checkValidity: boolean;
+}>`
+  appearance: none;
+  padding: 16px 63px 14px 23px;
+  border: 2px solid transparent;
+  border-top: none;
+  background-color: transparent;
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  width: 100%;
+  display: block;
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 300;
+  border-radius: 5px;
+  outline: none;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  transition-duration: 0.3s;
+  border-color: ${({ isError, isSuccess, checkValidity }) =>
+    !checkValidity
+      ? "#abc2d4"
+      : isError
+      ? "#ff8282"
+      : isSuccess
+      ? "#98e792"
+      : "#abc2d4"};
+  color: ${({ isError, isSuccess, checkValidity }) =>
+    !checkValidity
+      ? "#abc2d4"
+      : isError
+      ? "#ff8282"
+      : isSuccess
+      ? "#98e792"
+      : "#abc2d4"};
+`;

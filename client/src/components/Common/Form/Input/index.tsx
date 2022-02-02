@@ -1,5 +1,5 @@
 // Functions.
-import React, { forwardRef } from "react";
+import { forwardRef, useEffect, useState, useRef } from "react";
 
 // Components.
 // import Label from "../../Common/Form/Label";
@@ -28,13 +28,29 @@ export default forwardRef<
     { label, defaultValue, id, onChangeHandler, error, success, checkValidity },
     ref: React.ForwardedRef<HTMLInputElement>
   ) => {
+    const [labelWidth, setLabelWidth] = useState(0);
+    const labelRef = useRef<HTMLLabelElement>(null);
+
+    const setLabelWidthAfterScaling = (): number => {
+      let offsetWidth = labelRef.current?.offsetWidth;
+      offsetWidth = offsetWidth ? offsetWidth : 0;
+
+      const transformScaleMultiplier = 0.85;
+
+      return offsetWidth * transformScaleMultiplier;
+    };
+
+    // We need label width to set the pseudo element width.
+    useEffect(() => setLabelWidth(setLabelWidthAfterScaling()), []);
+
     return (
       <SContainer
         isError={error}
         isSuccess={success}
         checkValidity={checkValidity}
+        pseudoElementWidth={labelWidth}
       >
-        <SLabel isActive={success} htmlFor={id}>
+        <SLabel isActive={success} htmlFor={id} ref={labelRef}>
           {label}
         </SLabel>
         <SInput

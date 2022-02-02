@@ -14,7 +14,10 @@ import OpenNow from "./OpenNow";
 import Button from "../../Common/Button";
 
 // Styles.
-import { SForm } from "./styles";
+import { SForm, SClose, SHeading, SNote } from "./styles";
+
+// Icons.
+import closeIconPath from "../../../images/close.svg";
 
 export default function Form() {
   const {
@@ -50,6 +53,13 @@ export default function Form() {
         isModalOpen={isFiltersModalOpen}
         onSubmit={onSubmitHandler}
       >
+        <SClose
+          onClickHandler={setFiltersModalOff}
+          text="Zamknij modal z filtrami"
+          icon={closeIconPath}
+        />
+        <SHeading>Filtry</SHeading>
+        <SNote>Dostosuj filtry aby znaleźć interesujące Cię lokalizacje.</SNote>
         <Distance ref={distanceRef} />
         <Keyword ref={keywordRef} />
         <Types ref={typeRef} />
@@ -60,7 +70,7 @@ export default function Form() {
         <Button
           type="submit"
           onClickHandler={setFiltersModalOff}
-          text="Submit"
+          text="Filtruj"
         />
       </SForm>
     </>

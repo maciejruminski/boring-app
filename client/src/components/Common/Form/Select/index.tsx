@@ -1,5 +1,5 @@
 // Functions.
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useState, useEffect } from "react";
 
 // Components.
 // import Label from "../../Common/Form/Label";
@@ -23,6 +23,8 @@ export default forwardRef<
   ) => {
     const [activeOption, setActiveOption] = useState(defaultOption);
     const [optionsVisibility, setOptionsVisibility] = useState(false);
+    const [labelWidth, setLabelWidth] = useState(0);
+    const labelRef = React.useRef<HTMLLabelElement>(null);
 
     const showOptionsOnMouseDownHandler = (
       e: React.MouseEvent<HTMLSelectElement, MouseEvent>
@@ -49,11 +51,33 @@ export default forwardRef<
       }
     };
 
+    const setLabelWidthAfterScaling = (): number => {
+      let offsetWidth = labelRef.current?.offsetWidth;
+      offsetWidth = offsetWidth ? offsetWidth : 0;
+
+      const transformScaleMultiplier = 0.85;
+
+      return offsetWidth * transformScaleMultiplier;
+    };
+
+    // We need label width to set the pseudo element width.
+    useEffect(() => setLabelWidth(setLabelWidthAfterScaling()), []);
+
     return (
-      <SContainer>
+      <SContainer
+        isError={false}
+        isSuccess={true}
+        checkValidity={false}
+        pseudoElementWidth={labelWidth}
+      >
         {/* <Label text="Type" /> */}
-        <SLabel htmlFor={id}>{label}</SLabel>
+        <SLabel htmlFor={id} ref={labelRef} isActive={true}>
+          {label}
+        </SLabel>
         <SSelect
+          isError={false}
+          isSuccess={true}
+          checkValidity={false}
           id={id}
           name={id}
           ref={ref}
