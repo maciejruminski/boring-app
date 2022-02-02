@@ -5,21 +5,7 @@ import styled from "styled-components";
 import Button from "../../../Common/Button";
 
 // Styles.
-const SListContainer = styled.div`
-  /* position: relative; */
-
-  /* &:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border: 1px solid var(--text);
-    border-radius: var(--borderRadius);
-    opacity: 0.15;
-  } */
-`;
+const SListContainer = styled.div``;
 
 const SList = styled.ul`
   list-style: none;
@@ -28,7 +14,7 @@ const SList = styled.ul`
 `;
 
 const SButton = styled(Button)`
-  margin-bottom: 20px;
+  margin: 0;
   background-color: #ffffff;
   color: var(--primary);
 `;

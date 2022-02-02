@@ -1,3 +1,6 @@
+// Functions.
+import { useEffect } from "react";
+
 // Context.
 import { useGlobalContext } from "../../../../context";
 

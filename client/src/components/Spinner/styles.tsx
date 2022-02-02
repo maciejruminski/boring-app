@@ -29,13 +29,10 @@ const SSpinnerIcon = styled.div`
   height: 1em;
   border-radius: 50%;
   text-indent: -9999em;
-  -webkit-animation: load4 1s infinite linear;
-  animation: load4 1s infinite linear;
-  /* -webkit-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  transform: translateZ(0); */
+  -webkit-animation: load 1s infinite linear;
+  animation: load 1s infinite linear;
 
-  @-webkit-keyframes load4 {
+  @-webkit-keyframes load {
     0%,
     100% {
       box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em,
@@ -71,7 +68,7 @@ const SSpinnerIcon = styled.div`
         0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
     }
   }
-  @keyframes load4 {
+  @keyframes load {
     0%,
     100% {
       box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em,

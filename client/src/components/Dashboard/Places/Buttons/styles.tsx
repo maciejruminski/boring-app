@@ -6,7 +6,7 @@ import Button from "../../../Common/Button";
 
 const SNote = styled.p`
   color: var(--text);
-  margin: 0 0 17px;
+  margin: 20px 0;
 `;
 
 const SButton = styled(Button)`
@@ -15,6 +15,7 @@ const SButton = styled(Button)`
 
 const SSecondButton = styled(SButton)`
   background-color: var(--secondary);
+  margin-bottom: 0;
 `;
 
 export { SNote, SButton, SSecondButton };

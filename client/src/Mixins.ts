@@ -23,8 +23,12 @@ export const ScreenReaderText = () => css`
 `;
 
 export const BodyBackground = () => css`
-  background-color: #0c1025;
-  background: linear-gradient(135deg, #0c143d, #090b14);
+  background-color: var(--polyfillBackground);
+  background: linear-gradient(
+    135deg,
+    var(--gradientBackgroundFrom),
+    var(--gradientBackgroundTo)
+  );
 `;
 
 export const Modal = () => css<{ isModalOpen: boolean }>`

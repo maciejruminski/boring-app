@@ -46,7 +46,7 @@ const SFilter = styled.p`
   font-size: 14px;
 
   span {
-    color: var(--textLight);
+    color: var(--primaryLight);
     font-weight: 500;
   }
 `;
