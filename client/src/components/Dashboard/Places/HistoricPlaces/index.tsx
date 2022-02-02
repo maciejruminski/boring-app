@@ -1,6 +1,3 @@
-// Functions.
-import { useEffect } from "react";
-
 // Context.
 import { useGlobalContext } from "../../../../context";
 
@@ -23,7 +20,7 @@ export default function HistoricPlaces(): JSX.Element {
     actions: { setHistoricPlacesModalOff },
   } = useGlobalContext();
 
-  if (historicPlaces.length) {
+  if (Boolean(historicPlaces.length)) {
     return (
       <SModal isModalOpen={isHistoricPlacesModalOpen}>
         <SButton
@@ -37,5 +34,5 @@ export default function HistoricPlaces(): JSX.Element {
     );
   }
 
-  return <p>Loading...</p>;
+  return <></>;
 }

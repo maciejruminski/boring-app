@@ -1,17 +1,16 @@
-// functions.
+// Functions.
 import styled from "styled-components";
 
+// Mixins.
+import { Heading } from "../../../../Mixins";
+
 const SHeading = styled.h3`
-  color: var(--textLight);
-  font-weight: 500;
-  text-transform: uppercase;
-  font-size: 18px;
-  margin: 0 0 10px;
+  ${Heading()};
+  margin-bottom: 10px;
 `;
 
 const SNote = styled.p`
-  color: var(--text);
-  margin: 0 0 17px;
+  margin: 0 0 20px;
 `;
 
 export { SHeading, SNote };

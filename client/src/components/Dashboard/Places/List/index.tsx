@@ -36,7 +36,7 @@ export default function List(): JSX.Element {
   );
   useEffect(() => resetNumberOfPlacesToShowAtOnce(), [places]);
 
-  if (places.length) {
+  if (Boolean(maximumNumberOfPlaces)) {
     return (
       <SListContainer>
         <SList>
@@ -59,5 +59,5 @@ export default function List(): JSX.Element {
     );
   }
 
-  return <p>Loading...</p>;
+  return <p>Niestety, ale na podstawie podanych filtrów nie znaleziono żadnych miejsc.</p>;
 }

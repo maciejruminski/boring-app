@@ -2,7 +2,7 @@
 import styled from "styled-components";
 
 // Mixins.
-import { ScreenReaderText } from "../../../../Mixins";
+import { ScreenReaderText, Heading } from "../../../../Mixins";
 
 // Components.
 import Button from "../../../Common/Button";
@@ -44,6 +44,7 @@ const SFilter = styled.p`
   margin: 4px;
   color: var(--text);
   font-size: 14px;
+  line-height: 1.3;
 
   span {
     color: var(--primaryLight);
@@ -52,11 +53,7 @@ const SFilter = styled.p`
 `;
 
 const SHeading = styled.h3`
-  color: var(--textLight);
-  font-weight: 500;
-  text-transform: uppercase;
-  font-size: 18px;
-  margin: 0;
+  ${Heading()};
 `;
 
 export {

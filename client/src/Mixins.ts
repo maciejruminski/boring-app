@@ -1,11 +1,12 @@
 import { css } from "styled-components";
 
-interface FontProps {
+export const Font = ({
+  size,
+  weight,
+}: {
   size?: number;
   weight?: number;
-}
-
-export const Font = ({ size, weight }: FontProps) => css`
+}) => css`
   font: ${weight} normal ${size + "px"} / 20px "Montserrat", sans-serif;
 `;
 
@@ -149,4 +150,11 @@ export const Input = () => css<{
       : isSuccess
       ? "#98e792"
       : "#abc2d4"};
+`;
+
+export const Heading = () => css`
+  color: var(--textLight);
+  font-weight: 500;
+  font-size: 20px;
+  margin: 0;
 `;
