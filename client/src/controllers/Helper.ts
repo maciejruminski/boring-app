@@ -161,4 +161,14 @@ export default class Controller {
 
     return placeWithDetails;
   }
+
+  static formatDistance(distance: string): string {
+    const number = Number(distance);
+
+    if (number >= 1000) {
+      return `${number / 1000}km`;
+    }
+
+    return `${distance}m`;
+  }
 }

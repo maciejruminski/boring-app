@@ -16,7 +16,7 @@ export default forwardRef<HTMLSelectElement>(
       },
     } = useGlobalContext();
 
-    const distances = ["100", "300", "500", "2000"];
+    const distances = ["300", "650", "1000", "1500", "2000", "3000"];
 
     return (
       <Select

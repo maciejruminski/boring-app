@@ -1,3 +1,6 @@
+// Controllers.
+import Helper from "../../../../controllers/Helper";
+
 // Context.
 import { useGlobalContext } from "../../../../context";
 
@@ -16,6 +19,10 @@ import {
 // Icons.
 import filterIconPath from "../../../../images/filter.svg";
 
+// Array with types and prices.
+import types from "../filterTypes";
+import prices from "../prices";
+
 export default function Preview() {
   const {
     state: {
@@ -23,6 +30,8 @@ export default function Preview() {
     },
     actions: { setFiltersModalOn },
   } = useGlobalContext();
+
+  const formattedDistance = Helper.formatDistance(distance);
 
   return (
     <SContainer>
@@ -35,11 +44,14 @@ export default function Preview() {
         />
       </SFiltersHeader>
       <SFiltersContainer>
-        <Filter text="Dystans" type={distance} />
+        <Filter text="Dystans" type={formattedDistance} />
         <Filter text="Słowo kluczowe" type={keyword} />
-        <Filter text="Typ" type={type} />
-        <Filter text="Cena minimalna" type={minPrice} />
-        <Filter text="Cena maksymalna" type={maxPrice} />
+        <Filter text="Typ" type={types[type as keyof FilterTypes]} />
+        <Filter text="Cena minimalna" type={prices[minPrice as keyof Prices]} />
+        <Filter
+          text="Cena maksymalna"
+          type={prices[maxPrice as keyof Prices]}
+        />
         <Filter
           text="Pokaż tylko otwarte miejsca"
           type={openNow ? "Tak" : "Nie"}

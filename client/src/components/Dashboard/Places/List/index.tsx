@@ -32,8 +32,10 @@ export default function List(): JSX.Element {
   useEffect(() => setNewPlacesByFilters(filters), []);
   useEffect(
     () => setNumberOfPlacesButtonVisibility(),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [numberOfPlacesToShowAtOnce, maximumNumberOfPlaces]
   );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => resetNumberOfPlacesToShowAtOnce(), [places]);
 
   if (Boolean(maximumNumberOfPlaces)) {

@@ -7,6 +7,9 @@ import { useGlobalContext } from "../../../../context";
 // Components.
 import Select from "../../../Common/Form/Select";
 
+// Array with prices.
+import prices from "../prices";
+
 export default forwardRef<HTMLSelectElement>(
   // eslint-disable-next-line no-empty-pattern
   ({}, ref: React.ForwardedRef<HTMLSelectElement>) => {
@@ -15,13 +18,6 @@ export default forwardRef<HTMLSelectElement>(
         filters: { maxPrice },
       },
     } = useGlobalContext();
-
-    const prices = {
-      0: "Tanio",
-      1: "Średnio",
-      2: "Drogo",
-      3: "Bardzo drogo",
-    };
 
     return (
       <Select

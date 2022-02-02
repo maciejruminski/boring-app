@@ -8,7 +8,7 @@ import { useGlobalContext } from "../../../../context";
 import Select from "../../../Common/Form/Select";
 
 // Array with types.
-import types from "./filterTypes";
+import types from "../filterTypes";
 
 export default forwardRef<HTMLSelectElement>(
   // eslint-disable-next-line no-empty-pattern
