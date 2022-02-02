@@ -21,7 +21,7 @@ export default forwardRef<HTMLSelectElement>(
 
     return (
       <Select
-        label="Type"
+        label="Typ"
         options={types}
         defaultOption={type}
         id="types"

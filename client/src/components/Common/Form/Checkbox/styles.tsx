@@ -44,15 +44,13 @@ const SCheckbox = styled.input<{
   }
 
   &:after {
-    top: 12px;
-    left: 12px;
+    top: 10px;
+    left: 10px;
     border-radius: 2px;
     width: 10px;
     height: 10px;
     background-color: ${({ isChecked }) =>
       isChecked ? "#98e792" : "transparent"};
-    /* transform: ${({ isChecked }) =>
-      isChecked ? "translateX(100%)" : "translateX(0)"}; */
   }
 `;
 

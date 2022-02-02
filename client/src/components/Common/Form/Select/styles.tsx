@@ -31,33 +31,51 @@ const SCustomSelect = styled.div<{ areOptionsVisible: boolean }>`
   top: 60px;
   left: 0;
   width: 100%;
-  background: #abc2d4;
-  color: black;
+  background: var(--textLight);
+  color: var(--textDark);
   z-index: 10;
   max-height: 200px;
   overflow-y: scroll;
-  border-radius: 5px;
-  display: ${({ areOptionsVisible }) => (areOptionsVisible ? "block" : "none")};
+  border-radius: var(--borderRadius);
+  transition-duration: var(--transitionDuration);
+  transition-timing-function: ease-in;
+  opacity: ${({ areOptionsVisible }) => (areOptionsVisible ? "1" : "0")};
+  visibility: ${({ areOptionsVisible }) =>
+    areOptionsVisible ? "visible" : "hidden"};
 `;
 
 const SCustomOption = styled.div`
   padding: 12px 23px;
-  border-bottom: 1px solid #97b3c9;
   font-size: 14px;
   font-weight: 500;
   text-transform: uppercase;
+  position: relative;
+
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    border-bottom: 1px solid var(--textDark);
+    opacity: 0.05;
+  }
 
   &:first-child {
     padding-top: 15px;
   }
 
   &:last-child {
-    border-bottom: none;
     padding-bottom: 15px;
+
+    &:after {
+      display: none;
+    }
   }
 
   &.active {
-    background: red;
+    background-color: var(--primary);
+    color: var(--textLight);
   }
 `;
 

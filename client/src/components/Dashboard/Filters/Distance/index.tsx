@@ -16,11 +16,11 @@ export default forwardRef<HTMLSelectElement>(
       },
     } = useGlobalContext();
 
-    const distances = [100, 300, 500, 2000];
+    const distances = ["100", "300", "500", "2000"];
 
     return (
       <Select
-        label="Distance"
+        label="Dystans"
         options={distances}
         defaultOption={distance}
         id="distance"

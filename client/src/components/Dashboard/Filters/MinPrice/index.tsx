@@ -16,11 +16,16 @@ export default forwardRef<HTMLSelectElement>(
       },
     } = useGlobalContext();
 
-    const prices = [0, 1, 2, 3];
+    const prices = {
+      0: "Tanio",
+      1: "Średnio",
+      2: "Drogo",
+      3: "Bardzo drogo",
+    };
 
     return (
       <Select
-        label="Min price"
+        label="Cena min."
         options={prices}
         defaultOption={minPrice}
         id="minPrice"

@@ -15,7 +15,12 @@ import {
 
 export default forwardRef<
   HTMLSelectElement,
-  { label: string; defaultOption: string | number; options: any; id: string }
+  {
+    label: string;
+    defaultOption: string | number;
+    options: string[] | { [name: string]: string };
+    id: string;
+  }
 >(
   (
     { label, defaultOption, options, id },
@@ -85,28 +90,55 @@ export default forwardRef<
           value={activeOption}
           onChange={showOptionsOnChangeHandler}
         >
-          {options.map((option: string, key: number) => {
-            return (
-              <option value={option} key={key}>
-                {option}
-              </option>
-            );
-          })}
+          {Array.isArray(options)
+            ? options.map((option: string, key: number) => {
+                return (
+                  <option value={option} key={key}>
+                    {option}
+                  </option>
+                );
+              })
+            : Object.entries(options).map(
+                (option: [string, string], key: number) => {
+                  return (
+                    <option value={option[0]} key={key}>
+                      {option[1]}
+                    </option>
+                  );
+                }
+              )}
         </SSelect>
 
         <SCustomSelect areOptionsVisible={optionsVisibility}>
-          {options.map((option: string, key: number) => {
-            return (
-              <SCustomOption
-                data-type={option}
-                className={`option ${option === activeOption && "active"}`}
-                onClick={setOptionHandler}
-                key={key}
-              >
-                {option}
-              </SCustomOption>
-            );
-          })}
+          {Array.isArray(options)
+            ? options.map((option: string, key: number) => {
+                return (
+                  <SCustomOption
+                    data-type={option}
+                    className={`option ${option === activeOption && "active"}`}
+                    onClick={setOptionHandler}
+                    key={key}
+                  >
+                    {option}
+                  </SCustomOption>
+                );
+              })
+            : Object.entries(options).map(
+                (option: [string, string], key: number) => {
+                  return (
+                    <SCustomOption
+                      data-type={option[0]}
+                      className={`option ${
+                        option[0] === activeOption && "active"
+                      }`}
+                      onClick={setOptionHandler}
+                      key={key}
+                    >
+                      {option[1]}
+                    </SCustomOption>
+                  );
+                }
+              )}
         </SCustomSelect>
       </SContainer>
     );

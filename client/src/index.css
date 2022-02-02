@@ -33,5 +33,7 @@ p {
   --secondary: #1549bf;
   --text: #abc2d4;
   --textLight: #ffffff;
+  --textDark: #0c1025;
   --borderRadius: 5px;
+  --transitionDuration: 0.3s;
 }

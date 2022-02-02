@@ -102,12 +102,12 @@ export const Label = () => css<{ isActive: boolean }>`
   top: 19px;
   left: 23px;
   font-weight: 500;
-  color: #abc2d4;
   letter-spacing: 0.5px;
   transition-duration: 0.3s;
   transform-origin: left;
   transform: ${({ isActive }) =>
     isActive ? "translateY(-27px) translateX(1px) scale(0.85)" : ""};
+  color: ${({ isActive }) => (isActive ? "var(--primaryLight)" : "#abc2d4")};
 `;
 
 export const Input = () => css<{

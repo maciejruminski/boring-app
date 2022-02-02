@@ -17,7 +17,7 @@ export default forwardRef<HTMLInputElement>(({}, ref) => {
 
   return (
     <Checkbox
-      label="Show only open now items"
+      label="Pokaż tylko miejsca, które są teraz otwarte"
       defaultValue={openNow ? true : false}
       id="openNow"
       ref={ref}

@@ -35,7 +35,7 @@ const initialState: IState = {
     isSavedAsHistoric: false,
   },
   modals: {
-    isFiltersModalOpen: true,
+    isFiltersModalOpen: false,
     isCurrentPlaceModalOpen: false,
     isHistoricPlacesModalOpen: false,
   },
