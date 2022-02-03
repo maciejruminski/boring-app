@@ -78,25 +78,6 @@ export default class Controller {
     return palces.find((place: { id: string }) => place.id === placeID);
   }
 
-  // static getPlacesFromLocalStorage() {
-  //   return LocalStorage.getPlaces();
-  // }
-
-  static async getHistoricPlacesFromDatabase() {
-    const userUUID = LocalStorage.getUserUUID();
-
-    if (userUUID) {
-      const response = await API.getHistoricPlaces(userUUID);
-      const statusIsNotOk = response.status !== 200;
-
-      if (statusIsNotOk) {
-        return false;
-      }
-
-      return response.historicPlaces;
-    }
-  }
-
   static async sendPassword(email: string) {
     const response = await API.sendPassword(email);
     const statusIsNotOk = response.status !== 200;

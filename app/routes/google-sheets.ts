@@ -3,12 +3,20 @@ import GoogleSheetsController from "../controllers/GoogleSheetsController";
 
 const router = express.Router();
 
+// Users.
 router.post("/add-user", GoogleSheetsController.addUser);
+
+// Filters.
 router.post(
-  "/add-filter-types",
-  GoogleSheetsController.addFilterTypes.bind(GoogleSheetsController)
+  "/add-filters",
+  GoogleSheetsController.addFilters.bind(GoogleSheetsController)
+);
+router.post(
+  "/get-filters",
+  GoogleSheetsController.getFilters.bind(GoogleSheetsController)
 );
 
+// Historic places.
 router.post(
   "/add-historic-place",
   GoogleSheetsController.addHistoricPlace.bind(GoogleSheetsController)

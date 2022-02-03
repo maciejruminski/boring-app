@@ -50,16 +50,15 @@ class GoogleSheetsController {
     });
   }
 
-  async addFilterTypes(req: Request, res: Response) {
-    const { filterTypes, userUUID }: { filterTypes: any; userUUID: string } =
-      req.body;
+  async addFilters(req: Request, res: Response) {
+    const { filters, userUUID }: { filters: any; userUUID: string } = req.body;
     const row = await this.getUserRowById(userUUID);
     const clientData = {
       spreadsheetId: process.env.SPREADSHEETS_ID,
       range: "Sheet1!B" + row,
       valueInputOption: "RAW",
       resource: {
-        values: [[JSON.stringify(filterTypes)]],
+        values: [[JSON.stringify(filters)]],
       },
     };
 
@@ -68,6 +67,23 @@ class GoogleSheetsController {
     res.status(200).json({
       status: 200,
       message: "Typy filtrów zostały dodane do bazy danych",
+    });
+  }
+
+  async getFilters(req: Request, res: Response) {
+    const { userUUID }: { userUUID: string } = req.body;
+    const row = await this.getUserRowById(userUUID);
+    const clientData = {
+      spreadsheetId: process.env.SPREADSHEETS_ID,
+      majorDimension: "ROWS",
+      range: "Sheet1!B" + row,
+    };
+
+    const filters = await this.getClientValues().get(clientData);
+
+    res.status(200).json({
+      status: 200,
+      filters: filters.data.values[0][0],
     });
   }
 

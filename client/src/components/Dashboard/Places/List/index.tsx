@@ -20,7 +20,6 @@ export default function List(): JSX.Element {
       maximumNumberOfPlaces,
     },
     actions: {
-      setNewPlacesByFilters,
       getCurrentPlaceDetails,
       setNumberOfPlacesToShowAtOnce,
       resetNumberOfPlacesToShowAtOnce,
@@ -28,8 +27,6 @@ export default function List(): JSX.Element {
     },
   } = useGlobalContext();
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => setNewPlacesByFilters(filters), []);
   useEffect(
     () => setNumberOfPlacesButtonVisibility(),
     // eslint-disable-next-line react-hooks/exhaustive-deps

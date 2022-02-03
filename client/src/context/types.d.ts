@@ -115,7 +115,8 @@ interface IActions {
   ) => void;
   setBusyOn: () => void;
   setBusyOff: () => void;
-  setNewPlacesByFilters: (filters: Filters) => void;
+  setPlacesByFilters: (filters: Filters) => void;
+  filterForNewPlacesByFilters: (filters: Filters) => void;
   setFiltersModalOn: () => void;
   setFiltersModalOff: () => void;
   setCurrentPlaceModalOn: () => void;
@@ -124,7 +125,9 @@ interface IActions {
   getCurrentPlaceDetails: (place: Place) => Promise<void>;
   getRandomPlaceDetails: (currentPlaceID: string) => void;
   setPlacesFromLocalStorage: () => void;
-  setFiltersFromLocalStorage: () => void;
+  setFilters: () => void;
+  setFiltersAndNewPlaces: () => Promise<void>;
+  // setFiltersFromLocalStorage: () => void;
   validateInput: (input: HTMLInputElement) => boolean;
   setSignUpEmail: (input: HTMLInputElement) => void;
   setSignUpEmailAsSent: () => void;
@@ -134,7 +137,6 @@ interface IActions {
   addHistoricPlace: (place: Place) => void;
   removeHistoricPlace: (id: string) => void;
   setHistoricPlaces: () => void;
-  setHistoricPlacesFromLocalStorage: () => void;
   setHistoricPlacesModalOn: () => void;
   setHistoricPlacesModalOff: () => void;
   setNumberOfPlacesToShowAtOnce: () => void;

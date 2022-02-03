@@ -1,5 +1,5 @@
 // Functions.
-import { forwardRef, useState } from "react";
+import { forwardRef, useState, useEffect } from "react";
 
 // Context.
 import { useGlobalContext } from "../../../../context";
@@ -20,6 +20,12 @@ export default forwardRef<HTMLInputElement>(({}, ref) => {
   const setErrorHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setIsKeyword(e.target.value ? true : false);
   };
+
+  useEffect(() => {
+    if (keyword) {
+      setIsKeyword(true);
+    }
+  }, [keyword]);
 
   return (
     <Input

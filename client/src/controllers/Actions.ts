@@ -60,7 +60,69 @@ export default class Actions {
     });
   };
 
-  setNewPlacesByFilters = async (filters: Filters): Promise<void> => {
+  setFiltersAndNewPlaces = async (): Promise<void> => {
+    const userUUID = LocalStorage.getUserUUID();
+
+    if (userUUID) {
+      this.setBusyOn();
+      let response = await API.getFilters(userUUID);
+
+      if (Helper.statusIsNotOk(response.status)) {
+        return;
+      }
+
+      const parsedFilters: Filters = JSON.parse(response.filters);
+
+      LocalStorage.setFilters(parsedFilters);
+      this.dispatch({ type: "setFilters", payload: parsedFilters });
+
+      this.setPlacesByFilters(parsedFilters);
+    }
+  };
+
+  setPlacesByFilters = async (filters: Filters): Promise<void> => {
+    const response = await API.getPlaces(filters);
+
+    if (Helper.statusIsNotOk(response.status)) {
+      return;
+    }
+
+    const places = response.places;
+
+    LocalStorage.setPlaces(places);
+    this.dispatch({ type: "setPlaces", payload: places });
+    this.setMaximumNumberOfPlaces(places.length);
+    this.setNumberOfPlacesButtonVisibility();
+    this.setBusyOff();
+  };
+
+  setFilters = async (): Promise<void> => {
+    const filters = LocalStorage.getFilters();
+    const filtersAreNotEmpty = Object.keys(filters).length !== 0;
+
+    if (filtersAreNotEmpty) {
+      this.dispatch({ type: "setFilters", payload: filters });
+
+      return;
+    }
+
+    const userUUID = LocalStorage.getUserUUID();
+
+    if (userUUID) {
+      const response = await API.getFilters(userUUID);
+
+      if (Helper.statusIsNotOk(response.status)) {
+        return;
+      }
+
+      const parsedFilters: Filters = JSON.parse(response.filters);
+      LocalStorage.setFilters(parsedFilters);
+      this.dispatch({ type: "setFilters", payload: parsedFilters });
+      this.setBusyOff();
+    }
+  };
+
+  filterForNewPlacesByFilters = async (filters: Filters): Promise<void> => {
     this.setBusyOn();
 
     const filtersAreEqual = Helper.comparewithLocalStorageFilters(filters);
@@ -84,22 +146,10 @@ export default class Actions {
       this.dispatch({ type: "setFilters", payload: filters });
     }
 
-    const response = await API.getPlaces(filters);
-
-    if (Helper.statusIsNotOk(response.status)) {
-      return;
-    }
-
-    const places = response.places;
-
-    LocalStorage.setPlaces(places);
-    this.dispatch({ type: "setPlaces", payload: places });
-    this.setMaximumNumberOfPlaces(places.length);
-    this.setNumberOfPlacesButtonVisibility();
-    this.setBusyOff();
+    this.setPlacesByFilters(filters);
   };
 
-  setHistoricPlaces = (): void => {
+  setHistoricPlaces = async (): Promise<void> => {
     const historicPlaces = LocalStorage.getHistoricPlaces();
 
     if (historicPlaces.length) {
@@ -109,23 +159,25 @@ export default class Actions {
       return;
     }
 
-    Helper.getHistoricPlacesFromDatabase().then((historicPlaces: string) => {
-      if (historicPlaces) {
-        const parsedHistoricPlaces: Place[] = JSON.parse(historicPlaces);
-        LocalStorage.setHistoricPlaces(parsedHistoricPlaces);
-        this.dispatch({
-          type: "setHistoricPlaces",
-          payload: parsedHistoricPlaces,
-        });
-        this.setBusyOff();
+    const userUUID = LocalStorage.getUserUUID();
+
+    if (userUUID) {
+      const response = await API.getHistoricPlaces(userUUID);
+
+      if (Helper.statusIsNotOk(response.status)) {
+        return;
       }
-    });
-  };
 
-  setHistoricPlacesFromLocalStorage = (): void => {
-    const historicPlaces = LocalStorage.getHistoricPlaces();
+      const parsedHistoricPlaces: Place[] = JSON.parse(response.historicPlaces);
+      LocalStorage.setHistoricPlaces(parsedHistoricPlaces);
+      this.dispatch({
+        type: "setHistoricPlaces",
+        payload: parsedHistoricPlaces,
+      });
+      this.setBusyOff();
 
-    this.dispatch({ type: "setHistoricPlaces", payload: historicPlaces });
+      return response.historicPlaces;
+    }
   };
 
   addHistoricPlace = (place: Place): void => {
@@ -250,14 +302,6 @@ export default class Actions {
     this.dispatch({ type: "setPlacesFromLocalStorage", payload: places });
   };
 
-  setFiltersFromLocalStorage = (): void => {
-    const filters = LocalStorage.getFilters();
-
-    if (filters) {
-      this.dispatch({ type: "setFilters", payload: filters });
-    }
-  };
-
   setSignUpError = (error: string): void => {
     this.dispatch({ type: "setSignUpError", payload: error });
   };
@@ -364,7 +408,8 @@ export default class Actions {
       verifyOneTimePassword: this.verifyOneTimePassword,
       setBusyOn: this.setBusyOn,
       setBusyOff: this.setBusyOff,
-      setNewPlacesByFilters: this.setNewPlacesByFilters,
+      setPlacesByFilters: this.setPlacesByFilters,
+      filterForNewPlacesByFilters: this.filterForNewPlacesByFilters,
       setFiltersModalOn: this.setFiltersModalOn,
       setFiltersModalOff: this.setFiltersModalOff,
       setCurrentPlaceModalOn: this.setCurrentPlaceModalOn,
@@ -373,7 +418,9 @@ export default class Actions {
       getCurrentPlaceDetails: this.getCurrentPlaceDetails,
       getRandomPlaceDetails: this.getRandomPlaceDetails,
       setPlacesFromLocalStorage: this.setPlacesFromLocalStorage,
-      setFiltersFromLocalStorage: this.setFiltersFromLocalStorage,
+      setFilters: this.setFilters,
+      setFiltersAndNewPlaces: this.setFiltersAndNewPlaces,
+      // setFiltersFromLocalStorage: this.setFiltersFromLocalStorage,
       validateInput: this.validateInput,
       setSignUpEmail: this.setSignUpEmail,
       setSignUpEmailAsSent: this.setSignUpEmailAsSent,
@@ -383,7 +430,6 @@ export default class Actions {
       addHistoricPlace: this.addHistoricPlace,
       removeHistoricPlace: this.removeHistoricPlace,
       setHistoricPlaces: this.setHistoricPlaces,
-      setHistoricPlacesFromLocalStorage: this.setHistoricPlacesFromLocalStorage,
       setHistoricPlacesModalOn: this.setHistoricPlacesModalOn,
       setHistoricPlacesModalOff: this.setHistoricPlacesModalOff,
       setNumberOfPlacesToShowAtOnce: this.setNumberOfPlacesToShowAtOnce,

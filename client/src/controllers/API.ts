@@ -10,10 +10,20 @@ export default class API {
   }
 
   static async addFiltersToDatabase(filters: Filters, userUUID: string) {
-    const response = await fetch("/add-filter-types", {
+    const response = await fetch("/add-filters", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ filters, userUUID }),
+    });
+
+    return await response.json();
+  }
+
+  static async getFilters(userUUID: string) {
+    const response = await fetch("/get-filters", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userUUID }),
     });
 
     return await response.json();

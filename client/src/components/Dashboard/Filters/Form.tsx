@@ -24,7 +24,7 @@ export default function Form() {
     state: {
       modals: { isFiltersModalOpen },
     },
-    actions: { setNewPlacesByFilters, setFiltersModalOff },
+    actions: { filterForNewPlacesByFilters, setFiltersModalOff },
   } = useGlobalContext();
 
   const distanceRef = useRef<HTMLSelectElement>(null);
@@ -36,7 +36,7 @@ export default function Form() {
 
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setNewPlacesByFilters({
+    filterForNewPlacesByFilters({
       distance: distanceRef?.current?.value,
       keyword: keywordRef?.current?.value,
       type: typeRef?.current?.value,

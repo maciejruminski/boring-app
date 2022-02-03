@@ -1,6 +1,9 @@
 // Functions.
 import { forwardRef } from "react";
 
+// Controllers.
+import Helper from "../../../../controllers/Helper";
+
 // Context.
 import { useGlobalContext } from "../../../../context";
 
@@ -16,7 +19,14 @@ export default forwardRef<HTMLSelectElement>(
       },
     } = useGlobalContext();
 
-    const distances = ["300", "650", "1000", "1500", "2000", "3000"];
+    const distances = {
+      "300": "300m",
+      "650": "650m",
+      "1000": "1km",
+      "1500": "1.5km",
+      "2000": "2km",
+      "3000": "3km",
+    };
 
     return (
       <Select

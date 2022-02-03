@@ -12,7 +12,7 @@ const initialState: IState = {
     keyword: "",
     type: "accounting",
     minPrice: "0",
-    maxPrice: "4",
+    maxPrice: "3",
     openNow: false,
   },
   places: [],

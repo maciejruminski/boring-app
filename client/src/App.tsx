@@ -14,17 +14,15 @@ function App() {
     state: { isLoggedIn, historicPlaces },
     actions: {
       setUserAuthenticationByLocalStorage,
-      setPlacesFromLocalStorage,
-      setFiltersFromLocalStorage,
-      setHistoricPlaces,
+      setFiltersAndNewPlaces,
+      // setHistoricPlaces
     },
   } = useGlobalContext();
 
   useEffect(() => {
     setUserAuthenticationByLocalStorage();
-    setPlacesFromLocalStorage();
-    setFiltersFromLocalStorage();
-    setHistoricPlaces();
+    setFiltersAndNewPlaces();
+    // setHistoricPlaces();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

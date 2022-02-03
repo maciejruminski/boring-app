@@ -46,9 +46,8 @@ const SCustomSelect = styled.div<{ areOptionsVisible: boolean }>`
 
 const SCustomOption = styled.div`
   padding: 12px 23px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
-  text-transform: uppercase;
   position: relative;
 
   &:after {

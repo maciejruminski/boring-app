@@ -31,11 +31,24 @@ export default forwardRef<
     const [labelWidth, setLabelWidth] = useState(0);
     const labelRef = React.useRef<HTMLLabelElement>(null);
 
+    const closeOptionsOnMouseDownHandler = (e: Event) => {
+      window.removeEventListener("touchend", closeOptionsOnMouseDownHandler);
+      window.removeEventListener("mousedown", closeOptionsOnMouseDownHandler);
+
+      const refIsObject = typeof ref === "object";
+      const clickedElementIsOutsideATarget =
+        refIsObject && ref?.current !== e.target;
+
+      if (clickedElementIsOutsideATarget) {
+        setOptionsVisibility(false);
+      }
+    };
+
     const showOptionsOnMouseDownHandler = (
       e: React.MouseEvent<HTMLSelectElement, MouseEvent>
     ) => {
       e.preventDefault();
-      setOptionsVisibility(true);
+      setOptionsVisibility(!optionsVisibility);
     };
 
     const showOptionsOnChangeHandler = (
@@ -51,7 +64,6 @@ export default forwardRef<
       const type = (e.target as HTMLDivElement).dataset.type;
 
       if (type) {
-        setOptionsVisibility(false);
         setActiveOption(type);
       }
     };
@@ -67,6 +79,15 @@ export default forwardRef<
 
     // We need label width to set the pseudo element width.
     useEffect(() => setLabelWidth(setLabelWidthAfterScaling()), []);
+
+    useEffect(() => {
+      if (optionsVisibility) {
+        window.addEventListener("touchend", closeOptionsOnMouseDownHandler);
+        window.addEventListener("mousedown", closeOptionsOnMouseDownHandler);
+      }
+    }, [optionsVisibility]);
+
+    useEffect(() => setActiveOption(defaultOption), [defaultOption]);
 
     return (
       <SContainer
