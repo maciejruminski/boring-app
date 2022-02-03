@@ -152,4 +152,8 @@ export default class Controller {
 
     return `${distance}m`;
   }
+
+  static makeBodyUnscrollable(isModalOpen: boolean): void {
+    document.body.classList.toggle("no-scroll", isModalOpen);
+  }
 }

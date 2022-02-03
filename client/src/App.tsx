@@ -11,18 +11,18 @@ import { useGlobalContext } from "./context";
 
 function App() {
   const {
-    state: { isLoggedIn, historicPlaces },
+    state: { isLoggedIn },
     actions: {
       setUserAuthenticationByLocalStorage,
       setFiltersAndNewPlaces,
-      // setHistoricPlaces
+      setHistoricPlaces,
     },
   } = useGlobalContext();
 
   useEffect(() => {
     setUserAuthenticationByLocalStorage();
     setFiltersAndNewPlaces();
-    // setHistoricPlaces();
+    setHistoricPlaces();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

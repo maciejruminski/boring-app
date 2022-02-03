@@ -1,3 +1,9 @@
+// Functions.
+import { useEffect } from "react";
+
+// Controllers.
+import Helper from "../../../../controllers/Helper";
+
 // Context.
 import { useGlobalContext } from "../../../../context";
 
@@ -19,6 +25,11 @@ export default function HistoricPlaces(): JSX.Element {
     },
     actions: { setHistoricPlacesModalOff },
   } = useGlobalContext();
+
+  useEffect(
+    () => Helper.makeBodyUnscrollable(isHistoricPlacesModalOpen),
+    [isHistoricPlacesModalOpen]
+  );
 
   if (Boolean(historicPlaces.length)) {
     return (

@@ -1,5 +1,8 @@
 // Functions.
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
+
+// Controllers.
+import Helper from "../../../controllers/Helper";
 
 // Context.
 import { useGlobalContext } from "../../../context";
@@ -45,6 +48,11 @@ export default function Form() {
       openNow: openNowRef?.current?.checked,
     });
   };
+
+  useEffect(
+    () => Helper.makeBodyUnscrollable(isFiltersModalOpen),
+    [isFiltersModalOpen]
+  );
 
   return (
     <>

@@ -1,7 +1,10 @@
 import styled from "styled-components";
 
 // Functions.
-// import { useRef } from "react";
+import { useEffect } from "react";
+
+// Controllers.
+import Helper from "../../../../controllers/Helper";
 
 // Context.
 import { useGlobalContext } from "../../../../context";
@@ -47,7 +50,7 @@ export default function Details() {
     state: {
       places,
       currentPlace,
-      modals: { isCurrentPlaceModalOpen },
+      modals: { isCurrentPlaceModalOpen, isHistoricPlacesModalOpen },
     },
     actions: {
       setCurrentPlaceModalOff,
@@ -58,6 +61,14 @@ export default function Details() {
   } = useGlobalContext();
 
   const { id, name, rating, website, isSavedAsHistoric } = currentPlace;
+
+  useEffect(
+    () =>
+      Helper.makeBodyUnscrollable(
+        isCurrentPlaceModalOpen || isHistoricPlacesModalOpen
+      ),
+    [isCurrentPlaceModalOpen]
+  );
 
   return (
     <SDetails isModalOpen={isCurrentPlaceModalOpen}>

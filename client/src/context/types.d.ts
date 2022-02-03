@@ -124,7 +124,7 @@ interface IActions {
   setCurrentPlace: (placeWithDetails: PlaceWithDetails) => void;
   getCurrentPlaceDetails: (place: Place) => Promise<void>;
   getRandomPlaceDetails: (currentPlaceID: string) => void;
-  setPlacesFromLocalStorage: () => void;
+  // setPlacesFromLocalStorage: () => void;
   setFilters: () => void;
   setFiltersAndNewPlaces: () => Promise<void>;
   // setFiltersFromLocalStorage: () => void;
