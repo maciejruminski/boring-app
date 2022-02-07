@@ -1,5 +1,5 @@
 // Functions.
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 // Mixins.
 import { InputContainer, Label, Input } from "../../../../Mixins";

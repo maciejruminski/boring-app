@@ -175,7 +175,7 @@ export default class Controller {
         travelMode: google.maps.TravelMode.WALKING,
       },
       function (response: any, status: any) {
-        if (status == google.maps.DirectionsStatus.OK) {
+        if (status === google.maps.DirectionsStatus.OK) {
           var route = response.routes[0].legs[0];
 
           var latlng = new google.maps.LatLng(

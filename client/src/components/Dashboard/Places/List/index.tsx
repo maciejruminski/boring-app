@@ -14,7 +14,6 @@ export default function List(): JSX.Element {
   const {
     state: {
       places,
-      filters,
       isShowMorePlacesButtonVisible,
       numberOfPlacesToShowAtOnce,
       maximumNumberOfPlaces,
@@ -58,5 +57,9 @@ export default function List(): JSX.Element {
     );
   }
 
-  return <p>Niestety, ale na podstawie podanych filtrów nie znaleziono żadnych miejsc.</p>;
+  return (
+    <p>
+      Niestety, ale na podstawie podanych filtrów nie znaleziono żadnych miejsc.
+    </p>
+  );
 }

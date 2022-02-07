@@ -42,6 +42,7 @@ export default function Map({
     if (!map) {
       initializeMap(ref);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref]);
 
   useEffect(() => {
@@ -53,6 +54,7 @@ export default function Map({
         origin?.lng()
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [targetLocation]);
 
   useEffect(() => {
@@ -72,6 +74,7 @@ export default function Map({
         );
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCurrentPlaceModalOpen, targetLocation]);
 
   return (

@@ -50,9 +50,7 @@ export default function Details() {
     rating,
     website,
     isSavedAsHistoric,
-    reviews,
     openNow,
-    phone,
     vicinity,
     geometry: { location },
   } = currentPlace;
@@ -63,6 +61,7 @@ export default function Details() {
       Helper.makeBodyUnscrollable(
         isCurrentPlaceModalOpen || isHistoricPlacesModalOpen
       ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [isCurrentPlaceModalOpen]
   );
 
@@ -103,7 +102,7 @@ export default function Details() {
         {website && (
           <SNote>
             Kliknij{" "}
-            <a href={website} target="_blank">
+            <a href={website} target="_blank" rel="noreferrer">
               tutaj
             </a>{" "}
             aby przejść na stronę internetową.

@@ -1,9 +1,6 @@
 // Functions.
 import { forwardRef } from "react";
 
-// Controllers.
-import Helper from "../../../../controllers/Helper";
-
 // Context.
 import { useGlobalContext } from "../../../../context";
 

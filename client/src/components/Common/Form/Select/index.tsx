@@ -85,6 +85,7 @@ export default forwardRef<
         window.addEventListener("touchend", closeOptionsOnMouseDownHandler);
         window.addEventListener("mousedown", closeOptionsOnMouseDownHandler);
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [optionsVisibility]);
 
     useEffect(() => setActiveOption(defaultOption), [defaultOption]);
