@@ -1,107 +1,34 @@
-import { Loader } from "@googlemaps/js-api-loader";
-import styled from "styled-components";
+// Functions.
+import { useEffect, useRef } from "react";
 
-const SMap = styled.div`
-  width: 500px;
-  height: 500px;
-`;
+// Controllers.
+import Helper from "../../../../../controllers/Helper";
 
-export default function Map(): JSX.Element {
-  let map: google.maps.Map;
-  // console.log(process.env.REACT_APP_GOOGLE_API_KEY);
-  const loader = new Loader({
-    apiKey: `${process.env.REACT_APP_GOOGLE_API_KEY}`,
-    // version: "weekly",
-  });
+// Styles.
+import { SMap, SMapText, SButton } from "./styles";
 
-  function calculateAndDisplayRoute(
-    directionsService: any,
-    directionsDisplay: any,
-    pointA: any,
-    pointB: any,
-    travelMode: any,
-    marker: any
-  ) {
-    // console.log("route!!");
+// Context.
+import { useGlobalContext } from "../../../../../context";
 
-    let travelModeTest = "DRIVING";
-
-    directionsService.route(
-      {
-        origin: pointA,
-        destination: pointB,
-        avoidTolls: true,
-        avoidFerries: true,
-        avoidHighways: false,
-        provideRouteAlternatives: false,
-        travelMode,
+export default function Map({
+  targetLocation,
+}: {
+  targetLocation: any;
+}): JSX.Element {
+  const {
+    state: {
+      map: {
+        map,
+        origin,
+        directionsService,
+        directionsDisplay,
+        destinationMarker,
+        googleAppLink,
       },
-      function (response: any, status: any) {
-        if (status == google.maps.DirectionsStatus.OK) {
-          // console.log(google.maps.TravelMode);
-
-          // response.request.travelMode= 'WALKING';
-
-          var routewww = response.routes[0].legs[0];
-
-          // console.log(routewww.end_location);
-
-          var latlng = new google.maps.LatLng(
-            routewww.end_location.lat(),
-            routewww.end_location.lng()
-          );
-
-          marker.setPosition(latlng);
-
-          // const marker2 =   new google.maps.Marker({
-          //     position: new google.maps.LatLng(
-          //       53.464960907469835,
-          //       18.739887425618237
-          //     ),
-          //     map: map,
-          //     // icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-          // });
-
-          //   new google.maps.Marker({
-          //     position: pointB,
-          //     title: "point B",
-          //     label: "Bs",
-          //     icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-          //     map: map
-          // });
-
-          // console.log(response);
-
-          directionsDisplay.setDirections(response);
-        } else {
-          window.alert("Directions request failed due to " + status);
-        }
-      }
-    );
-  }
-
-  //   let map: google.maps.Map;
-  //   const google = window.google;
-  //   // let map: any;
-  //   console.log(google);
-
-  // function initMap(): void {
-  //   map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
-  //     center: { lat: -34.397, lng: 150.644 },
-  //     zoom: 8,
-  //   });
-  // }
-
-  // initMap();
-
-  const isNotMobileDevice =
-    !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    );
-
-  // if (isNotMobileDevice) {
-  //   throw new Error('This app is only for mobile devices!');
-  // }
+      modals: { isCurrentPlaceModalOpen },
+    },
+    actions: { setCurrentPlaceGoogleAppLink, initializeMap },
+  } = useGlobalContext();
 
   const geoIsNotSupported = !navigator.geolocation;
 
@@ -109,71 +36,56 @@ export default function Map(): JSX.Element {
     throw new Error("Geolocation is not supported by your browser!");
   }
 
-  const currentPosition = navigator.geolocation.getCurrentPosition(
-    (success) =>
-      loader.load().then(() => {
-        // console.log("Map initialized!");
-        // map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
-        //   center: { lat: 53.461460907469835, lng: 18.727277425618237 },
-        //   zoom: 17,
-        // });
+  const ref = useRef<HTMLDivElement>(null);
 
-        var pointA = new google.maps.LatLng(
-            success.coords.latitude,
-            success.coords.longitude
-          ),
-          pointB = new google.maps.LatLng(
-            53.464960907469835,
-            18.739887425618237
-          ),
-          map = new google.maps.Map(
-            document.getElementById("map") as HTMLElement,
-            {
-              // center: { lat: 53.461460907469835, lng: 18.727277425618237 },
-              center: pointA,
-              zoom: 17,
-            }
-          ),
-          // Instantiate a directions service.
-          directionsService = new google.maps.DirectionsService(),
-          directionsDisplayWalking = new google.maps.DirectionsRenderer({
-            map: map,
-            suppressMarkers: true,
-          }),
-          directionsDisplayDriving = new google.maps.DirectionsRenderer({
-            map: map,
-            suppressMarkers: true,
-          });
+  useEffect(() => {
+    if (!map) {
+      initializeMap(ref);
+    }
+  }, [ref]);
 
-        const marker1 = new google.maps.Marker({
-          position: pointA,
-          // title: "point A",
-          label: "A",
-          map: map,
-        });
+  useEffect(() => {
+    if (origin) {
+      setCurrentPlaceGoogleAppLink(
+        targetLocation.lat,
+        targetLocation.lng,
+        origin?.lat(),
+        origin?.lng()
+      );
+    }
+  }, [targetLocation]);
 
-        const marker2 = new google.maps.Marker({
-          // position: pointB,
-          // title: "point B",
-          label: "B",
-          map: map,
-          icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-        });
-
-        // get route from A to B
-        // calculateAndDisplayRoute(directionsService, directionsDisplayWalking, pointA, pointB, google.maps.TravelMode.WALKING, marker2);
-        calculateAndDisplayRoute(
+  useEffect(() => {
+    if (isCurrentPlaceModalOpen) {
+      if (
+        directionsService &&
+        directionsDisplay &&
+        origin &&
+        destinationMarker
+      ) {
+        Helper.calculateAndDisplayRoute(
           directionsService,
-          directionsDisplayDriving,
-          pointA,
-          pointB,
-          google.maps.TravelMode.DRIVING,
-          marker2
+          directionsDisplay,
+          origin.lat() + "," + origin.lng(),
+          targetLocation.lat + "," + targetLocation.lng,
+          destinationMarker
         );
-      }),
+      }
+    }
+  }, [isCurrentPlaceModalOpen, targetLocation]);
 
-    (error) => console.log(error)
+  return (
+    <>
+      <SMap ref={ref}>
+        <SMapText>Trwa wczytywanie mapy</SMapText>
+      </SMap>
+
+      {isCurrentPlaceModalOpen && (
+        <SButton
+          text="Odpal trasę na Google Map"
+          onClickHandler={() => window.open(googleAppLink, "_blank")}
+        />
+      )}
+    </>
   );
-
-  return <SMap id="map">Google map</SMap>;
 }

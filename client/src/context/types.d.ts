@@ -82,6 +82,15 @@ type Filters = {
   openNow: boolean;
 };
 
+type GoogleMap = {
+  map?: google.maps.Map<HTMLDivElement>;
+  origin?: google.maps.LatLng;
+  directionsService?: google.maps.DirectionsService;
+  directionsDisplay?: google.maps.DirectionsRenderer;
+  destinationMarker?: google.maps.Marker;
+  googleAppLink: string;
+};
+
 interface IState {
   isLoggedIn: boolean;
   isBusy: boolean;
@@ -103,6 +112,7 @@ interface IState {
     isCurrentPlaceModalOpen: boolean;
     isHistoricPlacesModalOpen: boolean;
   };
+  map: GoogleMap;
 }
 
 interface IActions {
@@ -143,6 +153,14 @@ interface IActions {
   resetNumberOfPlacesToShowAtOnce: () => void;
   setNumberOfPlacesButtonVisibility: () => void;
   setMaximumNumberOfPlaces: (number: number) => void;
+  initializeMap: (ref: any) => void;
+  setMap: (map: Map) => void;
+  setCurrentPlaceGoogleAppLink: (
+    destinationLatitude: number,
+    destinationLongitude: number,
+    originLatitude: number,
+    originLongitude: number
+  ) => void;
 }
 
 type ActionTypes =
@@ -167,7 +185,8 @@ type ActionTypes =
   | "setSignUpEmailAsSent"
   | "setNumberOfPlacesToShowAtOnce"
   | "setNumberOfPlacesButtonVisibility"
-  | "setMaximumNumberOfPlaces";
+  | "setMaximumNumberOfPlaces"
+  | "setMap";
 
 interface IAction {
   type: ActionTypes;

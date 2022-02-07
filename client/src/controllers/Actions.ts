@@ -1,7 +1,17 @@
+// Functions.
+import { Loader } from "@googlemaps/js-api-loader";
+
 // Controllers.
 import Helper from "./Helper";
 import LocalStorage from "./LocalStorage";
 import API from "./API";
+
+// Map options.
+import mapOptions from "../components/Dashboard/Places/CurrentPlace/Map/mapOptions";
+
+// Icons.
+import personIconPath from "../images/user.svg";
+import markerIconPath from "../images/marker.svg";
 
 export default class Actions {
   private state: IState;
@@ -291,7 +301,10 @@ export default class Actions {
       response.placeDetails
     );
 
-    let placeWithDetails: PlaceWithDetails = { ...place, ...placeDetails };
+    let placeWithDetails: PlaceWithDetails = {
+      ...place,
+      ...placeDetails,
+    };
 
     placeWithDetails = Helper.setAsHistoricIfPossible(
       placeWithDetails,
@@ -415,6 +428,71 @@ export default class Actions {
     this.dispatch({ type: "setMaximumNumberOfPlaces", payload: number });
   };
 
+  setCurrentPlaceGoogleAppLink = (
+    destinationLatitude: number,
+    destinationLongitude: number,
+    originLatitude: number,
+    originLongitude: number
+  ): void => {
+    const googleAppLink = `https://www.google.com/maps/dir/${destinationLatitude},${destinationLongitude}/${originLatitude},${originLongitude}/data=!3m1!4b1!4m2!4m1!3e2`;
+
+    this.setMap({ ...this.state.map, googleAppLink });
+  };
+
+  initializeMap = (ref: any): void => {
+    const loader = new Loader({
+      apiKey: `${process.env.REACT_APP_GOOGLE_API_KEY}`,
+    });
+
+    navigator.geolocation.getCurrentPosition((success: GeolocationPosition) =>
+      loader.load().then(() => {
+        const refIsObject = typeof ref === "object";
+        const mapDoesNotExist = !this.state.map.map;
+        const { latitude, longitude } = success.coords;
+        const origin = new google.maps.LatLng(latitude, longitude);
+
+        if (refIsObject && mapDoesNotExist) {
+          const map = new google.maps.Map(
+            ref?.current as HTMLDivElement,
+            mapOptions
+          );
+
+          const directionsService = new google.maps.DirectionsService();
+          const directionsDisplay = new google.maps.DirectionsRenderer({
+            map: map,
+            suppressMarkers: true,
+          });
+
+          // Origin Marker.
+          new google.maps.Marker({
+            position: origin,
+            map: map,
+            icon: personIconPath,
+          });
+
+          // Destination Marker.
+          const destinationMarker = new google.maps.Marker({
+            map: map,
+            icon: markerIconPath,
+          });
+
+          this.setMap({
+            map,
+            origin,
+            directionsService,
+            directionsDisplay,
+            destinationMarker,
+            googleAppLink: "ww",
+          });
+        }
+      })
+    );
+  };
+
+  setMap = (map: GoogleMap): void => {
+    this.dispatch({ type: "setMap", payload: map });
+  };
+
   getAllActions = (): IActions => {
     return {
       setUserAuthenticationOn: this.setUserAuthenticationOn,
@@ -452,6 +530,9 @@ export default class Actions {
       setMaximumNumberOfPlaces: this.setMaximumNumberOfPlaces,
       resetNumberOfPlacesToShowAtOnce: this.resetNumberOfPlacesToShowAtOnce,
       setNumberOfPlacesButtonVisibility: this.setNumberOfPlacesButtonVisibility,
+      setCurrentPlaceGoogleAppLink: this.setCurrentPlaceGoogleAppLink,
+      initializeMap: this.initializeMap,
+      setMap: this.setMap,
     };
   };
 }

@@ -36,7 +36,7 @@ export default function HistoricPlaces(): JSX.Element {
       <SModal isModalOpen={isHistoricPlacesModalOpen}>
         <SButton
           onClickHandler={setHistoricPlacesModalOff}
-          text="Submit"
+          text="Zamknij modal z zapisanymi miejscami"
           icon={closeIconPath}
         />
         <Heading />

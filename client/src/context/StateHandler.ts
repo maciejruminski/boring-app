@@ -108,6 +108,10 @@ export default class StateHandler {
     return { ...state, maximumNumberOfPlaces };
   }
 
+  static setMap({ state, payload: map }: IStateHandler) {
+    return { ...state, map };
+  }
+
   static handlers = {
     setUserAuthenticationOn: StateHandler.setUserAuthenticationOn,
     setUserAuthenticationOff: StateHandler.setUserAuthenticationOff,
@@ -132,5 +136,6 @@ export default class StateHandler {
     setNumberOfPlacesButtonVisibility:
       StateHandler.setNumberOfPlacesButtonVisibility,
     setMaximumNumberOfPlaces: StateHandler.setMaximumNumberOfPlaces,
+    setMap: StateHandler.setMap,
   };
 }

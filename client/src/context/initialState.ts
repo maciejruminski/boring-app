@@ -39,6 +39,14 @@ const initialState: IState = {
     isCurrentPlaceModalOpen: false,
     isHistoricPlacesModalOpen: false,
   },
+  map: {
+    map: undefined,
+    origin: undefined,
+    directionsService: undefined,
+    directionsDisplay: undefined,
+    destinationMarker: undefined,
+    googleAppLink: "",
+  },
 };
 
 export default initialState;

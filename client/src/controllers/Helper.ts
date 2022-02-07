@@ -156,4 +156,52 @@ export default class Controller {
   static makeBodyUnscrollable(isModalOpen: boolean): void {
     document.body.classList.toggle("no-scroll", isModalOpen);
   }
+
+  static calculateAndDisplayRoute(
+    directionsService: google.maps.DirectionsService,
+    directionsDisplay: google.maps.DirectionsRenderer,
+    origin: string,
+    destination: string,
+    destinationMarker: google.maps.Marker
+  ) {
+    directionsService.route(
+      {
+        origin,
+        destination,
+        avoidTolls: true,
+        avoidFerries: true,
+        avoidHighways: false,
+        provideRouteAlternatives: false,
+        travelMode: google.maps.TravelMode.WALKING,
+      },
+      function (response: any, status: any) {
+        if (status == google.maps.DirectionsStatus.OK) {
+          var route = response.routes[0].legs[0];
+
+          var latlng = new google.maps.LatLng(
+            route.end_location.lat(),
+            route.end_location.lng()
+          );
+
+          if (destinationMarker) {
+            destinationMarker.setPosition(latlng);
+          }
+
+          directionsDisplay.setOptions({
+            polylineOptions: {
+              strokeColor: "#52a2e7",
+              strokeOpacity: 0.5,
+              strokeWeight: 5,
+            },
+          });
+
+          // @ts-ignore
+          directionsDisplay.setDirections({ routes: [] });
+          directionsDisplay.setDirections(response);
+        } else {
+          // window.alert("Directions request failed due to " + status);
+        }
+      }
+    );
+  }
 }

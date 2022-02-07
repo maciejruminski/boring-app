@@ -1,5 +1,3 @@
-import styled from "styled-components";
-
 // Functions.
 import { useEffect } from "react";
 
@@ -9,41 +7,27 @@ import Helper from "../../../../controllers/Helper";
 // Context.
 import { useGlobalContext } from "../../../../context";
 
+// Styles.
+import {
+  SDetails,
+  SClose,
+  SNote,
+  SHeading,
+  SAddress,
+  SOpenNow,
+  SStars,
+  SStarsContainer,
+  SStar,
+  SButton,
+  SSecondButton,
+} from "./styles";
+
+// Icons.
+import StarIconPath from "../../../../images/star.svg";
+import closeIconPath from "../../../../images/close.svg";
+
 // Components.
-// import Map from "./Map";
-// import Actions from "../../../../controllers/Actions";
-
-const SDetails = styled.div<{ isModalOpen: boolean }>`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: ${({ isModalOpen }) => (isModalOpen ? "1" : "0")};
-  visibility: ${({ isModalOpen }) => (isModalOpen ? "visible" : "hidden")};
-  transform: ${({ isModalOpen }) => (isModalOpen ? "scale(1)" : "scale(1.02)")};
-  transition-duration: 0.3s;
-  transition-timing-function: ease-in;
-  background-color: black;
-  color: white;
-  z-index: 3;
-`;
-
-const STest = styled.div<{ isModalOpen: boolean }>`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: ${({ isModalOpen }) => (isModalOpen ? "1" : "0")};
-  visibility: ${({ isModalOpen }) => (isModalOpen ? "visible" : "hidden")};
-  /* transform: ${({ isModalOpen }) =>
-    isModalOpen ? "translateY(0)" : "translateY(-90%)"}; */
-  transition-duration: 0.5s;
-  background-color: black;
-  color: white;
-  z-index: 4;
-`;
+import Map from "./Map";
 
 export default function Details() {
   const {
@@ -60,8 +44,20 @@ export default function Details() {
     },
   } = useGlobalContext();
 
-  const { id, name, rating, website, isSavedAsHistoric } = currentPlace;
+  const {
+    id,
+    name,
+    rating,
+    website,
+    isSavedAsHistoric,
+    reviews,
+    openNow,
+    phone,
+    vicinity,
+    geometry: { location },
+  } = currentPlace;
 
+  const numberOfStars = [...new Array(5)];
   useEffect(
     () =>
       Helper.makeBodyUnscrollable(
@@ -70,38 +66,83 @@ export default function Details() {
     [isCurrentPlaceModalOpen]
   );
 
+  const Info = (): JSX.Element => {
+    return (
+      <>
+        <SClose
+          onClickHandler={setCurrentPlaceModalOff}
+          text="Submit"
+          icon={closeIconPath}
+        />
+        <SNote>Wybrano lokalizację:</SNote>
+        {name && <SHeading>{name}</SHeading>}
+        {vicinity && <SAddress>{vicinity}</SAddress>}
+        <SStars>
+          <SStarsContainer ratingWidth={rating * 20}>
+            {numberOfStars.map((el, key) => (
+              <SStar
+                src={StarIconPath}
+                aria-hidden="true"
+                alt="Ikona gwiazdki"
+                key={key}
+              />
+            ))}
+          </SStarsContainer>
+          <SStarsContainer ratingWidth={rating * 20}>
+            {numberOfStars.map((el, key) => (
+              <SStar
+                src={StarIconPath}
+                aria-hidden="true"
+                alt="Ikona gwiazdki"
+                key={key}
+              />
+            ))}
+          </SStarsContainer>
+        </SStars>
+        {openNow && <SOpenNow>Teraz Otwarte</SOpenNow>}
+        {website && (
+          <SNote>
+            Kliknij{" "}
+            <a href={website} target="_blank">
+              tutaj
+            </a>{" "}
+            aby przejść na stronę internetową.
+          </SNote>
+        )}
+      </>
+    );
+  };
+
+  const Buttons = (): JSX.Element => {
+    return (
+      <>
+        {isSavedAsHistoric ? (
+          <SButton
+            onClickHandler={() => removeHistoricPlace(id)}
+            text="Usuń lokację z historii"
+          />
+        ) : (
+          <SButton
+            onClickHandler={() => addHistoricPlace(currentPlace)}
+            text="Zapisz lokację w historii"
+          />
+        )}
+
+        {!isHistoricPlacesModalOpen && (
+          <SSecondButton
+            text="Losuj inne miejsce"
+            onClickHandler={() => getRandomPlaceDetails(places, id)}
+          />
+        )}
+      </>
+    );
+  };
+
   return (
     <SDetails isModalOpen={isCurrentPlaceModalOpen}>
-      <p>{name}</p>
-      <p>{rating}</p>
-      <p>{website}</p>
-
-      <button onClick={setCurrentPlaceModalOff}>X</button>
-
-      {/* <Map /> */}
-
-      <p>Czy zapisać lokację w historii?</p>
-      <button onClick={() => addHistoricPlace(currentPlace)}>Tak</button>
-
-      <button
-        onClick={() => {
-          // window.open('https://www.google.com/maps/dir/53.4614609,18.7250887,17/53.4614609,18.7272774/data=!3m1!4b1!4m2!4m1!3e2', '_blank');
-        }}
-      >
-        odpal trase na google map
-      </button>
-
-      {isSavedAsHistoric && (
-        <button onClick={() => removeHistoricPlace(id)}>
-          Usuń lokację z historii
-        </button>
-      )}
-
-      {/* {!isSavedAsHistoric && ( */}
-      <button onClick={() => getRandomPlaceDetails(places, id)}>
-        losuj inne miejsce
-      </button>
-      {/* )} */}
+      {isCurrentPlaceModalOpen && Info()}
+      <Map targetLocation={location} />
+      {isCurrentPlaceModalOpen && Buttons()}
     </SDetails>
   );
 }
