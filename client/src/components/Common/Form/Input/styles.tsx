@@ -29,6 +29,17 @@ const SContainer = styled.div<{
       ? "#98e792"
       : "#abc2d4"};
   } */
+
+  .icon {
+    transition-duration: 0.3s;
+    position: absolute;
+    right: 23px;
+    bottom: 17px;
+    width: 20px;
+    height: auto;
+    fill: ${({ isError, isSuccess }) =>
+      isError ? "#ff8282" : isSuccess ? "#98e792" : "#abc2d4"};
+  }
 `;
 
 const SLabel = styled.label<{ isActive: boolean }>`
@@ -47,21 +58,13 @@ const SErrors = styled.p`
   color: #ff8282;
   font-size: 14px;
   font-weight: 500;
-  margin: 0;
-  /* margin: -20px 0 50px; */
+  margin: 0 0 10px;
   line-height: 1.6;
   letter-spacing: 0.4px;
-  /* position: absolute;
-    top: 100%;
-    left: 0; */
-  /* opacity: 0; */
   height: 0;
   transition-duration: 0.3s;
   opacity: 0;
-
-  div {
-    transform: translateY(15px);
-  }
+  transform: translateY(14px);
 `;
 
 export { SContainer, SLabel, SInput, SErrors, Input };

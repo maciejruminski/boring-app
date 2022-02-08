@@ -33,6 +33,7 @@ export default forwardRef<HTMLInputElement>(({}, ref) => {
       defaultValue={keyword}
       id="keyword"
       onChangeHandler={setErrorHandler}
+      labelActivity={isKeyword}
       error={false}
       success={isKeyword}
       checkValidity={false}

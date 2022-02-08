@@ -41,7 +41,8 @@ export const Modal = () => css<{ isModalOpen: boolean }>`
   height: 100%;
   padding: 30px;
   z-index: 1;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
   opacity: ${({ isModalOpen }) => (isModalOpen ? "1" : "0")};
   visibility: ${({ isModalOpen }) => (isModalOpen ? "visible" : "hidden")};
   transform: ${({ isModalOpen }) => (isModalOpen ? "scale(1)" : "scale(1.02)")};
@@ -156,6 +157,6 @@ export const Heading = () => css`
   color: var(--textLight);
   font-weight: 500;
   font-size: 22px;
-  margin: 0;
+  margin: 0 0 -5px;
   line-height: 1.4;
 `;

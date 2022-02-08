@@ -8,7 +8,7 @@ export default function Button({
   icon,
   className,
 }: {
-  onClickHandler: React.MouseEventHandler<HTMLButtonElement>;
+  onClickHandler?: React.MouseEventHandler<HTMLButtonElement>;
   text: string;
   type?: "button" | "submit" | "reset";
   icon?: string;

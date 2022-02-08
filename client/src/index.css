@@ -29,6 +29,16 @@ p {
   color: var(--text);
 }
 
+p b {
+  font-weight: 500;
+  color: var(--textLight);
+}
+
+p a {
+  color: var(--primaryLight);
+  font-weight: 500;
+}
+
 :root {
   --polyfillBackground: #0c1025;
   --gradientBackgroundFrom: #0c143d;
@@ -39,6 +49,8 @@ p {
   --text: #abc2d4;
   --textLight: #ffffff;
   --textDark: #0c1025;
+  --success: #98e792;
+  --error: #ff9696;
   --borderRadius: 5px;
   --transitionDuration: 0.3s;
 }

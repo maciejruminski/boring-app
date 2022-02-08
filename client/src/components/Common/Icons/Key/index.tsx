@@ -12,7 +12,7 @@ export default function Key() {
       viewBox="0 0 836.127 836.127"
       enableBackground="new 0 0 836.127 836.127"
       xmlSpace="preserve"
-      className="key"
+      className="key icon"
     >
       <g>
         <path

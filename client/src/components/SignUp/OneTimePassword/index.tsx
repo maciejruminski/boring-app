@@ -1,89 +1,27 @@
-import styled from "styled-components";
-
 // Functions.
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 
 // Context.
 import { useGlobalContext } from "../../../context";
 
 // Components.
-import { Key, 
-  // Lock
- } from "../../Common/Icons";
+import { Key } from "../../Common/Icons";
+import Input from "../../Common/Form/Input";
 
+// Icons.
+import WarningIconPath from "../../../images/warning.svg";
+
+// Styles.
 import {
+  SOneTimePassword,
+  SLock,
   SForm,
-  SEmailContainer,
-  SLabel,
-  SEmail,
-  SErrors,
-  SSubmit,
+  SHeading,
+  SWarning,
+  SButton,
+  SSecondForm,
+  SSecondButton,
 } from "./styles";
-
-const SOneTimePassword = styled.div<{ isModalOpen: boolean }>`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  opacity: ${({ isModalOpen }) => (isModalOpen ? "1" : "0")};
-  transform: ${({ isModalOpen }) =>
-    isModalOpen ? "translateY(0)" : "translateY(-100%)"};
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-  background: linear-gradient(135deg, #131c50, #0c0e1a);
-  color: white;
-  padding: 60px 40px;
-  box-sizing: border-box;
-  /* display: none; */
-
-  h3 {
-    font-weight: 500;
-    font-size: 24px;
-    margin: auto 0 0;
-    color: #ffffff;
-    color: #abc2d4;
-    letter-spacing: 0.5px;
-  }
-
-  p {
-    margin: 17px 0 25px;
-    font-weight: 300;
-    font-size: 17px;
-    line-height: 1.5;
-    color: #abc2d4;
-    color: #ffffff;
-
-    b {
-      font-weight: 600;
-      font-family: inherit;
-    }
-
-    a {
-      color: #40a2f8;
-      font-weight: 400;
-      text-decoration: underline;
-    }
-  }
-
-  .alert {
-    font-size: 14px;
-    font-weight: 500;
-    color: #abc2d4;
-  }
-
-  .lock {
-    position: absolute;
-    top: 20px;
-    right: 100px;
-    transform: translateX(50%);
-    z-index: 0;
-    opacity: 0.1;
-    width: 600px;
-    height: auto;
-    fill: #0c3d68;
-  }
-`;
 
 export default function OneTimePassword() {
   const {
@@ -93,7 +31,6 @@ export default function OneTimePassword() {
     actions: { inputOnChange, verifyOneTimePassword, validateInput },
   } = useGlobalContext();
   const oneTimePasswordRef = useRef<HTMLInputElement>(null);
-  const errorRef = useRef<HTMLParagraphElement>(null);
 
   const handleFormSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -113,72 +50,59 @@ export default function OneTimePassword() {
     }
   };
 
-  useEffect(() => {
-    const error = errorRef.current;
-    const text = error?.children[0];
-    const height = text?.clientHeight;
-
-    if (error) {
-      error.style.height = height + "px";
-      error.style.opacity = "1";
-    }
-  }, [error, password]);
+  const isError = error ? true : false;
+  const isSuccess = !isError && password ? true : false;
+  const isLabelActive = isError || isSuccess ? true : false;
 
   return (
     <SOneTimePassword isModalOpen={true}>
-      <h3 className="register-heading">You are almost there!</h3>
+      <SHeading>You are almost there!</SHeading>
       <p>
         We sent a <b>One Time Password</b> to your email address at
         {email}.
       </p>
       <p>
         Please check your email (and the spam folder if necessary), enter the{" "}
-        <b>OTP</b> and click on login button. If you haven't received your
-        email, <a href="#hashToChange">click here to resend</a>.
+        <b>OTP</b> and click on login button.
       </p>
 
-      <p className="alert">
-        ! The <b>OTP</b> will expire in 15 minutes.
-      </p>
+      <SWarning>
+        <img
+          src={WarningIconPath}
+          aria-hidden="true"
+          alt="Ikona ostrzegawcza"
+        />
+        The OTP will expire in 15 minutes.
+      </SWarning>
 
       <SForm method="POST" onSubmit={handleFormSubmit} noValidate>
-        <SEmailContainer isError={!!error} isSuccess={!!(!error && password)}>
-          <SLabel isActive={!!(error || password)} htmlFor="signUpPassword">
-            Enter the password
-          </SLabel>
-          <SEmail
-            isError={!!error}
-            isSuccess={!!(!error && password)}
-            ref={oneTimePasswordRef}
-            onChange={inputOnChange}
-            type="text"
-            minLength={6}
-            maxLength={6}
-            name="password"
-            id="signUpPassword"
-            required
-            autoComplete="off"
-            autoCorrect="off"
-          />
-          <Key />
-        </SEmailContainer>
+        <Input
+          label="Enter the password"
+          defaultValue={password}
+          id="signUpPassword"
+          onChangeHandler={inputOnChange}
+          labelActivity={isLabelActive}
+          errorMessage={error}
+          error={isError}
+          success={isSuccess}
+          checkValidity={true}
+          required={true}
+          minLength={6}
+          maxLength={6}
+          ref={oneTimePasswordRef}
+          icon={<Key />}
+        />
 
-        {error && (
-          <SErrors ref={errorRef}>
-            <div>{error}</div>
-          </SErrors>
-        )}
-
-        <SSubmit type="submit" value="Login" />
+        <SButton type="submit" text="Login" />
       </SForm>
 
-      {/* <Lock /> */}
+      <SSecondForm method="POST" action="resend">
+        <SHeading>No email?</SHeading>
+        <p>If you haven't received your email, click here to resend.</p>
+        <SSecondButton type="submit" text="Resend One Time Password" />
+      </SSecondForm>
 
-      {/* <form method="POST" action="resend">
-        <p className="full">
-          <button type="submit">resend otp</button>
-        </p>
-      </form> */}
+      <SLock />
     </SOneTimePassword>
   );
 }

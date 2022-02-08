@@ -204,4 +204,25 @@ export default class Controller {
       }
     );
   }
+
+  static setInputErrorMessageHeight(errorMessage: HTMLParagraphElement): void {
+    const text = errorMessage?.children[0];
+    const height = text?.clientHeight;
+
+    if (errorMessage) {
+      errorMessage.style.height = height + "px";
+      errorMessage.style.opacity = "1";
+    }
+  }
+
+
+  static setLabelWidthAfterScaling(label: HTMLLabelElement): number {
+    let offsetWidth = label.offsetWidth;
+    offsetWidth = offsetWidth ? offsetWidth : 0;
+
+    const transformScaleMultiplier = 0.85;
+
+    return offsetWidth * transformScaleMultiplier;
+  };
+
 }

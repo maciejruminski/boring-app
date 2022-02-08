@@ -1,4 +1,4 @@
-export default function Lock() {
+export default function Lock({ className }: { className?: string }) {
   return (
     <svg
       version="1.1"
@@ -8,7 +8,7 @@ export default function Lock() {
       viewBox="0 0 330 330"
       enableBackground="new 0 0 330 330"
       xmlSpace="preserve"
-      className="lock"
+      className={className}
     >
       <g id="XMLID_486_">
         <path
