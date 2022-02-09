@@ -1,91 +1,47 @@
 export default class API {
-  static async addUserToDatabase(userUUID: string) {
-    const response = await fetch("/add-user", {
+  private static async request(url: string, body = {}) {
+    const response = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userUUID }),
+      body: JSON.stringify(body),
     });
 
     return await response.json();
   }
 
-  static async addFiltersToDatabase(filters: Filters, userUUID: string) {
-    const response = await fetch("/add-filters", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ filters, userUUID }),
-    });
+  static async addUser(userUUID: string) {
+    return await this.request("/add-user", { userUUID });
+  }
 
-    return await response.json();
+  static async addFilters(filters: Filters, userUUID: string) {
+    return await this.request("/add-filters", { filters, userUUID });
   }
 
   static async getFilters(userUUID: string) {
-    const response = await fetch("/get-filters", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userUUID }),
-    });
-
-    return await response.json();
+    return await this.request("/get-filters", { userUUID });
   }
 
-  static async addHistoricPlacesToDatabase(places: Place[], userUUID: string) {
-    const response = await fetch("/add-historic-place", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ places, userUUID }),
-    });
-
-    return await response.json();
+  static async addHistoricPlaces(places: Place[], userUUID: string) {
+    return await this.request("/add-historic-places", { places, userUUID });
   }
 
   static async getHistoricPlaces(userUUID: string) {
-    const response = await fetch("/get-historic-places", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userUUID }),
-    });
-
-    return await response.json();
-  }
-
-  static async verifyOneTimePassword(oneTimePassword: string) {
-    const response = await fetch("/verify-password", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ oneTimePassword }),
-    });
-
-    return await response.json();
+    return await this.request("/get-historic-places", { userUUID });
   }
 
   static async getPlaces(filters: Filters) {
-    const response = await fetch("/get-places", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ filters }),
-    });
-
-    return await response.json();
+    return await this.request("/get-places", { filters });
   }
 
-  static async getCurrentPlaceDetails(placeId: string) {
-    const response = await fetch("/get-place-details", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ placeId }),
-    });
+  static async getCurrentPlaceDetails(placeID: string) {
+    return await this.request("/get-place-details", { placeID });
+  }
 
-    return await response.json();
+  static async verifyOneTimePassword(oneTimePassword: string) {
+    return await this.request("/verify-password", { oneTimePassword });
   }
 
   static async sendPassword(email: string) {
-    const response = await fetch("/send-password", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    });
-
-    return await response.json();
+    return await this.request("/send-password", { email });
   }
 }
