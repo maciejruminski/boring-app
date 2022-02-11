@@ -2,18 +2,15 @@
 import styled from "styled-components";
 
 // Mixins.
-import { BodyBackground } from "../../Mixins";
+import { BodyBackground } from "../../../Mixins";
 
-
-
-const fitBusyToStyle = ({isBusy} : {isBusy: any})=>{
-  if(isBusy){
-    return `z-index:3; opacity:0.75;`
+const fitBusyToStyle = ({ isBusy }: { isBusy: boolean }) => {
+  if (isBusy) {
+    return `opacity:0.85;`;
   }
 
-  return `z-index:-1; opacity:0;`
-}
-
+  return `opacity:0;`;
+};
 
 const SSpinner = styled.div<{ isBusy: boolean }>`
   ${BodyBackground()};
@@ -22,12 +19,10 @@ const SSpinner = styled.div<{ isBusy: boolean }>`
   left: 0;
   width: 100%;
   height: 100%;
-  transition-duration: 0.2s;
-  transition-delay: 0.2s;
+  transition-duration: var(--spinnerTransitionDuration);
+  z-index: 3;
   ${fitBusyToStyle}
 `;
-
-
 
 const SSpinnerIcon = styled.div`
   position: fixed;
@@ -35,10 +30,10 @@ const SSpinnerIcon = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   color: var(--primary);
-  font-size: 6px;
+  font-size: 10px;
   margin: 0;
-  width: 1em;
-  height: 1em;
+  width: 1.1em;
+  height: 1.1em;
   border-radius: 50%;
   text-indent: -9999em;
   -webkit-animation: load 1s infinite linear;

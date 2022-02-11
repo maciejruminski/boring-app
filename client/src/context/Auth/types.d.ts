@@ -1,4 +1,5 @@
 interface IAuthState {
+  isBusy: boolean;
   isLoggedIn: boolean;
   signUp: {
     email: string;
@@ -12,6 +13,8 @@ interface IAuthState {
 }
 
 interface IAuthActions {
+  setBusyOn: () => void;
+  setBusyOff: () => void;
   setUserAuthenticationOn: () => void;
   setUserAuthenticationOff: () => void;
   setUserAuthenticationByLocalStorage: () => void;
@@ -29,6 +32,8 @@ interface IAuthActions {
 }
 
 type AuthActionTypes =
+  | "setBusyOn"
+  | "setBusyOff"
   | "setUserAuthenticationOn"
   | "setUserAuthenticationOff"
   | "setOneTimePassword"

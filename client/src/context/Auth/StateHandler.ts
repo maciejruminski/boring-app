@@ -1,4 +1,12 @@
 export default class StateHandler {
+  static setBusyOn({ state }: IAuthStateHandler) {
+    return { ...state, isBusy: true };
+  }
+
+  static setBusyOff({ state }: IAuthStateHandler) {
+    return { ...state, isBusy: false };
+  }
+
   static setUserAuthenticationOn({ state }: IAuthStateHandler) {
     return { ...state, isLoggedIn: true };
   }
@@ -43,11 +51,11 @@ export default class StateHandler {
   }
 
   static handlers = {
+    setBusyOn: StateHandler.setBusyOn,
+    setBusyOff: StateHandler.setBusyOff,
     setUserAuthenticationOn: StateHandler.setUserAuthenticationOn,
     setUserAuthenticationOff: StateHandler.setUserAuthenticationOff,
-
     setOneTimePasswordModalOn: StateHandler.setOneTimePasswordModalOn,
-
     setSignUpError: StateHandler.setSignUpError,
     setSignUpEmail: StateHandler.setSignUpEmail,
     setSignUpEmailAsSent: StateHandler.setSignUpEmailAsSent,

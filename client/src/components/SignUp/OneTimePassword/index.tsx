@@ -58,7 +58,8 @@ export default function OneTimePassword() {
   const isLabelActive = Boolean(isError || isSuccess);
 
   return (
-    <SOneTimePassword isModalOpen={isOneTimePasswordModalOpen}>
+    // <SOneTimePassword isModalOpen={isOneTimePasswordModalOpen}>
+    <SOneTimePassword isModalOpen={true}>
       <SHeading>You are almost there!</SHeading>
       <p>
         We sent a <b>One Time Password</b> to your email address at {email}.

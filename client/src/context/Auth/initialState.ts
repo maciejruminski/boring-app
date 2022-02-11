@@ -1,4 +1,5 @@
 const initialState: IAuthState = {
+  isBusy: false,
   isLoggedIn: false,
   signUp: {
     email: "",

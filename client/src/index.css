@@ -58,4 +58,5 @@ p a {
   --error: #ff9696;
   --borderRadius: 5px;
   --transitionDuration: 0.3s;
+  --spinnerTransitionDuration: 0.5s;
 }

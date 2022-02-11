@@ -13,6 +13,14 @@ export default class AuthActions {
     this.state = state;
   }
 
+  setBusyOn = (): void => {
+    this.dispatch({ type: "setBusyOn" });
+  };
+
+  setBusyOff = (): void => {
+    this.dispatch({ type: "setBusyOff" });
+  };
+
   setUserAuthenticationOn = (): void => {
     this.dispatch({ type: "setUserAuthenticationOn" });
   };
@@ -36,20 +44,24 @@ export default class AuthActions {
     oneTimePassword: string
   ): void => {
     evt.preventDefault();
+    this.setBusyOn();
 
-    // this.setBusyOn();
+    console.log("Verify!");
+
+
+    setTimeout(()=> {
+      this.setBusyOff();
+    }, 1000);
 
     // just for now
-    this.setUserAuthenticationOn();
+    // this.setUserAuthenticationOn();
 
-    Helper.verifyOneTimePassword(oneTimePassword).then((test: any) => {
-
-
-      setTimeout(() => {
-        this.setUserAuthenticationOn();
-        // this.setBusyOff();
-      }, 500);
-    });
+    // Helper.verifyOneTimePassword(oneTimePassword).then((test: any) => {
+    //   setTimeout(() => {
+    //     this.setUserAuthenticationOn();
+    //     // this.setBusyOff();
+    //   }, 500);
+    // });
   };
 
   setSignUpError = (error: string): void => {
@@ -121,6 +133,8 @@ export default class AuthActions {
 
   getAllActions = (): IAuthActions => {
     return {
+      setBusyOn: this.setBusyOn,
+      setBusyOff: this.setBusyOff,
       setUserAuthenticationOn: this.setUserAuthenticationOn,
       setUserAuthenticationOff: this.setUserAuthenticationOff,
       setUserAuthenticationByLocalStorage:

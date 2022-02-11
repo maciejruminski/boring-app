@@ -10,8 +10,6 @@ function App() {
     state: { isLoggedIn },
   } = useAuthContext();
 
-  //błąd
-
   if (isLoggedIn) {
     return <Dashboard />;
   }
