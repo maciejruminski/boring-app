@@ -2,7 +2,8 @@
 import { useEffect } from "react";
 
 // Context.
-import { useGlobalContext } from "../../../../context";
+import usePlacesContext from "../../../../context/Places/usePlacesContext";
+import useFiltersAndPlacesContext from "../../../../context/FiltersAndPlaces/useFiltersAndPlacesContext";
 
 // Components.
 import Place from "../Place";
@@ -13,35 +14,54 @@ import { SList, SListContainer, SButton } from "./styles";
 export default function List(): JSX.Element {
   const {
     state: {
-      places,
       isShowMorePlacesButtonVisible,
       numberOfPlacesToShowAtOnce,
       maximumNumberOfPlaces,
     },
     actions: {
-      getCurrentPlaceDetails,
+      setMaximumNumberOfPlaces,
       setNumberOfPlacesToShowAtOnce,
       resetNumberOfPlacesToShowAtOnce,
       setNumberOfPlacesButtonVisibility,
     },
-  } = useGlobalContext();
+  } = usePlacesContext();
+
+  const {
+    state: {
+      places,
+      // isShowMorePlacesButtonVisible,
+      // numberOfPlacesToShowAtOnce,
+      // maximumNumberOfPlaces,
+    },
+    actions: {
+      // setNumberOfPlacesToShowAtOnce,
+      // resetNumberOfPlacesToShowAtOnce,
+      // setNumberOfPlacesButtonVisibility,
+    },
+  } = useFiltersAndPlacesContext();
+
+  // console.log(maximumNumberOfPlaces);
 
   useEffect(
-    () => setNumberOfPlacesButtonVisibility(),
+    () => setNumberOfPlacesButtonVisibility(places),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [numberOfPlacesToShowAtOnce, maximumNumberOfPlaces]
   );
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => resetNumberOfPlacesToShowAtOnce(), [places]);
+  useEffect(() => {
+    resetNumberOfPlacesToShowAtOnce();
+    setMaximumNumberOfPlaces(places.length);
+  }, [places]);
 
-  if (Boolean(maximumNumberOfPlaces)) {
+  // if (Boolean(maximumNumberOfPlaces)) {
+  // do sprawdzenia
+  if (maximumNumberOfPlaces) {
     return (
       <SListContainer>
         <SList>
-          {places.map((place: any, i) => (
+          {places.map((place: any, i: number) => (
             <Place
               place={place}
-              getCurrentPlaceDetails={getCurrentPlaceDetails}
               key={place.id}
               isVisible={i < numberOfPlacesToShowAtOnce ? true : false}
             />

@@ -1,38 +1,22 @@
-// Functions.
-import { useEffect } from "react";
-
 // Components.
 import Dashboard from "./components/Dashboard";
 import SignUp from "./components/SignUp";
-import Spinner from "./components/Spinner";
 
-// Hooks.
-import { useGlobalContext } from "./context";
+// Context.
+import useAuthContext from "./context/Auth/useAuthContext";
 
 function App() {
   const {
     state: { isLoggedIn },
-    actions: {
-      setUserAuthenticationByLocalStorage,
-      setFiltersAndNewPlaces,
-      setHistoricPlaces,
-    },
-  } = useGlobalContext();
+  } = useAuthContext();
 
-  useEffect(() => {
-    setUserAuthenticationByLocalStorage();
-    setFiltersAndNewPlaces();
-    setHistoricPlaces();
+  //błąd
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  if (isLoggedIn) {
+    return <Dashboard />;
+  }
 
-  return (
-    <>
-      {isLoggedIn ? <Dashboard /> : <SignUp />}
-      <Spinner />
-    </>
-  );
+  return <SignUp />;
 }
 
 export default App;

@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import Helper from "../../../../controllers/Helper";
 
 // Context.
-import { useGlobalContext } from "../../../../context";
+import useHistoricPlacesContext from "../../../../context/HistoricPlaces/useHistoricPlacesContext";
 
 // Components.
 import Heading from "./Heading";
@@ -19,19 +19,20 @@ import closeIconPath from "../../../../images/close.svg";
 
 export default function HistoricPlaces(): JSX.Element {
   const {
-    state: {
-      historicPlaces,
-      modals: { isHistoricPlacesModalOpen },
-    },
-    actions: { setHistoricPlacesModalOff },
-  } = useGlobalContext();
+    state: { historicPlaces, isHistoricPlacesModalOpen },
+    actions: { setHistoricPlacesModalOff, setHistoricPlaces },
+  } = useHistoricPlacesContext();
+
+  useEffect(() => setHistoricPlaces(), []);
 
   useEffect(
     () => Helper.makeBodyUnscrollable(isHistoricPlacesModalOpen),
     [isHistoricPlacesModalOpen]
   );
 
-  if (Boolean(historicPlaces.length)) {
+  const historicPlacesExist = historicPlaces.length > 0;
+
+  if (historicPlacesExist) {
     return (
       <SModal isModalOpen={isHistoricPlacesModalOpen}>
         <SButton

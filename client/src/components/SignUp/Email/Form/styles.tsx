@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import Button from "../../../Common/Button";
 
 const SForm = styled.form``;
+
 
 const SEmailContainer = styled.div<{ isError: boolean; isSuccess: boolean }>`
   position: relative;
@@ -110,19 +112,8 @@ const SErrors = styled.p`
   }
 `;
 
-const SSubmit = styled.input`
-  appearance: none;
-  background-color: #1a7bcf;
-  border: none;
-  padding: 16px 28px;
-  font-size: 16px;
-  letter-spacing: 0.5px;
-  /* text-transform: uppercase; */
-  border-radius: 5px;
-  font-weight: 600;
-  color: white;
-  margin-top: 30px;
-  font-family: inherit;
+const SSubmit = styled(Button)`
+  margin-top: 20px;
 `;
 
 export { SForm, SEmailContainer, SLabel, SEmail, SErrors, SSubmit };

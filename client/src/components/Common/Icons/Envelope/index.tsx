@@ -10,7 +10,7 @@ export default function Envelope() {
       viewBox="0 0 512 512"
       enableBackground="new 0 0 512 512"
       xmlSpace="preserve"
-      className="envelope"
+      className="envelope icon"
     >
       <g>
         <g>

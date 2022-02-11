@@ -1,3 +1,4 @@
+// Libraries.
 import fetch from "node-fetch";
 
 class GooglePlacesController {
@@ -5,12 +6,10 @@ class GooglePlacesController {
     const { distance, keyword, type, maxprice, minprice, opennow } =
       req.body.filters;
 
-    const location = "53.47638527583563,18.762058310853494";
+    const location = "53.4813444,18.7613652";
 
     try {
-      const url = `https://maps.googleapis.com/maps/api/place/search/json?location=${location}&radius=${
-        distance ? distance : 5000
-      }&keyword=${keyword}${
+      const url = `https://maps.googleapis.com/maps/api/place/search/json?location=${location}&radius=${distance}&keyword=${keyword}${
         opennow ? "&opennow" : ""
       }&type=${type}&maxprice=${maxprice}&minprice=${minprice}&key=${
         process.env.GOOGLE_API_KEY
@@ -28,7 +27,6 @@ class GooglePlacesController {
               rating: data.rating,
               geometry: data.geometry,
               openNow: data?.opening_hours?.open_now,
-              isSavedAsHistoric: false,
             };
           });
 
@@ -40,10 +38,10 @@ class GooglePlacesController {
   }
 
   async getPlaceDetails(req, res, next) {
-    const { placeId } = req.body;
+    const { placeID } = req.body;
 
     try {
-      const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${process.env.GOOGLE_API_KEY}`;
+      const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeID}&key=${process.env.GOOGLE_API_KEY}`;
 
       await fetch(url, {
         method: "GET",

@@ -2,7 +2,7 @@
 import { forwardRef } from "react";
 
 // Context.
-import { useGlobalContext } from "../../../../context";
+import useFiltersAndPlacesContext from "../../../../context/FiltersAndPlaces/useFiltersAndPlacesContext";
 
 // Components.
 import Select from "../../../Common/Form/Select";
@@ -14,7 +14,7 @@ export default forwardRef<HTMLSelectElement>(
       state: {
         filters: { distance },
       },
-    } = useGlobalContext();
+    } = useFiltersAndPlacesContext();
 
     const distances = {
       "300": "300m",

@@ -2,6 +2,10 @@
 import { google } from "googleapis";
 import { Request, Response } from "express";
 
+
+
+
+
 class GoogleSheetsController {
   getClientValues() {
     const JwtClient = new google.auth.JWT(
@@ -35,7 +39,7 @@ class GoogleSheetsController {
     const { userUUID }: { userUUID: string } = req.body;
     const clientData = {
       spreadsheetId: process.env.SPREADSHEETS_ID,
-      range: "Sheet1!A2:Z1000",
+      range: "Sheet1!A2",
       valueInputOption: "USER_ENTERED",
       resource: {
         values: [[userUUID]],
@@ -80,10 +84,11 @@ class GoogleSheetsController {
     };
 
     const filters = await this.getClientValues().get(clientData);
+    const filtersValues = filters.data.values;
 
     res.status(200).json({
       status: 200,
-      filters: filters.data.values[0][0],
+      filters: filtersValues ? filters.data.values[0][0] : {},
     });
   }
 
@@ -117,10 +122,13 @@ class GoogleSheetsController {
     };
 
     const historicPlaces = await this.getClientValues().get(clientData);
+    const historicPlacesValues = historicPlaces.data.values;
+
+    console.log('@@@@', historicPlacesValues);
 
     res.status(200).json({
       status: 200,
-      historicPlaces: historicPlaces.data.values[0],
+      historicPlaces: historicPlacesValues ? historicPlacesValues[0] : [],
     });
   }
 }

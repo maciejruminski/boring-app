@@ -2,7 +2,7 @@
 import { forwardRef, useState, useEffect } from "react";
 
 // Context.
-import { useGlobalContext } from "../../../../context";
+import useFiltersAndPlacesContext from "../../../../context/FiltersAndPlaces/useFiltersAndPlacesContext";
 
 // Components.
 import Input from "../../../Common/Form/Input";
@@ -13,7 +13,7 @@ export default forwardRef<HTMLInputElement>(({}, ref) => {
     state: {
       filters: { keyword },
     },
-  } = useGlobalContext();
+  } = useFiltersAndPlacesContext();
 
   const [isKeyword, setIsKeyword] = useState(keyword ? true : false);
 

@@ -13,23 +13,6 @@ const SContainer = styled.div<{
 }>`
   ${InputContainer()};
 
-  /* .envelope {
-    transition-duration: 0.3s;
-    position: absolute;
-    right: 23px;
-    bottom: 17px;
-    width: 20px;
-    height: auto;
-    fill: ${({ isError, isSuccess, checkValidity }) =>
-    !checkValidity
-      ? "#abc2d4"
-      : isError
-      ? "#ff8282"
-      : isSuccess
-      ? "#98e792"
-      : "#abc2d4"};
-  } */
-
   .icon {
     transition-duration: 0.3s;
     position: absolute;

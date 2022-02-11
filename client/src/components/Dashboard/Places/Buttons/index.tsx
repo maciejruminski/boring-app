@@ -1,18 +1,32 @@
+// Controllers.
+import Helper from "../../../../controllers/Helper";
+
 // Context.
-import { useGlobalContext } from "../../../../context";
+import usePlacesContext from "../../../../context/Places/usePlacesContext";
+import useHistoricPlacesContext from "../../../../context/HistoricPlaces/useHistoricPlacesContext";
+import useFiltersAndPlacesContext from "../../../../context/FiltersAndPlaces/useFiltersAndPlacesContext";
+import useDetailsContext from "../../../../context/Details/useDetailsContext";
 
 // Styles.
 import { SNote, SButton, SSecondButton } from "./styles";
 
 export default function Places() {
   const {
-    state: {
-      historicPlaces,
-      maximumNumberOfPlaces,
-      currentPlace: { id },
-    },
-    actions: { getRandomPlaceDetails, setHistoricPlacesModalOn },
-  } = useGlobalContext();
+    state: { places },
+  } = useFiltersAndPlacesContext();
+
+  const {
+    actions: { showDetails },
+  } = useDetailsContext();
+
+  const {
+    state: { maximumNumberOfPlaces },
+  } = usePlacesContext();
+
+  const {
+    state: { historicPlaces },
+    actions: { setHistoricPlacesModalOn },
+  } = useHistoricPlacesContext();
 
   const createNote = () => {
     let note =
@@ -36,6 +50,8 @@ export default function Places() {
 
   let note = createNote();
 
+  const randomPlace = Helper.getRandomPlace(places, "");
+
   return (
     <>
       <SNote>{note}</SNote>
@@ -48,7 +64,7 @@ export default function Places() {
 
       {maximumNumberOfPlaces > 1 && (
         <SSecondButton
-          onClickHandler={() => getRandomPlaceDetails(id)}
+          onClickHandler={() => showDetails(randomPlace)}
           text="Wybierz losowe miejsce"
         />
       )}

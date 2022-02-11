@@ -1,5 +1,5 @@
 // Context.
-import { useGlobalContext } from "../../../../../context";
+import useHistoricPlacesContext from "../../../../../context/HistoricPlaces/useHistoricPlacesContext";
 
 // Styles.
 import { SHeading, SNote, SSmallNote } from "./styles";
@@ -7,7 +7,7 @@ import { SHeading, SNote, SSmallNote } from "./styles";
 export default function Heading() {
   const {
     state: { historicPlaces },
-  } = useGlobalContext();
+  } = useHistoricPlacesContext();
 
   return (
     <>

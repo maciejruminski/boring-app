@@ -1,5 +1,5 @@
 // Context.
-import { useGlobalContext } from "../../../../context";
+import { usePlacesContext } from "../../../../context/Places";
 
 // Styles.
 import { SHeading, SSmallNote, SNote } from "./styles";
@@ -7,7 +7,7 @@ import { SHeading, SSmallNote, SNote } from "./styles";
 export default function Heading() {
   const {
     state: { maximumNumberOfPlaces },
-  } = useGlobalContext();
+  } = usePlacesContext();
 
   return (
     <>

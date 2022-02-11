@@ -1,20 +1,42 @@
+// Libraries.
+import { google } from "googleapis";
+import { Request, Response } from "express";
+
 import nodemailer from "nodemailer";
+import { generate } from "generate-password"; // https://www.npmjs.com/package/generate-password
 import { v4 as uuidv4 } from "uuid";
 
-// var generatedOneTimePassword = Math.random();
-var generatedOneTimePassword = "111111"; // https://www.npmjs.com/package/generate-password
-// generatedOneTimePassword = generatedOneTimePassword * 1000000;
-// generatedOneTimePassword = parseInt(generatedOneTimePassword);
+const generatedOneTimePassword = generate({
+  length: 6,
+  numbers: true,
+  symbols: false,
+  lowercase: false,
+  uppercase: false,
+});
 
 var email;
 
 let transporter: any;
 
 class OneTimePasswordController {
+  // getClientValues() {
+  //   const JwtClient = new google.auth.JWT(
+  //     process.env.SERVICEACCOUNT_EMAIL,
+  //     null,
+  //     process.env.SERVICEACCOUNT_PRIVATE_KEY,
+  //     ["https://www.googleapis.com/auth/spreadsheets"],
+  //     null
+  //   );
+
+  //   const client = google.sheets({ version: "v4", auth: JwtClient });
+
+  //   return client.spreadsheets.values;
+  // }
+
   send(req, res) {
     email = req.body.email;
 
-     transporter = nodemailer.createTransport({
+    transporter = nodemailer.createTransport({
       host: process.env.NODEMAILER_HOST,
       port: process.env.NODEMAILER_PORT,
       secure: true,
@@ -25,7 +47,6 @@ class OneTimePasswordController {
         pass: process.env.NODEMAILER_AUTH_PASS,
       },
     });
-
 
     // send mail with defined transport object
     var mailOptions = {
@@ -39,7 +60,6 @@ class OneTimePasswordController {
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
-
       if (error) {
         return console.log(error);
       }
@@ -75,25 +95,27 @@ class OneTimePasswordController {
   async verify(req, res) {
     const { oneTimePassword } = req.body;
 
-    const oneTimePasswordIsEmpty = oneTimePassword === "";
+    // const oneTimePasswordIsEmpty = oneTimePassword === "";
 
-    if (oneTimePasswordIsEmpty) {
-      return res.json({ message: "Hasło nie może być puste" });
-    }
+    // if (oneTimePasswordIsEmpty) {
+    //   return res.json({ message: "Hasło nie może być puste" });
+    // }
 
-    const oneTimePasswordIsInvalid =
-      oneTimePassword !== generatedOneTimePassword;
+    // const oneTimePasswordIsInvalid =
+    //   oneTimePassword !== generatedOneTimePassword;
 
-    if (oneTimePasswordIsInvalid) {
-      return res.json({ message: "Hasło jest niepoprawne" });
-    }
+    // if (oneTimePasswordIsInvalid) {
+    //   return res.json({ message: "Hasło jest niepoprawne" });
+    // }
 
+
+    // oneTimePassword === generatedOneTimePassword
 
     const uuid = uuidv4();
 
     // await client.spreadsheets.values.append({
-    //   spreadsheetId, //spreadsheet id
-    //   range: "Sheet1!A2:Z1000", //sheet name and range of cells
+    //   spreadsheetId: process.env.SPREADSHEETS_ID,
+    //   range: "Sheet1!A2", //sheet name and range of cells
     //   valueInputOption: "USER_ENTERED", // The information will be passed according to what the usere passes in as date, number or text
     //   resource: {
     //     values: [[uuid]],

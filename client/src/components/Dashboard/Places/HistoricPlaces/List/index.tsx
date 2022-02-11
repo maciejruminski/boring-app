@@ -1,5 +1,5 @@
 // Context.
-import { useGlobalContext } from "../../../../../context";
+import { useHistoricPlacesContext } from "../../../../../context/HistoricPlaces";
 
 // Components.
 import Place from "../../Place";
@@ -10,20 +10,14 @@ import { SList, SListContainer } from "./styles";
 export default function List(): JSX.Element {
   const {
     state: { historicPlaces },
-    actions: { getCurrentPlaceDetails },
-  } = useGlobalContext();
+  } = useHistoricPlacesContext();
 
   if (historicPlaces.length) {
     return (
       <SListContainer>
         <SList>
           {historicPlaces.map((place: any) => (
-            <Place
-              place={place}
-              getCurrentPlaceDetails={getCurrentPlaceDetails}
-              key={place.id}
-              isVisible={true}
-            />
+            <Place place={place} key={place.id} isVisible={true} />
           ))}
         </SList>
       </SListContainer>

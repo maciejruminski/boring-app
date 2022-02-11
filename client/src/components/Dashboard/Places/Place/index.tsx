@@ -1,3 +1,6 @@
+// Context.
+import useDetailsContext from "../../../../context/Details/useDetailsContext";
+
 // Styles.
 import {
   SPlace,
@@ -15,17 +18,16 @@ import {
 import StarIconPath from "../../../../images/star.svg";
 import ArrowIconPath from "../../../../images/right-arrow.svg";
 
-export default function Place({
-  place,
-  getCurrentPlaceDetails,
-  isVisible,
-}: any): JSX.Element {
+export default function Place({ place, isVisible }: any): JSX.Element {
   const { name, rating } = place;
   const numberOfStars = [...new Array(5)];
+  const {
+    actions: { showDetails },
+  } = useDetailsContext();
 
   return (
     <SPlace isVisible={isVisible}>
-      <SButton onClick={() => getCurrentPlaceDetails(place)}>
+      <SButton onClick={() => showDetails(place)}>
         <SName>{name}</SName>
         <SBottom>
           <SStars>

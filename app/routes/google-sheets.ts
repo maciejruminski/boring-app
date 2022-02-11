@@ -4,7 +4,10 @@ import GoogleSheetsController from "../controllers/GoogleSheetsController";
 const router = express.Router();
 
 // Users.
-router.post("/add-user", GoogleSheetsController.addUser);
+router.post(
+  "/add-user",
+  GoogleSheetsController.addUser.bind(GoogleSheetsController)
+);
 
 // Filters.
 router.post(
@@ -18,7 +21,7 @@ router.post(
 
 // Historic places.
 router.post(
-  "/add-historic-place",
+  "/add-historic-places",
   GoogleSheetsController.addHistoricPlace.bind(GoogleSheetsController)
 );
 

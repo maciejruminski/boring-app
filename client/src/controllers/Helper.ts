@@ -7,8 +7,8 @@ export default class Controller {
     LocalStorage.setUserUUID(userUUID);
     LocalStorage.setUserAuthentication();
 
-    // const response = await API.addUserToDatabase(userUUID);
-    await API.addUserToDatabase(userUUID);
+    // const response = await API.addUser(userUUID);
+    await API.addUser(userUUID);
   }
 
   static async verifyOneTimePassword(oneTimePassword: string) {
@@ -59,10 +59,7 @@ export default class Controller {
     const userUUID = LocalStorage.getUserUUID();
     if (userUUID) {
       LocalStorage.setHistoricPlaces(historicPlaces);
-      const response = await API.addHistoricPlacesToDatabase(
-        historicPlaces,
-        userUUID
-      );
+      const response = await API.addHistoricPlaces(historicPlaces, userUUID);
 
       const statusIsNotOk = response.status !== 200;
 
@@ -81,6 +78,8 @@ export default class Controller {
   static async sendPassword(email: string) {
     const response = await API.sendPassword(email);
     const statusIsNotOk = response.status !== 200;
+
+    console.log(response);
 
     if (statusIsNotOk) {
       return false;
@@ -127,22 +126,6 @@ export default class Controller {
     return { website, reviews, vicinity, phone: formatted_phone_number };
   }
 
-  static setAsHistoricIfPossible(
-    placeWithDetails: PlaceWithDetails,
-    historicPlaces: Places
-  ): PlaceWithDetails {
-    const historicPlace = this.getPlaceById(
-      historicPlaces,
-      placeWithDetails.id
-    );
-
-    if (historicPlace) {
-      placeWithDetails.isSavedAsHistoric = true;
-    }
-
-    return placeWithDetails;
-  }
-
   static formatDistance(distance: string): string {
     const number = Number(distance);
 
@@ -157,54 +140,6 @@ export default class Controller {
     document.body.classList.toggle("no-scroll", isModalOpen);
   }
 
-  static calculateAndDisplayRoute(
-    directionsService: google.maps.DirectionsService,
-    directionsDisplay: google.maps.DirectionsRenderer,
-    origin: string,
-    destination: string,
-    destinationMarker: google.maps.Marker
-  ) {
-    directionsService.route(
-      {
-        origin,
-        destination,
-        avoidTolls: true,
-        avoidFerries: true,
-        avoidHighways: false,
-        provideRouteAlternatives: false,
-        travelMode: google.maps.TravelMode.WALKING,
-      },
-      function (response: any, status: any) {
-        if (status === google.maps.DirectionsStatus.OK) {
-          var route = response.routes[0].legs[0];
-
-          var latlng = new google.maps.LatLng(
-            route.end_location.lat(),
-            route.end_location.lng()
-          );
-
-          if (destinationMarker) {
-            destinationMarker.setPosition(latlng);
-          }
-
-          directionsDisplay.setOptions({
-            polylineOptions: {
-              strokeColor: "#52a2e7",
-              strokeOpacity: 0.5,
-              strokeWeight: 5,
-            },
-          });
-
-          // @ts-ignore
-          directionsDisplay.setDirections({ routes: [] });
-          directionsDisplay.setDirections(response);
-        } else {
-          // window.alert("Directions request failed due to " + status);
-        }
-      }
-    );
-  }
-
   static setInputErrorMessageHeight(errorMessage: HTMLParagraphElement): void {
     const text = errorMessage?.children[0];
     const height = text?.clientHeight;
@@ -215,7 +150,6 @@ export default class Controller {
     }
   }
 
-
   static setLabelWidthAfterScaling(label: HTMLLabelElement): number {
     let offsetWidth = label.offsetWidth;
     offsetWidth = offsetWidth ? offsetWidth : 0;
@@ -223,6 +157,5 @@ export default class Controller {
     const transformScaleMultiplier = 0.85;
 
     return offsetWidth * transformScaleMultiplier;
-  };
-
+  }
 }

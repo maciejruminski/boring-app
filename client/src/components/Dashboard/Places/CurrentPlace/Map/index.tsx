@@ -2,33 +2,25 @@
 import { useEffect, useRef } from "react";
 
 // Controllers.
-import Helper from "../../../../../controllers/Helper";
+import GoogleMap from "../../../../../controllers/GoogleMap/GoogleMap";
 
 // Styles.
 import { SMap, SMapText, SButton } from "./styles";
 
 // Context.
-import { useGlobalContext } from "../../../../../context";
+import { useDetailsContext } from "../../../../../context/Details";
 
-export default function Map({
-  targetLocation,
-}: {
-  targetLocation: any;
-}): JSX.Element {
+let map: GoogleMap;
+
+export default function Map(): JSX.Element {
   const {
     state: {
-      map: {
-        map,
-        origin,
-        directionsService,
-        directionsDisplay,
-        destinationMarker,
-        googleAppLink,
+      currentPlace: {
+        geometry: { location },
       },
-      modals: { isCurrentPlaceModalOpen },
+      isCurrentPlaceModalOpen,
     },
-    actions: { setCurrentPlaceGoogleAppLink, initializeMap },
-  } = useGlobalContext();
+  } = useDetailsContext();
 
   const geoIsNotSupported = !navigator.geolocation;
 
@@ -39,54 +31,30 @@ export default function Map({
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!map) {
-      initializeMap(ref);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ref]);
-
-  useEffect(() => {
-    if (origin) {
-      setCurrentPlaceGoogleAppLink(
-        targetLocation.lat,
-        targetLocation.lng,
-        origin?.lat(),
-        origin?.lng()
-      );
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [targetLocation]);
+    map = new GoogleMap(ref);
+  }, []);
 
   useEffect(() => {
     if (isCurrentPlaceModalOpen) {
-      if (
-        directionsService &&
-        directionsDisplay &&
-        origin &&
-        destinationMarker
-      ) {
-        Helper.calculateAndDisplayRoute(
-          directionsService,
-          directionsDisplay,
-          origin.lat() + "," + origin.lng(),
-          targetLocation.lat + "," + targetLocation.lng,
-          destinationMarker
-        );
-      }
+      map.createRoute(`${location.lat},${location.lng}`);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isCurrentPlaceModalOpen, targetLocation]);
+  }, [isCurrentPlaceModalOpen, location]);
 
   return (
     <>
       <SMap ref={ref}>
         <SMapText>Trwa wczytywanie mapy</SMapText>
       </SMap>
-
       {isCurrentPlaceModalOpen && (
         <SButton
           text="Odpal trasę na Google Map"
-          onClickHandler={() => window.open(googleAppLink, "_blank")}
+          onClickHandler={() =>
+            window.open(
+              map.createGoogleMapLink(`${location.lat},${location.lng}`),
+              "_blank"
+            )
+          }
         />
       )}
     </>

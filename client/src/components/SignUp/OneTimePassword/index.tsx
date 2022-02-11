@@ -2,7 +2,7 @@
 import { useRef } from "react";
 
 // Context.
-import { useGlobalContext } from "../../../context";
+import useAuthContext from "../../../context/Auth/useAuthContext";
 
 // Components.
 import { Key } from "../../Common/Icons";
@@ -27,9 +27,11 @@ export default function OneTimePassword() {
   const {
     state: {
       signUp: { email, password, error },
+      modals: { isOneTimePasswordModalOpen },
     },
     actions: { inputOnChange, verifyOneTimePassword, validateInput },
-  } = useGlobalContext();
+  } = useAuthContext();
+
   const oneTimePasswordRef = useRef<HTMLInputElement>(null);
 
   const handleFormSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
@@ -50,16 +52,16 @@ export default function OneTimePassword() {
     }
   };
 
-  const isError = error ? true : false;
-  const isSuccess = !isError && password ? true : false;
-  const isLabelActive = isError || isSuccess ? true : false;
+  // Input musi sprawdzac sam z siebie czy jest error czy nie
+  const isError = Boolean(error);
+  const isSuccess = Boolean(!isError && password);
+  const isLabelActive = Boolean(isError || isSuccess);
 
   return (
-    <SOneTimePassword isModalOpen={true}>
+    <SOneTimePassword isModalOpen={isOneTimePasswordModalOpen}>
       <SHeading>You are almost there!</SHeading>
       <p>
-        We sent a <b>One Time Password</b> to your email address at
-        {email}.
+        We sent a <b>One Time Password</b> to your email address at {email}.
       </p>
       <p>
         Please check your email (and the spam folder if necessary), enter the{" "}

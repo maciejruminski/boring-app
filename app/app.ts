@@ -3,9 +3,11 @@ import express from 'express';
 import dotenv from "dotenv";
 
 // Routes.
-import oneTimePasswordRouter from "./routes/one-time-password";
+// import {oneTimePasswordRouter} from "./routes/one-time-password";
+import oneTimePasswordRouter from "./routes/google-sheets";
 import googleSheetsRouter from "./routes/google-sheets";
 import googlePlacesRouter from "./routes/google-places";
+// import { googlePlacesRouter,... }from "./routes";
 
 // Environment variables.
 dotenv.config();

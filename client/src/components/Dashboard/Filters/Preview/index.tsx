@@ -2,16 +2,17 @@
 import Helper from "../../../../controllers/Helper";
 
 // Context.
-import { useGlobalContext } from "../../../../context";
+import useFiltersContext from "../../../../context/Filters/useFiltersContext";
+import useFiltersAndPlacesContext from "../../../../context/FiltersAndPlaces/useFiltersAndPlacesContext";
 
 // Components.
-import Heading from "./Heading";
 import Filter from "./Filter";
 
 // Styles.
 import {
   SContainer,
   SFiltersHeader,
+  SHeading,
   SFiltersContainer,
   SButton,
 } from "./styles";
@@ -28,15 +29,18 @@ export default function Preview() {
     state: {
       filters: { distance, keyword, type, minPrice, maxPrice, openNow },
     },
+  } = useFiltersAndPlacesContext();
+
+  const {
     actions: { setFiltersModalOn },
-  } = useGlobalContext();
+  } = useFiltersContext();
 
   const formattedDistance = Helper.formatDistance(distance);
 
   return (
     <SContainer>
       <SFiltersHeader>
-        <Heading />
+        <SHeading>Filtry</SHeading>;
         <SButton
           onClickHandler={setFiltersModalOn}
           text="Pokaż filtry"

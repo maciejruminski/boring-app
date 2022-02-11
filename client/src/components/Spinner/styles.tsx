@@ -4,6 +4,17 @@ import styled from "styled-components";
 // Mixins.
 import { BodyBackground } from "../../Mixins";
 
+
+
+const fitBusyToStyle = ({isBusy} : {isBusy: any})=>{
+  if(isBusy){
+    return `z-index:3; opacity:0.75;`
+  }
+
+  return `z-index:-1; opacity:0;`
+}
+
+
 const SSpinner = styled.div<{ isBusy: boolean }>`
   ${BodyBackground()};
   position: fixed;
@@ -13,9 +24,10 @@ const SSpinner = styled.div<{ isBusy: boolean }>`
   height: 100%;
   transition-duration: 0.2s;
   transition-delay: 0.2s;
-  z-index: ${({ isBusy }) => (isBusy ? "3" : "-1")};
-  opacity: ${({ isBusy }) => (isBusy ? "0.75" : "0")};
+  ${fitBusyToStyle}
 `;
+
+
 
 const SSpinnerIcon = styled.div`
   position: fixed;

@@ -2,7 +2,7 @@
 import { forwardRef } from "react";
 
 // Context.
-import { useGlobalContext } from "../../../../context";
+import useFiltersAndPlacesContext from "../../../../context/FiltersAndPlaces/useFiltersAndPlacesContext";
 
 // Components.
 import Checkbox from "../../../Common/Form/Checkbox";
@@ -13,7 +13,7 @@ export default forwardRef<HTMLInputElement>(({}, ref) => {
     state: {
       filters: { openNow },
     },
-  } = useGlobalContext();
+  } = useFiltersAndPlacesContext();
 
   return (
     <Checkbox
