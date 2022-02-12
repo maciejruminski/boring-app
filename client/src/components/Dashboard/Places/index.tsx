@@ -17,7 +17,7 @@ export default function Places() {
         <List />
         <HistoricPlacesContextProvider>
           <HistoricPlaces />
-          <CurrentPlace />
+          {/* <CurrentPlace /> */}
           <Buttons />
         </HistoricPlacesContextProvider>
       </DetailsContextProvider>

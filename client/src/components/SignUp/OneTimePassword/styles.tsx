@@ -9,9 +9,22 @@ import Button from "../../Common/Button";
 import { Lock } from "../../Common/Icons";
 
 // Styles.
+const fitFadingOutToStyle = ({ isFadingOut }: { isFadingOut: boolean }) => {
+  if (isFadingOut) {
+    return `opacity:0; transform: scale(1.02);`;
+  }
+
+  return `opacity:1;`;
+};
+
 const SOneTimePassword = styled.div<{ isModalOpen: boolean }>`
   ${Modal()};
   z-index: 2;
+`;
+
+const SOneTimePasswordContainer = styled.div<{ isFadingOut: boolean }>`
+  ${fitFadingOutToStyle}
+  transition-duration: var(--transitionDuration);
 `;
 
 const SLock = styled(Lock)`
@@ -75,6 +88,7 @@ const SSecondButton = styled(SButton)`
 
 export {
   SOneTimePassword,
+  SOneTimePasswordContainer,
   SLock,
   SForm,
   SHeading,

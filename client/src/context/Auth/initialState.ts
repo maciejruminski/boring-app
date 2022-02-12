@@ -7,6 +7,7 @@ const initialState: IAuthState = {
     error: "",
     isSent: false,
   },
+  isFadingOut: false,
   modals: {
     isOneTimePasswordModalOpen: false,
   },

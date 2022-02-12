@@ -29,6 +29,10 @@ export default class AuthActions {
     this.dispatch({ type: "setUserAuthenticationOff" });
   };
 
+  setFadingOutOn = (): void => {
+    this.dispatch({ type: "setFadingOutOn" });
+  };
+
   setUserAuthenticationByLocalStorage = (): void => {
     LocalStorage.getUserAuthentication()
       ? this.setUserAuthenticationOn()
@@ -39,29 +43,37 @@ export default class AuthActions {
     this.dispatch({ type: "setOneTimePasswordModalOn" });
   };
 
-  verifyOneTimePassword = (
+  verifyOneTimePassword = async (
     evt: React.FormEvent<HTMLFormElement>,
     oneTimePassword: string
-  ): void => {
+  ): Promise<void> => {
     evt.preventDefault();
     this.setBusyOn();
 
-    console.log("Verify!");
+    let response = await API.verifyOneTimePassword(oneTimePassword);
 
-
-    setTimeout(()=> {
+    if (Helper.statusIsNotOk(response.status)) {
+      this.setSignUpError(response.message);
       this.setBusyOff();
-    }, 1000);
+      return;
+    }
 
-    // just for now
-    // this.setUserAuthenticationOn();
+    response = await API.addUser(response.uuid);
 
-    // Helper.verifyOneTimePassword(oneTimePassword).then((test: any) => {
-    //   setTimeout(() => {
-    //     this.setUserAuthenticationOn();
-    //     // this.setBusyOff();
-    //   }, 500);
-    // });
+    if (Helper.statusIsNotOk(response.status)) {
+      this.setBusyOff();
+      return;
+    }
+
+    // LocalStorage.setUserAuthentication();
+    // LocalStorage.setUserUUID(response.uuid);
+
+    this.setFadingOutOn();
+    this.setBusyOff();
+
+    const fadingOutTime = 300;
+
+    setTimeout(this.setUserAuthenticationOn, fadingOutTime);
   };
 
   setSignUpError = (error: string): void => {
@@ -137,6 +149,7 @@ export default class AuthActions {
       setBusyOff: this.setBusyOff,
       setUserAuthenticationOn: this.setUserAuthenticationOn,
       setUserAuthenticationOff: this.setUserAuthenticationOff,
+      setFadingOutOn: this.setFadingOutOn,
       setUserAuthenticationByLocalStorage:
         this.setUserAuthenticationByLocalStorage,
       verifyOneTimePassword: this.verifyOneTimePassword,

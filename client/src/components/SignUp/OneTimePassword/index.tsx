@@ -14,6 +14,7 @@ import WarningIconPath from "../../../images/warning.svg";
 // Styles.
 import {
   SOneTimePassword,
+  SOneTimePasswordContainer,
   SLock,
   SForm,
   SHeading,
@@ -28,6 +29,7 @@ export default function OneTimePassword() {
     state: {
       signUp: { email, password, error },
       modals: { isOneTimePasswordModalOpen },
+      isFadingOut,
     },
     actions: { inputOnChange, verifyOneTimePassword, validateInput },
   } = useAuthContext();
@@ -40,13 +42,13 @@ export default function OneTimePassword() {
     const oneTimePassword = oneTimePasswordRef.current;
 
     if (oneTimePassword) {
-      const emailIsNotValid: boolean = !validateInput(oneTimePassword);
+      // const emailIsNotValid: boolean = !validateInput(oneTimePassword);
 
-      if (emailIsNotValid) {
-        oneTimePassword.focus();
+      // if (emailIsNotValid) {
+      //   oneTimePassword.focus();
 
-        return;
-      }
+      //   return;
+      // }
 
       verifyOneTimePassword(evt, oneTimePassword.value);
     }
@@ -60,52 +62,54 @@ export default function OneTimePassword() {
   return (
     // <SOneTimePassword isModalOpen={isOneTimePasswordModalOpen}>
     <SOneTimePassword isModalOpen={true}>
-      <SHeading>You are almost there!</SHeading>
-      <p>
-        We sent a <b>One Time Password</b> to your email address at {email}.
-      </p>
-      <p>
-        Please check your email (and the spam folder if necessary), enter the{" "}
-        <b>OTP</b> and click on login button.
-      </p>
+      <SOneTimePasswordContainer isFadingOut={isFadingOut}>
+        <SHeading>You are almost there!</SHeading>
+        <p>
+          We sent a <b>One Time Password</b> to your email address at {email}.
+        </p>
+        <p>
+          Please check your email (and the spam folder if necessary), enter the{" "}
+          <b>OTP</b> and click on login button.
+        </p>
 
-      <SWarning>
-        <img
-          src={WarningIconPath}
-          aria-hidden="true"
-          alt="Ikona ostrzegawcza"
-        />
-        The OTP will expire in 15 minutes.
-      </SWarning>
+        <SWarning>
+          <img
+            src={WarningIconPath}
+            aria-hidden="true"
+            alt="Ikona ostrzegawcza"
+          />
+          The OTP will expire in 15 minutes.
+        </SWarning>
 
-      <SForm method="POST" onSubmit={handleFormSubmit} noValidate>
-        <Input
-          label="Enter the password"
-          defaultValue={password}
-          id="signUpPassword"
-          onChangeHandler={inputOnChange}
-          labelActivity={isLabelActive}
-          errorMessage={error}
-          error={isError}
-          success={isSuccess}
-          checkValidity={true}
-          required={true}
-          minLength={6}
-          maxLength={6}
-          ref={oneTimePasswordRef}
-          icon={<Key />}
-        />
+        <SForm method="POST" onSubmit={handleFormSubmit} noValidate>
+          <Input
+            label="Enter the password"
+            defaultValue={password}
+            id="signUpPassword"
+            onChangeHandler={inputOnChange}
+            labelActivity={isLabelActive}
+            errorMessage={error}
+            error={isError}
+            success={isSuccess}
+            checkValidity={true}
+            required={true}
+            minLength={6}
+            maxLength={6}
+            ref={oneTimePasswordRef}
+            icon={<Key />}
+          />
 
-        <SButton type="submit" text="Login" />
-      </SForm>
+          <SButton type="submit" text="Login" />
+        </SForm>
 
-      <SSecondForm method="POST" action="resend">
-        <SHeading>No email?</SHeading>
-        <p>If you haven't received your email, click here to resend.</p>
-        <SSecondButton type="submit" text="Resend One Time Password" />
-      </SSecondForm>
+        <SSecondForm method="POST" action="resend">
+          <SHeading>No email?</SHeading>
+          <p>If you haven't received your email, click here to resend.</p>
+          <SSecondButton type="submit" text="Resend One Time Password" />
+        </SSecondForm>
 
-      <SLock />
+        <SLock />
+      </SOneTimePasswordContainer>
     </SOneTimePassword>
   );
 }

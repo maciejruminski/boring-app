@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 
 // Routes.
 // import {oneTimePasswordRouter} from "./routes/one-time-password";
-import oneTimePasswordRouter from "./routes/google-sheets";
+import oneTimePasswordRouter from "./routes/one-time-password";
 import googleSheetsRouter from "./routes/google-sheets";
 import googlePlacesRouter from "./routes/google-places";
 // import { googlePlacesRouter,... }from "./routes";

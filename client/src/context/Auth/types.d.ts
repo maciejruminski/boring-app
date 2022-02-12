@@ -7,6 +7,7 @@ interface IAuthState {
     error: string;
     isSent: boolean;
   };
+  isFadingOut: boolean;
   modals: {
     isOneTimePasswordModalOpen: boolean;
   };
@@ -17,6 +18,7 @@ interface IAuthActions {
   setBusyOff: () => void;
   setUserAuthenticationOn: () => void;
   setUserAuthenticationOff: () => void;
+  setFadingOutOn: () => void;
   setUserAuthenticationByLocalStorage: () => void;
   verifyOneTimePassword: (
     e: React.FormEvent<HTMLFormElement>,
@@ -36,6 +38,7 @@ type AuthActionTypes =
   | "setBusyOff"
   | "setUserAuthenticationOn"
   | "setUserAuthenticationOff"
+  | "setFadingOutOn"
   | "setOneTimePassword"
   | "setSignUpError"
   | "setSignUpEmail"

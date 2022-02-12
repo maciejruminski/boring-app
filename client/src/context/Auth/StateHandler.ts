@@ -15,6 +15,10 @@ export default class StateHandler {
     return { ...state, isLoggedIn: false };
   }
 
+  static setFadingOutOn({ state }: IAuthStateHandler) {
+    return { ...state, isFadingOut: true };
+  }
+
   static setOneTimePasswordModalOn({ state }: IAuthStateHandler) {
     return {
       ...state,
@@ -55,6 +59,7 @@ export default class StateHandler {
     setBusyOff: StateHandler.setBusyOff,
     setUserAuthenticationOn: StateHandler.setUserAuthenticationOn,
     setUserAuthenticationOff: StateHandler.setUserAuthenticationOff,
+    setFadingOutOn: StateHandler.setFadingOutOn,
     setOneTimePasswordModalOn: StateHandler.setOneTimePasswordModalOn,
     setSignUpError: StateHandler.setSignUpError,
     setSignUpEmail: StateHandler.setSignUpEmail,

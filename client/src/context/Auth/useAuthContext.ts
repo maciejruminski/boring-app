@@ -11,10 +11,7 @@ const useAuthContext: AuthContextHook = () => {
   const { state, dispatch } = useContext(AuthContext);
   const actions: IAuthActions = new Actions(state, dispatch).getAllActions();
 
-  useEffect(
-    () => actions.setUserAuthenticationByLocalStorage(),
-    [state.isLoggedIn]
-  );
+  useEffect(() => actions.setUserAuthenticationByLocalStorage(), []);
 
   return { state, actions };
 };

@@ -51,6 +51,7 @@ class GoogleSheetsController {
     res.status(200).json({
       status: 200,
       message: "Użytkownik został dodany do bazy danych",
+      uuid: userUUID
     });
   }
 

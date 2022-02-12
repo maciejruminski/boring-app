@@ -11,18 +11,19 @@ export default class Controller {
     await API.addUser(userUUID);
   }
 
-  static async verifyOneTimePassword(oneTimePassword: string) {
-    const response = await API.verifyOneTimePassword(oneTimePassword);
-    const statusIsNotOk = response.status !== 200;
+  // static async verifyOneTimePassword(oneTimePassword: string) {
+  //   const response = await API.verifyOneTimePassword(oneTimePassword);
 
-    if (statusIsNotOk) {
-      return false;
-      // throw Error(response.errorMessage);
-    }
+  //   const statusIsNotOk = response.status !== 200;
 
-    this.setUser(response.uuid);
-    return true;
-  }
+  //   if (statusIsNotOk) {
+  //     return false;
+  //     // throw Error(response.errorMessage);
+  //   }
+
+  //   // this.setUser(response.uuid);
+  //   return true;
+  // }
 
   static getRandomPlace(places: Places, currentPlaceID: string): Place {
     const filteredPlaces = places.filter(
@@ -99,7 +100,7 @@ export default class Controller {
     if (id === "signUpPassword") {
       input.setCustomValidity(
         tooShort || tooLong
-          ? "A one time password must contain exactly 6 digits."
+          ? "Password must contain exactly 6 digits."
           : ""
       );
     }
