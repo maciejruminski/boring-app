@@ -20,10 +20,7 @@ export default class StateHandler {
   }
 
   static setOneTimePasswordModalOn({ state }: IAuthStateHandler) {
-    return {
-      ...state,
-      modals: { ...state.modals, isOneTimePasswordModalOpen: true },
-    };
+    return { ...state, isOneTimePasswordModalOpen: true };
   }
 
   static setSignUpError({ state, payload: error }: IAuthStateHandler) {
@@ -50,7 +47,14 @@ export default class StateHandler {
   static setSignUpEmailAsSent({ state }: IAuthStateHandler) {
     return {
       ...state,
-      // signUp: { ...state.signUp, isSent: true }
+      signUp: { ...state.signUp, isEmailSent: true }
+    };
+  }
+
+  static setSignUpEmailAsResent({ state }: IAuthStateHandler) {
+    return {
+      ...state,
+      signUp: { ...state.signUp, isEmailResent: true }
     };
   }
 
@@ -64,6 +68,7 @@ export default class StateHandler {
     setSignUpError: StateHandler.setSignUpError,
     setSignUpEmail: StateHandler.setSignUpEmail,
     setSignUpEmailAsSent: StateHandler.setSignUpEmailAsSent,
+    setSignUpEmailAsResent: StateHandler.setSignUpEmailAsResent,
     setOneTimePassword: StateHandler.setOneTimePassword,
   };
 }

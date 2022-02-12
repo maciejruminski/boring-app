@@ -27,17 +27,19 @@ export default forwardRef<HTMLInputElement>(({}, ref) => {
     }
   }, [keyword]);
 
-  return (
-    <Input
-      label="Słowo kluczowe"
-      defaultValue={keyword}
-      id="keyword"
-      onChangeHandler={setErrorHandler}
-      labelActivity={isKeyword}
-      error={false}
-      success={isKeyword}
-      checkValidity={false}
-      ref={ref}
-    />
-  );
+return <></>
+
+  // return (
+  //   <Input
+  //     label="Słowo kluczowe"
+  //     defaultValue={keyword}
+  //     id="keyword"
+  //     onChangeHandler={setErrorHandler}
+  //     labelActivity={isKeyword}
+  //     error={false}
+  //     success={isKeyword}
+  //     checkValidity={false}
+  //     ref={ref}
+  //   />
+  // );
 });

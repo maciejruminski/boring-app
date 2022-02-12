@@ -2,15 +2,12 @@
 import Helper from "../../controllers/Helper";
 import LocalStorage from "../../controllers/LocalStorage";
 import API from "../../controllers/API";
-import OneTimePassword from "../../components/SignUp/OneTimePassword";
 
 export default class AuthActions {
-  private state: IAuthState;
   private dispatch: React.Dispatch<IAuthAction>;
 
   constructor(state: IAuthState, dispatch: React.Dispatch<IAuthAction>) {
     this.dispatch = dispatch;
-    this.state = state;
   }
 
   setBusyOn = (): void => {
@@ -90,8 +87,10 @@ export default class AuthActions {
     this.dispatch({ type: "setSignUpEmail", payload: emailInput.value });
   };
 
-  setOneTimePassword = (passwordInput: HTMLInputElement): void => {
-    const passwordIsNotValid: boolean = !this.validateInput(passwordInput);
+  setOneTimePassword = (evt: React.ChangeEvent<HTMLInputElement>): void => {
+    const input = evt.target;
+
+    const passwordIsNotValid: boolean = !this.validateInput(input);
 
     if (passwordIsNotValid) {
       return;
@@ -99,12 +98,16 @@ export default class AuthActions {
 
     this.dispatch({
       type: "setOneTimePassword",
-      payload: passwordInput.value,
+      payload: input.value,
     });
   };
 
   setSignUpEmailAsSent = (): void => {
     this.dispatch({ type: "setSignUpEmailAsSent" });
+  };
+
+  setSignUpEmailAsResent = (): void => {
+    this.dispatch({ type: "setSignUpEmailAsResent" });
   };
 
   validateInput = (input: HTMLInputElement): boolean => {
@@ -127,20 +130,43 @@ export default class AuthActions {
         this.setSignUpEmail(input);
         break;
       case "signUpPassword":
-        this.setOneTimePassword(input);
+        // this.setOneTimePassword(input);
         break;
       default:
         console.log("test...");
     }
   };
 
-  sendPassword = (email: string): void => {
-    // this.setBusyOn();
+  sendPassword = async (email: string): Promise<void> => {
+    this.setBusyOn();
 
-    Helper.sendPassword(email).then(() => {
-      // this.setBusyOff();
-      this.setSignUpEmailAsSent();
-    });
+    const response = await API.sendPassword(email);
+
+    if (Helper.statusIsNotOk(response.status)) {
+      console.log("STATUS NOT OK");
+      // this.setSignUpError(response.message); JAKIS ERROR, ŻE NIE WYSLALLO
+      this.setBusyOff();
+      return;
+    }
+
+    this.setSignUpEmailAsSent();
+    this.setBusyOff();
+  };
+
+  resendPassword = async (email: string): Promise<void> => {
+    this.setBusyOn();
+
+    const response = await API.sendPassword(email);
+
+    if (Helper.statusIsNotOk(response.status)) {
+      console.log("STATUS NOT OK");
+      // this.setSignUpError(response.message); JAKIS ERROR, ŻE NIE WYSLALLO
+      this.setBusyOff();
+      return;
+    }
+
+    this.setSignUpEmailAsResent();
+    this.setBusyOff();
   };
 
   getAllActions = (): IAuthActions => {
@@ -156,8 +182,10 @@ export default class AuthActions {
       validateInput: this.validateInput,
       setSignUpEmail: this.setSignUpEmail,
       setSignUpEmailAsSent: this.setSignUpEmailAsSent,
+      setSignUpEmailAsResent: this.setSignUpEmailAsResent,
       inputOnChange: this.inputOnChange,
       sendPassword: this.sendPassword,
+      resendPassword: this.resendPassword,
       setOneTimePassword: this.setOneTimePassword,
       setOneTimePasswordModalOn: this.setOneTimePasswordModalOn,
     };

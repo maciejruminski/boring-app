@@ -5,12 +5,11 @@ interface IAuthState {
     email: string;
     password: string;
     error: string;
-    isSent: boolean;
+    isEmailSent: boolean;
+    isEmailResent: boolean;
   };
   isFadingOut: boolean;
-  modals: {
-    isOneTimePasswordModalOpen: boolean;
-  };
+  isOneTimePasswordModalOpen: boolean;
 }
 
 interface IAuthActions {
@@ -27,9 +26,11 @@ interface IAuthActions {
   validateInput: (input: HTMLInputElement) => boolean;
   setSignUpEmail: (input: HTMLInputElement) => void;
   setSignUpEmailAsSent: () => void;
+  setSignUpEmailAsResent: () => void;
   inputOnChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
   sendPassword: (email: string) => void;
-  setOneTimePassword: (input: HTMLInputElement) => void;
+  resendPassword: (email: string) => void;
+  setOneTimePassword: (evt: React.ChangeEvent<HTMLInputElement>) => void;
   setOneTimePasswordModalOn: () => void;
 }
 
@@ -43,6 +44,7 @@ type AuthActionTypes =
   | "setSignUpError"
   | "setSignUpEmail"
   | "setSignUpEmailAsSent"
+  | "setSignUpEmailAsResent"
   | "setOneTimePasswordModalOn";
 
 interface IAuthAction {

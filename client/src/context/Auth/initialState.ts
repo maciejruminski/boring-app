@@ -5,12 +5,11 @@ const initialState: IAuthState = {
     email: "",
     password: "",
     error: "",
-    isSent: false,
+    isEmailSent: false,
+    isEmailResent: false,
   },
   isFadingOut: false,
-  modals: {
-    isOneTimePasswordModalOpen: false,
-  },
+  isOneTimePasswordModalOpen: false,
 };
 
 export default initialState;

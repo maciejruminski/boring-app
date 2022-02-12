@@ -37,64 +37,79 @@ class OneTimePasswordController {
   //   return client.spreadsheets.values;
   // }
 
-  // send(req, res) {
-  //   email = req.body.email;
+  send(req, res) {
+    email = req.body.email;
 
-  //   transporter = nodemailer.createTransport({
-  //     host: process.env.NODEMAILER_HOST,
-  //     port: process.env.NODEMAILER_PORT,
-  //     secure: true,
-  //     service: process.env.NODEMAILER_SERVICE,
-  //     from: process.env.NODEMAILER_AUTH_USER,
-  //     auth: {
-  //       user: process.env.NODEMAILER_AUTH_USER,
-  //       pass: process.env.NODEMAILER_AUTH_PASS,
-  //     },
-  //   });
 
-  //   // send mail with defined transport object
-  //   var mailOptions = {
-  //     to: req.body.email,
-  //     subject: "Otp for registration is: ",
-  //     html:
-  //       "<h3>OTP for account verification is </h3>" +
-  //       "<h1 style='font-weight:bold;'>" +
-  //       generatedOneTimePassword +
-  //       "</h1>", // html body
-  //   };
 
-  //   transporter.sendMail(mailOptions, (error, info) => {
-  //     if (error) {
-  //       return console.log(error);
-  //     }
-  //     console.log("Message sent: %s", info.messageId);
-  //     console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    if (!transporter) {
 
-  //     // res.render("otp");
-  //     res.status(200).json({ status: "ok" });
-  //   });
-  // }
+      console.log('RESEND!!');
 
-  // resend(req, res) {
-  //   var mailOptions = {
-  //     to: email,
-  //     subject: "Otp for registration is: ",
-  //     html:
-  //       "<h3>OTP for account verification is </h3>" +
-  //       "<h1 style='font-weight:bold;'>" +
-  //       generatedOneTimePassword +
-  //       "</h1>", // html body
-  //   };
 
-  //   transporter.sendMail(mailOptions, (error, info) => {
-  //     if (error) {
-  //       return console.log(error);
-  //     }
-  //     console.log("Message sent: %s", info.messageId);
-  //     console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-  //     res.render("otp", { msg: "otp has been sent" });
-  //   });
-  // }
+      transporter = nodemailer.createTransport({
+        host: process.env.NODEMAILER_HOST,
+        port: process.env.NODEMAILER_PORT,
+        secure: true,
+        service: process.env.NODEMAILER_SERVICE,
+        from: process.env.NODEMAILER_AUTH_USER,
+        auth: {
+          user: process.env.NODEMAILER_AUTH_USER,
+          pass: process.env.NODEMAILER_AUTH_PASS,
+        },
+      });
+    }
+
+    // send mail with defined transport object
+    var mailOptions = {
+      to: req.body.email,
+      subject: "Otp for registration is: ",
+      html:
+        "<h3>OTP for account verification is </h3>" +
+        "<h1 style='font-weight:bold;'>" +
+        generatedOneTimePassword +
+        "</h1>", // html body
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error);
+      }
+      // console.log("Message sent: %s", info.messageId);
+      // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+
+      // res.render("otp");
+      res
+        .status(200)
+        .json({ status: 200, message: nodemailer.getTestMessageUrl(info) });
+    });
+  }
+
+  resend(req, res) {
+    var mailOptions = {
+      to: email,
+      subject: "Otp for registration is: ",
+      html:
+        "<h3>OTP for account verification is </h3>" +
+        "<h1 style='font-weight:bold;'>" +
+        generatedOneTimePassword +
+        "</h1>", // html body
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error);
+      }
+
+      res
+        .status(200)
+        .json({ status: 200, message: nodemailer.getTestMessageUrl(info) });
+
+      // console.log("Message sent: %s", info.messageId);
+      // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+      // res.render("otp", { msg: "otp has been sent" });
+    });
+  }
 
   async verify(req, res) {
     const { oneTimePassword } = req.body;
@@ -102,7 +117,7 @@ class OneTimePasswordController {
     const oneTimePasswordIsEmpty = oneTimePassword === "";
 
     if (oneTimePasswordIsEmpty) {
-      return res.json({ status: 401, message: "Please fill in this field" });
+      return res.json({ status: 401, message: "Please fill in this field." });
     }
 
     const oneTimePasswordLengthIsWrong = oneTimePassword.length !== 6;

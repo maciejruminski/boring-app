@@ -11,20 +11,6 @@ export default class Controller {
     await API.addUser(userUUID);
   }
 
-  // static async verifyOneTimePassword(oneTimePassword: string) {
-  //   const response = await API.verifyOneTimePassword(oneTimePassword);
-
-  //   const statusIsNotOk = response.status !== 200;
-
-  //   if (statusIsNotOk) {
-  //     return false;
-  //     // throw Error(response.errorMessage);
-  //   }
-
-  //   // this.setUser(response.uuid);
-  //   return true;
-  // }
-
   static getRandomPlace(places: Places, currentPlaceID: string): Place {
     const filteredPlaces = places.filter(
       (place: { id: string }) => place.id !== currentPlaceID
@@ -76,21 +62,6 @@ export default class Controller {
     return palces.find((place: { id: string }) => place.id === placeID);
   }
 
-  static async sendPassword(email: string) {
-    const response = await API.sendPassword(email);
-    const statusIsNotOk = response.status !== 200;
-
-    console.log(response);
-
-    if (statusIsNotOk) {
-      return false;
-      // throw Error(response.errorMessage);
-    }
-
-    // this.setUser(response.uuid);
-    return true;
-  }
-
   static validateInput(input: HTMLInputElement): boolean {
     const {
       id,
@@ -99,9 +70,7 @@ export default class Controller {
 
     if (id === "signUpPassword") {
       input.setCustomValidity(
-        tooShort || tooLong
-          ? "Password must contain exactly 6 digits."
-          : ""
+        tooShort || tooLong ? "Password must contain exactly 6 digits." : ""
       );
     }
 

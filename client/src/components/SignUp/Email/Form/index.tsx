@@ -56,7 +56,7 @@ export default function Form() {
   const isLabelActive = isError || isSuccess ? true : false;
 
   return (
-    <SForm method="POST" onSubmit={handleFormSubmit} noValidate>
+    <SForm method="POST" onSubmit={handleFormSubmit} noValidate action="aaa">
       <Email
         label="Enter your email"
         defaultValue={email}

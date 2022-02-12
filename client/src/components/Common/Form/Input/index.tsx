@@ -14,11 +14,11 @@ export default forwardRef<
     defaultValue: string | number;
     id: string;
     onChangeHandler: React.ChangeEventHandler<HTMLInputElement>;
-    error: boolean;
-    errorMessage?: string;
-    success: boolean;
+    error: string;
+    // errorMessage?: string;
+    // success: boolean;
     checkValidity: boolean;
-    labelActivity: boolean;
+    // labelActivity: boolean;
     minLength?: number;
     maxLength?: number;
     required?: boolean;
@@ -32,13 +32,13 @@ export default forwardRef<
       id,
       onChangeHandler,
       error,
-      success,
-      labelActivity,
+      // success,
+      // labelActivity,
       checkValidity,
       minLength,
       maxLength,
       required,
-      errorMessage,
+      // errorMessage,
       icon,
     },
     ref: React.ForwardedRef<HTMLInputElement>
@@ -57,28 +57,51 @@ export default forwardRef<
       []
     );
 
-    useEffect(
-      () =>
-        Helper.setInputErrorMessageHeight(
-          errorRef.current as HTMLParagraphElement
-        ),
-      [errorMessage]
-    );
+    useEffect(() => {
+      Helper.setInputErrorMessageHeight(
+        errorRef.current as HTMLParagraphElement
+      );
+
+      if (typeof ref === "object" && ref?.current && error) {
+        ref.current.focus();
+      }
+    }, [error]);
+
+    // TO REFACTOR.
+    let isError = false;
+    let isSuccess = false;
+    let isLabelActive = false;
+
+    if (id === "signUpPassword") {
+      isError = Boolean(error);
+      isSuccess = Boolean(!isError && defaultValue);
+      isLabelActive = Boolean(isError || isSuccess);
+    }
 
     return (
       <>
         <SContainer
-          isError={error}
-          isSuccess={success}
-          checkValidity={checkValidity}
+          isError={isError}
+          // isError={error}
+          isSuccess={isSuccess}
+          // isSuccess={success}
+          checkValidity={isLabelActive}
+          // checkValidity={checkValidity}
           pseudoElementWidth={labelWidth}
         >
-          <SLabel isActive={labelActivity} htmlFor={id} ref={labelRef}>
+          <SLabel
+            isActive={isLabelActive}
+            // isActive={labelActivity}
+            htmlFor={id}
+            ref={labelRef}
+          >
             {label}
           </SLabel>
           <SInput
-            isError={error}
-            isSuccess={success}
+            isError={isError}
+            // isError={error}
+            isSuccess={isSuccess}
+            // isSuccess={success}
             checkValidity={checkValidity}
             ref={ref}
             onChange={onChangeHandler}
@@ -95,9 +118,9 @@ export default forwardRef<
           {icon}
         </SContainer>
 
-        {error && errorMessage && (
+        {error && (
           <SErrors ref={errorRef}>
-            <div>{errorMessage}</div>
+            <div>{error}</div>
           </SErrors>
         )}
       </>
