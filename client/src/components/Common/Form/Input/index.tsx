@@ -18,6 +18,7 @@ export default forwardRef<
     // errorMessage?: string;
     // success: boolean;
     checkValidity: boolean;
+    type?: "email" | "text";
     // labelActivity: boolean;
     minLength?: number;
     maxLength?: number;
@@ -32,6 +33,7 @@ export default forwardRef<
       id,
       onChangeHandler,
       error,
+      type,
       // success,
       // labelActivity,
       checkValidity,
@@ -78,6 +80,12 @@ export default forwardRef<
       isLabelActive = Boolean(isError || isSuccess);
     }
 
+    if (id === "email") {
+      isError = error ? true : false;
+      isSuccess = !isError && defaultValue ? true : false;
+      isLabelActive = isError || isSuccess ? true : false;
+    }
+
     return (
       <>
         <SContainer
@@ -105,7 +113,7 @@ export default forwardRef<
             checkValidity={checkValidity}
             ref={ref}
             onChange={onChangeHandler}
-            type="text"
+            type={type ? type : "text"}
             name={id}
             id={id}
             autoComplete="off"

@@ -13,14 +13,14 @@ import { SForm, SHeading, SNotification, SButton } from "./styles";
 export default function ResendForm() {
   const {
     state: {
-      signUp: { isEmailResent },
+      email: { isResent },
     },
-    actions: { resendPassword },
+    actions: { sendPassword },
   } = useAuthContext();
 
   const handleFormSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    resendPassword("mac-rum@wp.pl");
+    sendPassword("mac-rum@wp.pl", true);
   };
 
   const notificationRef = useRef<HTMLParagraphElement>(null);
@@ -30,15 +30,15 @@ export default function ResendForm() {
       Helper.setInputErrorMessageHeight(
         notificationRef.current as HTMLParagraphElement
       ),
-    [isEmailResent]
+    [isResent]
   );
 
   return (
-    <SForm method="POST" onSubmit={handleFormSubmit} action="www">
+    <SForm method="POST" onSubmit={handleFormSubmit}>
       <SHeading>No email?</SHeading>
       <p>If you haven't received your email, click here to resend.</p>
 
-      {isEmailResent && (
+      {isResent && (
         <SNotification ref={notificationRef}>
           <div>Password has been sent!</div>
         </SNotification>

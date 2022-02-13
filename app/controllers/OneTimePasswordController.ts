@@ -40,12 +40,8 @@ class OneTimePasswordController {
   send(req, res) {
     email = req.body.email;
 
-
-
     if (!transporter) {
-
-      console.log('RESEND!!');
-
+      console.log("RESEND!!");
 
       transporter = nodemailer.createTransport({
         host: process.env.NODEMAILER_HOST,
@@ -73,12 +69,12 @@ class OneTimePasswordController {
 
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
-        return console.log(error);
+        res.status(200).json({
+          status: 401,
+          message: "Unfortunately, something went wrong.",
+        });
       }
-      // console.log("Message sent: %s", info.messageId);
-      // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 
-      // res.render("otp");
       res
         .status(200)
         .json({ status: 200, message: nodemailer.getTestMessageUrl(info) });
@@ -117,7 +113,10 @@ class OneTimePasswordController {
     const oneTimePasswordIsEmpty = oneTimePassword === "";
 
     if (oneTimePasswordIsEmpty) {
-      return res.json({ status: 401, message: "Please fill in this field." });
+      return res.json({
+        status: 401,
+        message: "Please fill in this field. aaa",
+      });
     }
 
     const oneTimePasswordLengthIsWrong = oneTimePassword.length !== 6;

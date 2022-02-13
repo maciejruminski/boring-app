@@ -1,34 +1,22 @@
 // Functions.
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 
 // Context.
 import useAuthContext from "../../../../context/Auth/useAuthContext";
 
 // Components.
 import { Envelope } from "../../../Common/Icons";
-import Email from "../../../Common/Form/Email";
+import Input from "../../../Common/Form/Input";
 
 // Styles.
-import {
-  SForm,
-  SErrors,
-  SEmailContainer,
-  SLabel,
-  SEmail,
-  SSubmit,
-} from "./styles";
+import { SForm, SSubmit } from "./styles";
 
 export default function Form() {
   const {
     state: {
-      signUp: { email, error },
+      email: { email, error },
     },
-    actions: {
-      inputOnChange,
-      validateInput,
-      sendPassword,
-      setOneTimePasswordModalOn,
-    },
+    actions: { inputOnChange, sendPassword, setPasswordModalOn, validateInput },
   } = useAuthContext();
 
   const emailRef = useRef<HTMLInputElement>(null);
@@ -36,36 +24,26 @@ export default function Form() {
   const handleFormSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    const emailInput = emailRef.current;
-
-    if (emailInput) {
-      const emailIsNotValid: boolean = !validateInput(emailInput);
-
-      if (emailIsNotValid) {
-        emailInput.focus();
-
-        return;
-      }
-
+    if (validateInput(emailRef.current as HTMLInputElement)) {
       sendPassword(email);
     }
   };
 
-  const isError = error ? true : false;
-  const isSuccess = !isError && email ? true : false;
-  const isLabelActive = isError || isSuccess ? true : false;
+  const submitHandler = () => {
+    if (!error && email) {
+      setPasswordModalOn();
+    }
+  };
 
   return (
-    <SForm method="POST" onSubmit={handleFormSubmit} noValidate action="aaa">
-      <Email
+    <SForm method="POST" onSubmit={handleFormSubmit} noValidate>
+      <Input
         label="Enter your email"
         defaultValue={email}
         id="email"
+        type="email"
         onChangeHandler={inputOnChange}
-        labelActivity={isLabelActive}
-        errorMessage={error}
-        error={isError}
-        success={isSuccess}
+        error={error}
         checkValidity={true}
         required={true}
         ref={emailRef}
@@ -75,11 +53,7 @@ export default function Form() {
       <SSubmit
         type="submit"
         text="Get One Time Password"
-        onClickHandler={() => {
-          if (isSuccess) {
-            setOneTimePasswordModalOn();
-          }
-        }}
+        onClickHandler={submitHandler}
       />
     </SForm>
   );

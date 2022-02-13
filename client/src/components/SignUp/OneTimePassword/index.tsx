@@ -1,3 +1,6 @@
+// Functions.
+import { useEffect } from "react";
+
 // Context.
 import useAuthContext from "../../../context/Auth/useAuthContext";
 
@@ -11,12 +14,23 @@ import { SOneTimePassword, SOneTimePasswordContainer, SLock } from "./styles";
 
 export default function OneTimePassword() {
   const {
-    state: { isOneTimePasswordModalOpen, isFadingOut },
+    state: {
+      password: { isComponentInactive },
+    },
+    actions: { setUserAuthenticationOn },
   } = useAuthContext();
 
+  const fadingOutTime = 500;
+
+  useEffect(() => {
+    if (isComponentInactive) {
+      setTimeout(setUserAuthenticationOn, fadingOutTime);
+    }
+  }, [isComponentInactive]);
+
   return (
-    <SOneTimePassword isModalOpen={isOneTimePasswordModalOpen}>
-      <SOneTimePasswordContainer isFadingOut={isFadingOut}>
+    <SOneTimePassword isModalOpen={true}>
+      <SOneTimePasswordContainer isFadingOut={isComponentInactive}>
         <Info />
         <Form />
         <ResendForm />

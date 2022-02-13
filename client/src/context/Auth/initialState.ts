@@ -1,15 +1,18 @@
 const initialState: IAuthState = {
   isBusy: false,
   isLoggedIn: false,
-  signUp: {
+  email: {
     email: "",
+    error: "",
+    isSent: false,
+    isResent: false,
+    isComponentActive: true,
+  },
+  password: {
     password: "",
     error: "",
-    isEmailSent: false,
-    isEmailResent: false,
+    isComponentInactive: false,
   },
-  isFadingOut: false,
-  isOneTimePasswordModalOpen: false,
 };
 
 export default initialState;

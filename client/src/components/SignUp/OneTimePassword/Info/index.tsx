@@ -10,7 +10,7 @@ import { SHeading, SWarning } from "./styles";
 export default function Info() {
   const {
     state: {
-      signUp: { email },
+      email: { email },
     },
   } = useAuthContext();
 

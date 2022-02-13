@@ -6,18 +6,27 @@ import Spinner from "components/Common/Spinner";
 // Context.
 import useAuthContext from "../../context/Auth/useAuthContext";
 
-// import SignUp from "components/SignUp";
-
 export default function SignUp() {
   const {
-    state: { isBusy },
+    state: {
+      isBusy,
+      email: { isSent },
+    },
   } = useAuthContext();
+
+  if (isSent) {
+    return (
+      <>
+        <Spinner isBusy={isBusy} />
+        <OneTimePassword />
+      </>
+    );
+  }
 
   return (
     <>
       <Spinner isBusy={isBusy} />
       <Email />
-      <OneTimePassword />
     </>
   );
 }

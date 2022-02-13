@@ -15,47 +15,40 @@ export default class StateHandler {
     return { ...state, isLoggedIn: false };
   }
 
-  static setFadingOutOn({ state }: IAuthStateHandler) {
-    return { ...state, isFadingOut: true };
+  static setPasswordComponentAsInactive({ state }: IAuthStateHandler) {
+    return { ...state, password: { ...state.password, isComponentInactive: true } };
   }
 
-  static setOneTimePasswordModalOn({ state }: IAuthStateHandler) {
-    return { ...state, isOneTimePasswordModalOpen: true };
+  static setPasswordModalOn({ state }: IAuthStateHandler) {
+    return { ...state, isModalOpen: true };
   }
 
-  static setSignUpError({ state, payload: error }: IAuthStateHandler) {
-    return {
-      ...state,
-      signUp: { ...state.signUp, error },
-    };
+  static setEmailError({ state, payload: error }: IAuthStateHandler) {
+    return { ...state, email: { ...state.email, error } };
+  }
+
+  static setPasswordError({ state, payload: error }: IAuthStateHandler) {
+    return { ...state, password: { ...state.password, error } };
   }
 
   static setSignUpEmail({ state, payload: email }: IAuthStateHandler) {
-    return {
-      ...state,
-      signUp: { ...state.signUp, email },
-    };
+    return { ...state, email: { ...state.email, email } };
   }
 
   static setOneTimePassword({ state, payload: password }: IAuthStateHandler) {
-    return {
-      ...state,
-      // signUp: { ...state.signUp, password }
-    };
+    return { ...state, password: { ...state.password, password } };
   }
 
-  static setSignUpEmailAsSent({ state }: IAuthStateHandler) {
-    return {
-      ...state,
-      signUp: { ...state.signUp, isEmailSent: true }
-    };
+  static setEmailAsSent({ state }: IAuthStateHandler) {
+    return { ...state, email: { ...state.email, isSent: true } };
   }
 
-  static setSignUpEmailAsResent({ state }: IAuthStateHandler) {
-    return {
-      ...state,
-      signUp: { ...state.signUp, isEmailResent: true }
-    };
+  static setEmailAsResent({ state }: IAuthStateHandler) {
+    return { ...state, email: { ...state.email, isResent: true } };
+  }
+
+  static setEmailComponentAsInactive({ state }: IAuthStateHandler) {
+    return { ...state, email: { ...state.email, isComponentActive: false } };
   }
 
   static handlers = {
@@ -63,12 +56,14 @@ export default class StateHandler {
     setBusyOff: StateHandler.setBusyOff,
     setUserAuthenticationOn: StateHandler.setUserAuthenticationOn,
     setUserAuthenticationOff: StateHandler.setUserAuthenticationOff,
-    setFadingOutOn: StateHandler.setFadingOutOn,
-    setOneTimePasswordModalOn: StateHandler.setOneTimePasswordModalOn,
-    setSignUpError: StateHandler.setSignUpError,
+    setPasswordComponentAsInactive: StateHandler.setPasswordComponentAsInactive,
+    setPasswordModalOn: StateHandler.setPasswordModalOn,
+    setEmailError: StateHandler.setEmailError,
+    setPasswordError: StateHandler.setPasswordError,
     setSignUpEmail: StateHandler.setSignUpEmail,
-    setSignUpEmailAsSent: StateHandler.setSignUpEmailAsSent,
-    setSignUpEmailAsResent: StateHandler.setSignUpEmailAsResent,
+    setEmailAsSent: StateHandler.setEmailAsSent,
+    setEmailAsResent: StateHandler.setEmailAsResent,
     setOneTimePassword: StateHandler.setOneTimePassword,
+    setEmailComponentAsInactive: StateHandler.setEmailComponentAsInactive,
   };
 }

@@ -26,8 +26,8 @@ export default class AuthActions {
     this.dispatch({ type: "setUserAuthenticationOff" });
   };
 
-  setFadingOutOn = (): void => {
-    this.dispatch({ type: "setFadingOutOn" });
+  setPasswordComponentAsInactive = (): void => {
+    this.dispatch({ type: "setPasswordComponentAsInactive" });
   };
 
   setUserAuthenticationByLocalStorage = (): void => {
@@ -36,21 +36,17 @@ export default class AuthActions {
       : this.setUserAuthenticationOff();
   };
 
-  setOneTimePasswordModalOn = (): void => {
-    this.dispatch({ type: "setOneTimePasswordModalOn" });
+  setPasswordModalOn = (): void => {
+    this.dispatch({ type: "setPasswordModalOn" });
   };
 
-  verifyOneTimePassword = async (
-    evt: React.FormEvent<HTMLFormElement>,
-    oneTimePassword: string
-  ): Promise<void> => {
-    evt.preventDefault();
+  verifyPassword = async (oneTimePassword: string): Promise<void> => {
     this.setBusyOn();
 
-    let response = await API.verifyOneTimePassword(oneTimePassword);
+    let response = await API.verifyPassword(oneTimePassword);
 
     if (Helper.statusIsNotOk(response.status)) {
-      this.setSignUpError(response.message);
+      this.setPasswordError(response.message);
       this.setBusyOff();
       return;
     }
@@ -62,110 +58,85 @@ export default class AuthActions {
       return;
     }
 
-    // LocalStorage.setUserAuthentication();
-    // LocalStorage.setUserUUID(response.uuid);
+    LocalStorage.setUserAuthentication();
+    LocalStorage.setUserUUID(response.uuid);
 
-    this.setFadingOutOn();
+    this.setPasswordComponentAsInactive();
     this.setBusyOff();
-
-    const fadingOutTime = 300;
-
-    setTimeout(this.setUserAuthenticationOn, fadingOutTime);
   };
 
-  setSignUpError = (error: string): void => {
-    this.dispatch({ type: "setSignUpError", payload: error });
+  setEmailError = (error: string): void => {
+    this.dispatch({ type: "setEmailError", payload: error });
   };
 
-  setSignUpEmail = (emailInput: HTMLInputElement): void => {
-    const emailIsNotValid: boolean = !this.validateInput(emailInput);
-
-    if (emailIsNotValid) {
-      return;
-    }
-
-    this.dispatch({ type: "setSignUpEmail", payload: emailInput.value });
+  setPasswordError = (error: string): void => {
+    this.dispatch({ type: "setPasswordError", payload: error });
   };
 
-  setOneTimePassword = (evt: React.ChangeEvent<HTMLInputElement>): void => {
-    const input = evt.target;
-
-    const passwordIsNotValid: boolean = !this.validateInput(input);
-
-    if (passwordIsNotValid) {
-      return;
-    }
-
-    this.dispatch({
-      type: "setOneTimePassword",
-      payload: input.value,
-    });
+  setEmailAsSent = (): void => {
+    this.dispatch({ type: "setEmailAsSent" });
   };
 
-  setSignUpEmailAsSent = (): void => {
-    this.dispatch({ type: "setSignUpEmailAsSent" });
+  setEmailAsResent = (): void => {
+    this.dispatch({ type: "setEmailAsResent" });
   };
 
-  setSignUpEmailAsResent = (): void => {
-    this.dispatch({ type: "setSignUpEmailAsResent" });
+  setEmailComponentAsInactive = (): void => {
+    this.dispatch({ type: "setEmailComponentAsInactive" });
   };
 
   validateInput = (input: HTMLInputElement): boolean => {
     const inputIsNotValid = !Helper.validateInput(input);
 
     if (inputIsNotValid) {
-      this.setSignUpError(input.validationMessage);
+      const error = input.validationMessage;
+
+      input.id === "email"
+        ? this.setEmailError(error)
+        : this.setPasswordError(error);
+
       return false;
     }
 
-    this.setSignUpError("");
+    input.id === "email" ? this.setEmailError("") : this.setPasswordError("");
     return true;
   };
 
   inputOnChange = (evt: React.ChangeEvent<HTMLInputElement>): void => {
     const input = evt.target;
 
+    const inputIsNotValid: boolean = !this.validateInput(input);
+
+    if (inputIsNotValid) {
+      return;
+    }
+
     switch (input.id) {
       case "email":
-        this.setSignUpEmail(input);
+        this.dispatch({ type: "setSignUpEmail", payload: input.value });
         break;
       case "signUpPassword":
-        // this.setOneTimePassword(input);
+        this.dispatch({ type: "setOneTimePassword", payload: input.value });
         break;
-      default:
-        console.log("test...");
     }
   };
 
-  sendPassword = async (email: string): Promise<void> => {
+  sendPassword = async (
+    email: string,
+    resend: boolean = false
+  ): Promise<void> => {
     this.setBusyOn();
 
     const response = await API.sendPassword(email);
 
     if (Helper.statusIsNotOk(response.status)) {
-      console.log("STATUS NOT OK");
-      // this.setSignUpError(response.message); JAKIS ERROR, ŻE NIE WYSLALLO
+      this.setEmailError(response.message);
       this.setBusyOff();
       return;
     }
 
-    this.setSignUpEmailAsSent();
-    this.setBusyOff();
-  };
+    resend ? this.setEmailAsResent() : this.setEmailAsSent();
 
-  resendPassword = async (email: string): Promise<void> => {
-    this.setBusyOn();
-
-    const response = await API.sendPassword(email);
-
-    if (Helper.statusIsNotOk(response.status)) {
-      console.log("STATUS NOT OK");
-      // this.setSignUpError(response.message); JAKIS ERROR, ŻE NIE WYSLALLO
-      this.setBusyOff();
-      return;
-    }
-
-    this.setSignUpEmailAsResent();
     this.setBusyOff();
   };
 
@@ -175,19 +146,17 @@ export default class AuthActions {
       setBusyOff: this.setBusyOff,
       setUserAuthenticationOn: this.setUserAuthenticationOn,
       setUserAuthenticationOff: this.setUserAuthenticationOff,
-      setFadingOutOn: this.setFadingOutOn,
+      setPasswordComponentAsInactive: this.setPasswordComponentAsInactive,
       setUserAuthenticationByLocalStorage:
         this.setUserAuthenticationByLocalStorage,
-      verifyOneTimePassword: this.verifyOneTimePassword,
+      verifyPassword: this.verifyPassword,
       validateInput: this.validateInput,
-      setSignUpEmail: this.setSignUpEmail,
-      setSignUpEmailAsSent: this.setSignUpEmailAsSent,
-      setSignUpEmailAsResent: this.setSignUpEmailAsResent,
+      setEmailAsSent: this.setEmailAsSent,
+      setEmailAsResent: this.setEmailAsResent,
       inputOnChange: this.inputOnChange,
       sendPassword: this.sendPassword,
-      resendPassword: this.resendPassword,
-      setOneTimePassword: this.setOneTimePassword,
-      setOneTimePasswordModalOn: this.setOneTimePasswordModalOn,
+      setPasswordModalOn: this.setPasswordModalOn,
+      setEmailComponentAsInactive: this.setEmailComponentAsInactive,
     };
   };
 }

@@ -1,15 +1,18 @@
 interface IAuthState {
   isBusy: boolean;
   isLoggedIn: boolean;
-  signUp: {
+  email: {
     email: string;
+    error: string;
+    isSent: boolean;
+    isResent: boolean;
+    isComponentActive: boolean;
+  };
+  password: {
     password: string;
     error: string;
-    isEmailSent: boolean;
-    isEmailResent: boolean;
+    isComponentInactive: boolean;
   };
-  isFadingOut: boolean;
-  isOneTimePasswordModalOpen: boolean;
 }
 
 interface IAuthActions {
@@ -17,21 +20,16 @@ interface IAuthActions {
   setBusyOff: () => void;
   setUserAuthenticationOn: () => void;
   setUserAuthenticationOff: () => void;
-  setFadingOutOn: () => void;
+  setPasswordComponentAsInactive: () => void;
   setUserAuthenticationByLocalStorage: () => void;
-  verifyOneTimePassword: (
-    e: React.FormEvent<HTMLFormElement>,
-    oneTimePassword: string
-  ) => void;
+  verifyPassword: (oneTimePassword: string) => void;
   validateInput: (input: HTMLInputElement) => boolean;
-  setSignUpEmail: (input: HTMLInputElement) => void;
-  setSignUpEmailAsSent: () => void;
-  setSignUpEmailAsResent: () => void;
+  setEmailAsSent: () => void;
+  setEmailAsResent: () => void;
   inputOnChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
-  sendPassword: (email: string) => void;
-  resendPassword: (email: string) => void;
-  setOneTimePassword: (evt: React.ChangeEvent<HTMLInputElement>) => void;
-  setOneTimePasswordModalOn: () => void;
+  sendPassword: (email: string, resend: boolean = false) => void;
+  setPasswordModalOn: () => void;
+  setEmailComponentAsInactive: () => void;
 }
 
 type AuthActionTypes =
@@ -39,13 +37,15 @@ type AuthActionTypes =
   | "setBusyOff"
   | "setUserAuthenticationOn"
   | "setUserAuthenticationOff"
-  | "setFadingOutOn"
+  | "setPasswordComponentAsInactive"
   | "setOneTimePassword"
-  | "setSignUpError"
+  | "setEmailError"
+  | "setPasswordError"
   | "setSignUpEmail"
-  | "setSignUpEmailAsSent"
-  | "setSignUpEmailAsResent"
-  | "setOneTimePasswordModalOn";
+  | "setEmailAsSent"
+  | "setEmailAsResent"
+  | "setPasswordModalOn"
+  | "setEmailComponentAsInactive";
 
 interface IAuthAction {
   type: AuthActionTypes;

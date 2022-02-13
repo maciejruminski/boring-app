@@ -14,20 +14,18 @@ import { SForm, SButton } from "./styles";
 export default function OneTimePassword() {
   const {
     state: {
-      signUp: { password, error },
+      password: { password, error },
     },
-    actions: { verifyOneTimePassword, setOneTimePassword },
+    actions: { verifyPassword, inputOnChange, validateInput },
   } = useAuthContext();
 
-  const oneTimePasswordRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
   const handleFormSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    const oneTimePassword = oneTimePasswordRef.current;
-
-    if (oneTimePassword) {
-      verifyOneTimePassword(evt, oneTimePassword.value);
+    if (validateInput(passwordRef.current as HTMLInputElement)) {
+      verifyPassword(password);
     }
   };
 
@@ -37,13 +35,13 @@ export default function OneTimePassword() {
         label="Enter the password"
         defaultValue={password}
         id="signUpPassword"
-        onChangeHandler={setOneTimePassword}
+        onChangeHandler={inputOnChange}
         error={error}
         checkValidity={true}
         required={true}
         minLength={6}
         maxLength={6}
-        ref={oneTimePasswordRef}
+        ref={passwordRef}
         icon={<Key />}
       />
 

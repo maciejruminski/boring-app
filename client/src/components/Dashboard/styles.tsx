@@ -8,6 +8,7 @@ const SDashboard = styled.div`
     from {
       opacity: 0;
       transform: scale(1.02);
+      visibility: hidden;
     }
     to {
       opacity: 1;
@@ -17,9 +18,8 @@ const SDashboard = styled.div`
 
   animation-name: example;
   animation-duration: 0.5s;
-  animation-delay: 0.2s;
+  animation-delay: 0.25s;
   animation-fill-mode: forwards;
-
   opacity: 0;
 `;
 

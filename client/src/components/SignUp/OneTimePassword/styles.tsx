@@ -18,7 +18,21 @@ const fitFadingOutToStyle = ({ isFadingOut }: { isFadingOut: boolean }) => {
 
 const SOneTimePassword = styled.div<{ isModalOpen: boolean }>`
   ${Modal()};
-  z-index: 2;
+
+  @keyframes example {
+    from {
+      opacity: 0;
+      transform: scale(1.02);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  animation-name: example;
+  animation-duration: var(--spinnerTransitionDuration);
+  animation-fill-mode: forwards;
 `;
 
 const SOneTimePasswordContainer = styled.div<{ isFadingOut: boolean }>`

@@ -37,7 +37,7 @@ export default class API {
     return await this.request("/get-place-details", { placeID });
   }
 
-  static async verifyOneTimePassword(oneTimePassword: string) {
+  static async verifyPassword(oneTimePassword: string) {
     return await this.request("/verify-password", { oneTimePassword });
   }
 
