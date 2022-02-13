@@ -1,9 +1,9 @@
 // Components.
-import Dashboard from "./components/Dashboard";
-import SignUp from "./components/SignUp";
+import Dashboard from "@components/Dashboard";
+import SignUp from "@components/SignUp";
 
 // Context.
-import useAuthContext from "./context/Auth/useAuthContext";
+import { useAuthContext } from "@context/Auth";
 
 function App() {
   const {

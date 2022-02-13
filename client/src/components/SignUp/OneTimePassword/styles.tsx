@@ -2,10 +2,10 @@
 import styled from "styled-components";
 
 // Mixins.
-import { Modal } from "../../../Mixins";
+import { Modal } from "@src/Mixins";
 
 // Components.
-import { Lock } from "../../Common/Icons";
+import { Lock } from "@common/Icons";
 
 // Styles.
 const fitFadingOutToStyle = ({ isFadingOut }: { isFadingOut: boolean }) => {

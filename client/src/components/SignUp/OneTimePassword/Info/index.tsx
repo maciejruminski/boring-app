@@ -1,8 +1,8 @@
 // Context.
-import useAuthContext from "../../../../context/Auth/useAuthContext";
+import { useAuthContext } from "@context/Auth";
 
 // Icons.
-import WarningIconPath from "../../../../images/warning.svg";
+import WarningIconPath from "@images/warning.svg";
 
 // Styles.
 import { SHeading, SWarning } from "./styles";

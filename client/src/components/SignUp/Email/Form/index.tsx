@@ -2,11 +2,11 @@
 import { useRef } from "react";
 
 // Context.
-import useAuthContext from "../../../../context/Auth/useAuthContext";
+import { useAuthContext } from "@context/Auth";
 
 // Components.
-import { Envelope } from "../../../Common/Icons";
-import Input from "../../../Common/Form/Input";
+import { Envelope } from "@common/Icons";
+import Input from "@common/Form/Input";
 
 // Styles.
 import { SForm, SSubmit } from "./styles";

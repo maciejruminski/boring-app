@@ -2,10 +2,10 @@
 import styled from "styled-components";
 
 // Mixins.
-import { Heading } from "../../../../Mixins";
+import { Heading } from "@src/Mixins";
 
 // Components.
-import Button from "../../../Common/Button";
+import Button from "@common/Button";
 
 // Styles.
 const SForm = styled.form`

@@ -7,7 +7,7 @@ import Description from "./Description";
 import Form from "./Form";
 
 // Context.
-import useAuthContext from "../../../context/Auth/useAuthContext";
+import { useAuthContext } from "@context/Auth";
 
 // Styles.
 import { SEmail, SLock } from "./styles";

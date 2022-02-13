@@ -2,7 +2,14 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "components/*": ["./src/components/*"]
+      "@src/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@common/*": ["./src/components/Common/*"],
+      "@dashboard/*": ["./src/components/Dashboard/*"],
+      "@signup/*": ["./src/components/SignUp/*"],
+      "@context/*": ["./src/context/*"],
+      "@controllers/*": ["./src/controllers/*"],
+      "@images/*": ["./src/images/*"]
     }
   }
 }

@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 
 // Context.
-import useAuthContext from "../../../context/Auth/useAuthContext";
+import { useAuthContext } from "@context/Auth";
 
 // Components.
 import Info from "./Info";

@@ -2,10 +2,10 @@
 import { useRef, useEffect } from "react";
 
 // Controllers.
-import Helper from "../../../../controllers/Helper";
+import Helper from "@controllers/Helper";
 
 // Context.
-import useAuthContext from "../../../../context/Auth/useAuthContext";
+import { useAuthContext } from "@context/Auth";
 
 // Styles.
 import { SForm, SHeading, SNotification, SButton } from "./styles";

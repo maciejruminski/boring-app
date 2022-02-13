@@ -2,7 +2,7 @@
 import styled from "styled-components";
 
 // Components.
-import { Lock } from "../../Common/Icons";
+import { Lock } from "@common/Icons";
 
 // Styles.
 const SEmail = styled.div`
