@@ -13,14 +13,14 @@ import { SForm, SHeading, SNotification, SButton } from "./styles";
 export default function ResendForm() {
   const {
     state: {
-      email: { isResent },
+      email: { email, isResent },
     },
     actions: { sendPassword },
   } = useAuthContext();
 
   const handleFormSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    sendPassword("mac-rum@wp.pl", true);
+    sendPassword(email, true);
   };
 
   const notificationRef = useRef<HTMLParagraphElement>(null);
