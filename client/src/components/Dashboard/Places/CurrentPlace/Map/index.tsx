@@ -2,13 +2,13 @@
 import { useEffect, useRef } from "react";
 
 // Controllers.
-import GoogleMap from "../../../../../controllers/GoogleMap/GoogleMap";
+import GoogleMap from "@controllers/GoogleMap/GoogleMap";
 
 // Styles.
 import { SMap, SMapText, SButton } from "./styles";
 
 // Context.
-import { useDetailsContext } from "../../../../../context/Details";
+import { useDetailsContext } from "@context/Details";
 
 let map: GoogleMap;
 

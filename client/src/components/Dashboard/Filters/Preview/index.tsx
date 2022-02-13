@@ -1,9 +1,9 @@
 // Controllers.
-import Helper from "../../../../controllers/Helper";
+import Helper from "@controllers/Helper";
 
 // Context.
-import useFiltersContext from "../../../../context/Filters/useFiltersContext";
-import useFiltersAndPlacesContext from "../../../../context/FiltersAndPlaces/useFiltersAndPlacesContext";
+import useFiltersContext from "@context/Filters/useFiltersContext";
+import { useFiltersAndPlacesContext } from "@context/FiltersAndPlaces";
 
 // Components.
 import Filter from "./Filter";

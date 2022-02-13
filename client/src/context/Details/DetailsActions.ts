@@ -1,6 +1,6 @@
 // Controllers.
-import Helper from "../../controllers/Helper";
-import API from "../../controllers/API";
+import Helper from "@controllers/Helper";
+import API from "@controllers/API";
 
 export default class DetailsActions {
   private dispatch: React.Dispatch<IDetailsAction>;

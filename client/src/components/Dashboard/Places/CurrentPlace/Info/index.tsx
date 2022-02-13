@@ -1,5 +1,5 @@
 // Context.
-import { useDetailsContext } from "../../../../../context/Details";
+import { useDetailsContext } from "@context/Details";
 
 // Styles.
 import {

@@ -6,9 +6,9 @@ import Places from "./Places";
 import { SDashboard } from "./styles";
 
 // Providers.
-import { PlacesContextProvider } from "../../context/Places";
-import { FiltersContextProvider } from "../../context/Filters";
-import { FiltersAndPlacesContextProvider } from "../../context/FiltersAndPlaces";
+import { PlacesContextProvider } from "@context/Places";
+import { FiltersContextProvider } from "@context/Filters";
+import { FiltersAndPlacesContextProvider } from "@context/FiltersAndPlaces";
 
 export default function Dashboard() {
   return (

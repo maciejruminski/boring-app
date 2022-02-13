@@ -1,7 +1,7 @@
+// Functions.
 import styled from "styled-components";
 
-const SLabel = styled.div`
-
-`;
+// Styles.
+const SLabel = styled.div``;
 
 export { SLabel };

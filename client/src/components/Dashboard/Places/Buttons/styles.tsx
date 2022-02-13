@@ -2,7 +2,7 @@
 import styled from "styled-components";
 
 // Components.
-import Button from "../../../Common/Button";
+import Button from "@common/Button";
 
 const SNote = styled.p`
   color: var(--text);

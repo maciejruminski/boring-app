@@ -1,5 +1,5 @@
 // Context.
-import { useHistoricPlacesContext } from "../../../../../context/HistoricPlaces";
+import { useHistoricPlacesContext } from "@context/HistoricPlaces";
 
 // Components.
 import Place from "../../Place";

@@ -2,11 +2,11 @@
 import { useRef, useEffect } from "react";
 
 // Controllers.
-import Helper from "../../../../controllers/Helper";
+import Helper from "@controllers/Helper";
 
 // Context.
-import useFiltersContext from "../../../../context/Filters/useFiltersContext";
-import useFiltersAndPlacesContext from "../../../../context/FiltersAndPlaces/useFiltersAndPlacesContext";
+import useFiltersContext from "@context/Filters/useFiltersContext";
+import { useFiltersAndPlacesContext } from "@context/FiltersAndPlaces";
 
 // Components.
 import Types from "../Types";
@@ -15,7 +15,7 @@ import Distance from "../Distance";
 import MinPrice from "../MinPrice";
 import MaxPrice from "../MaxPrice";
 import OpenNow from "../OpenNow";
-import Button from "../../../Common/Button";
+import Button from "@common/Button";
 
 // Styles.
 import { SForm, SClose, SHeading, SNote } from "./styles";

@@ -2,10 +2,10 @@
 import { forwardRef, useState, useEffect } from "react";
 
 // Context.
-import useFiltersAndPlacesContext from "../../../../context/FiltersAndPlaces/useFiltersAndPlacesContext";
+import { useFiltersAndPlacesContext } from "@context/FiltersAndPlaces";
 
 // Components.
-import Input from "../../../Common/Form/Input";
+import Input from "@common/Form/Input";
 
 // eslint-disable-next-line no-empty-pattern
 export default forwardRef<HTMLInputElement>(({}, ref) => {

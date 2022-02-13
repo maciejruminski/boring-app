@@ -2,8 +2,8 @@
 import { useEffect } from "react";
 
 // Context.
-import usePlacesContext from "../../../../context/Places/usePlacesContext";
-import useFiltersAndPlacesContext from "../../../../context/FiltersAndPlaces/useFiltersAndPlacesContext";
+import usePlacesContext from "@context/Places/usePlacesContext";
+import { useFiltersAndPlacesContext } from "@context/FiltersAndPlaces";
 
 // Components.
 import Place from "../Place";

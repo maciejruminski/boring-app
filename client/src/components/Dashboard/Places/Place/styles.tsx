@@ -2,10 +2,10 @@
 import styled from "styled-components";
 
 // Mixins.
-// import { BodyBackground } from "../../../Mixins";
+// import { BodyBackground } from "@src/Mixins";
 
 // Components.
-// import Button from "../../Common/Button";
+// import Button from "@common/Button";
 
 // Styles.
 const SPlace = styled.li<{ isVisible: boolean }>`

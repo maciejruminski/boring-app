@@ -1,7 +1,10 @@
+// Functions.
 import styled from "styled-components";
 
-import { Font } from "../../../Mixins";
+// Mixins.
+import { Font } from "@src/Mixins";
 
+// Styles.
 const SSubmit = styled.button`
   ${Font({ weight: 600, size: 15 })};
   appearance: none;

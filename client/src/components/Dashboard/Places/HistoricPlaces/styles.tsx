@@ -2,10 +2,10 @@
 import styled from "styled-components";
 
 // Components.
-import Button from "../../../Common/Button";
+import Button from "@common/Button";
 
 // Mixins.
-import { Modal, ScreenReaderText } from "../../../../Mixins";
+import { Modal, ScreenReaderText } from "@src/Mixins";
 
 // Styles.
 const SModal = styled.div<{ isModalOpen: boolean }>`

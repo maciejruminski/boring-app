@@ -2,11 +2,11 @@
 import { useEffect } from "react";
 
 // Controllers.
-import Helper from "../../../../controllers/Helper";
+import Helper from "@controllers/Helper";
 
 // Context.
-import { useHistoricPlacesContext } from "../../../../context/HistoricPlaces";
-import { useDetailsContext } from "../../../../context/Details";
+import { useHistoricPlacesContext } from "@context/HistoricPlaces";
+import { useDetailsContext } from "@context/Details";
 
 // Styles.
 import { SDetails, SClose } from "./styles";

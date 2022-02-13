@@ -1,10 +1,10 @@
 // Controllers.
-import Helper from "../../../../../controllers/Helper";
+import Helper from "@controllers/Helper";
 
 // Context.
-import { useFiltersAndPlacesContext } from "../../../../../context/FiltersAndPlaces";
-import { useHistoricPlacesContext } from "../../../../../context/HistoricPlaces";
-import { useDetailsContext } from "../../../../../context/Details";
+import { useFiltersAndPlacesContext } from "@context/FiltersAndPlaces";
+import { useHistoricPlacesContext } from "@context/HistoricPlaces";
+import { useDetailsContext } from "@context/Details";
 
 // Styles.
 import { SButton, SSecondButton } from "./styles";

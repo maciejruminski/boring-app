@@ -2,7 +2,7 @@
 import React, { forwardRef, useState } from "react";
 
 // Components.
-// import Label from "../../Common/Form/Label";
+// import Label from "@common/Form/Label";
 
 // Styles.
 import { SContainer, SCheckbox } from "./styles";

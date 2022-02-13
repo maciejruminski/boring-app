@@ -2,7 +2,7 @@
 import { forwardRef, useEffect, useState, useRef } from "react";
 
 // Controllers.
-import Helper from "../../../../controllers/Helper";
+import Helper from "@controllers/Helper";
 
 // Styles.
 import { SErrors, SContainer, SLabel, SInput } from "./styles";

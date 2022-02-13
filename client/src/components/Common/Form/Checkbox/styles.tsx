@@ -1,5 +1,7 @@
+// Functions.
 import styled from "styled-components";
 
+// Styles.
 const SContainer = styled.div`
   position: relative;
   margin: 30px 0;

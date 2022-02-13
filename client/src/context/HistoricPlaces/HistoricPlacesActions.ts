@@ -1,7 +1,7 @@
 // Controllers.
-import Helper from "../../controllers/Helper";
-import LocalStorage from "../../controllers/LocalStorage";
-import API from "../../controllers/API";
+import Helper from "@controllers/Helper";
+import LocalStorage from "@controllers/LocalStorage";
+import API from "@controllers/API";
 
 export default class HistoricPlacesActions {
   private state: IHistoricPlacesState;

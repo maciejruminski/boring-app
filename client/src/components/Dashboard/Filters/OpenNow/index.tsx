@@ -2,10 +2,10 @@
 import { forwardRef } from "react";
 
 // Context.
-import useFiltersAndPlacesContext from "../../../../context/FiltersAndPlaces/useFiltersAndPlacesContext";
+import { useFiltersAndPlacesContext } from "@context/FiltersAndPlaces";
 
 // Components.
-import Checkbox from "../../../Common/Form/Checkbox";
+import Checkbox from "@common/Form/Checkbox";
 
 // eslint-disable-next-line no-empty-pattern
 export default forwardRef<HTMLInputElement>(({}, ref) => {

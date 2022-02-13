@@ -2,7 +2,7 @@
 import styled from "styled-components";
 
 // Mixins.
-import { InputContainer, Label, Input } from "../../../../Mixins";
+import { InputContainer, Label, Input } from "@src/Mixins";
 
 // Styles.
 const SContainer = styled.div<{

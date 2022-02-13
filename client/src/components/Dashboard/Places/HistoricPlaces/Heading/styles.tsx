@@ -2,7 +2,7 @@
 import styled from "styled-components";
 
 // Mixins.
-import { Heading } from "../../../../../Mixins";
+import { Heading } from "@src/Mixins";
 
 const SHeading = styled.h3`
   ${Heading()};

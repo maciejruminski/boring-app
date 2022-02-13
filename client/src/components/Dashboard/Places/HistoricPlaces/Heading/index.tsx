@@ -1,5 +1,5 @@
 // Context.
-import useHistoricPlacesContext from "../../../../../context/HistoricPlaces/useHistoricPlacesContext";
+import useHistoricPlacesContext from "@context/HistoricPlaces/useHistoricPlacesContext";
 
 // Styles.
 import { SHeading, SNote, SSmallNote } from "./styles";

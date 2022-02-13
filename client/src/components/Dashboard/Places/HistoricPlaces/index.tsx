@@ -2,10 +2,10 @@
 import { useEffect } from "react";
 
 // Controllers.
-import Helper from "../../../../controllers/Helper";
+import Helper from "@controllers/Helper";
 
 // Context.
-import useHistoricPlacesContext from "../../../../context/HistoricPlaces/useHistoricPlacesContext";
+import useHistoricPlacesContext from "@context/HistoricPlaces/useHistoricPlacesContext";
 
 // Components.
 import Heading from "./Heading";

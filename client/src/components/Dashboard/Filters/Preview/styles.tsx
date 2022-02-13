@@ -2,10 +2,10 @@
 import styled from "styled-components";
 
 // Mixins.
-import { ScreenReaderText, Heading } from "../../../../Mixins";
+import { ScreenReaderText, Heading } from "@src/Mixins";
 
 // Components.
-import Button from "../../../Common/Button";
+import Button from "@common/Button";
 
 // Styles.
 const SContainer = styled.div`

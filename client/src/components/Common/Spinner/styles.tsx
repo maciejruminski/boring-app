@@ -2,8 +2,9 @@
 import styled from "styled-components";
 
 // Mixins.
-import { BodyBackground } from "../../../Mixins";
+import { BodyBackground } from "@src/Mixins";
 
+// Styles.
 const fitBusyToStyle = ({ isBusy }: { isBusy: boolean }) => {
   if (isBusy) {
     return `opacity:0.85;`;

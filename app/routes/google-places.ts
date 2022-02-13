@@ -1,5 +1,5 @@
 import * as express from "express";
-import GooglePlacesController from "../controllers/GooglePlacesController";
+import GooglePlacesController from "@controllers/GooglePlacesController";
 
 const router = express.Router();
 

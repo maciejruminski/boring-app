@@ -1,5 +1,5 @@
 import * as express from "express";
-import OneTimePasswordController from "../controllers/OneTimePasswordController";
+import OneTimePasswordController from "@controllers/OneTimePasswordController";
 
 const router = express.Router();
 

@@ -2,10 +2,10 @@
 import { forwardRef } from "react";
 
 // Context.
-import useFiltersAndPlacesContext from "../../../../context/FiltersAndPlaces/useFiltersAndPlacesContext";
+import { useFiltersAndPlacesContext } from "@context/FiltersAndPlaces";
 
 // Components.
-import Select from "../../../Common/Form/Select";
+import Select from "@common/Form/Select";
 
 // Array with prices.
 import prices from "../prices";

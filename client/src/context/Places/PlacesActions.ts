@@ -2,12 +2,12 @@
 import { Loader } from "@googlemaps/js-api-loader";
 
 // Controllers.
-import Helper from "../../controllers/Helper";
-import LocalStorage from "../../controllers/LocalStorage";
-import API from "../../controllers/API";
+import Helper from "@controllers/Helper";
+import LocalStorage from "@controllers/LocalStorage";
+import API from "@controllers/API";
 
 // Map options.
-import mapOptions from "../../controllers/GoogleMap/options";
+import mapOptions from "@controllers/GoogleMap/options";
 
 // Icons.
 import personIconPath from "../images/user.svg";

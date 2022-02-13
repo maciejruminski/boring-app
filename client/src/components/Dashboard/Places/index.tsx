@@ -6,8 +6,8 @@ import CurrentPlace from "./CurrentPlace";
 import HistoricPlaces from "./HistoricPlaces";
 
 // Providers.
-import { DetailsContextProvider } from "../../../context/Details";
-import { HistoricPlacesContextProvider } from "../../../context/HistoricPlaces";
+import { DetailsContextProvider } from "@context/Details";
+import { HistoricPlacesContextProvider } from "@context/HistoricPlaces";
 
 export default function Places() {
   return (

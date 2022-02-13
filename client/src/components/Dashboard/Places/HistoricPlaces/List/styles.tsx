@@ -2,7 +2,7 @@
 import styled from "styled-components";
 
 // Mixins.
-import { BodyBackground } from "../../../../../Mixins";
+import { BodyBackground } from "@src/Mixins";
 
 // Styles.
 const SModal = styled.div<{ isModalOpen: boolean }>`
