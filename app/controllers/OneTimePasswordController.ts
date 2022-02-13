@@ -8,17 +8,8 @@ import { generate } from "generate-password"; // https://www.npmjs.com/package/g
 import { v4 as uuidv4 } from "uuid";
 import { Console } from "console";
 
-// const generatedOneTimePassword = generate({
-//   length: 6,
-//   numbers: true,
-//   symbols: false,
-//   lowercase: false,
-//   uppercase: false,
-// });
-
-const generatedOneTimePassword = "111111";
-
-var email;
+let generatedOneTimePassword;
+let generatedOneTimePasswordTime = new Date();
 
 let transporter: any;
 
@@ -37,12 +28,29 @@ class OneTimePasswordController {
   //   return client.spreadsheets.values;
   // }
 
+  generatePassword() {
+    const now = new Date();
+    const minutesToAdd = 15;
+
+    if (now > generatedOneTimePasswordTime) {
+      generatedOneTimePasswordTime = new Date(
+        now.getTime() + minutesToAdd * 60000
+      );
+
+      generatedOneTimePassword = generate({
+        length: 6,
+        numbers: true,
+        symbols: false,
+        lowercase: false,
+        uppercase: false,
+      });
+    }
+  }
+
   send(req, res) {
-    email = req.body.email;
+    const email = req.body.email;
 
     if (!transporter) {
-      console.log("RESEND!!");
-
       transporter = nodemailer.createTransport({
         host: process.env.NODEMAILER_HOST,
         port: process.env.NODEMAILER_PORT,
@@ -56,9 +64,11 @@ class OneTimePasswordController {
       });
     }
 
+    this.generatePassword();
+
     // send mail with defined transport object
     var mailOptions = {
-      to: req.body.email,
+      to: email,
       subject: "Otp for registration is: ",
       html:
         "<h3>OTP for account verification is </h3>" +
@@ -82,6 +92,10 @@ class OneTimePasswordController {
   }
 
   resend(req, res) {
+    const email = req.body.email;
+
+    this.generatePassword();
+
     var mailOptions = {
       to: email,
       subject: "Otp for registration is: ",
@@ -109,6 +123,8 @@ class OneTimePasswordController {
 
   async verify(req, res) {
     const { oneTimePassword } = req.body;
+
+    this.generatePassword();
 
     const oneTimePasswordIsEmpty = oneTimePassword === "";
 
