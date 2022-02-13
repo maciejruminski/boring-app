@@ -9,11 +9,6 @@ router.post(
 );
 
 router.post(
-  "/resend-password",
-  OneTimePasswordController.resend.bind(OneTimePasswordController)
-);
-
-router.post(
   "/verify-password",
   OneTimePasswordController.verify.bind(OneTimePasswordController)
 );
