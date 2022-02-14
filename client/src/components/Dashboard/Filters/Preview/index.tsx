@@ -18,7 +18,7 @@ import {
 } from "./styles";
 
 // Icons.
-import filterIconPath from "../../../../images/filter.svg";
+import filterIconPath from "@images/filter.svg";
 
 // Array with types and prices.
 import types from "../filterTypes";

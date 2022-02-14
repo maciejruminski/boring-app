@@ -12,7 +12,7 @@ import { useDetailsContext } from "@context/Details";
 import { SDetails, SClose } from "./styles";
 
 // Icons.
-import closeIconPath from "../../../../images/close.svg";
+import closeIconPath from "@images/close.svg";
 
 // Components.
 import Info from "./Info";

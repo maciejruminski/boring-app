@@ -13,7 +13,7 @@ import {
 } from "./styles";
 
 // Icons.
-import StarIconPath from "../../../../../images/star.svg";
+import StarIconPath from "@images/star.svg";
 
 export default function Details() {
   const {

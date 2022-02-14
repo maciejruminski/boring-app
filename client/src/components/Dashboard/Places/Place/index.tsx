@@ -15,8 +15,8 @@ import {
 } from "./styles";
 
 // Icons.
-import StarIconPath from "../../../../images/star.svg";
-import ArrowIconPath from "../../../../images/right-arrow.svg";
+import StarIconPath from "@images/star.svg";
+import ArrowIconPath from "@images/right-arrow.svg";
 
 export default function Place({ place, isVisible }: any): JSX.Element {
   const { name, rating } = place;

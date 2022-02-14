@@ -5,8 +5,8 @@ import { Loader } from "@googlemaps/js-api-loader";
 import options from "./options";
 
 // Icons.
-import personIconPath from "../../images/user.svg";
-import markerIconPath from "../../images/marker.svg";
+import personIconPath from "@images/user.svg";
+import markerIconPath from "@images/marker.svg";
 
 export default class GoogleMap {
   map: google.maps.Map<HTMLDivElement> | undefined;

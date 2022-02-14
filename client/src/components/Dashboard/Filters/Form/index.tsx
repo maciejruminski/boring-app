@@ -21,7 +21,7 @@ import Button from "@common/Button";
 import { SForm, SClose, SHeading, SNote, SWarning } from "./styles";
 
 // Icons.
-import closeIconPath from "../../../../images/close.svg";
+import closeIconPath from "@images/close.svg";
 import WarningIconPath from "@images/warning.svg";
 
 export default function Form() {

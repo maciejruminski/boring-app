@@ -15,7 +15,7 @@ import List from "./List";
 import { SModal, SButton } from "./styles";
 
 // Icons.
-import closeIconPath from "../../../../images/close.svg";
+import closeIconPath from "@images/close.svg";
 
 export default function HistoricPlaces(): JSX.Element {
   const {
