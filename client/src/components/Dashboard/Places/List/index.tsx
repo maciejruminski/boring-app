@@ -1,5 +1,5 @@
 // Functions.
-import { useEffect } from "react";
+import { useEffect, useRef, useCallback } from "react";
 
 // Context.
 import usePlacesContext from "@context/Places/usePlacesContext";
@@ -9,7 +9,7 @@ import { useFiltersAndPlacesContext } from "@context/FiltersAndPlaces";
 import Place from "../Place";
 
 // Styles.
-import { SList, SListContainer, SButton } from "./styles";
+import { SList, SListContainer, SListInnerContainer, SButton } from "./styles";
 
 export default function List(): JSX.Element {
   const {
@@ -27,46 +27,72 @@ export default function List(): JSX.Element {
   } = usePlacesContext();
 
   const {
-    state: {
-      places,
-      // isShowMorePlacesButtonVisible,
-      // numberOfPlacesToShowAtOnce,
-      // maximumNumberOfPlaces,
-    },
-    actions: {
-      // setNumberOfPlacesToShowAtOnce,
-      // resetNumberOfPlacesToShowAtOnce,
-      // setNumberOfPlacesButtonVisibility,
-    },
+    state: { places },
   } = useFiltersAndPlacesContext();
-
-  // console.log(maximumNumberOfPlaces);
 
   useEffect(
     () => setNumberOfPlacesButtonVisibility(places),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [numberOfPlacesToShowAtOnce, maximumNumberOfPlaces]
   );
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     resetNumberOfPlacesToShowAtOnce();
     setMaximumNumberOfPlaces(places.length);
   }, [places]);
 
-  // if (Boolean(maximumNumberOfPlaces)) {
-  // do sprawdzenia
-  if (maximumNumberOfPlaces) {
+  const useHookWithRefCallback = () => {
+    const ref = useRef<HTMLDivElement | null>(null);
+    const setRef = useCallback((listInnerContainer: HTMLDivElement) => {
+      if (listInnerContainer) {
+        const list = listInnerContainer?.children[0];
+
+        if (listInnerContainer) {
+          setTimeout(
+            () => (listInnerContainer.style.height = list?.clientHeight + "px"),
+            0
+          );
+        }
+      }
+
+      ref.current = listInnerContainer;
+    }, []);
+
+    return [ref, setRef];
+  };
+
+  const [listContainerRef, setListContainerRef] = useHookWithRefCallback();
+  const listRef = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    if (
+      listContainerRef &&
+      // @ts-ignore
+      listContainerRef.current &&
+      listRef &&
+      listRef.current
+    ) {
+      // @ts-ignore
+      listContainerRef.current.style.height =
+        listRef.current.clientHeight + "px";
+    }
+  }, [numberOfPlacesToShowAtOnce]);
+
+  if (Boolean(maximumNumberOfPlaces)) {
     return (
       <SListContainer>
-        <SList>
-          {places.map((place: any, i: number) => (
-            <Place
-              place={place}
-              key={place.id}
-              isVisible={i < numberOfPlacesToShowAtOnce ? true : false}
-            />
-          ))}
-        </SList>
+        <SListInnerContainer ref={setListContainerRef} id="listInnerContainer">
+          <SList ref={listRef}>
+            {places.map((place: any, i: number) => (
+              <Place
+                place={place}
+                key={place.id}
+                isVisible={i < numberOfPlacesToShowAtOnce ? true : false}
+              />
+            ))}
+          </SList>
+        </SListInnerContainer>
         {isShowMorePlacesButtonVisible && (
           <SButton
             onClickHandler={setNumberOfPlacesToShowAtOnce}
