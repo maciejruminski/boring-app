@@ -69,7 +69,7 @@ export default forwardRef<
       }
     }, [error]);
 
-    // TO REFACTOR.
+    // TO REFACTOR. /////
     let isError = false;
     let isSuccess = false;
     let isLabelActive = false;
@@ -86,6 +86,14 @@ export default forwardRef<
       isLabelActive = isError || isSuccess ? true : false;
     }
 
+    if (!checkValidity) {
+      isError = false;
+      isSuccess = Boolean(defaultValue);
+      isLabelActive = Boolean(defaultValue);
+    }
+
+    //////////////
+
     return (
       <>
         <SContainer
@@ -93,7 +101,7 @@ export default forwardRef<
           // isError={error}
           isSuccess={isSuccess}
           // isSuccess={success}
-          checkValidity={isLabelActive}
+          checkValidity={checkValidity}
           // checkValidity={checkValidity}
           pseudoElementWidth={labelWidth}
         >

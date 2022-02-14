@@ -10,36 +10,24 @@ import Input from "@common/Form/Input";
 // eslint-disable-next-line no-empty-pattern
 export default forwardRef<HTMLInputElement>(({}, ref) => {
   const {
-    state: {
-      filters: { keyword },
-    },
+    state: { filters },
   } = useFiltersAndPlacesContext();
 
-  const [isKeyword, setIsKeyword] = useState(keyword ? true : false);
+  const [keyword, setKeyword] = useState(filters.keyword);
 
-  const setErrorHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setIsKeyword(e.target.value ? true : false);
+  const setHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setKeyword(e.target.value);
   };
 
-  useEffect(() => {
-    if (keyword) {
-      setIsKeyword(true);
-    }
-  }, [keyword]);
-
-return <></>
-
-  // return (
-  //   <Input
-  //     label="Słowo kluczowe"
-  //     defaultValue={keyword}
-  //     id="keyword"
-  //     onChangeHandler={setErrorHandler}
-  //     labelActivity={isKeyword}
-  //     error={false}
-  //     success={isKeyword}
-  //     checkValidity={false}
-  //     ref={ref}
-  //   />
-  // );
+  return (
+    <Input
+      label="Słowo kluczowe"
+      defaultValue={keyword}
+      id="keyword"
+      onChangeHandler={setHandler}
+      error={""}
+      checkValidity={false}
+      ref={ref}
+    />
+  );
 });
