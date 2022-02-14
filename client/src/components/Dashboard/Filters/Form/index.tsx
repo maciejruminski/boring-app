@@ -18,10 +18,11 @@ import OpenNow from "../OpenNow";
 import Button from "@common/Button";
 
 // Styles.
-import { SForm, SClose, SHeading, SNote } from "./styles";
+import { SForm, SClose, SHeading, SNote, SWarning } from "./styles";
 
 // Icons.
 import closeIconPath from "../../../../images/close.svg";
+import WarningIconPath from "@images/warning.svg";
 
 export default function Form() {
   const {
@@ -68,16 +69,25 @@ export default function Form() {
         isModalOpen={isFiltersModalOpen}
         onSubmit={onSubmitHandler}
       >
-        <SClose
+      <SClose
           onClickHandler={setFiltersModalOff}
           text="Zamknij modal z filtrami"
           icon={closeIconPath}
         />
         <SHeading>Filtry</SHeading>
         <SNote>Dostosuj filtry aby znaleźć interesujące Cię lokalizacje.</SNote>
-        <Distance ref={distanceRef} />
         <Keyword ref={keywordRef} />
+        <Distance ref={distanceRef} />
         <Types ref={typeRef} />
+        <SWarning>
+          <img
+            src={WarningIconPath}
+            aria-hidden="true"
+            alt="Ikona ostrzegawcza"
+          />
+          Ustawianie ceny nie jest zalecane! Wiele miejsc w systemie Google nie
+          ma ustawionej ceny, zostaną więc wykluczone z wyników wyszukiwania.
+        </SWarning>
         <MinPrice ref={minPriceRef} />
         <MaxPrice ref={maxPriceRef} />
         <OpenNow ref={openNowRef} />

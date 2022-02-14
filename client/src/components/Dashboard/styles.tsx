@@ -2,24 +2,15 @@
 import styled from "styled-components";
 
 // Styles.
-
 const SDashboard = styled.div`
-  @keyframes example {
-    from {
-      opacity: 0;
-      transform: scale(1.02);
-      visibility: hidden;
-    }
+  @keyframes showDashboard {
     to {
       opacity: 1;
-      transform: scale(1);
     }
   }
 
-  animation-name: example;
-  animation-duration: 0.5s;
-  animation-delay: 0.25s;
-  animation-fill-mode: forwards;
+  animation: showDashboard var(--spinnerTransitionDuration) linear 0.25s
+    forwards alternate;
   opacity: 0;
 `;
 

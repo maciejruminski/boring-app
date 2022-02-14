@@ -42,4 +42,19 @@ const SNote = styled.p`
   margin: 0 0 17px;
 `;
 
-export { SForm, SClose, SHeading, SNote };
+const SWarning = styled.p`
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--error);
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 25px;
+
+  img {
+    width: 17px;
+    margin-right: 10px;
+    transform: translateY(3px);
+  }
+`;
+
+export { SForm, SClose, SHeading, SNote, SWarning };

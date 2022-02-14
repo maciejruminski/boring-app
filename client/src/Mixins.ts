@@ -63,9 +63,9 @@ export const InputContainer = () => css<{
     content: "";
     position: absolute;
     width: 10px;
-    height: 53px;
+    height: 54px;
     border-radius: 5px 0 0 5px;
-    bottom: 3px;
+    bottom: 2px;
     transition-duration: 0.3s;
     border: 2px solid #abc2d4;
     border-bottom: none;

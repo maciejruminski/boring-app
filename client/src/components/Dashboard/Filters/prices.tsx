@@ -1,8 +1,9 @@
 const prices: Prices = {
-  "0": "Tanio",
-  "1": "Średnio",
-  "2": "Drogo",
-  "3": "Bardzo drogo",
+  "_": "-",
+  "_0": "Tanio",
+  "_1": "Średnio",
+  "_2": "Drogo",
+  "_3": "Bardzo drogo",
 };
 
 export default prices;

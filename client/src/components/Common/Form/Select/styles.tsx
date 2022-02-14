@@ -34,7 +34,7 @@ const SCustomSelect = styled.div<{ areOptionsVisible: boolean }>`
   background: var(--textLight);
   color: var(--textDark);
   z-index: 10;
-  max-height: 200px;
+  max-height: 150px;
   overflow-y: scroll;
   border-radius: var(--borderRadius);
   transition-duration: var(--transitionDuration);
@@ -78,4 +78,12 @@ const SCustomOption = styled.div`
   }
 `;
 
-export { SContainer, SLabel, SSelect, SCustomSelect, SCustomOption };
+const SCaret = styled.img`
+  position: absolute;
+  top: 22px;
+  right: 23px;
+  width: 14px;
+  height: auto;
+`;
+
+export { SContainer, SLabel, SSelect, SCustomSelect, SCustomOption, SCaret };

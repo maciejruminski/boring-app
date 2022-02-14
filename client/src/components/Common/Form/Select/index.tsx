@@ -1,9 +1,6 @@
 // Functions.
 import React, { forwardRef, useState, useEffect } from "react";
 
-// Components.
-// import Label from "@common/Form/Label";
-
 // Styles.
 import {
   SContainer,
@@ -11,7 +8,11 @@ import {
   SSelect,
   SCustomSelect,
   SCustomOption,
+  SCaret,
 } from "./styles";
+
+// Icons.
+import caretIconPath from "@images/caret.svg";
 
 export default forwardRef<
   HTMLSelectElement,
@@ -97,10 +98,16 @@ export default forwardRef<
         checkValidity={false}
         pseudoElementWidth={labelWidth}
       >
-        {/* <Label text="Type" /> */}
         <SLabel htmlFor={id} ref={labelRef} isActive={true}>
           {label}
         </SLabel>
+
+        <SCaret
+          src={caretIconPath}
+          aria-hidden="true"
+          alt="Ikona sugerująca możliwość wyboru"
+        />
+
         <SSelect
           isError={false}
           isSuccess={true}

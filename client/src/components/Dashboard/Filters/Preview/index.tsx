@@ -51,11 +51,18 @@ export default function Preview() {
         <Filter text="Dystans" type={formattedDistance} />
         <Filter text="Słowo kluczowe" type={keyword} />
         <Filter text="Typ" type={types[type as keyof FilterTypes]} />
-        <Filter text="Cena minimalna" type={prices[minPrice as keyof Prices]} />
-        <Filter
-          text="Cena maksymalna"
-          type={prices[maxPrice as keyof Prices]}
-        />
+        {minPrice !== "_" && (
+          <Filter
+            text="Cena minimalna"
+            type={prices[minPrice as keyof Prices]}
+          />
+        )}
+        {maxPrice !== "_" && (
+          <Filter
+            text="Cena maksymalna"
+            type={prices[maxPrice as keyof Prices]}
+          />
+        )}
         <Filter
           text="Pokaż tylko otwarte miejsca"
           type={openNow ? "Tak" : "Nie"}

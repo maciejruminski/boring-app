@@ -35,51 +35,15 @@ type Filters = {
 interface IFiltersAndPlacesState {
   filters: Filters;
   places: Places;
-  historicPlaces: Places;
-  maximumNumberOfPlaces: number;
-  numberOfPlacesToShowAtOnce: number;
-  isShowMorePlacesButtonVisible: boolean;
-  currentPlace: PlaceWithDetails;
-  modals: {
-    isCurrentPlaceModalOpen: boolean;
-    isHistoricPlacesModalOpen: boolean;
-  };
 }
 
 interface IFiltersAndPlacesActions {
-  setFiltersAndShowPlaces: () => void;
-  // setPlacesByFilters: (filters: Filters) => void;
   showNewPlacesByFilters: (filters: Filters) => void;
-  setCurrentPlace: (placeWithDetails: PlaceWithDetails) => void;
-  getCurrentPlaceDetails: (place: Place) => Promise<void>;
-
-  // setPlacesFromLocalStorage: () => void;
-  // setFilters: () => void;
-  // setFiltersAndNewPlaces: () => Promise<void>;
+  setFiltersAndShowPlaces: () => void;
   updateFilters: (filters: Filters) => Promise<void>;
-  // setFiltersFromLocalStorage: () => void;
-  addHistoricPlace: (place: Place) => void;
-  removeHistoricPlace: (id: string) => void;
-  setHistoricPlaces: () => void;
-  setHistoricPlacesModalOn: () => void;
-  setHistoricPlacesModalOff: () => void;
-  setNumberOfPlacesToShowAtOnce: () => void;
-  resetNumberOfPlacesToShowAtOnce: () => void;
-  setNumberOfPlacesButtonVisibility: () => void;
-  setMaximumNumberOfPlaces: (number: number) => void;
 }
 
-type FiltersAndPlacesActionTypes =
-  | "setFilters"
-  | "setPlaces"
-  | "setHistoricPlaces"
-  | "setCurrentPlace"
-  | "setHistoricPlacesModalOn"
-  | "setHistoricPlacesModalOff"
-  | "setPlacesFromLocalStorage"
-  | "setNumberOfPlacesToShowAtOnce"
-  | "setNumberOfPlacesButtonVisibility"
-  | "setMaximumNumberOfPlaces";
+type FiltersAndPlacesActionTypes = "setFilters" | "setPlaces";
 
 interface IFiltersAndPlacesAction {
   type: FiltersAndPlacesActionTypes;
@@ -161,8 +125,9 @@ type FilterTypes = {
 };
 
 type Prices = {
-  "0": "Tanio";
-  "1": "Średnio";
-  "2": "Drogo";
-  "3": "Bardzo drogo";
+  _: "-";
+  _0: "Tanio";
+  _1: "Średnio";
+  _2: "Drogo";
+  _3: "Bardzo drogo";
 };

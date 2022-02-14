@@ -3,15 +3,15 @@ import fetch from "node-fetch";
 
 class GooglePlacesController {
   async getPlaces(req, res, next) {
-    const { distance, keyword, type, maxprice, minprice, opennow } =
+    const { distance, keyword, type, maxPrice, minPrice, openNow } =
       req.body.filters;
 
     const location = "53.4813444,18.7613652";
 
     try {
       const url = `https://maps.googleapis.com/maps/api/place/search/json?location=${location}&radius=${distance}&keyword=${keyword}${
-        opennow ? "&opennow" : ""
-      }&type=${type}&maxprice=${maxprice}&minprice=${minprice}&key=${
+        openNow ? "&opennow" : ""
+      }&type=${type}&maxprice=${maxPrice}&minprice=${minPrice}&key=${
         process.env.GOOGLE_API_KEY
       }`;
 
