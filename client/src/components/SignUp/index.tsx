@@ -14,6 +14,10 @@ export default function SignUp() {
     },
   } = useAuthContext();
 
+  // const { t, i18n } = useTranslation();
+
+  // console.log(Object.keys(i18n.services.resourceStore.data));
+
   if (isSent) {
     return (
       <>
@@ -25,6 +29,7 @@ export default function SignUp() {
 
   return (
     <>
+      {/* <button onClick={() => i18n.changeLanguage("fr")}>Switcher</button> */}
       <Spinner isBusy={isBusy} />
       <Email />
     </>

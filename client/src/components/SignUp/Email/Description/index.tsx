@@ -1,19 +1,18 @@
 // Styles.
 import { SDescription, SHeading } from "./styles";
 
+// Context.
+import { useTranslation } from "react-i18next";
+
 export default function Description() {
+  const { t } = useTranslation();
+
   return (
     <SDescription>
-      <p>
-        Are you feeling bored? Perhaps this application will help you find some
-        interesting place.
-      </p>
-      <p>You are only two small steps away from using it.</p>
-      <SHeading>Verification</SHeading>
-      <p>
-        We will send you a <b>One Time Password</b> on your e-mail. We do not
-        store your email address anywhere!
-      </p>
+      <p>{t("Email.1_paragraph")}</p>
+      <p>{t("Email.2_paragraph")}</p>
+      <SHeading>{t("Email.2_heading")}</SHeading>
+      <p dangerouslySetInnerHTML={{ __html: t("Email.3_paragraph") }}></p>
     </SDescription>
   );
 }

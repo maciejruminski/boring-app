@@ -3,6 +3,7 @@ import { useRef } from "react";
 
 // Context.
 import { useAuthContext } from "@context/Auth";
+import { useTranslation } from "react-i18next";
 
 // Components.
 import { Envelope } from "@common/Icons";
@@ -35,10 +36,12 @@ export default function Form() {
     }
   };
 
+  const { t } = useTranslation();
+
   return (
     <SForm method="POST" onSubmit={handleFormSubmit} noValidate>
       <Input
-        label="Enter your email"
+        label={t("Email.1_label")}
         value={email}
         id="email"
         type="email"
@@ -52,8 +55,8 @@ export default function Form() {
 
       <SSubmit
         type="submit"
-        text="Get One Time Password"
         onClickHandler={submitHandler}
+        text={t("Email.1_button")}
       />
     </SForm>
   );
