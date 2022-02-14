@@ -1,6 +1,9 @@
 // Libraries.
 import fetch from "node-fetch";
 
+// Config.
+import googleApiKey from "../config";
+
 class GooglePlacesController {
   async getPlaces(req, res, next) {
     const { distance, keyword, type, maxPrice, minPrice, openNow } =
@@ -11,9 +14,7 @@ class GooglePlacesController {
     try {
       const url = `https://maps.googleapis.com/maps/api/place/search/json?location=${location}&radius=${distance}&keyword=${keyword}${
         openNow ? "&opennow" : ""
-      }&type=${type}&maxprice=${maxPrice}&minprice=${minPrice}&key=${
-        process.env.GOOGLE_API_KEY
-      }`;
+      }&type=${type}&maxprice=${maxPrice}&minprice=${minPrice}&key=${googleApiKey}`;
 
       await fetch(url, {
         method: "GET",
@@ -41,7 +42,7 @@ class GooglePlacesController {
     const { placeID } = req.body;
 
     try {
-      const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeID}&key=${process.env.GOOGLE_API_KEY}`;
+      const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeID}&key=${googleApiKey}`;
 
       await fetch(url, {
         method: "GET",

@@ -4,9 +4,31 @@ import nodemailer from "nodemailer";
 import { generate } from "generate-password";
 import { v4 as uuidv4 } from "uuid";
 
+// Config.
+import config from "../config";
+
+const {
+  nodemailerHost,
+  nodemailerPort,
+  nodemailerService,
+  nodemailerAuthUser,
+  nodemailerAuthPass,
+} = config;
+
+const transporter = nodemailer.createTransport({
+  host: nodemailerHost,
+  port: nodemailerPort,
+  secure: true,
+  service: nodemailerService,
+  from: nodemailerAuthUser,
+  auth: {
+    user: nodemailerAuthUser,
+    pass: nodemailerAuthPass,
+  },
+});
+
 let generatedOneTimePassword: string = "";
 let generatedOneTimePasswordTime = new Date();
-let transporter: any;
 
 class OneTimePasswordController {
   generatePassword() {
@@ -28,26 +50,8 @@ class OneTimePasswordController {
     }
   }
 
-  createTransport() {
-    transporter = nodemailer.createTransport({
-      host: process.env.NODEMAILER_HOST,
-      port: process.env.NODEMAILER_PORT,
-      secure: true,
-      service: process.env.NODEMAILER_SERVICE,
-      from: process.env.NODEMAILER_AUTH_USER,
-      auth: {
-        user: process.env.NODEMAILER_AUTH_USER,
-        pass: process.env.NODEMAILER_AUTH_PASS,
-      },
-    });
-  }
-
   send(req: Request, res: Response) {
     this.generatePassword();
-
-    if (!transporter) {
-      this.createTransport();
-    }
 
     const email = req.body.email;
     const mailOptions = {

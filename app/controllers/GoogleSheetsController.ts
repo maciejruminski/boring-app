@@ -2,16 +2,17 @@
 import { google } from "googleapis";
 import { Request, Response } from "express";
 
-
-
-
+// Config.
+import config from "../config";
+const { serviceAccountEmail, serviceAccountPrivateKey, spreadSheetsID } =
+  config;
 
 class GoogleSheetsController {
   getClientValues() {
     const JwtClient = new google.auth.JWT(
-      process.env.SERVICEACCOUNT_EMAIL,
+      serviceAccountEmail,
       null,
-      process.env.SERVICEACCOUNT_PRIVATE_KEY,
+      serviceAccountPrivateKey,
       ["https://www.googleapis.com/auth/spreadsheets"],
       null
     );
@@ -23,7 +24,7 @@ class GoogleSheetsController {
 
   async getUserRowById(userUUID: string): Promise<number> {
     const spreadsheetIds = await this.getClientValues().get({
-      spreadsheetId: process.env.SPREADSHEETS_ID,
+      spreadsheetId: spreadSheetsID,
       majorDimension: "ROWS",
       range: "Sheet1!A2:A1000",
     });
@@ -38,7 +39,7 @@ class GoogleSheetsController {
   async addUser(req: Request, res: Response): Promise<void> {
     const { userUUID }: { userUUID: string } = req.body;
     const clientData = {
-      spreadsheetId: process.env.SPREADSHEETS_ID,
+      spreadsheetId: spreadSheetsID,
       range: "Sheet1!A2",
       valueInputOption: "USER_ENTERED",
       resource: {
@@ -51,7 +52,7 @@ class GoogleSheetsController {
     res.status(200).json({
       status: 200,
       message: "Użytkownik został dodany do bazy danych",
-      uuid: userUUID
+      uuid: userUUID,
     });
   }
 
@@ -59,7 +60,7 @@ class GoogleSheetsController {
     const { filters, userUUID }: { filters: any; userUUID: string } = req.body;
     const row = await this.getUserRowById(userUUID);
     const clientData = {
-      spreadsheetId: process.env.SPREADSHEETS_ID,
+      spreadsheetId: spreadSheetsID,
       range: "Sheet1!B" + row,
       valueInputOption: "RAW",
       resource: {
@@ -79,7 +80,7 @@ class GoogleSheetsController {
     const { userUUID }: { userUUID: string } = req.body;
     const row = await this.getUserRowById(userUUID);
     const clientData = {
-      spreadsheetId: process.env.SPREADSHEETS_ID,
+      spreadsheetId: spreadSheetsID,
       majorDimension: "ROWS",
       range: "Sheet1!B" + row,
     };
@@ -97,7 +98,7 @@ class GoogleSheetsController {
     const { places, userUUID }: { places: any; userUUID: string } = req.body;
     const row = await this.getUserRowById(userUUID);
     const clientData = {
-      spreadsheetId: process.env.SPREADSHEETS_ID,
+      spreadsheetId: spreadSheetsID,
       range: "Sheet1!C" + row,
       valueInputOption: "RAW",
       resource: {
@@ -117,7 +118,7 @@ class GoogleSheetsController {
     const { userUUID }: { userUUID: string } = req.body;
     const row = await this.getUserRowById(userUUID);
     const clientData = {
-      spreadsheetId: process.env.SPREADSHEETS_ID,
+      spreadsheetId: spreadSheetsID,
       majorDimension: "ROWS",
       range: "Sheet1!C" + row,
     };
@@ -125,7 +126,7 @@ class GoogleSheetsController {
     const historicPlaces = await this.getClientValues().get(clientData);
     const historicPlacesValues = historicPlaces.data.values;
 
-    console.log('@@@@', historicPlacesValues);
+    console.log("@@@@", historicPlacesValues);
 
     res.status(200).json({
       status: 200,

@@ -1,4 +1,4 @@
 import app from "./app";
-import port from "./config";
+import config from "./config";
 
-app.listen(port, () => `App is live at ${port}`);
+app.listen(config.port, () => `App is live at ${config.port}`);
