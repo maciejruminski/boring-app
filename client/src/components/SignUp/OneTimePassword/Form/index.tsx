@@ -33,7 +33,7 @@ export default function OneTimePassword() {
     <SForm method="POST" onSubmit={handleFormSubmit} noValidate>
       <Input
         label="Enter the password"
-        defaultValue={password}
+        value={password}
         id="signUpPassword"
         onChangeHandler={inputOnChange}
         error={error}

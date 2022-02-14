@@ -39,7 +39,7 @@ export default function Form() {
     <SForm method="POST" onSubmit={handleFormSubmit} noValidate>
       <Input
         label="Enter your email"
-        defaultValue={email}
+        value={email}
         id="email"
         type="email"
         onChangeHandler={inputOnChange}

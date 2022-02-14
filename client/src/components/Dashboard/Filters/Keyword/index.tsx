@@ -22,7 +22,7 @@ export default forwardRef<HTMLInputElement>(({}, ref) => {
   return (
     <Input
       label="Słowo kluczowe"
-      defaultValue={keyword}
+      value={keyword}
       id="keyword"
       onChangeHandler={setHandler}
       error={""}

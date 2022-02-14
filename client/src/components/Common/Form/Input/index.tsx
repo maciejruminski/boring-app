@@ -11,15 +11,12 @@ export default forwardRef<
   HTMLInputElement,
   {
     label: string;
-    defaultValue: string | number;
+    value: string | number;
     id: string;
     onChangeHandler: React.ChangeEventHandler<HTMLInputElement>;
     error: string;
-    // errorMessage?: string;
-    // success: boolean;
     checkValidity: boolean;
     type?: "email" | "text";
-    // labelActivity: boolean;
     minLength?: number;
     maxLength?: number;
     required?: boolean;
@@ -29,18 +26,15 @@ export default forwardRef<
   (
     {
       label,
-      defaultValue,
+      value,
       id,
       onChangeHandler,
       error,
       type,
-      // success,
-      // labelActivity,
       checkValidity,
       minLength,
       maxLength,
       required,
-      // errorMessage,
       icon,
     },
     ref: React.ForwardedRef<HTMLInputElement>
@@ -69,55 +63,30 @@ export default forwardRef<
       }
     }, [error]);
 
-    // TO REFACTOR. /////
-    let isError = false;
-    let isSuccess = false;
-    let isLabelActive = false;
+    let isError = Boolean(error);
+    let isSuccess = Boolean(!isError && value);
+    let isLabelActive = Boolean(isError || isSuccess);
 
-    if (id === "signUpPassword") {
-      isError = Boolean(error);
-      isSuccess = Boolean(!isError && defaultValue);
-      isLabelActive = Boolean(isError || isSuccess);
-    }
-
-    if (id === "email") {
-      isError = error ? true : false;
-      isSuccess = !isError && defaultValue ? true : false;
-      isLabelActive = isError || isSuccess ? true : false;
-    }
-
-    if (!checkValidity) {
+    if (checkValidity === false) {
       isError = false;
-      isSuccess = Boolean(defaultValue);
-      isLabelActive = Boolean(defaultValue);
+      isSuccess = Boolean(value);
+      isLabelActive = Boolean(value);
     }
-
-    //////////////
 
     return (
       <>
         <SContainer
           isError={isError}
-          // isError={error}
           isSuccess={isSuccess}
-          // isSuccess={success}
           checkValidity={checkValidity}
-          // checkValidity={checkValidity}
           pseudoElementWidth={labelWidth}
         >
-          <SLabel
-            isActive={isLabelActive}
-            // isActive={labelActivity}
-            htmlFor={id}
-            ref={labelRef}
-          >
+          <SLabel isActive={isLabelActive} htmlFor={id} ref={labelRef}>
             {label}
           </SLabel>
           <SInput
             isError={isError}
-            // isError={error}
             isSuccess={isSuccess}
-            // isSuccess={success}
             checkValidity={checkValidity}
             ref={ref}
             onChange={onChangeHandler}
@@ -126,7 +95,7 @@ export default forwardRef<
             id={id}
             autoComplete="off"
             autoCorrect="off"
-            defaultValue={defaultValue}
+            defaultValue={value}
             minLength={minLength}
             maxLength={maxLength}
             required={required}
