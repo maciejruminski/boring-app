@@ -8,6 +8,9 @@ import options from "./options";
 import personIconPath from "@images/user.svg";
 import markerIconPath from "@images/marker.svg";
 
+// Config.
+import config from "@src/config";
+
 export default class GoogleMap {
   map: google.maps.Map<HTMLDivElement> | undefined;
   origin: google.maps.LatLng | undefined;
@@ -17,7 +20,7 @@ export default class GoogleMap {
 
   constructor(ref: React.RefObject<HTMLDivElement>) {
     const loader = new Loader({
-      apiKey: `${process.env.REACT_APP_GOOGLE_API_KEY}`,
+      apiKey: `${config.googleAPIKey}`,
     });
 
     navigator.geolocation.getCurrentPosition((success: GeolocationPosition) =>
