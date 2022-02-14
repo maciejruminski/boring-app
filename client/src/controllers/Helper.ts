@@ -3,14 +3,6 @@ import LocalStorage from "./LocalStorage";
 import API from "./API";
 
 export default class Controller {
-  private static async setUser(userUUID: string) {
-    LocalStorage.setUserUUID(userUUID);
-    LocalStorage.setUserAuthentication();
-
-    // const response = await API.addUser(userUUID);
-    await API.addUser(userUUID);
-  }
-
   static getRandomPlace(places: Places, currentPlaceID: string): Place {
     const filteredPlaces = places.filter(
       (place: { id: string }) => place.id !== currentPlaceID
