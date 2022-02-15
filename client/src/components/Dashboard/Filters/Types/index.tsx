@@ -3,6 +3,7 @@ import { forwardRef } from "react";
 
 // Context.
 import { useFiltersAndPlacesContext } from "@context/FiltersAndPlaces";
+import { useTranslation } from "react-i18next";
 
 // Components.
 import Select from "@common/Form/Select";
@@ -19,9 +20,11 @@ export default forwardRef<HTMLSelectElement>(
       },
     } = useFiltersAndPlacesContext();
 
+    const { t } = useTranslation();
+
     return (
       <Select
-        label="Typ"
+        label={t("Dashboard.Filters.Types.Select__label")}
         options={types}
         defaultOption={type}
         id="types"

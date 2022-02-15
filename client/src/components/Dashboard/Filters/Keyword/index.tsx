@@ -3,6 +3,7 @@ import { forwardRef, useState, useEffect } from "react";
 
 // Context.
 import { useFiltersAndPlacesContext } from "@context/FiltersAndPlaces";
+import { useTranslation } from "react-i18next";
 
 // Components.
 import Input from "@common/Form/Input";
@@ -19,9 +20,11 @@ export default forwardRef<HTMLInputElement>(({}, ref) => {
     setKeyword(e.target.value);
   };
 
+  const { t } = useTranslation();
+
   return (
     <Input
-      label="Słowo kluczowe"
+      label={t("Dashboard.Filters.Keyword.Input__label")}
       value={keyword}
       id="keyword"
       onChangeHandler={setHandler}

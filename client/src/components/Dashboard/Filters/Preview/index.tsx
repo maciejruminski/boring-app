@@ -2,8 +2,9 @@
 import Helper from "@controllers/Helper";
 
 // Context.
-import useFiltersContext from "@context/Filters/useFiltersContext";
+import { useFiltersContext } from "@context/Filters";
 import { useFiltersAndPlacesContext } from "@context/FiltersAndPlaces";
+import { useTranslation } from "react-i18next";
 
 // Components.
 import Filter from "./Filter";
@@ -36,36 +37,50 @@ export default function Preview() {
   } = useFiltersContext();
 
   const formattedDistance = Helper.formatDistance(distance);
+  const { t } = useTranslation();
 
   return (
     <SContainer>
       <SFiltersHeader>
-        <SHeading>Filtry</SHeading>;
+        <SHeading>{t("Dashboard.Filters.Preview.SHeading")}</SHeading>;
         <SButton
           onClickHandler={setFiltersModalOn}
-          text="Pokaż filtry"
+          text={t("Dashboard.Filters.Preview.SButton__text")}
           icon={filterIconPath}
         />
       </SFiltersHeader>
       <SFiltersContainer>
-        <Filter text="Dystans" type={formattedDistance} />
-        <Filter text="Słowo kluczowe" type={keyword} />
-        <Filter text="Typ" type={types[type as keyof FilterTypes]} />
+        <Filter
+          text={t("Dashboard.Filters.Preview.Filter_1__text")}
+          type={formattedDistance}
+        />
+        <Filter
+          text={t("Dashboard.Filters.Preview.Filter_2__text")}
+          type={keyword}
+        />
+        <Filter
+          text={t("Dashboard.Filters.Preview.Filter_3__text")}
+          type={types[type as keyof FilterTypes]}
+        />
         {minPrice !== "_" && (
           <Filter
-            text="Cena minimalna"
+            text={t("Dashboard.Filters.Preview.Filter_4__text")}
             type={prices[minPrice as keyof Prices]}
           />
         )}
         {maxPrice !== "_" && (
           <Filter
-            text="Cena maksymalna"
+            text={t("Dashboard.Filters.Preview.Filter_5__text")}
             type={prices[maxPrice as keyof Prices]}
           />
         )}
         <Filter
-          text="Pokaż tylko otwarte miejsca"
-          type={openNow ? "Tak" : "Nie"}
+          text={t("Dashboard.Filters.Preview.Filter_6__text")}
+          type={
+            openNow
+              ? t("Dashboard.Filters.Preview.Filter_6__type-true")
+              : t("Dashboard.Filters.Preview.Filter_6__type-false")
+          }
         />
       </SFiltersContainer>
     </SContainer>

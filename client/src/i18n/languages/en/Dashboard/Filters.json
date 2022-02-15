@@ -1,0 +1,23 @@
+{
+  "Dashboard.Filters.Preview.SHeading": "Filters",
+  "Dashboard.Filters.Preview.SButton__text": "Show filters",
+  "Dashboard.Filters.Preview.Filter_1__text": "Distance",
+  "Dashboard.Filters.Preview.Filter_2__text": "Keyword",
+  "Dashboard.Filters.Preview.Filter_3__text": "Type",
+  "Dashboard.Filters.Preview.Filter_4__text": "Min. price",
+  "Dashboard.Filters.Preview.Filter_5__text": "Max. price",
+  "Dashboard.Filters.Preview.Filter_6__text": "Show only open places",
+  "Dashboard.Filters.Preview.Filter_6__type-true": "Yes",
+  "Dashboard.Filters.Preview.Filter_6__type-false": "No",
+  "Dashboard.Filters.Form.SClose__text": "Close filters modal",
+  "Dashboard.Filters.Form.SHeading": "Filters",
+  "Dashboard.Filters.Form.SNote": "Adjust the filters to find the locations of your interest.",
+  "Dashboard.Filters.Form.SWarning": "Setting a price is not recommended! Many places in Google's system do not have a price set, so they will be excluded from search results.",
+  "Dashboard.Filters.Keyword.Input__label": "Keyword",
+  "Dashboard.Filters.Form.Button__text": "Filter",
+  "Dashboard.Filters.Distance.Select__label": "Distance",
+  "Dashboard.Filters.Types.Select__label": "Type",
+  "Dashboard.Filters.MinPrice.Select__label": "Min. price",
+  "Dashboard.Filters.MaxPrice.Select__label": "Max. price",
+  "Dashboard.Filters.OpenNow.Checkbox__label": "Show only places which are open now"
+}

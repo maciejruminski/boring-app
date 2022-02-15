@@ -2,8 +2,9 @@
 import { useEffect, useRef, useCallback } from "react";
 
 // Context.
-import usePlacesContext from "@context/Places/usePlacesContext";
+import { usePlacesContext } from "@context/Places";
 import { useFiltersAndPlacesContext } from "@context/FiltersAndPlaces";
+import { useTranslation } from "react-i18next";
 
 // Components.
 import Place from "../Place";
@@ -79,6 +80,8 @@ export default function List(): JSX.Element {
     }
   }, [numberOfPlacesToShowAtOnce]);
 
+  const { t } = useTranslation();
+
   if (Boolean(maximumNumberOfPlaces)) {
     return (
       <SListContainer>
@@ -96,16 +99,12 @@ export default function List(): JSX.Element {
         {isShowMorePlacesButtonVisible && (
           <SButton
             onClickHandler={setNumberOfPlacesToShowAtOnce}
-            text="Wczytaj kolejne miejsca"
+            text={t("Dashboard.Places.List.SButton__text")}
           />
         )}
       </SListContainer>
     );
   }
 
-  return (
-    <p>
-      Niestety, ale na podstawie podanych filtrów nie znaleziono żadnych miejsc.
-    </p>
-  );
+  return <p>{t("Dashboard.Places.List.p_1")}</p>;
 }

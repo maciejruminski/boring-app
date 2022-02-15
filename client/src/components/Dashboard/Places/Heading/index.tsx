@@ -1,5 +1,6 @@
 // Context.
 import { usePlacesContext } from "@context/Places";
+import { useTranslation } from "react-i18next";
 
 // Styles.
 import { SHeading, SSmallNote, SNote } from "./styles";
@@ -9,13 +10,19 @@ export default function Heading() {
     state: { maximumNumberOfPlaces },
   } = usePlacesContext();
 
+  const { t } = useTranslation();
+
   return (
     <>
-      <SHeading>Lokalizacje</SHeading>
+      <SHeading>{t("Dashboard.Places.Heading.SHeading")}</SHeading>
       {Boolean(maximumNumberOfPlaces) && (
         <>
-          <SSmallNote>{maximumNumberOfPlaces} wyników wyszukiwania.</SSmallNote>
-          <SNote>Kliknij w wybrane miejsce aby uzyskać szczegóły.</SNote>
+          <SSmallNote>
+            {t("Dashboard.Places.Heading.SSmallNote", {
+              maximumNumberOfPlaces,
+            })}
+          </SSmallNote>
+          <SNote>{t("Dashboard.Places.Heading.SNote")}</SNote>
         </>
       )}
     </>

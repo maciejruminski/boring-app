@@ -5,8 +5,9 @@ import { useRef, useEffect } from "react";
 import Helper from "@controllers/Helper";
 
 // Context.
-import useFiltersContext from "@context/Filters/useFiltersContext";
+import { useFiltersContext } from "@context/Filters";
 import { useFiltersAndPlacesContext } from "@context/FiltersAndPlaces";
+import { useTranslation } from "react-i18next";
 
 // Components.
 import Types from "../Types";
@@ -62,6 +63,8 @@ export default function Form() {
     [isFiltersModalOpen]
   );
 
+  const { t } = useTranslation();
+
   return (
     <>
       <SForm
@@ -69,24 +72,19 @@ export default function Form() {
         isModalOpen={isFiltersModalOpen}
         onSubmit={onSubmitHandler}
       >
-      <SClose
+        <SClose
           onClickHandler={setFiltersModalOff}
-          text="Zamknij modal z filtrami"
+          text={t("Dashboard.Filters.Form.SClose__text")}
           icon={closeIconPath}
         />
-        <SHeading>Filtry</SHeading>
-        <SNote>Dostosuj filtry aby znaleźć interesujące Cię lokalizacje.</SNote>
+        <SHeading>{t("Dashboard.Filters.Form.SHeading")}</SHeading>
+        <SNote>{t("Dashboard.Filters.Form.SNote")}</SNote>
         <Keyword ref={keywordRef} />
         <Distance ref={distanceRef} />
         <Types ref={typeRef} />
         <SWarning>
-          <img
-            src={WarningIconPath}
-            aria-hidden="true"
-            alt="Ikona ostrzegawcza"
-          />
-          Ustawianie ceny nie jest zalecane! Wiele miejsc w systemie Google nie
-          ma ustawionej ceny, zostaną więc wykluczone z wyników wyszukiwania.
+          <img src={WarningIconPath} aria-hidden="true" alt="Warning icon" />
+          {t("Dashboard.Filters.Form.SWarning")}
         </SWarning>
         <MinPrice ref={minPriceRef} />
         <MaxPrice ref={maxPriceRef} />
@@ -95,7 +93,7 @@ export default function Form() {
         <Button
           type="submit"
           onClickHandler={setFiltersModalOff}
-          text="Filtruj"
+          text={t("Dashboard.Filters.Form.Button__text")}
         />
       </SForm>
     </>

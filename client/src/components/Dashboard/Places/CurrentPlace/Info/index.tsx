@@ -1,5 +1,6 @@
 // Context.
 import { useDetailsContext } from "@context/Details";
+import { useTranslation } from "react-i18next";
 
 // Styles.
 import {
@@ -21,13 +22,13 @@ export default function Details() {
   } = useDetailsContext();
 
   const { name, rating, website, openNow, vicinity } = currentPlace;
-
   const numberOfStars = [...new Array(5)];
+  const { t } = useTranslation();
 
   if (isCurrentPlaceModalOpen) {
     return (
       <>
-        <SNote>Wybrano lokalizację:</SNote>
+        <SNote>{t("Dashboard.Places.CurrentPlace.Info.SNote_1")}</SNote>
         {name && <SHeading>{name}</SHeading>}
         {vicinity && <SAddress>{vicinity}</SAddress>}
         <SStars>
@@ -36,7 +37,7 @@ export default function Details() {
               <SStar
                 src={StarIconPath}
                 aria-hidden="true"
-                alt="Ikona gwiazdki"
+                alt="Star icon"
                 key={key}
               />
             ))}
@@ -46,21 +47,25 @@ export default function Details() {
               <SStar
                 src={StarIconPath}
                 aria-hidden="true"
-                alt="Ikona gwiazdki"
+                alt="Star icon"
                 key={key}
               />
             ))}
           </SStarsContainer>
         </SStars>
-        {openNow && <SOpenNow>Teraz Otwarte</SOpenNow>}
+        {openNow && (
+          <SOpenNow>
+            {t("Dashboard.Places.CurrentPlace.Info.SOpenNow")}
+          </SOpenNow>
+        )}
         {website && (
-          <SNote>
-            Kliknij{" "}
-            <a href={website} target="_blank" rel="noreferrer">
-              tutaj
-            </a>{" "}
-            aby przejść na stronę internetową.
-          </SNote>
+          <SNote
+            dangerouslySetInnerHTML={{
+              __html: t("Dashboard.Places.CurrentPlace.Info.SNote_2", {
+                website,
+              }),
+            }}
+          ></SNote>
         )}
       </>
     );

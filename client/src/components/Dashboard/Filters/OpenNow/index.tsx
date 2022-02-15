@@ -3,6 +3,7 @@ import { forwardRef } from "react";
 
 // Context.
 import { useFiltersAndPlacesContext } from "@context/FiltersAndPlaces";
+import { useTranslation } from "react-i18next";
 
 // Components.
 import Checkbox from "@common/Form/Checkbox";
@@ -15,9 +16,11 @@ export default forwardRef<HTMLInputElement>(({}, ref) => {
     },
   } = useFiltersAndPlacesContext();
 
+  const { t } = useTranslation();
+
   return (
     <Checkbox
-      label="Pokaż tylko miejsca, które są teraz otwarte"
+      label={t("Dashboard.Filters.OpenNow.Checkbox__label")}
       defaultValue={openNow ? true : false}
       id="openNow"
       ref={ref}

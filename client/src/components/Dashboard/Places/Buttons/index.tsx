@@ -2,10 +2,11 @@
 import Helper from "@controllers/Helper";
 
 // Context.
-import usePlacesContext from "@context/Places/usePlacesContext";
-import useHistoricPlacesContext from "@context/HistoricPlaces/useHistoricPlacesContext";
+import { usePlacesContext } from "@context/Places";
+import { useHistoricPlacesContext } from "@context/HistoricPlaces";
 import { useFiltersAndPlacesContext } from "@context/FiltersAndPlaces";
-import useDetailsContext from "@context/Details/useDetailsContext";
+import { useDetailsContext } from "@context/Details";
+import { useTranslation } from "react-i18next";
 
 // Styles.
 import { SNote, SButton, SSecondButton } from "./styles";
@@ -28,17 +29,17 @@ export default function Places() {
     actions: { setHistoricPlacesModalOn },
   } = useHistoricPlacesContext();
 
+  const { t } = useTranslation();
+
   const createNote = () => {
-    let note =
-      "Możesz sprawdzić miejsca, które już zapisałeś lub wybrać losowo z pośród tych, które pojawiły się na podstawie filtrów.";
+    let note = t("Dashboard.Places.Buttons.SNote--1");
 
     if (maximumNumberOfPlaces < 2 && historicPlaces.length > 0) {
-      note = "Możesz sprawdzić lokalizacje, które wczesniej zapisałeś.";
+      note = t("Dashboard.Places.Buttons.SNote--2");
     }
 
     if (maximumNumberOfPlaces > 1 && historicPlaces.length === 0) {
-      note =
-        "Możesz wybrać losowo z pośród tych miejsc, które pojawiły się na podstawie filtrów.";
+      note = t("Dashboard.Places.Buttons.SNote--3");
     }
 
     if (maximumNumberOfPlaces < 2 && historicPlaces.length === 0) {
@@ -49,7 +50,6 @@ export default function Places() {
   };
 
   let note = createNote();
-
   const randomPlace = Helper.getRandomPlace(places, "");
 
   return (
@@ -58,14 +58,14 @@ export default function Places() {
       {historicPlaces.length > 0 && (
         <SButton
           onClickHandler={setHistoricPlacesModalOn}
-          text="Pokaż miejsca, które zapisałem"
+          text={t("Dashboard.Places.Buttons.SButton__text")}
         />
       )}
 
       {maximumNumberOfPlaces > 1 && (
         <SSecondButton
           onClickHandler={() => showDetails(randomPlace)}
-          text="Wybierz losowe miejsce"
+          text={t("Dashboard.Places.Buttons.SSecondButton__text")}
         />
       )}
     </>

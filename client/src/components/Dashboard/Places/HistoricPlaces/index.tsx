@@ -5,7 +5,8 @@ import { useEffect } from "react";
 import Helper from "@controllers/Helper";
 
 // Context.
-import useHistoricPlacesContext from "@context/HistoricPlaces/useHistoricPlacesContext";
+import { useHistoricPlacesContext } from "@context/HistoricPlaces";
+import { useTranslation } from "react-i18next";
 
 // Components.
 import Heading from "./Heading";
@@ -30,6 +31,8 @@ export default function HistoricPlaces(): JSX.Element {
     [isHistoricPlacesModalOpen]
   );
 
+  const { t } = useTranslation();
+
   const historicPlacesExist = historicPlaces.length > 0;
 
   if (historicPlacesExist) {
@@ -37,7 +40,7 @@ export default function HistoricPlaces(): JSX.Element {
       <SModal isModalOpen={isHistoricPlacesModalOpen}>
         <SButton
           onClickHandler={setHistoricPlacesModalOff}
-          text="Zamknij modal z zapisanymi miejscami"
+          text={t("Dashboard.Places.HistoricPlaces.SButton__text")}
           icon={closeIconPath}
         />
         <Heading />

@@ -3,6 +3,7 @@ import { forwardRef } from "react";
 
 // Context.
 import { useFiltersAndPlacesContext } from "@context/FiltersAndPlaces";
+import { useTranslation } from "react-i18next";
 
 // Components.
 import Select from "@common/Form/Select";
@@ -16,6 +17,8 @@ export default forwardRef<HTMLSelectElement>(
       },
     } = useFiltersAndPlacesContext();
 
+    const { t } = useTranslation();
+
     const distances = {
       "300": "300m",
       "650": "650m",
@@ -27,7 +30,7 @@ export default forwardRef<HTMLSelectElement>(
 
     return (
       <Select
-        label="Dystans"
+        label={t("Dashboard.Filters.Distance.Select__label")}
         options={distances}
         defaultOption={distance}
         id="distance"

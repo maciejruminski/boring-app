@@ -7,6 +7,7 @@ import Helper from "@controllers/Helper";
 // Context.
 import { useHistoricPlacesContext } from "@context/HistoricPlaces";
 import { useDetailsContext } from "@context/Details";
+import { useTranslation } from "react-i18next";
 
 // Styles.
 import { SDetails, SClose } from "./styles";
@@ -39,12 +40,14 @@ export default function Details() {
     [isCurrentPlaceModalOpen]
   );
 
+  const { t } = useTranslation();
+
   return (
     <SDetails isModalOpen={isCurrentPlaceModalOpen}>
       {isCurrentPlaceModalOpen && (
         <SClose
           onClickHandler={setCurrentPlaceModalOff}
-          text="Submit"
+          text={t("Dashboard.Places.CurrentPlace.SClose__text")}
           icon={closeIconPath}
         />
       )}

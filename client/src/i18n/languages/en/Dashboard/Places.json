@@ -1,0 +1,23 @@
+{
+  "Dashboard.Places.Heading.SHeading": "Localizations",
+  "Dashboard.Places.Heading.SSmallNote": "{{maximumNumberOfPlaces}} search results.",
+  "Dashboard.Places.Heading.SNote": "Click on a place for more details.",
+  "Dashboard.Places.List.SButton__text": "Show more places",
+  "Dashboard.Places.List.p_1": "Sorry, but no places were found based on the filters you provided.",
+  "Dashboard.Places.Buttons.SNote--1": "ENG Możesz sprawdzić miejsca, które już zapisałeś lub wybrać losowo z pośród tych, które pojawiły się na podstawie filtrów.",
+  "Dashboard.Places.Buttons.SNote--2": "ENG Możesz sprawdzić lokalizacje, które wczesniej zapisałeś.",
+  "Dashboard.Places.Buttons.SNote--3": "ENG Możesz wybrać losowo z pośród tych miejsc, które pojawiły się na podstawie filtrów.",
+  "Dashboard.Places.Buttons.SButton__text": "Show me the saved places",
+  "Dashboard.Places.Buttons.SSecondButton__text": "Choose a random location",
+  "Dashboard.Places.CurrentPlace.SClose__text": "Submit",
+  "Dashboard.Places.CurrentPlace.Info.SNote_1": "Selected location",
+  "Dashboard.Places.CurrentPlace.Info.SOpenNow": "Open now",
+  "Dashboard.Places.CurrentPlace.Info.SNote_2": "Kliknij <a href='{{website}}' target='_blank' rel='noreferrer'>tutaj</a> aby przejść na stronę internetową.",
+  "Dashboard.Places.CurrentPlace.Map.SMapText": "Map is loading",
+  "Dashboard.Places.CurrentPlace.Map.SButton__text": "Show the route on Google Map",
+  "Dashboard.Places.HistoricPlaces.SButton__text": "Close a modal with saved places",
+  "Dashboard.Places.HistoricPlaces.Heading.SHeading": "Saved places",
+  "Dashboard.Places.HistoricPlaces.Heading.SSmallNote": "{{numberOfHistoricPlaces}} of saved places.",
+  "Dashboard.Places.HistoricPlaces.Heading.SNote": "Click on a place for more details.",
+  "Dashboard.Places.HistoricPlaces.List.p_1": "You don't have any saved places."
+}

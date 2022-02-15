@@ -1,5 +1,6 @@
 // Context.
 import { useHistoricPlacesContext } from "@context/HistoricPlaces";
+import { useTranslation } from "react-i18next";
 
 // Components.
 import Place from "../../Place";
@@ -12,7 +13,9 @@ export default function List(): JSX.Element {
     state: { historicPlaces },
   } = useHistoricPlacesContext();
 
-  if (historicPlaces.length) {
+  const { t } = useTranslation();
+
+  if (Boolean(historicPlaces.length)) {
     return (
       <SListContainer>
         <SList>
@@ -24,5 +27,5 @@ export default function List(): JSX.Element {
     );
   }
 
-  return <p>Loading...</p>;
+  return <p>{t("Dashboard.Places.HistoricPlaces.List.p_1")}</p>;
 }

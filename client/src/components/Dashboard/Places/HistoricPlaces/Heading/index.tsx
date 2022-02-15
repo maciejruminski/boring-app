@@ -1,5 +1,6 @@
 // Context.
-import useHistoricPlacesContext from "@context/HistoricPlaces/useHistoricPlacesContext";
+import { useHistoricPlacesContext } from "@context/HistoricPlaces";
+import { useTranslation } from "react-i18next";
 
 // Styles.
 import { SHeading, SNote, SSmallNote } from "./styles";
@@ -9,13 +10,22 @@ export default function Heading() {
     state: { historicPlaces },
   } = useHistoricPlacesContext();
 
+  const numberOfHistoricPlaces = historicPlaces.length;
+  const { t } = useTranslation();
+
   return (
     <>
-      <SHeading>Historia</SHeading>
-      {Boolean(historicPlaces.length) && (
+      <SHeading>
+        {t("Dashboard.Places.HistoricPlaces.Heading.SHeading")}
+      </SHeading>
+      {Boolean(numberOfHistoricPlaces) && (
         <>
-          <SSmallNote>{historicPlaces.length} zapisanych miejsc.</SSmallNote>
-          <SNote>Kliknij w wybrane miejsce aby uzyskać szczegóły.</SNote>
+          <SSmallNote>
+            {t("Dashboard.Places.HistoricPlaces.Heading.SSmallNote", {
+              numberOfHistoricPlaces,
+            })}
+          </SSmallNote>
+          <SNote>{t("Dashboard.Places.HistoricPlaces.Heading.SNote")}</SNote>
         </>
       )}
     </>

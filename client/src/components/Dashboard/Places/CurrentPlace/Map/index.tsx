@@ -9,6 +9,7 @@ import { SMap, SMapText, SButton } from "./styles";
 
 // Context.
 import { useDetailsContext } from "@context/Details";
+import { useTranslation } from "react-i18next";
 
 let map: GoogleMap;
 
@@ -22,9 +23,12 @@ export default function Map(): JSX.Element {
     },
   } = useDetailsContext();
 
+  const { t } = useTranslation();
+
   const geoIsNotSupported = !navigator.geolocation;
 
   if (geoIsNotSupported) {
+    // TO DO - jakis blad jak uzytkownik nie zgodzi sie na lokalizowanie
     throw new Error("Geolocation is not supported by your browser!");
   }
 
@@ -44,11 +48,11 @@ export default function Map(): JSX.Element {
   return (
     <>
       <SMap ref={ref}>
-        <SMapText>Trwa wczytywanie mapy</SMapText>
+        <SMapText>{t("Dashboard.Places.CurrentPlace.Map.SMapText")}</SMapText>
       </SMap>
       {isCurrentPlaceModalOpen && (
         <SButton
-          text="Odpal trasę na Google Map"
+          text={t("Dashboard.Places.CurrentPlace.Map.SButton__text")}
           onClickHandler={() =>
             window.open(
               map.createGoogleMapLink(`${location.lat},${location.lng}`),

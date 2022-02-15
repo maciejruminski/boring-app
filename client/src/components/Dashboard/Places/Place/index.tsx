@@ -36,7 +36,7 @@ export default function Place({ place, isVisible }: any): JSX.Element {
                 <SStar
                   src={StarIconPath}
                   aria-hidden="true"
-                  alt="Ikona gwiazdki"
+                  alt="Star icon"
                   key={key}
                 />
               ))}
@@ -46,7 +46,7 @@ export default function Place({ place, isVisible }: any): JSX.Element {
                 <SStar
                   src={StarIconPath}
                   aria-hidden="true"
-                  alt="Ikona gwiazdki"
+                  alt="Star icon"
                   key={key}
                 />
               ))}
@@ -56,7 +56,7 @@ export default function Place({ place, isVisible }: any): JSX.Element {
             <SArrow
               src={ArrowIconPath}
               aria-hidden="true"
-              alt="Ikona strzałki skierowanej w prawo"
+              alt="Arrow righ icon"
             />
           </SArrowContainer>
         </SBottom>
