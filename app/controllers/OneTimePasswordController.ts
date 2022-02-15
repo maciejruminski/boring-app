@@ -15,18 +15,7 @@ const {
   nodemailerAuthPass,
 } = config;
 
-const transporter = nodemailer.createTransport({
-  host: nodemailerHost,
-  port: nodemailerPort,
-  secure: true,
-  service: nodemailerService,
-  from: nodemailerAuthUser,
-  auth: {
-    user: nodemailerAuthUser,
-    pass: nodemailerAuthPass,
-  },
-});
-
+let transporter;
 let generatedOneTimePassword: string = "";
 let generatedOneTimePasswordTime = new Date();
 
@@ -64,8 +53,23 @@ class OneTimePasswordController {
         "</h1>",
     };
 
+    if (!transporter) {
+      transporter = nodemailer.createTransport({
+        host: nodemailerHost,
+        port: nodemailerPort,
+        secure: true,
+        service: nodemailerService,
+        from: nodemailerAuthUser,
+        auth: {
+          user: nodemailerAuthUser,
+          pass: nodemailerAuthPass,
+        },
+      });
+    }
+
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
+        console.log(error);
         return res.json({
           status: 401,
           message: "Unfortunately, something went wrong.",
