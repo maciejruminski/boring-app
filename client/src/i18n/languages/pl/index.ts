@@ -1,3 +1,4 @@
-import SignUp from "./SignUp.json";
+import Email from "./SignUp/Email.json";
+import Password from "./SignUp/Password.json";
 
-export default { ...SignUp };
+export default { ...Email, ...Password };

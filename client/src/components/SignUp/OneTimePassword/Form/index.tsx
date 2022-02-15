@@ -3,6 +3,7 @@ import { useRef } from "react";
 
 // Context.
 import { useAuthContext } from "@context/Auth";
+import { useTranslation } from "react-i18next";
 
 // Components.
 import { Key } from "@common/Icons";
@@ -29,10 +30,12 @@ export default function OneTimePassword() {
     }
   };
 
+  const { t } = useTranslation();
+
   return (
     <SForm method="POST" onSubmit={handleFormSubmit} noValidate>
       <Input
-        label="Enter the password"
+        label={t("SignUp.Password.Form.Input__label")}
         value={password}
         id="signUpPassword"
         onChangeHandler={inputOnChange}
@@ -45,7 +48,7 @@ export default function OneTimePassword() {
         icon={<Key />}
       />
 
-      <SButton type="submit" text="Login" />
+      <SButton type="submit" text={t("SignUp.Password.Form.SButton__text")} />
     </SForm>
   );
 }

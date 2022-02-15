@@ -8,6 +8,7 @@ import { useAuthContext } from "@context/Auth";
 import Info from "./Info";
 import Form from "./Form";
 import ResendForm from "./ResendForm";
+import LanguageSwitcher from "@common/LanguageSwitcher";
 
 // Styles.
 import { SOneTimePassword, SOneTimePasswordContainer, SLock } from "./styles";
@@ -31,6 +32,7 @@ export default function OneTimePassword() {
   return (
     <SOneTimePassword isModalOpen={true}>
       <SOneTimePasswordContainer isFadingOut={isComponentInactive}>
+        <LanguageSwitcher />
         <Info />
         <Form />
         <ResendForm />

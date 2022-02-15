@@ -1,5 +1,6 @@
 // Context.
 import { useAuthContext } from "@context/Auth";
+import { useTranslation } from "react-i18next";
 
 // Icons.
 import WarningIconPath from "@images/warning.svg";
@@ -14,24 +15,21 @@ export default function Info() {
     },
   } = useAuthContext();
 
+  const { t } = useTranslation();
+
   return (
     <>
-      <SHeading>You are almost there!</SHeading>
-      <p>
-        We sent a <b>One Time Password</b> to your email address at {email}.
-      </p>
-      <p>
-        Please check your email (and the spam folder if necessary), enter the{" "}
-        <b>OTP</b> and click on login button.
-      </p>
+      <SHeading>{t("SignUp.Password.Info.SHeading")}</SHeading>
+      <p
+        dangerouslySetInnerHTML={{
+          __html: t("SignUp.Password.Info.p_1", { email }),
+        }}
+      ></p>
+      <p>{t("SignUp.Password.Info.p_2")}</p>
 
       <SWarning>
-        <img
-          src={WarningIconPath}
-          aria-hidden="true"
-          alt="Ikona ostrzegawcza"
-        />
-        The OTP will expire in 15 minutes.
+        <img src={WarningIconPath} aria-hidden="true" alt="Warning icon" />
+        {t("SignUp.Password.Info.SWarning")}
       </SWarning>
     </>
   );
