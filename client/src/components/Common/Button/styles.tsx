@@ -16,6 +16,8 @@ const SSubmit = styled.button`
   color: #ffffff;
   cursor: pointer;
   width: 100%;
+  transition-duration: var(--transitionDuration);
+  outline: none;
 `;
 
 export { SSubmit };

@@ -41,7 +41,7 @@ export default function Form() {
   return (
     <SForm method="POST" onSubmit={handleFormSubmit} noValidate>
       <Input
-        label={t("Email.1_label")}
+        label={t("SignUp.Email.Form.Input__label")}
         value={email}
         id="email"
         type="email"
@@ -56,7 +56,7 @@ export default function Form() {
       <SSubmit
         type="submit"
         onClickHandler={submitHandler}
-        text={t("Email.1_button")}
+        text={t("SignUp.Email.Form.SSubmit__text")}
       />
     </SForm>
   );

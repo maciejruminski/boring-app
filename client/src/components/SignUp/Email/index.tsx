@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import Heading from "./Heading";
 import Description from "./Description";
 import Form from "./Form";
+import LanguageSwitcher from "@common/LanguageSwitcher";
 
 // Context.
 import { useAuthContext } from "@context/Auth";
@@ -31,6 +32,7 @@ export default function Email() {
   if (isComponentActive) {
     return (
       <SEmail>
+        <LanguageSwitcher />
         <Heading />
         <Description />
         <Form />

@@ -1,0 +1,9 @@
+{
+  "SignUp.Email.Heading.SHeading": "Welcome to the <span>Boring App</span>",
+  "SignUp.Email.Description.p_1": "Are you feeling bored? Perhaps this application will help you find some interesting place.",
+  "SignUp.Email.Description.p_2": "You are only two small steps away from using it.",
+  "SignUp.Email.Description.SHeading": "Verification",
+  "SignUp.Email.Description.p_3": "We will send you a <b>one time password</b> on your email (we do not store your data anywhere).",
+  "SignUp.Email.Form.Input__label": "Enter your email",
+  "SignUp.Email.Form.SSubmit__text": "Get one time password"
+}

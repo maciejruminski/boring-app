@@ -9,7 +9,7 @@ export default function Heading() {
 
   return (
     <SHeading
-      dangerouslySetInnerHTML={{ __html: t("Email.1_heading") }}
+      dangerouslySetInnerHTML={{ __html: t("SignUp.Email.Heading.SHeading") }}
     ></SHeading>
   );
 }

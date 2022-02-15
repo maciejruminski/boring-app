@@ -9,10 +9,12 @@ export default function Description() {
 
   return (
     <SDescription>
-      <p>{t("Email.1_paragraph")}</p>
-      <p>{t("Email.2_paragraph")}</p>
-      <SHeading>{t("Email.2_heading")}</SHeading>
-      <p dangerouslySetInnerHTML={{ __html: t("Email.3_paragraph") }}></p>
+      <p>{t("SignUp.Email.Description.p_1")}</p>
+      <p>{t("SignUp.Email.Description.p_2")}</p>
+      <SHeading>{t("SignUp.Email.Description.SHeading")}</SHeading>
+      <p
+        dangerouslySetInnerHTML={{ __html: t("SignUp.Email.Description.p_3") }}
+      ></p>
     </SDescription>
   );
 }
