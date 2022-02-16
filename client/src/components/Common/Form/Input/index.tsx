@@ -1,6 +1,9 @@
 // Functions.
 import { forwardRef, useEffect, useState, useRef } from "react";
 
+// Context.
+import { useTranslation } from "react-i18next";
+
 // Controllers.
 import Helper from "@controllers/Helper";
 
@@ -43,6 +46,7 @@ export default forwardRef<
     const errorRef = useRef<HTMLParagraphElement>(null);
 
     const [labelWidth, setLabelWidth] = useState(0);
+    const { i18n } = useTranslation();
 
     // We need label width to set the pseudo element width.
     useEffect(
@@ -50,7 +54,7 @@ export default forwardRef<
         setLabelWidth(
           Helper.setLabelWidthAfterScaling(labelRef.current as HTMLLabelElement)
         ),
-      []
+      [i18n.language]
     );
 
     useEffect(() => {

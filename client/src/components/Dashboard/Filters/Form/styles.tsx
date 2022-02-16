@@ -8,9 +8,48 @@ import Button from "@common/Button";
 import { Modal, ScreenReaderText } from "@src/Mixins";
 
 // Styles.
-const SForm = styled.form<{ isModalOpen: boolean }>`
+
+const fitIsActiveToStyle = ({ isFadingOut }: { isFadingOut: boolean }) => {
+  if (isFadingOut) {
+
+    
+    return `
+    @keyframes hideFilters {
+      to {
+        opacity: 0;
+        // transform: scale(1);
+      }
+    }
+    
+    animation: hideFilters var(--spinnerTransitionDuration) linear 0s forwards
+    alternate;
+    opacity: 1;
+    transform: scale(1);
+    `;
+  } else {
+    return `
+    @keyframes showFilters {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  
+    opacity: 0;
+    transform: scale(1.02);
+    animation: showFilters var(--spinnerTransitionDuration) linear 0.3s forwards
+      alternate;
+    `; 
+  }
+};
+
+const SForm = styled.form<{ isModalOpen: boolean; isFadingOut: boolean }>`
   ${Modal()};
   z-index: 2;
+
+ 
+
+  ${fitIsActiveToStyle};
 `;
 
 const SClose = styled(Button)`

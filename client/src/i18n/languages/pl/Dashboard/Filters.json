@@ -1,0 +1,23 @@
+{
+  "Dashboard.Filters.Preview.SHeading": "Filtry",
+  "Dashboard.Filters.Preview.SButton__text": "Pokaż filtry",
+  "Dashboard.Filters.Preview.Filter_1__text": "Dystans",
+  "Dashboard.Filters.Preview.Filter_2__text": "Słowo kluczowe",
+  "Dashboard.Filters.Preview.Filter_3__text": "Typ",
+  "Dashboard.Filters.Preview.Filter_4__text": "Cena min.",
+  "Dashboard.Filters.Preview.Filter_5__text": "Cena max.",
+  "Dashboard.Filters.Preview.Filter_6__text": "Pokaż tylko otwarte miejsca",
+  "Dashboard.Filters.Preview.Filter_6__type-true": "Tak",
+  "Dashboard.Filters.Preview.Filter_6__type-false": "Nie",
+  "Dashboard.Filters.Form.SClose__text": "Zamknij panel z filtrami",
+  "Dashboard.Filters.Form.SHeading": "Filtry",
+  "Dashboard.Filters.Form.SNote": "Dostosuj filtry aby znaleźć interesujące Cię lokacje.",
+  "Dashboard.Filters.Form.SWarning": "Ustawianie ceny nie jest rekomendowane! Wiele miejsc w systemie Google nie ma tego parametru, zostaną zatem wykluczone z wyników wyszukiwania.",
+  "Dashboard.Filters.Keyword.Input__label": "Słowo kluczowe",
+  "Dashboard.Filters.Form.Button__text": "Filtruj",
+  "Dashboard.Filters.Distance.Select__label": "Dystans",
+  "Dashboard.Filters.Types.Select__label": "Typ",
+  "Dashboard.Filters.MinPrice.Select__label": "Cena min.",
+  "Dashboard.Filters.MaxPrice.Select__label": "Cena max.",
+  "Dashboard.Filters.OpenNow.Checkbox__label": "Pokaż tylko otwarte miejsca"
+}

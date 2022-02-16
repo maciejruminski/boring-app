@@ -1,0 +1,23 @@
+{
+  "Dashboard.Places.Heading.SHeading": "Lokalizacje",
+  "Dashboard.Places.Heading.SSmallNote": "{{maximumNumberOfPlaces}} wyników wyszukiwania.",
+  "Dashboard.Places.Heading.SNote": "Kliknij w wybrane miejsce aby uzyskać szczegóły.",
+  "Dashboard.Places.List.SButton__text": "Pokaż więcej miejsc",
+  "Dashboard.Places.List.p_1": "Przepraszamy, ale na podstawie podanych filtrów nie znaleźliśmy żadnych miejsc.",
+  "Dashboard.Places.Buttons.SNote--1": "Możesz sprawdzić miejsca, które już zapisałeś lub wybrać losowo z pośród tych, które pojawiły się na podstawie filtrów.",
+  "Dashboard.Places.Buttons.SNote--2": "Możesz sprawdzić lokalizacje, które wczesniej zapisałeś.",
+  "Dashboard.Places.Buttons.SNote--3": "Możesz wybrać losowo z pośród tych miejsc, które pojawiły się na podstawie filtrów.",
+  "Dashboard.Places.Buttons.SButton__text": "Pokaż miejsca, które zapisałem",
+  "Dashboard.Places.Buttons.SSecondButton__text": "Wybierz losową lokację",
+  "Dashboard.Places.CurrentPlace.SClose__text": "Submit",
+  "Dashboard.Places.CurrentPlace.Info.SNote_1": "Selected location",
+  "Dashboard.Places.CurrentPlace.Info.SOpenNow": "Open now",
+  "Dashboard.Places.CurrentPlace.Info.SNote_2": "Kliknij <a href='{{website}}' target='_blank' rel='noreferrer'>tutaj</a> aby przejść na stronę internetową.",
+  "Dashboard.Places.CurrentPlace.Map.SMapText": "Trwa wczytywanie mapy",
+  "Dashboard.Places.CurrentPlace.Map.SButton__text": "Show the route on Google Map",
+  "Dashboard.Places.HistoricPlaces.SButton__text": "Zamknij panel z zapisanymi miejscami",
+  "Dashboard.Places.HistoricPlaces.Heading.SHeading": "Historia",
+  "Dashboard.Places.HistoricPlaces.Heading.SSmallNote": "Masz {{numberOfHistoricPlaces}} zapisanych miejsc.",
+  "Dashboard.Places.HistoricPlaces.Heading.SNote": "Kliknij w wybrane miejsce aby uzyskać szczegóły.",
+  "Dashboard.Places.HistoricPlaces.List.p_1": "Nie masz żadnych zapisanych miejs."
+}

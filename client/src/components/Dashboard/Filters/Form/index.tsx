@@ -1,5 +1,5 @@
 // Functions.
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 // Controllers.
 import Helper from "@controllers/Helper";
@@ -63,39 +63,58 @@ export default function Form() {
     [isFiltersModalOpen]
   );
 
+  const fadingOutTime = 500;
+  const [isFadingOut, setIsFadingOut] = useState(false);
+
+  const modalOff = () => {
+    setIsFadingOut(true);
+    setTimeout(setFiltersModalOff, fadingOutTime);
+  };
+
+  useEffect(() => {
+    if (!isFiltersModalOpen) {
+      setIsFadingOut(false);
+    }
+  }, [isFiltersModalOpen]);
+
   const { t } = useTranslation();
 
-  return (
-    <>
-      <SForm
-        method="POST"
-        isModalOpen={isFiltersModalOpen}
-        onSubmit={onSubmitHandler}
-      >
-        <SClose
-          onClickHandler={setFiltersModalOff}
-          text={t("Dashboard.Filters.Form.SClose__text")}
-          icon={closeIconPath}
-        />
-        <SHeading>{t("Dashboard.Filters.Form.SHeading")}</SHeading>
-        <SNote>{t("Dashboard.Filters.Form.SNote")}</SNote>
-        <Keyword ref={keywordRef} />
-        <Distance ref={distanceRef} />
-        <Types ref={typeRef} />
-        <SWarning>
-          <img src={WarningIconPath} aria-hidden="true" alt="Warning icon" />
-          {t("Dashboard.Filters.Form.SWarning")}
-        </SWarning>
-        <MinPrice ref={minPriceRef} />
-        <MaxPrice ref={maxPriceRef} />
-        <OpenNow ref={openNowRef} />
+  if (isFiltersModalOpen) {
+    return (
+      <>
+        <SForm
+          method="POST"
+          isModalOpen={isFiltersModalOpen}
+          isFadingOut={isFadingOut}
+          onSubmit={onSubmitHandler}
+        >
+          <SClose
+            onClickHandler={modalOff}
+            text={t("Dashboard.Filters.Form.SClose__text")}
+            icon={closeIconPath}
+          />
+          <SHeading>{t("Dashboard.Filters.Form.SHeading")}</SHeading>
+          <SNote>{t("Dashboard.Filters.Form.SNote")}</SNote>
+          <Keyword ref={keywordRef} />
+          <Distance ref={distanceRef} />
+          <Types ref={typeRef} />
+          <SWarning>
+            <img src={WarningIconPath} aria-hidden="true" alt="Warning icon" />
+            {t("Dashboard.Filters.Form.SWarning")}
+          </SWarning>
+          <MinPrice ref={minPriceRef} />
+          <MaxPrice ref={maxPriceRef} />
+          <OpenNow ref={openNowRef} />
 
-        <Button
-          type="submit"
-          onClickHandler={setFiltersModalOff}
-          text={t("Dashboard.Filters.Form.Button__text")}
-        />
-      </SForm>
-    </>
-  );
+          <Button
+            type="submit"
+            onClickHandler={modalOff}
+            text={t("Dashboard.Filters.Form.Button__text")}
+          />
+        </SForm>
+      </>
+    );
+  }
+
+  return <></>;
 }

@@ -14,6 +14,9 @@ import {
 // Icons.
 import caretIconPath from "@images/caret.svg";
 
+// Context.
+import { useTranslation } from "react-i18next";
+
 export default forwardRef<
   HTMLSelectElement,
   {
@@ -31,6 +34,7 @@ export default forwardRef<
     const [optionsVisibility, setOptionsVisibility] = useState(false);
     const [labelWidth, setLabelWidth] = useState(0);
     const labelRef = React.useRef<HTMLLabelElement>(null);
+    const { i18n } = useTranslation();
 
     const closeOptionsOnMouseDownHandler = (e: Event) => {
       window.removeEventListener("touchend", closeOptionsOnMouseDownHandler);
@@ -79,7 +83,10 @@ export default forwardRef<
     };
 
     // We need label width to set the pseudo element width.
-    useEffect(() => setLabelWidth(setLabelWidthAfterScaling()), []);
+    useEffect(
+      () => setLabelWidth(setLabelWidthAfterScaling()),
+      [i18n.language]
+    );
 
     useEffect(() => {
       if (optionsVisibility) {

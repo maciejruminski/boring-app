@@ -1,9 +1,9 @@
 {
   "SignUp.Email.Heading.SHeading": "Witaj w <span>Boring App</span>",
   "SignUp.Email.Description.p_1": "Czujesz się znudzony? Być może ta aplikacja pozwoli Ci znaleźć jakieś interesujące miejsce.",
-  "SignUp.Email.Description.p_2": "Zostały Ci tylko dwa małe kroczki aby z niej skorzystać.",
+  "SignUp.Email.Description.p_2": "Potrzebujesz jedynie dwóch kroków aby z niej skorzystać.",
   "SignUp.Email.Description.SHeading": "Weryfikacja",
-  "SignUp.Email.Description.p_3": "Wyślemy Ci <b>jednorazowe hasło</b> na podanego maila (nigdzie nie przechowujemy Twoich danych).",
+  "SignUp.Email.Description.p_3": "Wyślemy Ci <b>hasło</b> na Twojego maila (nigdzie nie przechowujemy Twoich danych).",
   "SignUp.Email.Form.Input__label": "Wpisz swój email",
-  "SignUp.Email.Form.SSubmit__text": "Uzyskaj jednorazowe hasło"
+  "SignUp.Email.Form.SSubmit__text": "Otrzymaj hasło"
 }
