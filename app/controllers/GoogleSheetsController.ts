@@ -8,6 +8,16 @@ const { serviceAccountEmail, serviceAccountPrivateKey, spreadSheetsID } =
   config;
 
 class GoogleSheetsController {
+  private idsColumn: string;
+  private filtersColumn: string;
+  private historicPlacesColumn: string;
+
+  constructor() {
+    this.idsColumn = "Sheet1!A2";
+    this.filtersColumn = "Sheet1!B";
+    this.historicPlacesColumn = "Sheet1!C";
+  }
+
   getClientValues() {
     const JwtClient = new google.auth.JWT(
       serviceAccountEmail,
@@ -26,7 +36,8 @@ class GoogleSheetsController {
     const spreadsheetIds = await this.getClientValues().get({
       spreadsheetId: spreadSheetsID,
       majorDimension: "ROWS",
-      range: "Sheet1!A2:A1000",
+      // range: "Sheet1!A2:A1000", BEFORE
+      range: this.idsColumn,
     });
 
     const ids = spreadsheetIds.data.values;
@@ -40,7 +51,7 @@ class GoogleSheetsController {
     const { userUUID }: { userUUID: string } = req.body;
     const clientData = {
       spreadsheetId: spreadSheetsID,
-      range: "Sheet1!A2",
+      range: this.idsColumn,
       valueInputOption: "USER_ENTERED",
       resource: {
         values: [[userUUID]],
@@ -61,7 +72,7 @@ class GoogleSheetsController {
     const row = await this.getUserRowById(userUUID);
     const clientData = {
       spreadsheetId: spreadSheetsID,
-      range: "Sheet1!B" + row,
+      range: this.filtersColumn + row,
       valueInputOption: "RAW",
       resource: {
         values: [[JSON.stringify(filters)]],
@@ -82,7 +93,7 @@ class GoogleSheetsController {
     const clientData = {
       spreadsheetId: spreadSheetsID,
       majorDimension: "ROWS",
-      range: "Sheet1!B" + row,
+      range: this.filtersColumn + row,
     };
 
     const filters = await this.getClientValues().get(clientData);
@@ -99,7 +110,7 @@ class GoogleSheetsController {
     const row = await this.getUserRowById(userUUID);
     const clientData = {
       spreadsheetId: spreadSheetsID,
-      range: "Sheet1!C" + row,
+      range: this.historicPlacesColumn + row,
       valueInputOption: "RAW",
       resource: {
         values: [[JSON.stringify(places)]],
@@ -120,13 +131,11 @@ class GoogleSheetsController {
     const clientData = {
       spreadsheetId: spreadSheetsID,
       majorDimension: "ROWS",
-      range: "Sheet1!C" + row,
+      range: this.historicPlacesColumn + row,
     };
 
     const historicPlaces = await this.getClientValues().get(clientData);
     const historicPlacesValues = historicPlaces.data.values;
-
-    console.log("@@@@", historicPlacesValues);
 
     res.status(200).json({
       status: 200,
