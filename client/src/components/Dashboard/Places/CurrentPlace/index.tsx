@@ -1,5 +1,5 @@
 // Functions.
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // Controllers.
 import Helper from "@controllers/Helper";
@@ -19,6 +19,7 @@ import closeIconPath from "@images/close.svg";
 import Info from "./Info";
 import Map from "./Map";
 import Buttons from "./Buttons";
+import Spinner from "@common/Spinner";
 
 export default function Details() {
   const {
@@ -26,7 +27,7 @@ export default function Details() {
   } = useHistoricPlacesContext();
 
   const {
-    state: { isCurrentPlaceModalOpen },
+    state: { isCurrentPlaceModalOpen, isBusy },
     actions: { setCurrentPlaceModalOff },
   } = useDetailsContext();
 
@@ -42,18 +43,33 @@ export default function Details() {
 
   const { t } = useTranslation();
 
+  const fadingOutTime = 500;
+  const [isFadingOut, setIsFadingOut] = useState(false);
+
+  const modalOff = () => {
+    setIsFadingOut(true);
+    setTimeout(setCurrentPlaceModalOff, fadingOutTime);
+  };
+
+  useEffect(() => {
+    if (!isCurrentPlaceModalOpen) {
+      setIsFadingOut(false);
+    }
+  }, [isCurrentPlaceModalOpen]);
+
   return (
-    <SDetails isModalOpen={isCurrentPlaceModalOpen}>
-      {isCurrentPlaceModalOpen && (
+    <>
+      <Spinner isBusy={isBusy} />
+      <SDetails isModalOpen={isCurrentPlaceModalOpen} isFadingOut={isFadingOut}>
         <SClose
-          onClickHandler={setCurrentPlaceModalOff}
+          onClickHandler={modalOff}
           text={t("Dashboard.Places.CurrentPlace.SClose__text")}
           icon={closeIconPath}
         />
-      )}
-      <Info />
-      <Map />
-      <Buttons />
-    </SDetails>
+        <Info />
+        <Map />
+        <Buttons />
+      </SDetails>
+    </>
   );
 }

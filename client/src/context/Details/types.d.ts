@@ -48,11 +48,14 @@ interface APIPlaceDetails {
 }
 
 interface IDetailsState {
+  isBusy: boolean;
   currentPlace: PlaceWithDetails;
   isCurrentPlaceModalOpen: boolean;
 }
 
 interface IDetailsActions {
+  setBusyOn: () => void;
+  setBusyOff: () => void;
   setCurrentPlaceModalOn: () => void;
   setCurrentPlaceModalOff: () => void;
   setCurrentPlace: (placeWithDetails: PlaceWithDetails) => void;
@@ -60,6 +63,8 @@ interface IDetailsActions {
 }
 
 type DetailsActionTypes =
+  | "setBusyOn"
+  | "setBusyOff"
   | "setCurrentPlace"
   | "setCurrentPlaceModalOn"
   | "setCurrentPlaceModalOff";

@@ -9,6 +9,14 @@ export default class DetailsActions {
     this.dispatch = dispatch;
   }
 
+  setBusyOn = (): void => {
+    this.dispatch({ type: "setBusyOn" });
+  };
+
+  setBusyOff = (): void => {
+    this.dispatch({ type: "setBusyOff" });
+  };
+
   setCurrentPlaceModalOn = (): void => {
     this.dispatch({ type: "setCurrentPlaceModalOn" });
   };
@@ -22,7 +30,7 @@ export default class DetailsActions {
   };
 
   showDetails = async (place: Place): Promise<void> => {
-    // this.setBusyOn();
+    this.setBusyOn();
 
     const response = await API.getCurrentPlaceDetails(place.id);
 
@@ -41,11 +49,13 @@ export default class DetailsActions {
 
     this.setCurrentPlace(placeWithDetails);
     this.setCurrentPlaceModalOn();
-    // this.setBusyOff();
+    this.setBusyOff();
   };
 
   getAllActions = (): IDetailsActions => {
     return {
+      setBusyOn: this.setBusyOn,
+      setBusyOff: this.setBusyOff,
       setCurrentPlaceModalOn: this.setCurrentPlaceModalOn,
       setCurrentPlaceModalOff: this.setCurrentPlaceModalOff,
       setCurrentPlace: this.setCurrentPlace,

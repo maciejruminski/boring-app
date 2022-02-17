@@ -1,4 +1,5 @@
 const initialState: IDetailsState = {
+  isBusy: false,
   currentPlace: {
     id: "",
     name: "",

@@ -46,7 +46,7 @@ export const Modal = () => css<{ isModalOpen: boolean }>`
   opacity: ${({ isModalOpen }) => (isModalOpen ? "1" : "0")};
   visibility: ${({ isModalOpen }) => (isModalOpen ? "visible" : "hidden")};
   transform: ${({ isModalOpen }) => (isModalOpen ? "scale(1)" : "scale(1.02)")};
-  transition-duration: 0.3s;
+  transition-duration: var(--spinnerTransitionDuration);
   transition-timing-function: ease-in;
 `;
 
