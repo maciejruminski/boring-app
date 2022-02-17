@@ -1,20 +1,31 @@
 // Libraries.
 import fetch from "node-fetch";
+import { Request, Response } from "express";
 
 // Config.
-import googleApiKey from "../config";
+import config from "../config";
 
 class GooglePlacesController {
-  async getPlaces(req, res, next) {
-    const { distance, keyword, type, maxPrice, minPrice, openNow } =
-      req.body.filters;
+  private createGetPlacesUrl(filters): string {
+    const { distance, keyword, type, maxPrice, minPrice, openNow } = filters;
+    const url = "https://maps.googleapis.com/maps/api/place/search/json?";
+    const loc = "53.4813444,18.7613652";
+    const maxP = maxPrice === "_" ? "" : `&maxprice=${maxPrice}`;
+    const minP = minPrice === "_" ? "" : `&minprice=${minPrice}`;
+    const isOpen = openNow ? "&opennow" : "";
 
-    const location = "53.4813444,18.7613652";
+    return `${url}location=${loc}&radius=${distance}&keyword=${keyword}&type=${type}${maxP}${minP}${isOpen}&key=${config.googleApiKey}`;
+  }
 
+  private createGetPlaceDetailsUrl(placeID: string): string {
+    const url = "https://maps.googleapis.com/maps/api/place/details/json?";
+
+    return `${url}place_id=${placeID}&key=${config.googleApiKey}`;
+  }
+
+  async getPlaces(req: Request, res: Response, next) {
     try {
-      const url = `https://maps.googleapis.com/maps/api/place/search/json?location=${location}&radius=${distance}&keyword=${keyword}${
-        openNow ? "&opennow" : ""
-      }&type=${type}&maxprice=${maxPrice}&minprice=${minPrice}&key=${googleApiKey}`;
+      const url = this.createGetPlacesUrl(req.body.filters);
 
       await fetch(url, {
         method: "GET",
@@ -38,11 +49,11 @@ class GooglePlacesController {
     }
   }
 
-  async getPlaceDetails(req, res, next) {
+  async getPlaceDetails(req: Request, res: Response, next) {
     const { placeID } = req.body;
 
     try {
-      const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeID}&key=${googleApiKey}`;
+      const url = this.createGetPlaceDetailsUrl(placeID);
 
       await fetch(url, {
         method: "GET",
