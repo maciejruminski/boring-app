@@ -16,22 +16,20 @@ let map: GoogleMap;
 export default function Map(): JSX.Element {
   const {
     state: {
+      isGeolocationAllowed,
+      isCurrentPlaceModalOpen,
       currentPlace: {
         geometry: { location },
       },
-      isCurrentPlaceModalOpen,
     },
+    actions: { setGeolocationAsAllowed },
   } = useDetailsContext();
 
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(() => setGeolocationAsAllowed());
+  }, []);
+
   const { t } = useTranslation();
-
-  const geoIsNotSupported = !navigator.geolocation;
-
-  if (geoIsNotSupported) {
-    // TO DO - jakis blad jak uzytkownik nie zgodzi sie na lokalizowanie
-    throw new Error("Geolocation is not supported by your browser!");
-  }
-
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -45,12 +43,17 @@ export default function Map(): JSX.Element {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCurrentPlaceModalOpen, location]);
 
+  const mapText = isGeolocationAllowed
+    ? t("Dashboard.Places.CurrentPlace.Map.SMapText--allowed")
+    : t("Dashboard.Places.CurrentPlace.Map.SMapText--disallowed");
+
   return (
     <>
       <SMap ref={ref}>
-        <SMapText>{t("Dashboard.Places.CurrentPlace.Map.SMapText")}</SMapText>
+        <SMapText>{mapText}</SMapText>
       </SMap>
-      {isCurrentPlaceModalOpen && (
+
+      {isCurrentPlaceModalOpen && isGeolocationAllowed && (
         <SButton
           text={t("Dashboard.Places.CurrentPlace.Map.SButton__text")}
           onClickHandler={() =>

@@ -1,5 +1,7 @@
 const initialState: IDetailsState = {
   isBusy: false,
+  isCurrentPlaceModalOpen: false,
+  isGeolocationAllowed: false,
   currentPlace: {
     id: "",
     name: "",
@@ -13,7 +15,6 @@ const initialState: IDetailsState = {
     },
     openNow: false,
   },
-  isCurrentPlaceModalOpen: false,
 };
 
 export default initialState;

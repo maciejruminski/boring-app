@@ -49,11 +49,13 @@ interface APIPlaceDetails {
 
 interface IDetailsState {
   isBusy: boolean;
-  currentPlace: PlaceWithDetails;
   isCurrentPlaceModalOpen: boolean;
+  isGeolocationAllowed: boolean;
+  currentPlace: PlaceWithDetails;
 }
 
 interface IDetailsActions {
+  setGeolocationAsAllowed: () => void;
   setBusyOn: () => void;
   setBusyOff: () => void;
   setCurrentPlaceModalOn: () => void;
@@ -63,6 +65,7 @@ interface IDetailsActions {
 }
 
 type DetailsActionTypes =
+  | "setGeolocationAsAllowed"
   | "setBusyOn"
   | "setBusyOff"
   | "setCurrentPlace"

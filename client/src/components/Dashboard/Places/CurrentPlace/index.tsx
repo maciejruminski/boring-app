@@ -61,11 +61,13 @@ export default function Details() {
     <>
       <Spinner isBusy={isBusy} />
       <SDetails isModalOpen={isCurrentPlaceModalOpen} isFadingOut={isFadingOut}>
-        <SClose
-          onClickHandler={modalOff}
-          text={t("Dashboard.Places.CurrentPlace.SClose__text")}
-          icon={closeIconPath}
-        />
+        {isCurrentPlaceModalOpen && (
+          <SClose
+            onClickHandler={modalOff}
+            text={t("Dashboard.Places.CurrentPlace.SClose__text")}
+            icon={closeIconPath}
+          />
+        )}
         <Info />
         <Map />
         <Buttons />

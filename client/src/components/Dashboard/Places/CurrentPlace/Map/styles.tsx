@@ -8,11 +8,12 @@ import Button from "@common/Button";
 const SMap = styled.div`
   width: 100%;
   height: 300px;
-  margin-top: 20px;
+  margin: 20px 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 40px;
+  border-radius: var(--borderRadius);
   background-color: var(--textLight);
 `;
 
@@ -20,7 +21,6 @@ const SMapText = styled.p`
   margin: 0;
   font-size: 15px;
   text-transform: uppercase;
-  max-width: 150px;
   text-align: center;
   font-weight: 600;
   color: var(--textDark);
@@ -28,7 +28,7 @@ const SMapText = styled.p`
 `;
 
 const SButton = styled(Button)`
-  margin: 20px 0;
+  margin: 0 0 20px;
   background-color: var(--textLight);
   color: var(--primary);
 `;

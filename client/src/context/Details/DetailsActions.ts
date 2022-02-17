@@ -9,6 +9,10 @@ export default class DetailsActions {
     this.dispatch = dispatch;
   }
 
+  setGeolocationAsAllowed = (): void => {
+    this.dispatch({ type: "setGeolocationAsAllowed" });
+  };
+
   setBusyOn = (): void => {
     this.dispatch({ type: "setBusyOn" });
   };
@@ -54,6 +58,7 @@ export default class DetailsActions {
 
   getAllActions = (): IDetailsActions => {
     return {
+      setGeolocationAsAllowed: this.setGeolocationAsAllowed,
       setBusyOn: this.setBusyOn,
       setBusyOff: this.setBusyOff,
       setCurrentPlaceModalOn: this.setCurrentPlaceModalOn,
