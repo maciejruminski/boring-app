@@ -29,6 +29,7 @@ export default class DetailsActions {
     if (Helper.statusIsNotOk(response.status)) {
       return;
     }
+
     const placeDetails: PlaceDetails = Helper.extractPlaceDetailsFromAPI(
       response.placeDetails
     );
