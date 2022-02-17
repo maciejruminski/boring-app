@@ -76,9 +76,7 @@ class OneTimePasswordController {
         });
       }
 
-      res
-        .status(200)
-        .json({ status: 200, message: nodemailer.getTestMessageUrl(info) });
+      res.json({ status: "OK", message: nodemailer.getTestMessageUrl(info) });
     });
   }
 
@@ -115,7 +113,7 @@ class OneTimePasswordController {
     }
 
     res.json({
-      status: 200,
+      status: "OK",
       uuid: uuidv4(),
       message: "You have been logged in correctly.",
     });

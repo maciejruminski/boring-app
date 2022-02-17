@@ -31,20 +31,20 @@ class GooglePlacesController {
         method: "GET",
       })
         .then((response) => response.json())
-        .then((data: any) => {
-          const places = data?.results.map((data) => {
+        .then((response: any) => {
+          const places = response?.results.map((res) => {
             return {
-              id: data.place_id,
-              name: data.name,
-              rating: data.rating,
-              geometry: data.geometry,
-              openNow: data?.opening_hours?.open_now,
+              id: res.place_id,
+              name: res.name,
+              rating: res.rating,
+              geometry: res.geometry,
+              openNow: res?.opening_hours?.open_now,
             };
           });
-
-          res.status(200).json({ status: 200, places });
+          res.json({ status: response.status, places });
         });
     } catch (err) {
+      console.log(err);
       next(err);
     }
   }
@@ -60,9 +60,10 @@ class GooglePlacesController {
       })
         .then((response) => response.json())
         .then((response) => {
-          res.status(200).json({ status: 200, placeDetails: response.result });
+          res.json({ status: response.status, placeDetails: response.result });
         });
     } catch (err) {
+      console.log(err);
       next(err);
     }
   }

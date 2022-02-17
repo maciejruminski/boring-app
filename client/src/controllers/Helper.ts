@@ -40,7 +40,7 @@ export default class Controller {
       LocalStorage.setHistoricPlaces(historicPlaces);
       const response = await API.addHistoricPlaces(historicPlaces, userUUID);
 
-      const statusIsNotOk = response.status !== 200;
+      const statusIsNotOk = response.status !== "OK";
 
       if (statusIsNotOk) {
         return false;

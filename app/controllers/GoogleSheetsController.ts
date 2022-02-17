@@ -60,8 +60,8 @@ class GoogleSheetsController {
 
     await this.getClientValues().append(clientData);
 
-    res.status(200).json({
-      status: 200,
+    res.json({
+      status: "OK",
       message: "Użytkownik został dodany do bazy danych",
       uuid: userUUID,
     });
@@ -81,8 +81,8 @@ class GoogleSheetsController {
 
     await this.getClientValues().update(clientData);
 
-    res.status(200).json({
-      status: 200,
+    res.json({
+      status: "OK",
       message: "Typy filtrów zostały dodane do bazy danych",
     });
   }
@@ -99,8 +99,8 @@ class GoogleSheetsController {
     const filters = await this.getClientValues().get(clientData);
     const filtersValues = filters.data.values;
 
-    res.status(200).json({
-      status: 200,
+    res.json({
+      status: "OK",
       filters: filtersValues ? filters.data.values[0][0] : {},
     });
   }
@@ -119,8 +119,8 @@ class GoogleSheetsController {
 
     await this.getClientValues().update(clientData);
 
-    res.status(200).json({
-      status: 200,
+    res.json({
+      status: "OK",
       message: "Historyczne miejsce dodane do bazy danych",
     });
   }
@@ -137,8 +137,8 @@ class GoogleSheetsController {
     const historicPlaces = await this.getClientValues().get(clientData);
     const historicPlacesValues = historicPlaces.data.values;
 
-    res.status(200).json({
-      status: 200,
+    res.json({
+      status: "OK",
       historicPlaces: historicPlacesValues ? historicPlacesValues[0] : [],
     });
   }
