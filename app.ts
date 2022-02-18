@@ -40,6 +40,4 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/client/build", "index.html"));
 });
 
-app.listen(config.port, () => `App is live at ${config.port}`);
-
 export default app;
