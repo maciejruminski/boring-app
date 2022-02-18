@@ -22,7 +22,7 @@ class GoogleSheetsController {
     const JwtClient = new google.auth.JWT(
       serviceAccountEmail,
       null,
-      serviceAccountPrivateKey,
+      serviceAccountPrivateKey.replace(/\\n/gm, "\n"),
       ["https://www.googleapis.com/auth/spreadsheets"],
       null
     );
