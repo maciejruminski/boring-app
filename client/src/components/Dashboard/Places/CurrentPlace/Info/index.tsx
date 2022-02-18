@@ -2,19 +2,11 @@
 import { useDetailsContext } from "@context/Details";
 import { useTranslation } from "react-i18next";
 
-// Styles.
-import {
-  SNote,
-  SHeading,
-  SAddress,
-  SOpenNow,
-  SStars,
-  SStarsContainer,
-  SStar,
-} from "./styles";
+// Components.
+import Stars from "../../Stars";
 
-// Icons.
-import StarIconPath from "@images/star.svg";
+// Styles.
+import { SNote, SHeading, SAddress, SOpenNow } from "./styles";
 
 export default function Details() {
   const {
@@ -22,7 +14,6 @@ export default function Details() {
   } = useDetailsContext();
 
   const { name, rating, website, openNow, vicinity } = currentPlace;
-  const numberOfStars = [...new Array(5)];
   const { t } = useTranslation();
 
   if (isCurrentPlaceModalOpen) {
@@ -31,28 +22,7 @@ export default function Details() {
         <SNote>{t("Dashboard.Places.CurrentPlace.Info.SNote_1")}</SNote>
         {name && <SHeading>{name}</SHeading>}
         {vicinity && <SAddress>{vicinity}</SAddress>}
-        <SStars>
-          <SStarsContainer ratingWidth={rating * 20}>
-            {numberOfStars.map((el, key) => (
-              <SStar
-                src={StarIconPath}
-                aria-hidden="true"
-                alt="Star icon"
-                key={key}
-              />
-            ))}
-          </SStarsContainer>
-          <SStarsContainer ratingWidth={rating * 20}>
-            {numberOfStars.map((el, key) => (
-              <SStar
-                src={StarIconPath}
-                aria-hidden="true"
-                alt="Star icon"
-                key={key}
-              />
-            ))}
-          </SStarsContainer>
-        </SStars>
+        <Stars rating={rating} />
         {openNow && (
           <SOpenNow>
             {t("Dashboard.Places.CurrentPlace.Info.SOpenNow")}

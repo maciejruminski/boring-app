@@ -38,32 +38,8 @@ const SOpenNow = styled.p`
   margin: 15px 0 0;
   font-size: 14px;
   line-height: 1.3;
-  color: #98e792;
+  color: var(--success);
   font-weight: 500;
 `;
 
-const SStars = styled.div`
-  width: 75px;
-  margin-left: -1px;
-  position: relative;
-`;
-
-const SStarsContainer = styled.div<{ ratingWidth: number }>`
-  display: flex;
-  width: ${({ ratingWidth }) => `${ratingWidth}%`};
-  overflow: hidden;
-
-  &:last-child {
-    position: absolute;
-    top: 0;
-    left: 0;
-    overflow: visible;
-    opacity: 0.3;
-  }
-`;
-
-const SStar = styled.img`
-  width: 15px;
-`;
-
-export { SNote, SHeading, SAddress, SOpenNow, SStars, SStarsContainer, SStar };
+export { SNote, SHeading, SAddress, SOpenNow };

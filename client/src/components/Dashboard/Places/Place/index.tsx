@@ -7,20 +7,18 @@ import {
   SButton,
   SBottom,
   SName,
-  SStars,
-  SStarsContainer,
-  SStar,
   SArrowContainer,
   SArrow,
 } from "./styles";
 
+// Components.
+import Stars from "../Stars";
+
 // Icons.
-import StarIconPath from "@images/star.svg";
 import ArrowIconPath from "@images/right-arrow.svg";
 
 export default function Place({ place, isVisible }: any): JSX.Element {
   const { name, rating } = place;
-  const numberOfStars = [...new Array(5)];
   const {
     actions: { showDetails },
   } = useDetailsContext();
@@ -30,28 +28,7 @@ export default function Place({ place, isVisible }: any): JSX.Element {
       <SButton onClick={() => showDetails(place)}>
         <SName>{name}</SName>
         <SBottom>
-          <SStars>
-            <SStarsContainer ratingWidth={rating * 20}>
-              {numberOfStars.map((el, key) => (
-                <SStar
-                  src={StarIconPath}
-                  aria-hidden="true"
-                  alt="Star icon"
-                  key={key}
-                />
-              ))}
-            </SStarsContainer>
-            <SStarsContainer ratingWidth={rating * 20}>
-              {numberOfStars.map((el, key) => (
-                <SStar
-                  src={StarIconPath}
-                  aria-hidden="true"
-                  alt="Star icon"
-                  key={key}
-                />
-              ))}
-            </SStarsContainer>
-          </SStars>
+          <Stars rating={rating} />
           <SArrowContainer>
             <SArrow
               src={ArrowIconPath}

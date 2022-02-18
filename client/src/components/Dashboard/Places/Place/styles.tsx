@@ -1,11 +1,5 @@
-// functions.
+// Functions.
 import styled from "styled-components";
-
-// Mixins.
-// import { BodyBackground } from "@src/Mixins";
-
-// Components.
-// import Button from "@common/Button";
 
 // Styles.
 const SPlace = styled.li<{ isVisible: boolean }>`
@@ -74,30 +68,6 @@ const SName = styled.p`
   color: white;
 `;
 
-const SStars = styled.div`
-  width: 75px;
-  margin-left: -1px;
-  position: relative;
-`;
-
-const SStarsContainer = styled.div<{ ratingWidth: number }>`
-  display: flex;
-  width: ${({ ratingWidth }) => `${ratingWidth}%`};
-  overflow: hidden;
-
-  &:last-child {
-    position: absolute;
-    top: 0;
-    left: 0;
-    overflow: visible;
-    opacity: 0.3;
-  }
-`;
-
-const SStar = styled.img`
-  width: 15px;
-`;
-
 const SArrowContainer = styled.div`
   position: relative;
   padding: 6px;
@@ -125,14 +95,4 @@ const SArrow = styled.img`
   width: 12px;
 `;
 
-export {
-  SPlace,
-  SButton,
-  SBottom,
-  SName,
-  SStars,
-  SStarsContainer,
-  SStar,
-  SArrowContainer,
-  SArrow,
-};
+export { SPlace, SButton, SBottom, SName, SArrowContainer, SArrow };
