@@ -1,6 +1,6 @@
 // Libraries.
 import { Request, Response } from "express";
-import nodemailer from "nodemailer";
+import * as nodemailer from "nodemailer";
 import { generate } from "generate-password";
 import { v4 as uuidv4 } from "uuid";
 
