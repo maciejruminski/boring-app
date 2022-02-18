@@ -6,10 +6,6 @@ export default class StateHandler {
     return { ...state, currentPlace };
   }
 
-  static setGeolocationAsAllowed({ state }: IDetailsStateHandler) {
-    return { ...state, isGeolocationAllowed: true };
-  }
-
   static setBusyOn({ state }: IDetailsStateHandler) {
     return { ...state, isBusy: true };
   }
@@ -27,7 +23,6 @@ export default class StateHandler {
   }
 
   static handlers = {
-    setGeolocationAsAllowed: StateHandler.setGeolocationAsAllowed,
     setCurrentPlace: StateHandler.setCurrentPlace,
     setBusyOn: StateHandler.setBusyOn,
     setBusyOff: StateHandler.setBusyOff,

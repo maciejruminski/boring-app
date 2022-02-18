@@ -1,3 +1,6 @@
+// Functions.
+import { useEffect } from "react";
+
 // Components.
 import Heading from "./Heading";
 import List from "./List";
@@ -9,7 +12,23 @@ import HistoricPlaces from "./HistoricPlaces";
 import { DetailsContextProvider } from "@context/Details";
 import { HistoricPlacesContextProvider } from "@context/HistoricPlaces";
 
+// Context.
+import { useFiltersAndPlacesContext } from "@context/FiltersAndPlaces";
+
 export default function Places() {
+  const {
+    state: { currentLocation },
+    actions: { setFiltersAndShowPlaces, setCurrentLocation },
+  } = useFiltersAndPlacesContext();
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((success: GeolocationPosition) =>
+      setCurrentLocation(success)
+    );
+  }, []);
+
+  useEffect(() => setFiltersAndShowPlaces(), [currentLocation]);
+
   return (
     <>
       <Heading />

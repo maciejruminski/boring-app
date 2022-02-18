@@ -1,7 +1,6 @@
 const initialState: IDetailsState = {
   isBusy: false,
   isCurrentPlaceModalOpen: false,
-  isGeolocationAllowed: false,
   currentPlace: {
     id: "",
     name: "",

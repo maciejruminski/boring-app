@@ -8,6 +8,7 @@ const initialState: IFiltersAndPlacesState = {
     maxPrice: "_",
     openNow: false,
   },
+  currentLocation: "",
 };
 
 export default initialState;

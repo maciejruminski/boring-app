@@ -4,6 +4,7 @@
   "Dashboard.Places.Heading.SNote": "Click on a place for more details.",
   "Dashboard.Places.List.SButton__text": "Show more places",
   "Dashboard.Places.List.p_1": "Sorry, but no places were found based on the filters you provided.",
+  "Dashboard.Places.List.p_1--noLocation": "Since you have not allowed access to location information, no places will appear.",
   "Dashboard.Places.Buttons.SNote--1": "You can check the places you have already saved or choose randomly from among those that appeared based on the filters.",
   "Dashboard.Places.Buttons.SNote--2": "You can check the locations you saved previously.",
   "Dashboard.Places.Buttons.SNote--3": "You can choose randomly from among those places that appeared based on the filters.",

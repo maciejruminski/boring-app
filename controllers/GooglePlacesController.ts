@@ -6,15 +6,17 @@ import { Request, Response } from "express";
 import config from "../config";
 
 class GooglePlacesController {
-  private createGetPlacesUrl(filters): string {
+  private createGetPlacesUrl(filters, location: string): string {
     const { distance, keyword, type, maxPrice, minPrice, openNow } = filters;
     const url = "https://maps.googleapis.com/maps/api/place/search/json?";
-    const loc = "53.4813444,18.7613652";
     const maxP = maxPrice === "_" ? "" : `&maxprice=${maxPrice}`;
     const minP = minPrice === "_" ? "" : `&minprice=${minPrice}`;
     const isOpen = openNow ? "&opennow" : "";
 
-    return `${url}location=${loc}&radius=${distance}&keyword=${keyword}&type=${type}${maxP}${minP}${isOpen}&key=${config.googleApiKey}`;
+    console.log(
+      `${url}location=${location}&radius=${distance}&keyword=${keyword}&type=${type}${maxP}${minP}${isOpen}&key=${config.googleApiKey}`
+    );
+    return `${url}location=${location}&radius=${distance}&keyword=${keyword}&type=${type}${maxP}${minP}${isOpen}&key=${config.googleApiKey}`;
   }
 
   private createGetPlaceDetailsUrl(placeID: string): string {
@@ -25,7 +27,7 @@ class GooglePlacesController {
 
   async getPlaces(req: Request, res: Response, next) {
     try {
-      const url = this.createGetPlacesUrl(req.body.filters);
+      const url = this.createGetPlacesUrl(req.body.filters, req.body.location);
 
       await fetch(url, {
         method: "GET",
@@ -41,7 +43,14 @@ class GooglePlacesController {
               openNow: res?.opening_hours?.open_now,
             };
           });
-          res.json({ status: response.status, places });
+
+          let status = response.status;
+
+          if (status === "ZERO_RESULTS") {
+            status = "OK";
+          }
+
+          res.json({ status, places });
         });
     } catch (err) {
       console.log(err);

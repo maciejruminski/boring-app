@@ -29,8 +29,8 @@ export default class API {
     return await this.request("/get-historic-places", { userUUID });
   }
 
-  static async getPlaces(filters: Filters) {
-    return await this.request("/get-places", { filters });
+  static async getPlaces(filters: Filters, location: string) {
+    return await this.request("/get-places", { filters, location });
   }
 
   static async getCurrentPlaceDetails(placeID: string) {

@@ -10,8 +10,16 @@ export default class StateHandler {
     return { ...state, places };
   }
 
+  static setCurrentLocation({
+    state,
+    payload: currentLocation,
+  }: IFiltersAndPlacesStateHandler) {
+    return { ...state, currentLocation };
+  }
+
   static handlers = {
     setFilters: StateHandler.setFilters,
     setPlaces: StateHandler.setPlaces,
+    setCurrentLocation: StateHandler.setCurrentLocation,
   };
 }

@@ -22,7 +22,6 @@ body.no-scroll {
   min-height: 100vh;
 }
 
-/* @media screen and (min-width: 500px) and (orientation: landscape) { */
 @media screen and (min-width: 500px) and (min-height: 400px) {
   body {
     display: flex;

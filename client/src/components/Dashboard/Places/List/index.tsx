@@ -28,7 +28,7 @@ export default function List(): JSX.Element {
   } = usePlacesContext();
 
   const {
-    state: { places },
+    state: { places, currentLocation },
   } = useFiltersAndPlacesContext();
 
   useEffect(
@@ -82,7 +82,7 @@ export default function List(): JSX.Element {
 
   const { t } = useTranslation();
 
-  if (Boolean(maximumNumberOfPlaces)) {
+  if (Boolean(maximumNumberOfPlaces) && currentLocation) {
     return (
       <SListContainer>
         <SListInnerContainer ref={setListContainerRef} id="listInnerContainer">
@@ -106,5 +106,5 @@ export default function List(): JSX.Element {
     );
   }
 
-  return <p>{t("Dashboard.Places.List.p_1")}</p>;
+  return <p>{currentLocation ? t("Dashboard.Places.List.p_1") : t("Dashboard.Places.List.p_1--noLocation")}</p>;
 }

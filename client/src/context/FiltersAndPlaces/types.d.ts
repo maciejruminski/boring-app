@@ -35,15 +35,20 @@ type Filters = {
 interface IFiltersAndPlacesState {
   filters: Filters;
   places: Places;
+  currentLocation: string;
 }
 
 interface IFiltersAndPlacesActions {
   showNewPlacesByFilters: (filters: Filters) => void;
   setFiltersAndShowPlaces: () => void;
   updateFilters: (filters: Filters) => Promise<void>;
+  setCurrentLocation: (geolocationPosition: GeolocationPosition) => void;
 }
 
-type FiltersAndPlacesActionTypes = "setFilters" | "setPlaces";
+type FiltersAndPlacesActionTypes =
+  | "setFilters"
+  | "setPlaces"
+  | "setCurrentLocation";
 
 interface IFiltersAndPlacesAction {
   type: FiltersAndPlacesActionTypes;

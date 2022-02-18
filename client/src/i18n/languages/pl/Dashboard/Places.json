@@ -4,6 +4,7 @@
   "Dashboard.Places.Heading.SNote": "Kliknij w wybrane miejsce aby uzyskać szczegóły.",
   "Dashboard.Places.List.SButton__text": "Pokaż więcej miejsc",
   "Dashboard.Places.List.p_1": "Przepraszamy, ale na podstawie podanych filtrów nie znaleźliśmy żadnych miejsc.",
+  "Dashboard.Places.List.p_1--noLocation": "Ponieważ nie zezwoliłeś na dostęp do informacji o lokalizacji, żadne miejsca się nie pojawią.",
   "Dashboard.Places.Buttons.SNote--1": "Możesz sprawdzić miejsca, które już zapisałeś lub wybrać losowo z pośród tych, które pojawiły się na podstawie filtrów.",
   "Dashboard.Places.Buttons.SNote--2": "Możesz sprawdzić lokalizacje, które wczesniej zapisałeś.",
   "Dashboard.Places.Buttons.SNote--3": "Możesz wybrać losowo z pośród tych miejsc, które pojawiły się na podstawie filtrów.",

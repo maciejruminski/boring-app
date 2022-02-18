@@ -8,6 +8,7 @@ import GoogleMap from "@controllers/GoogleMap/GoogleMap";
 import { SMap, SMapText, SButton } from "./styles";
 
 // Context.
+import { useFiltersAndPlacesContext } from "@context/FiltersAndPlaces";
 import { useDetailsContext } from "@context/Details";
 import { useTranslation } from "react-i18next";
 
@@ -16,18 +17,16 @@ let map: GoogleMap;
 export default function Map(): JSX.Element {
   const {
     state: {
-      isGeolocationAllowed,
       isCurrentPlaceModalOpen,
       currentPlace: {
         geometry: { location },
       },
     },
-    actions: { setGeolocationAsAllowed },
   } = useDetailsContext();
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(() => setGeolocationAsAllowed());
-  }, []);
+  const {
+    state: { currentLocation },
+  } = useFiltersAndPlacesContext();
 
   const { t } = useTranslation();
   const ref = useRef<HTMLDivElement>(null);
@@ -43,7 +42,7 @@ export default function Map(): JSX.Element {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCurrentPlaceModalOpen, location]);
 
-  const mapText = isGeolocationAllowed
+  const mapText = currentLocation
     ? t("Dashboard.Places.CurrentPlace.Map.SMapText--allowed")
     : t("Dashboard.Places.CurrentPlace.Map.SMapText--disallowed");
 
@@ -53,7 +52,7 @@ export default function Map(): JSX.Element {
         <SMapText>{mapText}</SMapText>
       </SMap>
 
-      {isCurrentPlaceModalOpen && isGeolocationAllowed && (
+      {isCurrentPlaceModalOpen && currentLocation && (
         <SButton
           text={t("Dashboard.Places.CurrentPlace.Map.SButton__text")}
           onClickHandler={() =>

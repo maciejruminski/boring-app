@@ -80,14 +80,12 @@ export default class FiltersAndPlacesActions {
     if (filtersAreEqual && placesFromLocalStorage.length) {
       this.dispatch({ type: "setPlaces", payload: placesFromLocalStorage });
 
-      // this.setMaximumNumberOfPlaces(placesFromLocalStorage.length);
-      // this.setNumberOfPlacesButtonVisibility();
       // this.setBusyOff();
       return;
     }
 
-    const response = await API.getPlaces(filters);
-
+    const response = await API.getPlaces(filters, this.state.currentLocation);
+    console.log(response);
     if (Helper.statusIsNotOk(response.status)) {
       return;
     }
@@ -95,17 +93,24 @@ export default class FiltersAndPlacesActions {
     LocalStorage.setPlaces(response.places);
 
     this.dispatch({ type: "setPlaces", payload: response.places });
-    // this.setMaximumNumberOfPlaces(response.places.length);
-    // this.setNumberOfPlacesButtonVisibility();
     // this.setBusyOff();
   };
 
   setFiltersAndShowPlaces = (): void => {
-    this.setFilters().then((updatedFilters: Filters | void) =>
-      this.showNewPlacesByFilters(
-        updatedFilters ? updatedFilters : this.state.filters
-      )
-    );
+    if (this.state.currentLocation) {
+      this.setFilters().then((updatedFilters: Filters | void) =>
+        this.showNewPlacesByFilters(
+          updatedFilters ? updatedFilters : this.state.filters
+        )
+      );
+    }
+  };
+
+  setCurrentLocation = (geolocationPosition: GeolocationPosition): void => {
+    const { latitude, longitude } = geolocationPosition.coords;
+    const location: string = `${latitude},${longitude}`;
+
+    this.dispatch({ type: "setCurrentLocation", payload: location });
   };
 
   getAllActions = (): IFiltersAndPlacesActions => {
@@ -113,6 +118,7 @@ export default class FiltersAndPlacesActions {
       showNewPlacesByFilters: this.showNewPlacesByFilters,
       setFiltersAndShowPlaces: this.setFiltersAndShowPlaces,
       updateFilters: this.updateFilters,
+      setCurrentLocation: this.setCurrentLocation,
     };
   };
 }
