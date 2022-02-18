@@ -67,16 +67,16 @@ export const InputContainer = () => css<{
     border-radius: 5px 0 0 5px;
     bottom: 2px;
     transition-duration: 0.3s;
-    border: 2px solid #abc2d4;
+    border: 2px solid var(--text);
     border-bottom: none;
     border-color: ${({ isError, isSuccess, checkValidity }) =>
       !checkValidity
-        ? "#abc2d4"
+        ? "var(--text)"
         : isError
-        ? "#ff8282"
+        ? "var(--error)"
         : isSuccess
-        ? "#98e792"
-        : "#abc2d4"};
+        ? "var(--success)"
+        : "var(--text)"};
   }
 
   &:before {
@@ -109,7 +109,7 @@ export const Label = () => css<{ isActive: boolean }>`
   transform-origin: left;
   transform: ${({ isActive }) =>
     isActive ? "translateY(-27px) translateX(1px) scale(0.85)" : ""};
-  color: ${({ isActive }) => (isActive ? "var(--primaryLight)" : "#abc2d4")};
+  color: ${({ isActive }) => (isActive ? "var(--primaryLight)" : "var(--text)")};
 `;
 
 export const Input = () => css<{
@@ -137,20 +137,20 @@ export const Input = () => css<{
   transition-duration: 0.3s;
   border-color: ${({ isError, isSuccess, checkValidity }) =>
     !checkValidity
-      ? "#abc2d4"
+      ? "var(--text)"
       : isError
-      ? "#ff8282"
+      ? "var(--error)"
       : isSuccess
-      ? "#98e792"
-      : "#abc2d4"};
+      ? "var(--success)"
+      : "var(--text)"};
   color: ${({ isError, isSuccess, checkValidity }) =>
     !checkValidity
-      ? "#abc2d4"
+      ? "var(--text)"
       : isError
-      ? "#ff8282"
+      ? "var(--error)"
       : isSuccess
-      ? "#98e792"
-      : "#abc2d4"};
+      ? "var(--success)"
+      : "var(--text)"};
 `;
 
 export const Heading = () => css`

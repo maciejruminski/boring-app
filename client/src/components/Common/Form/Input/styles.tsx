@@ -21,7 +21,7 @@ const SContainer = styled.div<{
     width: 20px;
     height: auto;
     fill: ${({ isError, isSuccess }) =>
-      isError ? "#ff8282" : isSuccess ? "#98e792" : "#abc2d4"};
+      isError ? "var(--error)" : isSuccess ? "var(--success)" : "var(--text)"};
   }
 `;
 
@@ -38,7 +38,7 @@ const SInput = styled.input<{
 `;
 
 const SErrors = styled.p`
-  color: #ff8282;
+  color: var(--error);
   font-size: 14px;
   font-weight: 500;
   margin: 0 0 10px;

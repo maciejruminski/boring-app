@@ -66,8 +66,8 @@ p a {
 
 :root {
   --polyfillBackground: #0c1025;
-  --gradientBackgroundFrom: #0c143d;
-  --gradientBackgroundTo: #281d2c;
+  --gradientBackgroundFrom: #101829;
+  --gradientBackgroundTo: #112430;
   --primary: #1a7bcf;
   --primaryLight: #52a2e7;
   --secondary: #1549bf;
@@ -75,7 +75,7 @@ p a {
   --textLight: #ffffff;
   --textDark: #0c1025;
   --success: #98e792;
-  --error: #ff9696;
+  --error: #ff9c8f;
   --borderRadius: 5px;
   --transitionDuration: 0.3s;
   --spinnerTransitionDuration: 0.5s;

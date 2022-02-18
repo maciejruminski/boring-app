@@ -13,7 +13,7 @@ const SSubmit = styled.button`
   padding: 16px 22px;
   letter-spacing: 0.2px;
   border-radius: var(--borderRadius);
-  color: #ffffff;
+  color: var(--textLight);
   cursor: pointer;
   width: 100%;
   transition-duration: var(--transitionDuration);

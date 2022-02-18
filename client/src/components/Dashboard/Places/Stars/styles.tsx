@@ -29,7 +29,7 @@ const SStar = styled(StarIcon)`
   width: 15px;
   min-width: 15px;
   height: auto;
-  fill: var(--primaryLight);
+  fill: var(--primary);
 `;
 
 export { SStars, SStarsContainer, SStar };

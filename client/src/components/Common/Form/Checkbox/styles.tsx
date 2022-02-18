@@ -13,7 +13,7 @@ const SContainer = styled.div`
     text-transform: uppercase;
     font-size: 14px;
     font-weight: 500;
-    color: #abc2d4;
+    color: var(--text);
     letter-spacing: 0.5px;
   }
 `;
@@ -42,7 +42,7 @@ const SCheckbox = styled.input<{
     width: 100%;
     height: 100%;
     border-radius: 5px;
-    border: 2px solid ${({ isChecked }) => (isChecked ? "#98e792" : "#abc2d4")};
+    border: 2px solid ${({ isChecked }) => (isChecked ? "var(--success)" : "var(--text)")};
   }
 
   &:after {
@@ -52,7 +52,7 @@ const SCheckbox = styled.input<{
     width: 10px;
     height: 10px;
     background-color: ${({ isChecked }) =>
-      isChecked ? "#98e792" : "transparent"};
+      isChecked ? "var(--success)" : "transparent"};
   }
 `;
 

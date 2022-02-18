@@ -21,7 +21,7 @@ const SList = styled.ul`
 
 const SButton = styled(Button)`
   margin: 20px 0 0;
-  background-color: #ffffff;
+  background-color: var(--textLight);
   color: var(--primary);
 `;
 
