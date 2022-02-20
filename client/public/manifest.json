@@ -4,7 +4,7 @@
   "icons": [
     {
       "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "48x48 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
@@ -16,6 +16,24 @@
       "src": "icon-512x512.png",
       "type": "image/png",
       "sizes": "512x512"
+    },
+    {
+      "src": "mascable_icon_x48.png",
+      "type": "image/png",
+      "sizes": "48x48",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "mascable_icon_x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "mascable_icon_x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ],
   "start_url": ".",
