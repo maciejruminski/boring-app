@@ -1,5 +1,7 @@
 // Functions.
 import { useEffect, useState, useRef } from "react";
+// @ts-ignore
+import smoothscroll from "smoothscroll-polyfill";
 
 // Controllers.
 import Helper from "@controllers/Helper";
@@ -72,6 +74,8 @@ export default function Details() {
       }, 100);
     }
   }, [isBusy]);
+
+  useEffect(() => smoothscroll.polyfill(), []);
 
   return (
     <>
