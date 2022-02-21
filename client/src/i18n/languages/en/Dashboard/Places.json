@@ -13,7 +13,7 @@
   "Dashboard.Places.CurrentPlace.SClose__text": "Submit",
   "Dashboard.Places.CurrentPlace.Info.SNote_1": "Selected location:",
   "Dashboard.Places.CurrentPlace.Info.SOpenNow": "Open now!",
-  "Dashboard.Places.CurrentPlace.Info.SNote_2": "Kliknij <a href='{{website}}' target='_blank' rel='noreferrer'>tutaj</a> aby przejść na stronę internetową.",
+  "Dashboard.Places.CurrentPlace.Info.SNote_2": "Click <a href='{{website}}' target='_blank' rel='noreferrer'>here</a> to go to the website.",
   "Dashboard.Places.CurrentPlace.Map.SMapText--allowed": "Map is loading",
   "Dashboard.Places.CurrentPlace.Map.SMapText--disallowed": "The map will not load because you have denied access to the location.",
   "Dashboard.Places.CurrentPlace.Map.SButton__text": "Show the route on Google Map",
