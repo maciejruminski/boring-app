@@ -19,7 +19,7 @@ import {
 } from "./styles";
 
 // Icons.
-import filterIconPath from "@images/filter.svg";
+import filterIconPath from "@images/hamburger.svg";
 
 // Array with types and prices.
 import types from "../filterTypes";
@@ -42,7 +42,7 @@ export default function Preview() {
   return (
     <SContainer>
       <SFiltersHeader>
-        <SHeading>{t("Dashboard.Filters.Preview.SHeading")}</SHeading>;
+        <SHeading>{t("Dashboard.Filters.Preview.SHeading")}</SHeading>
         <SButton
           onClickHandler={setFiltersModalOn}
           text={t("Dashboard.Filters.Preview.SButton__text")}

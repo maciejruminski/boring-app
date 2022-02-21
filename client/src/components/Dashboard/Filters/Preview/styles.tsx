@@ -23,13 +23,14 @@ const SButton = styled(Button)`
   background-color: transparent;
   padding: 5px 0 5px 5px;
   width: auto;
+  margin: -80px -2px 0 0;
 
   .text {
     ${ScreenReaderText()};
   }
 
   .icon {
-    width: 26px;
+    width: 28px;
     display: block;
   }
 `;
