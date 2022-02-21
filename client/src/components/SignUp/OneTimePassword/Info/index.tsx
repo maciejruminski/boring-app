@@ -25,8 +25,11 @@ export default function Info() {
           __html: t("SignUp.Password.Info.p_1", { email }),
         }}
       ></p>
-      <p>{t("SignUp.Password.Info.p_2")}</p>
-
+      <p
+        dangerouslySetInnerHTML={{
+          __html: t("SignUp.Password.Info.p_2"),
+        }}
+      ></p>
       <SWarning>
         <img src={WarningIconPath} aria-hidden="true" alt="Warning icon" />
         {t("SignUp.Password.Info.SWarning")}

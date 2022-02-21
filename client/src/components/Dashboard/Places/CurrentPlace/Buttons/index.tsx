@@ -5,6 +5,7 @@ import Helper from "@controllers/Helper";
 import { useFiltersAndPlacesContext } from "@context/FiltersAndPlaces";
 import { useHistoricPlacesContext } from "@context/HistoricPlaces";
 import { useDetailsContext } from "@context/Details";
+import { useTranslation } from "react-i18next";
 
 // Styles.
 import { SButton, SSecondButton } from "./styles";
@@ -28,6 +29,8 @@ export default function Details() {
   const isSavedAsHistoric = Helper.getPlaceById(historicPlaces, id);
   const randomPlace = Helper.getRandomPlace(places, id);
 
+  const { t } = useTranslation();
+
   if (isCurrentPlaceModalOpen) {
     return (
       <>
@@ -39,14 +42,16 @@ export default function Details() {
           }
           text={
             isSavedAsHistoric
-              ? "Usuń lokację z historii"
-              : "Zapisz lokację w historii"
+              ? t("Dashboard.Places.CurrentPlace.Buttons.SButton__text--true")
+              : t("Dashboard.Places.CurrentPlace.Buttons.SButton__text--false")
           }
         />
 
         {!isHistoricPlacesModalOpen && (
           <SSecondButton
-            text="Losuj inne miejsce"
+            text={t(
+              "Dashboard.Places.CurrentPlace.Buttons.SSecondButton__text"
+            )}
             onClickHandler={() => showDetails(randomPlace)}
           />
         )}

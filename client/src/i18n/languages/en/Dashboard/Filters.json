@@ -12,7 +12,7 @@
   "Dashboard.Filters.Form.SClose__text": "Close filters modal",
   "Dashboard.Filters.Form.SHeading": "Filters",
   "Dashboard.Filters.Form.SNote": "Adjust the filters to find the locations of your interest.",
-  "Dashboard.Filters.Form.SWarning": "Setting a price is not recommended! Many places in Google's system do not have a price set, so they will be excluded from search results.",
+  "Dashboard.Filters.Form.SWarning": "Setting a price is not recommended! Many places in Google's system do not have this parameter set, so they will be excluded from search results.",
   "Dashboard.Filters.Keyword.Input__label": "Keyword",
   "Dashboard.Filters.Form.Button__text": "Filter",
   "Dashboard.Filters.Distance.Select__label": "Distance",
