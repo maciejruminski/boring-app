@@ -27,6 +27,10 @@ const SDetails = styled.div<{ isModalOpen: boolean; isFadingOut: boolean }>`
   ${Modal()};
   z-index: 3;
 
+  @media screen and (min-width: 500px) and (min-height: 400px) {
+    transform: translate(-50%, -50%);
+  }
+
   ${fitIsFadingOutToStyle};
 `;
 
