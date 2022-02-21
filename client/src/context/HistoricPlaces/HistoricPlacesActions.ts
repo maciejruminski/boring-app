@@ -30,7 +30,7 @@ export default class HistoricPlacesActions {
 
     const historicPlaces = LocalStorage.getHistoricPlaces();
 
-    if (historicPlaces.length) {
+    if (historicPlaces && Boolean(historicPlaces.length)) {
       this.dispatch({ type: "setHistoricPlaces", payload: historicPlaces });
       this.setBusyOff();
 
@@ -46,7 +46,7 @@ export default class HistoricPlacesActions {
         return;
       }
 
-      if (response.historicPlaces.length) {
+      if (response.historicPlaces && Boolean(response.historicPlaces.length)) {
         const parsedHistoricPlaces: Place[] = JSON.parse(
           response.historicPlaces
         );

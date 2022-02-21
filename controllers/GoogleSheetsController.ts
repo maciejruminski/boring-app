@@ -13,7 +13,7 @@ class GoogleSheetsController {
   private historicPlacesColumn: string;
 
   constructor() {
-    this.idsColumn = "Sheet1!A2";
+    this.idsColumn = "Sheet1!A2:A1000";
     this.filtersColumn = "Sheet1!B";
     this.historicPlacesColumn = "Sheet1!C";
   }
@@ -36,7 +36,6 @@ class GoogleSheetsController {
     const spreadsheetIds = await this.getClientValues().get({
       spreadsheetId: spreadSheetsID,
       majorDimension: "ROWS",
-      // range: "Sheet1!A2:A1000", BEFORE
       range: this.idsColumn,
     });
 
@@ -128,11 +127,16 @@ class GoogleSheetsController {
   async getHistoricPlaces(req: Request, res: Response) {
     const { userUUID }: { userUUID: string } = req.body;
     const row = await this.getUserRowById(userUUID);
+
+    console.log('row', row);
+
     const clientData = {
       spreadsheetId: spreadSheetsID,
       majorDimension: "ROWS",
       range: this.historicPlacesColumn + row,
     };
+
+    console.log('clientData', clientData);
 
     const historicPlaces = await this.getClientValues().get(clientData);
     const historicPlacesValues = historicPlaces.data.values;
