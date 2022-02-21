@@ -37,7 +37,6 @@ export default class HistoricPlacesActions {
       }
 
       if (response.historicPlaces.length) {
-        // Unhandled Rejection (SyntaxError): JSON Parse error: Unexpected identifier "Historic"
         const parsedHistoricPlaces: Place[] = JSON.parse(
           response.historicPlaces
         );

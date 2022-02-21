@@ -13,6 +13,7 @@ const SStars = styled.div`
 const SStarsContainer = styled.div<{ ratingWidth: number }>`
   display: flex;
   flex-wrap: nowrap;
+  align-items: center;
   width: ${({ ratingWidth }) => `${ratingWidth}%`};
   overflow: hidden;
 
