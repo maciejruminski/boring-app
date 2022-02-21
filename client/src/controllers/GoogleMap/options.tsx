@@ -181,6 +181,7 @@ const mapOptions = {
   panControl: false,
   streetViewControl: false,
   mapTypeControl: false,
+  scrollwheel: false
 } as google.maps.MapOptions;
 
 export default mapOptions;
