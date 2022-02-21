@@ -1,5 +1,5 @@
 // Functions.
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 // Controllers.
 import Helper from "@controllers/Helper";
@@ -57,10 +57,30 @@ export default function Details() {
     }
   }, [isCurrentPlaceModalOpen]);
 
+  const labelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isBusy) {
+      setTimeout(() => {
+        if (labelRef && labelRef.current) {
+          labelRef.current.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          });
+        }
+      }, 100);
+    }
+  }, [isBusy]);
+
   return (
     <>
       <Spinner isBusy={isBusy || isBusyHistoric} />
-      <SDetails isModalOpen={isCurrentPlaceModalOpen} isFadingOut={isFadingOut}>
+      <SDetails
+        ref={labelRef}
+        isModalOpen={isCurrentPlaceModalOpen}
+        isFadingOut={isFadingOut}
+      >
         {isCurrentPlaceModalOpen && (
           <SClose
             onClickHandler={modalOff}

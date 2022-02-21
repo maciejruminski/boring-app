@@ -71,7 +71,6 @@ export default class HistoricPlacesActions {
     isHistoricPlaceSaved.then((isSaved: any) => {
       if (isSaved) {
         this.setBusyOff();
-        console.log("Historyczne miejsce już istnieje!");
         return;
       }
 
@@ -101,7 +100,6 @@ export default class HistoricPlacesActions {
         );
 
         Helper.setHistoricPlaces(historicPlaces).then(() => {
-          console.log("Historyczne miejsce usunięte z bazy danych!");
           this.dispatch({
             type: "setHistoricPlaces",
             payload: historicPlaces,
