@@ -34,6 +34,15 @@ export default function Details() {
   if (isCurrentPlaceModalOpen) {
     return (
       <>
+        {!isHistoricPlacesModalOpen && (
+          <SSecondButton
+            text={t(
+              "Dashboard.Places.CurrentPlace.Buttons.SSecondButton__text"
+            )}
+            onClickHandler={() => showDetails(randomPlace)}
+          />
+        )}
+
         <SButton
           onClickHandler={() =>
             isSavedAsHistoric
@@ -45,16 +54,8 @@ export default function Details() {
               ? t("Dashboard.Places.CurrentPlace.Buttons.SButton__text--true")
               : t("Dashboard.Places.CurrentPlace.Buttons.SButton__text--false")
           }
+          isSaved={isSavedAsHistoric}
         />
-
-        {!isHistoricPlacesModalOpen && (
-          <SSecondButton
-            text={t(
-              "Dashboard.Places.CurrentPlace.Buttons.SSecondButton__text"
-            )}
-            onClickHandler={() => showDetails(randomPlace)}
-          />
-        )}
       </>
     );
   }
