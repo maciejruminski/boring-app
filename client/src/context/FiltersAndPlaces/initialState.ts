@@ -9,6 +9,7 @@ const initialState: IFiltersAndPlacesState = {
     openNow: false,
   },
   currentLocation: "",
+  isBusy: false,
 };
 
 export default initialState;

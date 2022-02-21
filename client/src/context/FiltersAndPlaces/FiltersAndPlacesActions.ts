@@ -15,6 +15,14 @@ export default class FiltersAndPlacesActions {
     this.state = state;
   }
 
+  setBusyOn = (): void => {
+    this.dispatch({ type: "setBusyOn" });
+  };
+
+  setBusyOff = (): void => {
+    this.dispatch({ type: "setBusyOff" });
+  };
+
   private setFilters = async (): Promise<Filters | void> => {
     const filters = LocalStorage.getFilters();
     const filtersAreNotEmpty = Object.keys(filters).length !== 0;
@@ -44,8 +52,6 @@ export default class FiltersAndPlacesActions {
 
         return filters;
       }
-
-      // this.setBusyOff();
     }
   };
 
@@ -65,14 +71,12 @@ export default class FiltersAndPlacesActions {
         if (Helper.statusIsNotOk(response.status)) {
           return;
         }
-
-        console.log("Filters are saved");
       }
     }
   };
 
   showNewPlacesByFilters = async (filters: Filters): Promise<void> => {
-    // this.setBusyOn();
+    this.setBusyOn();
 
     const filtersAreEqual = Helper.comparewithLocalStorageFilters(filters);
     const placesFromLocalStorage = LocalStorage.getPlaces();
@@ -80,12 +84,12 @@ export default class FiltersAndPlacesActions {
     if (filtersAreEqual && placesFromLocalStorage.length) {
       this.dispatch({ type: "setPlaces", payload: placesFromLocalStorage });
 
-      // this.setBusyOff();
+      this.setBusyOff();
       return;
     }
 
     const response = await API.getPlaces(filters, this.state.currentLocation);
-    console.log(response);
+
     if (Helper.statusIsNotOk(response.status)) {
       return;
     }
@@ -93,7 +97,7 @@ export default class FiltersAndPlacesActions {
     LocalStorage.setPlaces(response.places);
 
     this.dispatch({ type: "setPlaces", payload: response.places });
-    // this.setBusyOff();
+    this.setBusyOff();
   };
 
   setFiltersAndShowPlaces = (): void => {
@@ -115,6 +119,8 @@ export default class FiltersAndPlacesActions {
 
   getAllActions = (): IFiltersAndPlacesActions => {
     return {
+      setBusyOn: this.setBusyOn,
+      setBusyOff: this.setBusyOff,
       showNewPlacesByFilters: this.showNewPlacesByFilters,
       setFiltersAndShowPlaces: this.setFiltersAndShowPlaces,
       updateFilters: this.updateFilters,

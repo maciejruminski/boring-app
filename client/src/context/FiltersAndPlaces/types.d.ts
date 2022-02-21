@@ -36,9 +36,12 @@ interface IFiltersAndPlacesState {
   filters: Filters;
   places: Places;
   currentLocation: string;
+  isBusy: boolean;
 }
 
 interface IFiltersAndPlacesActions {
+  setBusyOn: () => void;
+  setBusyOff: () => void;
   showNewPlacesByFilters: (filters: Filters) => void;
   setFiltersAndShowPlaces: () => void;
   updateFilters: (filters: Filters) => Promise<void>;
@@ -46,6 +49,8 @@ interface IFiltersAndPlacesActions {
 }
 
 type FiltersAndPlacesActionTypes =
+  | "setBusyOn"
+  | "setBusyOff"
   | "setFilters"
   | "setPlaces"
   | "setCurrentLocation";
