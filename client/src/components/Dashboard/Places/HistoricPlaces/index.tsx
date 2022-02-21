@@ -1,5 +1,5 @@
 // Functions.
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // Controllers.
 import Helper from "@controllers/Helper";
@@ -31,15 +31,29 @@ export default function HistoricPlaces(): JSX.Element {
     [isHistoricPlacesModalOpen]
   );
 
+  const fadingOutTime = 500;
+  const [isFadingOut, setIsFadingOut] = useState(false);
+
+  const modalOff = () => {
+    setIsFadingOut(true);
+    setTimeout(setHistoricPlacesModalOff, fadingOutTime);
+  };
+
+  useEffect(() => {
+    if (!isHistoricPlacesModalOpen) {
+      setIsFadingOut(false);
+    }
+  }, [isHistoricPlacesModalOpen]);
+
   const { t } = useTranslation();
 
   const historicPlacesExist = historicPlaces.length > 0;
 
-  if (historicPlacesExist) {
+  if (historicPlacesExist && isHistoricPlacesModalOpen) {
     return (
-      <SModal isModalOpen={isHistoricPlacesModalOpen}>
+      <SModal isModalOpen={isHistoricPlacesModalOpen} isFadingOut={isFadingOut}>
         <SButton
-          onClickHandler={setHistoricPlacesModalOff}
+          onClickHandler={modalOff}
           text={t("Dashboard.Places.HistoricPlaces.SButton__text")}
           icon={closeIconPath}
         />

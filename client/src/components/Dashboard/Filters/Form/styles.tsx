@@ -8,7 +8,6 @@ import Button from "@common/Button";
 import { Modal, ScreenReaderText } from "@src/Mixins";
 
 // Styles.
-
 const fitIsFadingOutToStyle = ({ isFadingOut }: { isFadingOut: boolean }) => {
   if (isFadingOut) {
     return `
