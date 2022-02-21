@@ -9,13 +9,11 @@ const SNote = styled.p`
   margin: 20px 0;
 `;
 
-const SButton = styled(Button)`
-  margin-bottom: 20px;
-`;
+const SButton = styled(Button)``;
 
 const SSecondButton = styled(SButton)`
   background-color: var(--secondary);
-  margin-bottom: 0;
+  margin: 20px 0 0;
 `;
 
 export { SNote, SButton, SSecondButton };
