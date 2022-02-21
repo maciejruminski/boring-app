@@ -21,7 +21,7 @@ const SSpinner = styled.div<{ isBusy: boolean }>`
   width: 100%;
   height: 100%;
   transition-duration: var(--spinnerTransitionDuration);
-  z-index: 3;
+  z-index: 5;
   ${fitBusyToStyle}
 `;
 

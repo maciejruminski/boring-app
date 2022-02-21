@@ -17,12 +17,22 @@ export default class HistoricPlacesActions {
     this.historicPlaces = state.historicPlaces;
   }
 
+  setBusyOn = (): void => {
+    this.dispatch({ type: "setBusyOn" });
+  };
+
+  setBusyOff = (): void => {
+    this.dispatch({ type: "setBusyOff" });
+  };
+
   setHistoricPlaces = async (): Promise<void> => {
+    this.setBusyOn();
+
     const historicPlaces = LocalStorage.getHistoricPlaces();
 
     if (historicPlaces.length) {
       this.dispatch({ type: "setHistoricPlaces", payload: historicPlaces });
-      // this.setBusyOff();
+      this.setBusyOff();
 
       return;
     }
@@ -47,38 +57,35 @@ export default class HistoricPlacesActions {
         });
       }
 
-      // this.setBusyOff();
+      this.setBusyOff();
 
       return response.historicPlaces;
     }
   };
 
   addHistoricPlace = (place: Place): void => {
-    // this.setBusyOn();
+    this.setBusyOn();
 
     const isHistoricPlaceSaved = Helper.checkIfHistoricPlaceSaved(place.id);
 
     isHistoricPlaceSaved.then((isSaved: any) => {
       if (isSaved) {
-        // this.setBusyOff();
+        this.setBusyOff();
         console.log("Historyczne miejsce już istnieje!");
         return;
       }
 
       const historicPlaces = [...this.historicPlaces, place];
 
-      console.log(place);
-
       Helper.setHistoricPlaces(historicPlaces).then(() => {
-        console.log("Historyczne miejsce dodane do bazy danych!");
         this.dispatch({ type: "setHistoricPlaces", payload: historicPlaces });
-        // this.setBusyOff();
+        this.setBusyOff();
       });
     });
   };
 
   removeHistoricPlace = (place: PlaceWithDetails): void => {
-    // this.setBusyOn();
+    this.setBusyOn();
 
     const isHistoricPlaceSaved = Helper.checkIfHistoricPlaceSaved(place.id);
 
@@ -88,12 +95,6 @@ export default class HistoricPlacesActions {
           this.historicPlaces,
           place.id
         );
-
-        // const newPlaceDetails = this.state.currentPlace;
-
-
-
-        // this.setCurrentPlace(newPlaceDetails);
 
         const historicPlaces: Place[] = [...this.historicPlaces].filter(
           (place: Place) => place.id !== historicPlaceToRemove.id
@@ -106,7 +107,7 @@ export default class HistoricPlacesActions {
             payload: historicPlaces,
           });
 
-          // this.setBusyOff();
+          this.setBusyOff();
         });
       }
     });
@@ -122,6 +123,8 @@ export default class HistoricPlacesActions {
 
   getAllActions = (): IHistoricPlacesActions => {
     return {
+      setBusyOn: this.setBusyOn,
+      setBusyOff: this.setBusyOff,
       addHistoricPlace: this.addHistoricPlace,
       removeHistoricPlace: this.removeHistoricPlace,
       setHistoricPlaces: this.setHistoricPlaces,

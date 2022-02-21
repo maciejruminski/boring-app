@@ -1,9 +1,12 @@
 interface IHistoricPlacesState {
   historicPlaces: Places;
   isHistoricPlacesModalOpen: boolean;
+  isBusy: boolean;
 }
 
 interface IHistoricPlacesActions {
+  setBusyOn: () => void;
+  setBusyOff: () => void;
   addHistoricPlace: (place: Place) => void;
   removeHistoricPlace: (place: PlaceWithDetails) => void;
   setHistoricPlaces: () => void;
@@ -12,6 +15,8 @@ interface IHistoricPlacesActions {
 }
 
 type HistoricPlacesActionTypes =
+  | "setBusyOn"
+  | "setBusyOff"
   | "setHistoricPlaces"
   | "setHistoricPlacesModalOn"
   | "setHistoricPlacesModalOff";

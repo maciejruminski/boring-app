@@ -23,7 +23,7 @@ import Spinner from "@common/Spinner";
 
 export default function Details() {
   const {
-    state: { isHistoricPlacesModalOpen },
+    state: { isHistoricPlacesModalOpen, isBusy: isBusyHistoric },
   } = useHistoricPlacesContext();
 
   const {
@@ -59,7 +59,7 @@ export default function Details() {
 
   return (
     <>
-      <Spinner isBusy={isBusy} />
+      <Spinner isBusy={isBusy || isBusyHistoric} />
       <SDetails isModalOpen={isCurrentPlaceModalOpen} isFadingOut={isFadingOut}>
         {isCurrentPlaceModalOpen && (
           <SClose

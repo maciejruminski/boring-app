@@ -1,4 +1,12 @@
 export default class StateHandler {
+  static setBusyOn({ state }: IHistoricPlacesStateHandler) {
+    return { ...state, isBusy: true };
+  }
+
+  static setBusyOff({ state }: IHistoricPlacesStateHandler) {
+    return { ...state, isBusy: false };
+  }
+
   static setHistoricPlacesModalOn({ state }: IHistoricPlacesStateHandler) {
     return { ...state, isHistoricPlacesModalOpen: true };
   }
@@ -15,6 +23,8 @@ export default class StateHandler {
   }
 
   static handlers = {
+    setBusyOn: StateHandler.setBusyOn,
+    setBusyOff: StateHandler.setBusyOff,
     setHistoricPlaces: StateHandler.setHistoricPlaces,
     setHistoricPlacesModalOn: StateHandler.setHistoricPlacesModalOn,
     setHistoricPlacesModalOff: StateHandler.setHistoricPlacesModalOff,
