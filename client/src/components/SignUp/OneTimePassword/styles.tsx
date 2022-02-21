@@ -19,7 +19,7 @@ const fitFadingOutToStyle = ({ isFadingOut }: { isFadingOut: boolean }) => {
 const SOneTimePassword = styled.div<{ isModalOpen: boolean }>`
   ${Modal()};
 
-  @keyframes example {
+  @keyframes showPassword {
     from {
       opacity: 0;
       transform: scale(1.02);
@@ -30,7 +30,22 @@ const SOneTimePassword = styled.div<{ isModalOpen: boolean }>`
     }
   }
 
-  animation-name: example;
+  @media screen and (min-width: 500px) and (min-height: 400px) {
+    @keyframes showPassword {
+      from {
+        opacity: 0;
+        transform: scale(1.02) translate(-50%, -50%);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translate(-50%, -50%);
+      }
+    }
+
+    margin: 0;
+  }
+
+  animation-name: showPassword;
   animation-duration: var(--spinnerTransitionDuration);
   animation-fill-mode: forwards;
 `;

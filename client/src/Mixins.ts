@@ -48,6 +48,19 @@ export const Modal = () => css<{ isModalOpen: boolean }>`
   transform: ${({ isModalOpen }) => (isModalOpen ? "scale(1)" : "scale(1.02)")};
   transition-duration: var(--spinnerTransitionDuration);
   transition-timing-function: ease-in;
+
+  @media screen and (min-width: 500px) and (min-height: 400px) {
+    top: 50%;
+    left: 50%;
+    margin: 0;
+    max-width: 370px;
+    height: calc(100% - 100px);
+    min-height: initial;
+    max-height: 600px;
+    border: 4px solid #283248;
+    border-radius: var(--borderRadius);
+    box-shadow: 0 0 50px 0px #0e0f1f;
+  }
 `;
 
 export const InputContainer = () => css<{
@@ -109,7 +122,8 @@ export const Label = () => css<{ isActive: boolean }>`
   transform-origin: left;
   transform: ${({ isActive }) =>
     isActive ? "translateY(-27px) translateX(1px) scale(0.85)" : ""};
-  color: ${({ isActive }) => (isActive ? "var(--primaryLight)" : "var(--text)")};
+  color: ${({ isActive }) =>
+    isActive ? "var(--primaryLight)" : "var(--text)"};
 `;
 
 export const Input = () => css<{
