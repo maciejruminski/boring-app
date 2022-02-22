@@ -69,7 +69,6 @@ class OneTimePasswordController {
 
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
-        console.log(error);
         return res.json({
           status: 401,
           message: "Unfortunately, something went wrong.",

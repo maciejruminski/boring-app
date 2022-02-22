@@ -128,15 +128,11 @@ class GoogleSheetsController {
     const { userUUID }: { userUUID: string } = req.body;
     const row = await this.getUserRowById(userUUID);
 
-    console.log('row', row);
-
     const clientData = {
       spreadsheetId: spreadSheetsID,
       majorDimension: "ROWS",
       range: this.historicPlacesColumn + row,
     };
-
-    console.log('clientData', clientData);
 
     const historicPlaces = await this.getClientValues().get(clientData);
     const historicPlacesValues = historicPlaces.data.values;

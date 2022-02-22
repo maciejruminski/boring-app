@@ -28,7 +28,7 @@ export default class Controller {
 
     // if (userUUID) {
     // const response = await API.getHistoricPlaces(userUUID);
-    // console.log({ test });
+
     // }
 
     return false;

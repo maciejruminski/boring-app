@@ -13,9 +13,6 @@ class GooglePlacesController {
     const minP = minPrice === "_" ? "" : `&minprice=${minPrice}`;
     const isOpen = openNow ? "&opennow" : "";
 
-    console.log(
-      `${url}location=${location}&radius=${distance}&keyword=${keyword}&type=${type}${maxP}${minP}${isOpen}&key=${config.googleApiKey}`
-    );
     return `${url}location=${location}&radius=${distance}&keyword=${keyword}&type=${type}${maxP}${minP}${isOpen}&key=${config.googleApiKey}`;
   }
 
@@ -53,7 +50,6 @@ class GooglePlacesController {
           res.json({ status, places });
         });
     } catch (err) {
-      console.log(err);
       next(err);
     }
   }
@@ -72,7 +68,6 @@ class GooglePlacesController {
           res.json({ status: response.status, placeDetails: response.result });
         });
     } catch (err) {
-      console.log(err);
       next(err);
     }
   }
