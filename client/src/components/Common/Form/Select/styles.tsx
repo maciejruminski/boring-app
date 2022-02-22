@@ -16,10 +16,6 @@ const SContainer = styled.div`
   &:last-child {
     margin-bottom: 0;
   }
-
-  &:last-of-type {
-    background-color: red;
-  }
 `;
 
 const SLabel = styled.label`
