@@ -40,12 +40,13 @@ export default forwardRef<
       window.removeEventListener("touchend", closeOptionsOnMouseDownHandler);
       window.removeEventListener("mousedown", closeOptionsOnMouseDownHandler);
 
-      const refIsObject = typeof ref === "object";
-      const clickedElementIsOutsideATarget =
-        refIsObject && ref?.current !== e.target;
+      if (typeof ref === "object" && ref?.current) {
+        const targetID = (e.target as HTMLElement).dataset.id;
+        const refID = (ref?.current as HTMLElement).dataset.id;
 
-      if (clickedElementIsOutsideATarget) {
-        setOptionsVisibility(false);
+        if (targetID !== refID) {
+          setOptionsVisibility(false);
+        }
       }
     };
 
@@ -98,6 +99,8 @@ export default forwardRef<
 
     useEffect(() => setActiveOption(defaultOption), [defaultOption]);
 
+    useEffect(() => setOptionsVisibility(false), [activeOption]);
+
     return (
       <SContainer
         isError={false}
@@ -120,6 +123,7 @@ export default forwardRef<
           isSuccess={true}
           checkValidity={false}
           id={id}
+          data-id={id}
           name={id}
           ref={ref}
           onMouseDown={showOptionsOnMouseDownHandler}
@@ -145,7 +149,7 @@ export default forwardRef<
               )}
         </SSelect>
 
-        <SCustomSelect areOptionsVisible={optionsVisibility}>
+        <SCustomSelect data-id={id} areOptionsVisible={optionsVisibility}>
           {Array.isArray(options)
             ? options.map((option: string, key: number) => {
                 return (
@@ -154,6 +158,7 @@ export default forwardRef<
                     className={`option ${option === activeOption && "active"}`}
                     onClick={setOptionHandler}
                     key={key}
+                    data-id={id}
                   >
                     {option}
                   </SCustomOption>
@@ -169,6 +174,7 @@ export default forwardRef<
                       }`}
                       onClick={setOptionHandler}
                       key={key}
+                      data-id={id}
                     >
                       {option[1]}
                     </SCustomOption>

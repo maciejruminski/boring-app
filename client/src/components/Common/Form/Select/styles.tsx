@@ -16,6 +16,10 @@ const SContainer = styled.div`
   &:last-child {
     margin-bottom: 0;
   }
+
+  &:last-of-type {
+    background-color: red;
+  }
 `;
 
 const SLabel = styled.label`
@@ -34,7 +38,7 @@ const SCustomSelect = styled.div<{ areOptionsVisible: boolean }>`
   background: var(--textLight);
   color: var(--textDark);
   z-index: 10;
-  max-height: 150px;
+  max-height: 250px;
   overflow-y: scroll;
   border-radius: var(--borderRadius);
   transition-duration: var(--transitionDuration);
@@ -42,6 +46,11 @@ const SCustomSelect = styled.div<{ areOptionsVisible: boolean }>`
   opacity: ${({ areOptionsVisible }) => (areOptionsVisible ? "1" : "0")};
   visibility: ${({ areOptionsVisible }) =>
     areOptionsVisible ? "visible" : "hidden"};
+
+    &#maxPrice {
+      top: auto;
+      bottom: 65px;
+    }
 `;
 
 const SCustomOption = styled.div`
