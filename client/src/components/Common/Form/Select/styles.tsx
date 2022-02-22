@@ -47,10 +47,10 @@ const SCustomSelect = styled.div<{ areOptionsVisible: boolean }>`
   visibility: ${({ areOptionsVisible }) =>
     areOptionsVisible ? "visible" : "hidden"};
 
-    &#maxPrice {
-      top: auto;
-      bottom: 65px;
-    }
+  &[data-id="maxPrice"] {
+    top: auto;
+    bottom: 65px;
+  }
 `;
 
 const SCustomOption = styled.div`
