@@ -27,6 +27,7 @@ export default function OneTimePassword() {
     if (isComponentInactive) {
       setTimeout(setUserAuthenticationOn, fadingOutTime);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isComponentInactive]);
 
   return (

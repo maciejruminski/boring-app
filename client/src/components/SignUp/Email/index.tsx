@@ -27,6 +27,7 @@ export default function Email() {
     if (isSent) {
       setTimeout(setEmailComponentAsInactive, timeToInactivateComponent);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSent]);
 
   if (isComponentActive) {

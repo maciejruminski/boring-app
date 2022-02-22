@@ -24,6 +24,7 @@ export default function HistoricPlaces(): JSX.Element {
     actions: { setHistoricPlacesModalOff, setHistoricPlaces },
   } = useHistoricPlacesContext();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => setHistoricPlaces(), []);
 
   useEffect(

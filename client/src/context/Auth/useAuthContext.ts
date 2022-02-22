@@ -11,6 +11,7 @@ const useAuthContext: AuthContextHook = () => {
   const { state, dispatch } = useContext(AuthContext);
   const actions: IAuthActions = new Actions(state, dispatch).getAllActions();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => actions.setUserAuthenticationByLocalStorage(), []);
 
   return { state, actions };

@@ -1,5 +1,5 @@
 // Functions.
-import { forwardRef, useState, useEffect } from "react";
+import { forwardRef, useState } from "react";
 
 // Context.
 import { useFiltersAndPlacesContext } from "@context/FiltersAndPlaces";

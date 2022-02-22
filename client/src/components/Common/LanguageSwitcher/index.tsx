@@ -1,6 +1,3 @@
-// Functions.
-import { useState, useEffect } from "react";
-
 // Styles.
 import { SSwitcher, SButton } from "./styles";
 
@@ -14,12 +11,13 @@ export default function LanguageSwitcher(): JSX.Element {
 
   return (
     <SSwitcher isBusy={true}>
-      {langs.map((lang) => (
+      {langs.map((lang, key) => (
         <SButton
           isActive={lang === currentLang}
           disabled={lang === currentLang}
           text={lang}
           onClickHandler={() => i18n.changeLanguage(lang)}
+          key={key}
         />
       ))}
     </SSwitcher>

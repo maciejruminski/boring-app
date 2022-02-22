@@ -25,8 +25,10 @@ export default function Places() {
     navigator.geolocation.getCurrentPosition((success: GeolocationPosition) =>
       setCurrentLocation(success)
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => setFiltersAndShowPlaces(), [currentLocation]);
 
   return (

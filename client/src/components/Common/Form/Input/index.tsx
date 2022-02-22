@@ -65,6 +65,7 @@ export default forwardRef<
       if (typeof ref === "object" && ref?.current && error) {
         ref.current.focus();
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [error]);
 
     let isError = Boolean(error);

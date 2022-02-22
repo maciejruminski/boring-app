@@ -37,10 +37,10 @@ export default function List(): JSX.Element {
     [numberOfPlacesToShowAtOnce, maximumNumberOfPlaces]
   );
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     resetNumberOfPlacesToShowAtOnce();
     setMaximumNumberOfPlaces(places.length);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [places]);
 
   const useHookWithRefCallback = () => {
@@ -78,6 +78,7 @@ export default function List(): JSX.Element {
       listContainerRef.current.style.height =
         listRef.current.clientHeight + "px";
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [numberOfPlacesToShowAtOnce]);
 
   const { t } = useTranslation();
