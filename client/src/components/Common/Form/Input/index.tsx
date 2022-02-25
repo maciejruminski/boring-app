@@ -104,13 +104,14 @@ export default forwardRef<
             minLength={minLength}
             maxLength={maxLength}
             required={required}
+            data-testid={id}
           />
           {icon}
         </SContainer>
 
         {error && (
           <SErrors ref={errorRef}>
-            <div>{error}</div>
+            <div data-testid={`${id}-error`}>{error}</div>
           </SErrors>
         )}
       </>

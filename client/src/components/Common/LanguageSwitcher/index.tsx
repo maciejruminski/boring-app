@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 
 export default function LanguageSwitcher(): JSX.Element {
   const { i18n } = useTranslation();
+
   const langs = Object.keys(i18n.services.resourceStore.data);
   const currentLang = i18n.language;
 

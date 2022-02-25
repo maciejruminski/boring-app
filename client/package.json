@@ -29,7 +29,7 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -49,5 +49,23 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:5000",
+  "devDependencies": {
+    "@testing-library/cypress": "^8.0.2",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "cypress": "^9.5.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^@root(.*)$": "<rootDir>/src$1",
+      "^@src(.*)$": "<rootDir>/src/$1",
+      "^@components(.*)$": "<rootDir>/src/components$1",
+      "^@common(.*)$": "<rootDir>/src/components/Common$1",
+      "^@dashboard(.*)$": "<rootDir>/src/components/Dashboard$1",
+      "^@signup(.*)$": "<rootDir>/src/components/SignUp$1",
+      "^@context(.*)$": "<rootDir>/src/context$1",
+      "^@controllers(.*)$": "<rootDir>/src/controllers$1",
+      "^@images(.*)$": "<rootDir>/src/images$1"
+    }
+  }
 }

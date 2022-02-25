@@ -110,6 +110,7 @@ export default function Form() {
             type="submit"
             onClickHandler={modalOff}
             text={t("Dashboard.Filters.Form.Button__text")}
+            id='filter'
           />
         </SForm>
       </>

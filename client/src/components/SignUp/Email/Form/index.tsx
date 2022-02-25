@@ -57,6 +57,7 @@ export default function Form() {
         type="submit"
         onClickHandler={submitHandler}
         text={t("SignUp.Email.Form.SSubmit__text")}
+        id="emailSubmit"
       />
     </SForm>
   );

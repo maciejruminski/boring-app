@@ -8,6 +8,7 @@ export default function Button({
   icon,
   className,
   disabled,
+  id,
 }: {
   onClickHandler?: React.MouseEventHandler<HTMLButtonElement>;
   text: string;
@@ -15,6 +16,7 @@ export default function Button({
   icon?: string;
   className?: string;
   disabled?: boolean;
+  id?: string;
 }): JSX.Element {
   return (
     <SSubmit
@@ -22,6 +24,7 @@ export default function Button({
       onClick={onClickHandler}
       className={className}
       disabled={disabled}
+      data-testid={id}
     >
       <span className="text">{text}</span>
       {icon && <img className="icon" src={icon} aria-hidden="true" alt="" />}
