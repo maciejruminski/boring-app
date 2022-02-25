@@ -3,7 +3,7 @@ const initialState: IFiltersAndPlacesState = {
   filters: {
     distance: "1000",
     keyword: "",
-    type: "accounting",
+    type: "amusement_park",
     minPrice: "_",
     maxPrice: "_",
     openNow: false,
