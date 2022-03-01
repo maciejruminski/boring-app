@@ -93,6 +93,7 @@ export default function List(): JSX.Element {
                 place={place}
                 key={place.id}
                 isVisible={i < numberOfPlacesToShowAtOnce ? true : false}
+                testID={`placeButton-${i}`}
               />
             ))}
           </SList>

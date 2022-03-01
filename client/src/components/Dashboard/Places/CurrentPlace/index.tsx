@@ -90,6 +90,7 @@ export default function Details() {
             onClickHandler={modalOff}
             text={t("Dashboard.Places.CurrentPlace.SClose__text")}
             icon={closeIconPath}
+            id='closeButton'
           />
         )}
         <Info />

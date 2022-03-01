@@ -17,7 +17,7 @@ import Stars from "../Stars";
 // Icons.
 import ArrowIconPath from "@images/right-arrow.svg";
 
-export default function Place({ place, isVisible }: any): JSX.Element {
+export default function Place({ place, isVisible, testID }: any): JSX.Element {
   const { name, rating } = place;
   const {
     actions: { showDetails },
@@ -25,7 +25,7 @@ export default function Place({ place, isVisible }: any): JSX.Element {
 
   return (
     <SPlace isVisible={isVisible}>
-      <SButton onClick={() => showDetails(place)}>
+      <SButton onClick={() => showDetails(place)} data-testid={testID}>
         <SName>{name}</SName>
         <SBottom>
           <Stars rating={rating} />

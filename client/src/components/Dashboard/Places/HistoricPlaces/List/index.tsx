@@ -19,8 +19,13 @@ export default function List(): JSX.Element {
     return (
       <SListContainer>
         <SList>
-          {historicPlaces.map((place: any) => (
-            <Place place={place} key={place.id} isVisible={true} />
+          {historicPlaces.map((place: any, i: any) => (
+            <Place
+              place={place}
+              key={place.id}
+              isVisible={true}
+              testID={`historicPlaceButton-${i}`}
+            />
           ))}
         </SList>
       </SListContainer>

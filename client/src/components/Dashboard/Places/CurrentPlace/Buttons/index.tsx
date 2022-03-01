@@ -55,6 +55,7 @@ export default function Details() {
               : t("Dashboard.Places.CurrentPlace.Buttons.SButton__text--false")
           }
           isSaved={isSavedAsHistoric}
+          id="historicPlaceSavingButton"
         />
       </>
     );

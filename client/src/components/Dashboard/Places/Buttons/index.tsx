@@ -59,6 +59,7 @@ export default function Places() {
         <SButton
           onClickHandler={setHistoricPlacesModalOn}
           text={t("Dashboard.Places.Buttons.SButton__text")}
+          id="showHistoricPlaces"
         />
       )}
 
