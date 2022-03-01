@@ -14,7 +14,9 @@ export default function Heading() {
 
   return (
     <>
-      <SHeading>{t("Dashboard.Places.Heading.SHeading")}</SHeading>
+      <SHeading data-testid="placesHeading">
+        {t("Dashboard.Places.Heading.SHeading")}
+      </SHeading>
       {Boolean(maximumNumberOfPlaces) && (
         <>
           <SSmallNote>

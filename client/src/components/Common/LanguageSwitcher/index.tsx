@@ -27,6 +27,7 @@ export default function LanguageSwitcher(): JSX.Element {
           text={lang}
           onClickHandler={() => changeLanguage(lang)}
           key={key}
+          id={lang}
         />
       ))}
     </SSwitcher>

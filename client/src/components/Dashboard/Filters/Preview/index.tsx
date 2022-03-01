@@ -40,11 +40,14 @@ export default function Preview() {
   return (
     <SContainer>
       <SFiltersHeader>
-        <SHeading>{t("Dashboard.Filters.Preview.SHeading")}</SHeading>
+        <SHeading data-testid="previewHeading">
+          {t("Dashboard.Filters.Preview.SHeading")}
+        </SHeading>
         <SButton
           onClickHandler={setFiltersModalOn}
           text={t("Dashboard.Filters.Preview.SButton__text")}
           icon={filterIconPath}
+          id="showFilters"
         />
       </SFiltersHeader>
       <SFiltersContainer>
