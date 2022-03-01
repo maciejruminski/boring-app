@@ -1,3 +1,6 @@
+// Controllers.
+import LocalStorage from "@controllers/LocalStorage";
+
 // Styles.
 import { SSwitcher, SButton } from "./styles";
 
@@ -10,6 +13,11 @@ export default function LanguageSwitcher(): JSX.Element {
   const langs = Object.keys(i18n.services.resourceStore.data);
   const currentLang = i18n.language;
 
+  const changeLanguage = (lang: string) => {
+    i18n.changeLanguage(lang);
+    LocalStorage.setLanguage(lang);
+  };
+
   return (
     <SSwitcher isBusy={true}>
       {langs.map((lang, key) => (
@@ -17,7 +25,7 @@ export default function LanguageSwitcher(): JSX.Element {
           isActive={lang === currentLang}
           disabled={lang === currentLang}
           text={lang}
-          onClickHandler={() => i18n.changeLanguage(lang)}
+          onClickHandler={() => changeLanguage(lang)}
           key={key}
         />
       ))}

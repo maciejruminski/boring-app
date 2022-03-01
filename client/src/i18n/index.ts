@@ -6,6 +6,9 @@ import { initReactI18next } from "react-i18next";
 import en from "./languages/en";
 import pl from "./languages/pl";
 
+// Controllers.
+import LocalStorage from "@controllers/LocalStorage";
+
 i18n.use(initReactI18next).init({
   resources: {
     en: {
@@ -15,7 +18,7 @@ i18n.use(initReactI18next).init({
       translation: pl,
     },
   },
-  lng: "en",
+  lng: LocalStorage.getLanguage(),
   interpolation: {
     escapeValue: false,
   },

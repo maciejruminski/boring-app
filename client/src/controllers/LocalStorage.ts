@@ -66,4 +66,14 @@ export default class LocalStorage {
 
     return historicPlaces ? JSON.parse(historicPlaces) : [];
   }
+
+  static getLanguage(): string {
+    const lang = localStorage.getItem("lang");
+
+    return lang ? lang : "en";
+  }
+
+  static setLanguage(lang: string): void {
+    localStorage.setItem("lang", lang);
+  }
 }
