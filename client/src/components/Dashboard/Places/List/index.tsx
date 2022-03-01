@@ -77,9 +77,10 @@ export default function List(): JSX.Element {
       // @ts-ignore
       listContainerRef.current.style.height =
         listRef.current.clientHeight + "px";
+        console.log('height changed!');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [numberOfPlacesToShowAtOnce]);
+  }, [numberOfPlacesToShowAtOnce, places]);
 
   const { t } = useTranslation();
 
