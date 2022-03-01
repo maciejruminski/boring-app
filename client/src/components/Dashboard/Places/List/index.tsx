@@ -87,7 +87,7 @@ export default function List(): JSX.Element {
     return (
       <SListContainer>
         <SListInnerContainer ref={setListContainerRef} id="listInnerContainer">
-          <SList ref={listRef}>
+          <SList ref={listRef} data-testid="placesList">
             {places.map((place: any, i: number) => (
               <Place
                 place={place}
@@ -107,5 +107,11 @@ export default function List(): JSX.Element {
     );
   }
 
-  return <p>{currentLocation ? t("Dashboard.Places.List.p_1") : t("Dashboard.Places.List.p_1--noLocation")}</p>;
+  return (
+    <p>
+      {currentLocation
+        ? t("Dashboard.Places.List.p_1")
+        : t("Dashboard.Places.List.p_1--noLocation")}
+    </p>
+  );
 }
