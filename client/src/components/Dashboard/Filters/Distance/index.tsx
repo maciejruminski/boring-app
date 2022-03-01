@@ -26,6 +26,9 @@ export default forwardRef<HTMLSelectElement>(
       "1500": "1.5km",
       "2000": "2km",
       "3000": "3km",
+      "5000": "5km",
+      "10000": "10km",
+      "15000": "15km",
     };
 
     return (
