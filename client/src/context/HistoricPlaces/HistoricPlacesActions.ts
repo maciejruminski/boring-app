@@ -4,7 +4,7 @@ import LocalStorage from "@controllers/LocalStorage";
 import API from "@controllers/API";
 
 export default class HistoricPlacesActions {
-  private state: IHistoricPlacesState;
+  // private state: IHistoricPlacesState;
   private dispatch: React.Dispatch<IHistoricPlacesAction>;
   private historicPlaces: Place[];
 
@@ -13,7 +13,7 @@ export default class HistoricPlacesActions {
     dispatch: React.Dispatch<IHistoricPlacesAction>
   ) {
     this.dispatch = dispatch;
-    this.state = state;
+    // this.state = state;
     this.historicPlaces = state.historicPlaces;
   }
 
@@ -63,52 +63,74 @@ export default class HistoricPlacesActions {
     }
   };
 
-  addHistoricPlace = (place: Place): void => {
+  addHistoricPlace = async (place: Place): Promise<void> => {
     this.setBusyOn();
 
-    const isHistoricPlaceSaved = Helper.checkIfHistoricPlaceSaved(place.id);
+    const isHistoricPlaceSaved = await Helper.checkIfHistoricPlaceIsSaved(
+      place.id
+    );
 
-    isHistoricPlaceSaved.then((isSaved: any) => {
-      if (isSaved) {
-        this.setBusyOff();
+    if (isHistoricPlaceSaved) {
+      this.setBusyOff();
+      return;
+    }
+
+    const historicPlaces = [...this.historicPlaces, place];
+
+    const userUUID = LocalStorage.getUserUUID();
+
+    if (userUUID) {
+      LocalStorage.setHistoricPlaces(historicPlaces);
+      const response = await API.addHistoricPlaces(historicPlaces, userUUID);
+
+      if (Helper.statusIsNotOk(response.status)) {
         return;
       }
 
-      const historicPlaces = [...this.historicPlaces, place];
-
-      Helper.setHistoricPlaces(historicPlaces).then(() => {
-        this.dispatch({ type: "setHistoricPlaces", payload: historicPlaces });
-        this.setBusyOff();
+      this.dispatch({
+        type: "setHistoricPlaces",
+        payload: historicPlaces,
       });
-    });
+
+      this.setBusyOff();
+    }
   };
 
-  removeHistoricPlace = (place: PlaceWithDetails): void => {
+  removeHistoricPlace = async (place: PlaceWithDetails): Promise<void> => {
     this.setBusyOn();
 
-    const isHistoricPlaceSaved = Helper.checkIfHistoricPlaceSaved(place.id);
+    const isHistoricPlaceSaved = await Helper.checkIfHistoricPlaceIsSaved(
+      place.id
+    );
 
-    isHistoricPlaceSaved.then((isSaved: any) => {
-      if (isSaved) {
-        const historicPlaceToRemove = Helper.getPlaceById(
-          this.historicPlaces,
-          place.id
-        );
+    if (isHistoricPlaceSaved) {
+      const historicPlaceToRemove = Helper.getPlaceById(
+        this.historicPlaces,
+        place.id
+      );
 
-        const historicPlaces: Place[] = [...this.historicPlaces].filter(
-          (place: Place) => place.id !== historicPlaceToRemove.id
-        );
+      const historicPlaces: Place[] = [...this.historicPlaces].filter(
+        (place: Place) => place.id !== historicPlaceToRemove.id
+      );
 
-        Helper.setHistoricPlaces(historicPlaces).then(() => {
-          this.dispatch({
-            type: "setHistoricPlaces",
-            payload: historicPlaces,
-          });
+      const userUUID = LocalStorage.getUserUUID();
 
-          this.setBusyOff();
+      if (userUUID) {
+        LocalStorage.setHistoricPlaces(historicPlaces);
+        const response = await API.addHistoricPlaces(historicPlaces, userUUID);
+
+        if (Helper.statusIsNotOk(response.status)) {
+          return;
+        }
+
+        this.dispatch({
+          type: "setHistoricPlaces",
+          payload: historicPlaces,
         });
+
+        this.setBusyOff();
       }
-    });
+    }
   };
 
   setHistoricPlacesModalOn = (): void => {

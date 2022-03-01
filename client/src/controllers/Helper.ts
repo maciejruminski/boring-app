@@ -1,6 +1,5 @@
 // Controllers.
 import LocalStorage from "./LocalStorage";
-import API from "./API";
 
 // Language.
 import { TFunction } from "react-i18next";
@@ -17,7 +16,7 @@ export default class Controller {
     return randomPlace;
   }
 
-  static async checkIfHistoricPlaceSaved(placeID: string): Promise<boolean> {
+  static async checkIfHistoricPlaceIsSaved(placeID: string): Promise<boolean> {
     let historicPlaces: Place[] = LocalStorage.getHistoricPlaces();
     let isHistoricPlaceSaved = historicPlaces.find(
       (place) => place.id === placeID
@@ -27,28 +26,7 @@ export default class Controller {
       return true;
     }
 
-    // const userUUID = LocalStorage.getUserUUID();
-
-    // if (userUUID) {
-    // const response = await API.getHistoricPlaces(userUUID);
-
-    // }
-
     return false;
-  }
-
-  static async setHistoricPlaces(historicPlaces: Place[]): Promise<any> {
-    const userUUID = LocalStorage.getUserUUID();
-    if (userUUID) {
-      LocalStorage.setHistoricPlaces(historicPlaces);
-      const response = await API.addHistoricPlaces(historicPlaces, userUUID);
-
-      if (this.statusIsNotOk(response.status)) {
-        return false;
-      }
-
-      return true;
-    }
   }
 
   static getPlaceById(palces: Place[], placeID: string): any {
