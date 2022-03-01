@@ -2,6 +2,9 @@
 import LocalStorage from "./LocalStorage";
 import API from "./API";
 
+// Language.
+import { TFunction } from "react-i18next";
+
 export default class Controller {
   static getRandomPlace(places: Places, currentPlaceID: string): Place {
     const filteredPlaces = places.filter(
@@ -118,4 +121,52 @@ export default class Controller {
 
     return offsetWidth * transformScaleMultiplier;
   }
+
+  static getFilterTypesObject(
+    t: TFunction<"translation", undefined>
+  ): FilterTypes {
+    return {
+      amusement_park: t("Objects.FilterTypes.amusement_park"),
+      aquarium: t("Objects.FilterTypes.aquarium"),
+      art_gallery: t("Objects.FilterTypes.art_gallery"),
+      bar: t("Objects.FilterTypes.bar"),
+      book_store: t("Objects.FilterTypes.book_store"),
+      bowling_alley: t("Objects.FilterTypes.bowling_alley"),
+      cafe: t("Objects.FilterTypes.cafe"),
+      campground: t("Objects.FilterTypes.campground"),
+      casino: t("Objects.FilterTypes.casino"),
+      gym: t("Objects.FilterTypes.gym"),
+      library: t("Objects.FilterTypes.library"),
+      meal_takeaway: t("Objects.FilterTypes.meal_takeaway"),
+      movie_theater: t("Objects.FilterTypes.movie_theater"),
+      museum: t("Objects.FilterTypes.museum"),
+      night_club: t("Objects.FilterTypes.night_club"),
+      park: t("Objects.FilterTypes.park"),
+      restaurant: t("Objects.FilterTypes.restaurant"),
+      stadium: t("Objects.FilterTypes.stadium"),
+      tourist_attraction: t("Objects.FilterTypes.tourist_attraction"),
+      zoo: t("Objects.FilterTypes.zoo"),
+    };
+  }
 }
+
+// amusement_park: "Park rozrywki",
+// aquarium: "Akwarium",
+// art_gallery: "Galeria sztuki",
+// bar: "Bar",
+// book_store: "Księgarnia",
+// bowling_alley: "Kręgielnia",
+// cafe: "Kawiarnia",
+// campground: "Kemping",
+// casino: "Kasyno",
+// gym: "Siłownia",
+// library: "Biblioteka",
+// meal_takeaway: "Jedzenie na wynos",
+// movie_theater: "Teatr",
+// museum: "Muzeum",
+// night_club: "Klub nocny",
+// park: "Park",
+// restaurant: "Restauracja",
+// stadium: "Stadion",
+// tourist_attraction: "Atrakcja turystyczna",
+// zoo: "Zoo",

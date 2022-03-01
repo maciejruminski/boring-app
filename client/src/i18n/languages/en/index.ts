@@ -2,7 +2,8 @@ import Email from "./SignUp/Email.json";
 import Password from "./SignUp/Password.json";
 import Filters from "./Dashboard/Filters.json";
 import Places from "./Dashboard/Places.json";
+import FilterTypes from "./Objects/FilterTypes.json";
 
-const ENG = { ...Email, ...Password, ...Filters, ...Places };
+const ENG = { ...Email, ...Password, ...Filters, ...Places, ...FilterTypes };
 
 export default ENG;

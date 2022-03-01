@@ -22,7 +22,6 @@ import {
 import filterIconPath from "@images/hamburger.svg";
 
 // Array with types and prices.
-import types from "../filterTypes";
 import prices from "../prices";
 
 export default function Preview() {
@@ -38,6 +37,7 @@ export default function Preview() {
 
   const formattedDistance = Helper.formatDistance(distance);
   const { t } = useTranslation();
+  const types = Helper.getFilterTypesObject(t);
 
   return (
     <SContainer>

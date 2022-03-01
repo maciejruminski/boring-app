@@ -1,0 +1,22 @@
+{
+  "Objects.FilterTypes.amusement_park": "Amusement park",
+  "Objects.FilterTypes.aquarium": "Aquarium",
+  "Objects.FilterTypes.art_gallery": "Art gallery",
+  "Objects.FilterTypes.bar": "Bar",
+  "Objects.FilterTypes.book_store": "Book store",
+  "Objects.FilterTypes.bowling_alley": "Bowling alley",
+  "Objects.FilterTypes.cafe": "Cafe",
+  "Objects.FilterTypes.campground": "Campground",
+  "Objects.FilterTypes.casino": "Casino",
+  "Objects.FilterTypes.gym": "Gym",
+  "Objects.FilterTypes.library": "Library",
+  "Objects.FilterTypes.meal_takeaway": "Meal takeaway",
+  "Objects.FilterTypes.movie_theater": "Movie theater",
+  "Objects.FilterTypes.museum": "Museum",
+  "Objects.FilterTypes.night_club": "Night club",
+  "Objects.FilterTypes.park": "Park",
+  "Objects.FilterTypes.restaurant": "Restaurant",
+  "Objects.FilterTypes.stadium": "Stadium",
+  "Objects.FilterTypes.tourist_attraction": "Tourist attraction",
+  "Objects.FilterTypes.zoo": "Zoo"
+}
