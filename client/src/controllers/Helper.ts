@@ -148,25 +148,14 @@ export default class Controller {
       zoo: t("Objects.FilterTypes.zoo"),
     };
   }
-}
 
-// amusement_park: "Park rozrywki",
-// aquarium: "Akwarium",
-// art_gallery: "Galeria sztuki",
-// bar: "Bar",
-// book_store: "Księgarnia",
-// bowling_alley: "Kręgielnia",
-// cafe: "Kawiarnia",
-// campground: "Kemping",
-// casino: "Kasyno",
-// gym: "Siłownia",
-// library: "Biblioteka",
-// meal_takeaway: "Jedzenie na wynos",
-// movie_theater: "Teatr",
-// museum: "Muzeum",
-// night_club: "Klub nocny",
-// park: "Park",
-// restaurant: "Restauracja",
-// stadium: "Stadion",
-// tourist_attraction: "Atrakcja turystyczna",
-// zoo: "Zoo",
+  static getPricesObject(t: TFunction<"translation", undefined>): Prices {
+    return {
+      _: "-",
+      _0: t("Objects.Prices.cheap"),
+      _1: t("Objects.Prices.average"),
+      _2: t("Objects.Prices.expensive"),
+      _3: t("Objects.Prices.very-expensive"),
+    };
+  }
+}

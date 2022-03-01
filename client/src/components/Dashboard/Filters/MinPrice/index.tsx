@@ -1,3 +1,6 @@
+// Controllers.
+import Helper from "@controllers/Helper";
+
 // Functions.
 import { forwardRef } from "react";
 
@@ -7,9 +10,6 @@ import { useTranslation } from "react-i18next";
 
 // Components.
 import Select from "@common/Form/Select";
-
-// Array with prices.
-import prices from "../prices";
 
 export default forwardRef<HTMLSelectElement>(
   // eslint-disable-next-line no-empty-pattern
@@ -21,6 +21,7 @@ export default forwardRef<HTMLSelectElement>(
     } = useFiltersAndPlacesContext();
 
     const { t } = useTranslation();
+    const prices = Helper.getPricesObject(t);
 
     return (
       <Select
