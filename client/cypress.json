@@ -1,1 +1,3 @@
-{}
+{
+  "testFiles": ["login.js", "historicPlaces.js", "filters.js", "language.js"]
+}
